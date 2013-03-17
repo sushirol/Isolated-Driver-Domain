@@ -33,6 +33,7 @@
 
 #define IDD_SYSID_CURRENT   IDD_SYSID_ONE
 
+
 struct idd_request {
 	int data_direction;
 	unsigned long nbytes;
@@ -51,6 +52,7 @@ struct idd_response {
 
 DEFINE_RING_TYPES(idd, struct idd_request, struct idd_response);
 
+#define BLK_RING_SIZE __CONST_RING_SIZE(idd, PAGE_SIZE)
   
 typedef struct idd_irq_info {
 	struct idd_front_ring main_ring;
@@ -80,6 +82,8 @@ typedef struct idd_irq_info {
 	struct spinlock notify_lock;
 	struct task_struct *request_thread;
 	void * io_data_page;
+	unsigned long id;
+	struct request_queue *rq;
 } idd_irq_info_t;
 
 
