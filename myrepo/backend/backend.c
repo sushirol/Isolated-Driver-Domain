@@ -103,21 +103,24 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 	struct idd_request *req;
 	struct idd_response *rsp;
 	int notify;
-	RING_IDX rc;
+	RING_IDX rc, rp;
 
 	rc = backend.main_ring.req_cons;
+	rp = backend.main_ring.sring->req_prod;
 	smp_mb();
-	req = RING_GET_REQUEST(&backend.main_ring,rc);
-	if(rc == -1){
-		printk("get request failed");
-		return IRQ_HANDLED;
-	} 
-	backend.main_ring.req_cons = ++rc;
-	backend.rw_req = req;
-	smp_mb();
-	printk("got from frontend %lu!\n", req->seq_no);
 
-#if 1
+	while (rc != rp) {
+//		if (RING_REQUEST_CONS_OVERFLOW(&backend.main_ring->common, rc))
+//			break;
+		
+		req = RING_GET_REQUEST(&backend.main_ring,rc);
+
+		backend.main_ring.req_cons = ++rc;
+		backend.rw_req = req;
+		smp_mb();
+		printk("got from frontend %lu!\n", req->seq_no);
+
+#if 0
 	if(req->data_direction == 1){
 		INIT_WORK(&req->work, process_write_req);
 		printk("inserted in queue seq_no %lu!\n",req->seq_no);
@@ -125,19 +128,20 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 		INIT_WORK(&req->work, process_read_req);
 		printk("inserted in queue seq_no %lu!\n",req->seq_no);
 	}
+	schedule_work(&req->work);
 #else
-	rsp = RING_GET_RESPONSE(&backend.main_ring, backend.main_ring.rsp_prod_pvt);
-	rsp->res = 1;
-	rsp->seq_no = req->seq_no;
-	rsp->op = req->data_direction;
-	rsp->priv_data = req->priv_data;
-	backend.main_ring.rsp_prod_pvt++;
-	smp_mb();
-	RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(&backend.main_ring, notify);
-	notify_remote_via_irq(backend.ring_irq);
+		rsp = RING_GET_RESPONSE(&backend.main_ring, backend.main_ring.rsp_prod_pvt);
+		rsp->res = 1;
+		rsp->seq_no = req->seq_no;
+		rsp->op = req->data_direction;
+		rsp->priv_data = req->priv_data;
+		backend.main_ring.rsp_prod_pvt++;
+		smp_mb();
+		RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(&backend.main_ring, notify);
+		notify_remote_via_irq(backend.ring_irq);
 //	printk("interrupt handled at backend %lu. sending interrupt to frontend %lu!\n",req->seq_no, rsp->seq_no);
 #endif
-	schedule_work(&req->work);
+	}
         return IRQ_HANDLED;
 }
 
