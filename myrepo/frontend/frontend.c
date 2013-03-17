@@ -47,7 +47,7 @@ static struct new_device_t {
 }new_device;
 
 
-idd_irq_info_t info;
+	idd_irq_info_t info;
 static struct request_queue *Queue;
 int major_num=0;
 
@@ -57,133 +57,132 @@ module_exit(idd_cleanup);
 int workaround = 0;
 static int counter=0;
 
-static void idd_device_transfer(struct work_struct *work);
-static DECLARE_WORK(work, idd_device_transfer);
-static LIST_HEAD(idd_work_deferred);
 static DEFINE_SPINLOCK(idd_lock);
 
-#if 1
-DECLARE_WAIT_QUEUE_HEAD(send_request_wait_q);
+void idd_device_request(struct request_queue *);
 
-/*
-int is_buffer_empty(void){
-	if( info.main_ring.sring->rsp_prod != 0 &&
-		info.main_ring.sring->req_prod != 0 &&
-		info.main_ring.sring->rsp_prod - info.main_ring.sring->req_prod <= 0 ){
-		printk("buffer NOT free\n");
-		return 0;
-	}
-	printk("buffer free\n");
-	return 1;
-}
-*/
-
-#endif
-#if 0
-int idd_device_transfer(struct new_device_t *dev, unsigned long sector,
-                unsigned long nsect, char *buffer, int write)
+static const char *op_name(int op)
 {
-        unsigned long offset = sector * KERNEL_SECTOR_SIZE;
-        unsigned long nbytes = nsect * KERNEL_SECTOR_SIZE;
-        if( (offset + nbytes) > dev->size) {
-                printk("Beyond-end write(%ld,%ld)\n",offset,nbytes);
-                return -EIO;
-        }
-	printk("READ/WRITE\n");
-	return 0;
+	static const char *const names[] = {
+		[0] = "read",
+		[1] = "write"};
+	if (op < 0 || op >= ARRAY_SIZE(names))
+		return "unknown";
+ 
+	if (!names[op])
+		return "reserved";
+
+	return names[op];
 }
-#endif
 
-static void idd_device_transfer(struct work_struct *work){
+static inline void flush_requests(idd_irq_info_t *flush_info)
+{
+	int notify;
 
-	struct request *req;
-	struct list_head *elem, *next;
+	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
+	notify_remote_via_irq(flush_info->ring_irq);
+	printk("notify read backend! seq_no \n");
+}
+
+static void kick_pending_request_queues(idd_irq_info_t *kick_info)
+{
+	if (!RING_FULL(&kick_info->main_ring)) {
+		/* Re-enable calldowns. */
+		blk_start_queue(kick_info->rq);
+		/* Kick things off immediately. */
+		idd_device_request(kick_info->rq);
+	}
+}
+
+static int idd_queue_request(struct request *req){
+
 	unsigned long start_sector, sector_cnt, offset, nbytes;
 	struct idd_request *ring_req;
 	char * buffer;
-	int notify,write;
+	int write;
 
-	if (list_empty(&idd_work_deferred))
-		return;
+	start_sector = blk_rq_pos(req);
+	sector_cnt = blk_rq_cur_sectors(req);
 
-	spin_lock(&idd_lock);
-	list_for_each_safe(elem, next, &idd_work_deferred) {
-	
-		req = list_entry(elem, struct request, queuelist);
-		spin_unlock(&idd_lock);
-
-		start_sector = blk_rq_pos(req);
-		sector_cnt = blk_rq_cur_sectors(req);
-
-		offset = start_sector * KERNEL_SECTOR_SIZE;
-		nbytes = sector_cnt * KERNEL_SECTOR_SIZE;
-		buffer = req->buffer;
-		write = rq_data_dir(req);
+	offset = start_sector * KERNEL_SECTOR_SIZE;
+	nbytes = sector_cnt * KERNEL_SECTOR_SIZE;
+	buffer = req->buffer;
+	write = rq_data_dir(req);
 		
-		if( (offset + nbytes) > new_device.size) {
-			printk("Beyond-end write(%ld,%ld)\n",offset,nbytes);
-			return;
-		}
+	if( (offset + nbytes) > new_device.size) {
+		printk("Beyond-end write(%ld,%ld)\n",offset,nbytes);
+		return 1;
+	}
 
-		if(workaround == 0)
-			workaround = 1;
+	if(workaround == 0)
+		workaround = 1;
+        smp_mb();
+
+	ring_req = RING_GET_REQUEST(&info.main_ring, info.main_ring.req_prod_pvt);
+	if(ring_req == NULL){
+		printk("NULL RING_GET_REQUEST\n");
+		return 1;
+	}
+	ring_req->priv_data = req;
+	ring_req->nbytes = nbytes;
+	ring_req->offset = offset;
+	ring_req->seq_no = ++counter;
+
+	if (write){
+		ring_req->data_direction=write;
+//			memcpy((void *)info.io_data_page, buffer, nbytes);
+		info.main_ring.req_prod_pvt++;
+		printk("Debug: req_prod_pvt %d ", info.main_ring.req_prod_pvt);
+		printk("req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
         	smp_mb();
 
-//		wait_event(send_request_wait_q, is_buffer_empty());
-
-		ring_req = RING_GET_REQUEST(&info.main_ring, info.main_ring.req_prod_pvt);
-		if(ring_req == NULL){
-			printk("NULL RING_GET_REQUEST\n");
-			return;
-		}
-		ring_req->priv_data = req;
-		ring_req->nbytes = nbytes;
-		ring_req->offset = offset;
-		ring_req->seq_no = ++counter;
-
-		if (write){
-			ring_req->data_direction=write;
-			RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info.main_ring, notify);
-
-//			memcpy((void *)info.io_data_page, buffer, nbytes);
-
-			info.main_ring.req_prod_pvt++;
-			printk("Debug: req_prod_pvt %d ", info.main_ring.req_prod_pvt);
-			printk("req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
-        		smp_mb();
-
-			notify_remote_via_irq(info.ring_irq);
-			printk("notify write backend! seq_no %lu offset %lu sector %lu\n",ring_req->seq_no, ring_req->offset,start_sector);
-		}
-		else{
-			ring_req->data_direction=write;
-			RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info.main_ring, notify);
-			notify_remote_via_irq(info.ring_irq);
-			info.main_ring.req_prod_pvt++;
-	        	smp_mb();
-			printk("notify read backend! seq_no %lu \n",ring_req->seq_no);
-			printk("Debug: req_prod_pvt %d ", info.main_ring.req_prod_pvt);
-			printk("Debug: req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
-		}
-		spin_lock(&idd_lock);
-		list_del_init(&req->queuelist);
-//		__blk_end_request_all(req, 0);
+		printk("seq_no %lu offset %lu sector %lu\n",ring_req->seq_no, ring_req->offset,start_sector);
 	}
-	spin_unlock(&idd_lock);
+	else{
+		ring_req->data_direction=write;
+		info.main_ring.req_prod_pvt++;
+	        smp_mb();
+		printk("Debug: req_prod_pvt %d ", info.main_ring.req_prod_pvt);
+		printk("Debug: req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
+		printk("seq_no %lu offset %lu sector %lu\n",ring_req->seq_no, ring_req->offset,start_sector);
+	}
+	return 0;
 }
 
 void idd_device_request(struct request_queue *q)
 {
 	struct request *req;
-        while ((req = blk_fetch_request(q)) != NULL) {
+	int queued = 0;
+
+	while ((req = blk_peek_request(q)) != NULL) {
+		if (RING_FULL(&info.main_ring))
+			goto wait;
+
+		blk_start_request(req);
                 if (req->cmd_type != REQ_TYPE_FS) {
                         printk(KERN_NOTICE ": Non-fs request ignored\n");
                         __blk_end_request_all(req, -EIO);
                         continue;
                 }
-                list_add_tail(&req->queuelist, &idd_work_deferred);
-                schedule_work(&work);
-        }
+		
+		printk("do_blk_req %p: cmd %p, sec %lx, (%u/%u) buffer:%p [%s]\n",
+			req, req->cmd, (unsigned long)blk_rq_pos(req),
+			blk_rq_cur_sectors(req), blk_rq_sectors(req),
+			req->buffer, rq_data_dir(req) ? "write" : "read");
+
+		if (idd_queue_request(req)) {
+			blk_requeue_request(q, req);
+wait:
+			blk_stop_queue(q);
+			break;
+		}
+	
+		queued++;
+	}
+	
+	if(queued!=0){
+		flush_requests(&info);
+	}
 }
 
 struct block_device_operations idd_fops = {
@@ -193,34 +192,70 @@ struct block_device_operations idd_fops = {
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
 
-	RING_IDX rc;
+	RING_IDX rp,i;
 	struct idd_response *ring_rsp;
 	struct request *req;
-	char * buffer;
-	unsigned long start_sector, sector_cnt, offset, nbytes;
-#if 1
+	unsigned long flags;
+//	int error;
+
+//	char * buffer;
+//	unsigned long start_sector, sector_cnt, offset, nbytes;
+
+	spin_lock_irqsave(&idd_lock, flags);
+
 	if(workaround == 0){
 		printk("fake interrrupt handled !\n");
+		spin_unlock_irqrestore(&idd_lock, flags);
 		return IRQ_HANDLED;
 	}
 
-	rc = info.main_ring.rsp_cons;
-        smp_mb();
-	ring_rsp = RING_GET_RESPONSE(&info.main_ring, rc);
-	if(rc != -1){
-		info.main_ring.rsp_cons = ++rc;
+again:
+	rp = info.main_ring.sring->rsp_prod;
+        rmb();
+	
+	for (i = info.main_ring.rsp_cons; i != rp; i++) {
+
+		unsigned long id;
+		
+		ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
+
+		id  = ring_rsp->seq_no;
+
+#if 0
+		if (id >= BLK_RING_SIZE) {
+			WARN(1, "%s: response to %s has incorrect id (%ld)\n",
+				info.gd->disk_name, op_name(ring_rsp->op), id);
+			continue;
+		}
+#endif
+		
+//		req  = info->shadow[id].request;
 		req = ring_rsp->priv_data;
-		if(req == NULL){
-			printk(KERN_NOTICE "recieved private data in RSP is CORRUPTED !! \n");
-			return IRQ_HANDLED;
+		switch(ring_rsp->op){
+			case 0:
+			case 1:
+				__blk_end_request_all(req, 0);
+				break;
+			default:
+				BUG();
 		}
 		printk("INTERRUPT : Write result %d seq no %lu\n", ring_rsp->res, ring_rsp->seq_no);
 		printk("Debug: INTERRUPT req_prod_pvt %d ", info.main_ring.req_prod_pvt);
 		printk("Debug: INTERRUPT req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
-		if(ring_rsp->res >= 0){
-			if(ring_rsp->op == 1){
-				printk("Write Success\n");
-			}else{
+	}
+	info.main_ring.rsp_cons = i;
+	if (i != info.main_ring.req_prod_pvt) {
+		int more_to_do;
+		RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
+		if (more_to_do)
+			goto again;
+	} else
+		info.main_ring.sring->rsp_event = i + 1;
+	kick_pending_request_queues(&info);
+	spin_unlock_irqrestore(&idd_lock, flags);
+
+
+#if 0
 				buffer = req->buffer;
 				start_sector = blk_rq_pos(req);
 				sector_cnt = blk_rq_cur_sectors(req);
@@ -229,38 +264,7 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 				nbytes = sector_cnt * KERNEL_SECTOR_SIZE;
 
 //				memcpy(buffer,(void *)info.io_data_page,nbytes);
-				printk("Read Success\n");
-			}
-		}
-		else{
-			if(ring_rsp->op == 1){
-				printk("Write failed\n");
-			}else{
-				printk("Read failed\n");
-			}
-		}
-
-#if 0
-		if(req != NULL){
-			if(ring_rsp->res >= 0){
-//				__blk_end_request_all(req, 0);
-				blk_end_request(req, 0, blk_rq_bytes(req));
-			}else{
-//				__blk_end_request_all(req, 0);
-				blk_end_request(req, 0, blk_rq_bytes(req));
-//				blk_end_request(req, ring_rsp->res, blk_rq_bytes(req));
-			}
-			list_del_init(&req->queuelist);
-		}
 #endif
-//		spin_lock(&idd_lock);
-//		list_del_init(&req->queuelist);
-		__blk_end_request_all(req, 0);
-//		blk_end_request(req, 0, blk_rq_bytes(req));
-//		spin_unlock(&idd_lock);
-	}
-#endif
-//	wake_up(&send_request_wait_q);
 	
 	return IRQ_HANDLED;
 }
@@ -401,6 +405,9 @@ static int idd_init(void)
 	set_capacity(new_device.gd,DISK_CAPACITY/KERNEL_SECTOR_SIZE );
 	new_device.gd->queue = Queue;
 	add_disk(new_device.gd);
+
+	info.rq = new_device.gd->queue;
+
         smp_mb();
 
         return 0;
