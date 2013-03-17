@@ -84,7 +84,7 @@ typedef struct backend_info {
         struct work_struct write_task;
         struct work_struct read_task;
         struct idd_request *rw_req;
-
+	unsigned long id;
 } backend_info_t;
 
 typedef struct idd_connect{
