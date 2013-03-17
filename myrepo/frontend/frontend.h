@@ -91,6 +91,4 @@ typedef struct idd_connect{
 	uint32_t data_port;
 }idd_connect_t;
 
-int is_buffer_empty();
-
 #endif
