@@ -40,22 +40,30 @@ static void blk_cleanup(void);
 
 #define IDD_SYSID_CURRENT   IDD_SYSID_ONE
 
-
+#define IDD_MAX_SEGMENTS_PER_REQUEST 11
 struct idd_request {
-	int data_direction;
-	unsigned long nbytes;
-	unsigned long offset;
-	unsigned long seq_no;
-	struct work_struct work;
-	void *priv_data;
-};
+        int data_direction;
+//      unsigned long nbytes;
+//      unsigned long offset;
+        uint8_t nr_segments;
+        uint64_t sector_number;
+        struct idd_request_segment {
+                grant_ref_t gref;       /* reference to I/O buffer frame */
+                /* @first_sect: first sector in frame to transfer (inclusive).   */
+                /* @last_sect: last sector in frame to transfer (inclusive).     */
+                uint8_t     first_sect, last_sect;
+        }seg[IDD_MAX_SEGMENTS_PER_REQUEST];
+        uint64_t seq_no;
+        void *priv_data;
+}__attribute__((__packed__));
 
 struct idd_response {
-	int                     res;
-	int op;
-	unsigned long seq_no;
-	void *priv_data;
+        int res;
+        int op;
+        unsigned long seq_no;
+        void *priv_data;
 };
+
 
 DEFINE_RING_TYPES(idd, struct idd_request, struct idd_response);
 
