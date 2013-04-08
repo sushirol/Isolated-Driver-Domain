@@ -24,6 +24,7 @@ static backend_info_t backend;
 struct file *file;
 int f;
 static int count=0;
+#if 0
 void process_write_req(struct work_struct *taskp){
 	struct idd_response *rsp;
 	int err=-1, notify;
@@ -96,7 +97,7 @@ void process_read_req(struct work_struct *taskp){
 	printk("interrupt handled at backend %lu. sending interrupt to frontend %lu!\n",req->seq_no, rsp->seq_no);
 	up(&backend.rsp_ring_sem);
 }
-
+#endif
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
@@ -118,7 +119,7 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 		backend.main_ring.req_cons = ++rc;
 		backend.rw_req = req;
 		smp_mb();
-		printk("got from frontend %lu!\n", req->seq_no);
+		printk("got from frontend %lu %d!\n", req->seq_no, req->data_direction);
 
 #if 0
 	if(req->data_direction == 1){
