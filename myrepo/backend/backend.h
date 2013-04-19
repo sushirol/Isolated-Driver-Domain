@@ -67,12 +67,45 @@ struct idd_response {
 
 DEFINE_RING_TYPES(idd, struct idd_request, struct idd_response);
 
+struct bd_req {
+	unsigned short dev;
+	uint64_t nr_sects;
+	struct block_device *bdev;
+	uint64_t sector_number;
+};
+
+struct seg_buf {
+	unsigned long buf;
+	unsigned int nsec;
+};
+
+struct idd_bd {
+	struct block_device     *bdev;
+	sector_t                size;
+};
+
+struct pending_req {
+	struct backend_info *priv_d;
+	u64 id;
+	int nr_pages;
+	atomic_t pendcnt;
+	unsigned short operation;
+	int status;
+	struct list_head free_list;
+	DECLARE_BITMAP(unmap_seg, IDD_MAX_SEGMENTS_PER_REQUEST);
+};
+
+struct persistent_gnt {
+	struct page *page;
+	grant_ref_t gnt;
+	grant_handle_t handle;
+	uint64_t dev_bus_addr;
+	struct rb_node node;
+};
   
 typedef struct backend_info {
 	struct idd_back_ring main_ring;
 	struct idd_back_ring data_ring;
-//        syscall_handler_data_t  *list;
-//        syscall_handler_data_t  *next_data;
 	struct task_struct *main_thread;
 	struct task_struct *request_thread;
 	uint32_t main_ring_gref;
@@ -93,6 +126,22 @@ typedef struct backend_info {
         struct work_struct read_task;
         struct idd_request *rw_req;
 	unsigned long id;
+	
+	wait_queue_head_t wq;
+	unsigned int waiting_reqs;
+	struct idd_bd bd;
+	struct pending_req *pending_reqs;
+	/* List of all 'pending_req' available */
+	struct list_head pending_free;
+	spinlock_t pending_free_lock;
+	wait_queue_head_t pending_free_wq;
+	struct page **pending_pages;
+	grant_handle_t *pending_grant_handles;
+	atomic_t refcnt;
+	spinlock_t blk_ring_lock;
+//	unsigned int persistent_gnt_c;
+	struct rb_root persistent_gnts;
+
 } backend_info_t;
 
 typedef struct idd_connect{
@@ -102,5 +151,11 @@ typedef struct idd_connect{
 	uint32_t ring_port;
 	uint32_t data_port;
 }idd_connect_t;
+
+#define xen_idd_get(_b) (atomic_inc(&(_b)->refcnt))
+#define xen_idd_put(_b) (atomic_dec_and_test(&(_b)->refcnt))
+#define pending_page(req, seg) pending_pages[vaddr_pagenr(req, seg)]
+
+static int xen_idd_reqs = 64;
 
 #endif
