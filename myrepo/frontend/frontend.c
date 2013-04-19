@@ -293,7 +293,7 @@ static int idd_queue_request(struct request *req){
 			kunmap_atomic(shared_data);
 #endif
 		}
-#if 0
+#if 1
 		info.shadow[id].frame[i] = mfn_to_pfn(buffer_mfn);
 		ring_req->seg[i] = (struct idd_request_segment) {
 					.gref       = ref,
