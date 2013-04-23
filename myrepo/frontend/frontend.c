@@ -228,8 +228,8 @@ static int idd_queue_request(struct request *req){
 #if 1
 	for_each_sg(info.sg, sg, ring_req->nr_segments, i) {
 		// KERNEL_SECTOR_SHIFT
-		fsect = sg->offset >> 9;
-		lsect = fsect + (sg->length >> 9) - 1;
+		fsect = sg->offset >> KERNEL_SECTOR_SHIFT;
+		lsect = fsect + (sg->length >> KERNEL_SECTOR_SHIFT) - 1;
 		
 		/* Check if we have grants allocated requests */
 		if (info.persistent_gnts_c) {

@@ -104,4 +104,6 @@ typedef struct idd_connect{
 	uint32_t data_port;
 }idd_connect_t;
 
+#define KERNEL_SECTOR_SHIFT 9
+
 #endif
