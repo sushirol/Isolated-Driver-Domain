@@ -25,7 +25,6 @@ static backend_info_t backend;
 
 struct file *file;
 int f;
-struct block_device *bd;
 
 static inline int vaddr_pagenr(struct pending_req *req, int seg){
         return (req - backend.pending_reqs) * IDD_MAX_SEGMENTS_PER_REQUEST + seg;
@@ -49,7 +48,6 @@ static void free_req(struct pending_req *req){
 		wake_up(&backend.pending_free_wq);
 }
 
-//##########################
 static void make_response(backend_info_t *be, u64 id, unsigned short op, int st){
 	struct idd_response resp;
 	unsigned long flags;
@@ -58,8 +56,9 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	resp.op = op;
 	resp.seq_no = id;
 	resp.priv_data = NULL;
-	resp.res = 1;
+	resp.res = 9;
 
+	printk("makeing response\n");
 	spin_lock_irqsave(&be->blk_ring_lock, flags);
 
 	memcpy(RING_GET_RESPONSE(&be->main_ring, backend.main_ring.rsp_prod_pvt),&resp, sizeof(resp));
@@ -87,7 +86,8 @@ static void __end_block_io_op(struct pending_req *pending_req, int error){
 
 static void end_block_io_op(struct bio *bio, int error)
 {
-        __end_block_io_op(bio->bi_private, error);
+//        __end_block_io_op(bio->bi_private, error);
+	printk("panic ?? \n");
         bio_put(bio);
 }
 
@@ -106,50 +106,6 @@ static struct pending_req *alloc_req(void){
 	return req;
 }
 
-#if 0
-static struct persistent_gnt *get_persistent_gnt(struct rb_root *root,grant_ref_t gref){
-	struct persistent_gnt *data;
-	struct rb_node *node = root->rb_node;
-
-	while (node) {
-		data = container_of(node, struct persistent_gnt, node);
-		
-		if (gref < data->gnt)
-			node = node->rb_left;
-		else if (gref > data->gnt)
-			node = node->rb_right;
-		else
-			return data;
-	}
-
-	return NULL;
-}
-
-static void add_persistent_gnt(struct rb_root *root,
-	struct persistent_gnt *persistent_gnt){
-	
-	struct rb_node **new = &(root->rb_node), *parent = NULL;
-	struct persistent_gnt *this;
-
-	while (*new) {
-		
-		this = container_of(*new, struct persistent_gnt, node);
-		parent = *new;
-		
-		if (persistent_gnt->gnt < this->gnt)
-			new = &((*new)->rb_left);
-		else if (persistent_gnt->gnt > this->gnt)
-			new = &((*new)->rb_right);
-		else {
-			printk(" trying to add a gref that's already in the tree\n");
-			BUG();
-		}
-	}
-	rb_link_node(&(persistent_gnt->node), parent, new);
-	rb_insert_color(&(persistent_gnt->node), root);
-}
-#endif
-
 static int map_pages_to_req(struct idd_request *req, struct pending_req *pending_req, 
 			struct seg_buf seg[], struct page *pages[]){
 
@@ -163,15 +119,17 @@ static int map_pages_to_req(struct idd_request *req, struct pending_req *pending
 	int ret = 0;
 	backend_info_t *be = pending_req->priv_d;
 
+
+//code from xen
+
 	for (i = 0; i < nseg; i++) {
 		uint32_t flags;
-	
-			new_map = true;	
-			pages[i] = be->pending_page(pending_req, i);
-			printk("nseg %d pages[%d] %p\n", nseg, i, pages[i]);
-			addr = vaddr(pending_req, i);
-			printk("addr %lld\n",addr);
-			pages_to_gnt[segs_to_map] = be->pending_page(pending_req, i);
+		new_map = true;	
+		pages[i] = be->pending_page(pending_req, i);
+		printk("nseg %d pages[%d] %p\n", nseg, i, pages[i]);
+		addr = vaddr(pending_req, i);
+		printk("addr %lld\n",addr);
+		pages_to_gnt[segs_to_map] = be->pending_page(pending_req, i);
 
 		if (new_map) {
 			flags = GNTMAP_host_map;
@@ -189,23 +147,17 @@ static int map_pages_to_req(struct idd_request *req, struct pending_req *pending
 		BUG_ON(ret);
 	}
 
-	/*
-	* Now swizzle the MFN in our domain with the MFN from the other domain
-	* so that when we access vaddr(pending_req,i) it has the contents of
-	* the page from the other domain.
-	*/
-	
 	bitmap_zero(pending_req->unmap_seg, IDD_MAX_SEGMENTS_PER_REQUEST);
 	for (i = 0, j = 0; i < nseg; i++) {
-			bitmap_set(pending_req->unmap_seg, i, 1);
-			if (ret) {
-				j++;
-				continue;
-			}
+		bitmap_set(pending_req->unmap_seg, i, 1);
+		if (ret) {
+			j++;
+			continue;
+		}
 
-			seg[i].buf = map[j++].dev_bus_addr | (req->seg[i].first_sect << 9);
-			printk("len = %u\n", seg[i].nsec << 9);
-
+		seg[i].buf = map[j++].dev_bus_addr | (req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
+		printk("len = %u\n", seg[i].nsec << KERNEL_SECTOR_SHIFT);
+//xwen code : verified . returns correct offset and no of sects
 	}
 #endif
 	return 0;
@@ -237,9 +189,9 @@ static int dispatch_rw_block_io(backend_info_t *be,
 				struct pending_req *pending_req){
 	struct bd_req breq;
 	struct seg_buf seg[IDD_MAX_SEGMENTS_PER_REQUEST];
+	struct bio *biolist[IDD_MAX_SEGMENTS_PER_REQUEST];
 	unsigned int nseg;
 	struct bio *bio = NULL;
-	struct bio *biolist[IDD_MAX_SEGMENTS_PER_REQUEST];
 	int i, nbio = 0;
 	int op;
 	struct blk_plug plug;
@@ -263,21 +215,22 @@ static int dispatch_rw_block_io(backend_info_t *be,
 
 	breq.sector_number = req->sector_number;
 	breq.nr_sects = 0;
-//	breq.bdev = lookup_bdev("/dev/ramd");
-	breq.dev = MKDEV(MAJOR(bd->bd_inode->i_rdev), MINOR(bd->bd_inode->i_rdev));
 
 //	breq.bdev = blkdev_get_by_dev(breq.dev, FMODE_WRITE, NULL);
-	breq.bdev = lookup_bdev("/dev/ramd");
+	
+	breq.bdev = blkdev_get_by_path("/dev/ramd", FMODE_READ | FMODE_WRITE | FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE, NULL);
+	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), MINOR(breq.bdev->bd_inode->i_rdev));
+
+	printk("Major %d Minor %d bdev %p bd_disk %p \n",MAJOR(breq.bdev->bd_inode->i_rdev), MINOR(breq.bdev->bd_inode->i_rdev),breq.bdev, breq.bdev->bd_disk);
+
+
 	if (IS_ERR(breq.bdev)) {
 		printk("xen_vbd_create: device %08x could not be opened.\n",breq.dev);
 		return -ENOENT;
 	}
 
-	printk("Major %d Minor %d bdev %08x bd_disk %p \n",MAJOR(bd->bd_inode->i_rdev), MINOR(bd->bd_inode->i_rdev),breq.bdev, breq.bdev->bd_disk);
-
 	if (breq.bdev->bd_disk == NULL) {
-//		printk("xen_vbd_create: device %08x doesn't exist.\n",breq.dev);
-		printk("xen_vbd_create: device %08x bd_disk %p doesn't exist.\n",breq.dev,dev_to_disk(breq.bdev));
+		printk("xen_vbd_create: device %08x doesn't exist.\n",breq.dev);
 		return -ENOENT;
 	}
 
@@ -287,6 +240,8 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	pending_req->status = 0;
 	pending_req->nr_pages = nseg;
 
+
+//Sushrut : fill seg struct
 	for (i = 0; i < nseg; i++) {
 		seg[i].nsec = req->seg[i].last_sect - req->seg[i].first_sect + 1;
 		if ((req->seg[i].last_sect >= (PAGE_SIZE >> 9)) ||
@@ -295,12 +250,13 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
+//Sushrut : insert pages into bio
 	if (map_pages_to_req(req, pending_req, seg, pages))
 		goto fail_flush;
 
 	if(pages[0] == NULL){
 		printk("NULL!!!\n");
-	return 0;	
+		return -ENOMEM;
 	}
 	xen_idd_get(be);
 
@@ -321,8 +277,9 @@ static int dispatch_rw_block_io(backend_info_t *be,
 				goto fail_put_bio;
 			
 			biolist[nbio++] = bio;
+//Sushrut : add to biolist and submit bio later
+
 			bio->bi_bdev = breq.bdev;
-//			bio->bi_bdev = bd;
 			bio->bi_private = pending_req;
 			bio->bi_end_io = end_block_io_op;
 			bio->bi_sector  = breq.sector_number;
@@ -335,16 +292,18 @@ static int dispatch_rw_block_io(backend_info_t *be,
 #endif
 	atomic_set(&pending_req->pendcnt, nbio);
 
-//	blk_start_plug(&plug);
+#if 1
+//Sushrut : How to ensure flushing ? 
+// Use blk_start_plug and finish plug
+	blk_start_plug(&plug);
 
-#if 0
 	for (i = 0; i < nbio; i++){
 		printk("submitted bio %d\n", i);
-		submit_bio(op, biolist[i]);
+//		submit_bio(op, biolist[i]);
 	}
-#endif
 
-//	blk_finish_plug(&plug);
+	blk_finish_plug(&plug);
+#endif
 
 	return 0;	
 fail_flush:
@@ -401,6 +360,7 @@ static int __do_block_io_op(backend_info_t *be){
 		if(dispatch_rw_block_io(be, &req, pending_req)){
 			break;
 		}
+// Sushrut : yeild or cond_resched ?
 		cond_resched();
 	}
 	return more_to_do;
@@ -421,11 +381,10 @@ static int do_block_io_op(backend_info_t *be){
 
 int idd_request_schedule(void *arg){
 
+	struct block_device *bdev;
 	backend_info_t *be = (backend_info_t *)arg;
-	struct block_device *bd;
 
-	bd = lookup_bdev("/dev/ramd");
-	be->bd.bdev = bd;
+	bdev = blkdev_get_by_path("/dev/ramd", FMODE_READ | FMODE_WRITE | FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE, NULL);
 
 	while(!kthread_should_stop()){
 		if (try_to_freeze())
@@ -447,6 +406,23 @@ int idd_request_schedule(void *arg){
 		smp_mb();
 		if (do_block_io_op(be))
 			be->waiting_reqs = 1;
+
+#if 0
+		struct buffer_head * bh;
+
+		// request larger than 4k, split request.
+
+		if(req == WRITE) {
+			bh = __getblk(bdev, req->sector_number, size )
+			memcpy(req->pages, bh->b_data);
+			mark_buffer_dirty
+		}
+		else{
+			bh = __bread(bdev,sectore_num, size )
+			memcpy( bh->b_data, req->pages);
+		}
+		brelse(bh);
+#endif
 	}
 	xen_idd_put(be);
 
@@ -461,43 +437,8 @@ static void idd_notify_work(backend_info_t *be)
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-#if 1
 	printk("interrupt got !\n");
 	idd_notify_work(dev_id);
-#else
-	struct idd_request *req;
-	struct idd_response *rsp;
-	int notify;
-	RING_IDX rc, rp;
-
-	rc = backend.main_ring.req_cons;
-	rp = backend.main_ring.sring->req_prod;
-	smp_mb();
-
-
-	while (rc != rp) {
-		if (RING_REQUEST_CONS_OVERFLOW(&backend.main_ring, rc))
-			break;
-		
-		req = RING_GET_REQUEST(&backend.main_ring,rc);
-
-		backend.main_ring.req_cons = ++rc;
-		backend.rw_req = req;
-		smp_mb();
-		printk("got from frontend %llu %d!\n", req->seq_no, req->data_direction);
-
-		rsp = RING_GET_RESPONSE(&backend.main_ring, backend.main_ring.rsp_prod_pvt);
-		rsp->res = 1;
-		rsp->seq_no = req->seq_no;
-		rsp->op = req->data_direction;
-		rsp->priv_data = req->priv_data;
-		backend.main_ring.rsp_prod_pvt++;
-		smp_mb();
-		RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(&backend.main_ring, notify);
-		notify_remote_via_irq(backend.ring_irq);
-//		printk("interrupt handled at backend %lu. sending interrupt to frontend %lu!\n",req->seq_no, rsp->seq_no);
-	}
-#endif
         return IRQ_HANDLED;
 }
 
@@ -525,25 +466,13 @@ static void idd_free_shared(uint32_t gref, void *addr)
 
 static int blk_init(void)
 {
-	int major, i, mmap_pages;
+	int i, mmap_pages;
 
 	struct evtchn_alloc_unbound ring_alloc;
 	struct evtchn_close close;
 	idd_connect_t data;
 	int err=0;
 	struct idd_sring *sring;
-
-//        mm_segment_t old_fs;
-//        old_fs = get_fs();
-//        set_fs(KERNEL_DS);
-//        f = do_sys_open(AT_FDCWD, (const char*)"/root/sdb", O_RDWR, 0);
-//        printk("fvalue %d\n",f);
-//        f = do_sys_open(AT_FDCWD, (const char*)"/dev/sdb", O_RDWR, 0);
-//        f = do_sys_open(AT_FDCWD, (const char*)"/dev/ramd", O_RDWR, 0);
-//        printk("fvalue %d\n",f);
-//        file = fget(f);
-//        printk("file %p\n",file);
-//	set_fs(old_fs);
 
 	sema_init(&backend.rsp_ring_sem,1);
 	sema_init(&backend.req_ring_sem,1);
@@ -558,14 +487,11 @@ static int blk_init(void)
 		goto end;
 	}
 	SHARED_RING_INIT(sring);
-//	BACK_RING_INIT(&backend.main_ring, sring, 8 * PAGE_SIZE);
 	BACK_RING_INIT(&backend.main_ring, sring, PAGE_SIZE);
 
 	data.domid = 0;
 	data.main_ring_gref = backend.main_ring_gref;
         printk("DEBUG : main_ring_gref %u %u\n",data.main_ring_gref,backend.main_ring_gref);
-
-	//updating connection data info
 
 /********************* SHARED IO DATA PAGE *****************************/
 
@@ -607,7 +533,6 @@ static int blk_init(void)
 	spin_lock_init(&backend.pending_free_lock);
 
 	spin_lock_init(&backend.blk_ring_lock);
-	atomic_set(&backend.refcnt, 1);
 
 	init_waitqueue_head(&backend.pending_free_wq);
 	init_waitqueue_head(&backend.wq);
@@ -636,10 +561,6 @@ static int blk_init(void)
 		list_add_tail(&backend.pending_reqs[i].free_list,
 			&backend.pending_free);
 	}
-
-	bd = lookup_bdev("/dev/ramd");
-	major = MAJOR(bd->bd_inode->i_rdev);
-	printk("major %d \n", major);
 
 	backend.request_thread = kthread_run(idd_request_schedule, &backend, "request_thread");
 
