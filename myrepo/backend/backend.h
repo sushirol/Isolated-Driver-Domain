@@ -75,6 +75,7 @@ struct bd_req {
 };
 
 struct seg_buf {
+//Sushrut : offset and no of sect
 	unsigned long buf;
 	unsigned int nsec;
 };
@@ -155,6 +156,8 @@ typedef struct idd_connect{
 #define xen_idd_get(_b) (atomic_inc(&(_b)->refcnt))
 #define xen_idd_put(_b) (atomic_dec_and_test(&(_b)->refcnt))
 #define pending_page(req, seg) pending_pages[vaddr_pagenr(req, seg)]
+
+#define KERNEL_SECTOR_SHIFT 9
 
 static int xen_idd_reqs = 64;
 
