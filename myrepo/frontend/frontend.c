@@ -54,7 +54,7 @@ struct grant {
 idd_irq_info_t info;
 static struct request_queue *Queue;
 int major_num=0;
-
+static int count1 =0, count2 = 0;
 module_init(idd_init);
 module_exit(idd_cleanup);
 
@@ -77,12 +77,13 @@ static const char *op_name(int op)
 	return names[op];
 }
 
+#if 0
 static void idd_restart_queue_callback(void *arg)
 {
 	idd_irq_info_t *cb_info = (idd_irq_info_t *)arg;
 	schedule_work(&cb_info->work);
 }
-
+#endif
 
 static inline void flush_requests(idd_irq_info_t *flush_info)
 {
@@ -202,6 +203,7 @@ static int idd_queue_request(struct request *req){
 		BUG_ON(1);
 		return 1;
 	}
+	printk("DEBUG READ/WRITE %d!\n", count2++);
 #if 0
 	ring_req->priv_data = req;
 	ring_req->nbytes = nbytes;
@@ -212,6 +214,7 @@ static int idd_queue_request(struct request *req){
 
 	ring_req->seq_no = id;
 	ring_req->data_direction=write;
+	ring_req->sector_number = blk_rq_pos(req);
 
 //	printk("req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
 //	printk("seq_no %lu offset %lu sector %lu\n",ring_req->seq_no, ring_req->offset,start_sector);
@@ -267,7 +270,7 @@ static int idd_queue_request(struct request *req){
 		info.shadow[id].grants_used[i] = gnt_list_entry;
 		
 		if(write){
-			printk("SENDING WRITE !\n");
+//			printk("SENDING WRITE !\n");
 			printk("offset %u + length %u = %u PAGE SIZE %lu\n", sg->offset, sg->length, sg->offset + sg->length, PAGE_SIZE);
 #if 1
 			char *bvec_data;
@@ -355,6 +358,7 @@ struct block_device_operations idd_fops = {
 
 static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 	int i = 0;
+#if 0
 	struct bio_vec *bvec;
 	struct req_iterator iter;
 	unsigned long flags;
@@ -362,7 +366,6 @@ static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 	void *shared_data;
 	unsigned int offset = 0;
 
-#if 0	
 	if (ring_rsp->op == 0){
 		rq_for_each_segment(bvec, s->request, iter) {
 			BUG_ON((bvec->bv_offset + bvec->bv_len) > PAGE_SIZE);
@@ -417,7 +420,7 @@ again:
 		ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
 		id  = ring_rsp->seq_no;
 
-		printk("INTERRUPT : Write result %d seq no %lu\n", ring_rsp->res, ring_rsp->seq_no);
+		printk("DEBUG INTERRUPT %d : Write result %d seq no %lu\n", count1++, ring_rsp->res, ring_rsp->seq_no);
 		printk("Debug: INTERRUPT req_prod_pvt %d ", info.main_ring.req_prod_pvt);
 		printk("Debug: INTERRUPT req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
 
@@ -569,7 +572,7 @@ static int idd_init(void)
 
 	memset(&info.shadow, 0, sizeof(info.shadow));	
 
-	printk("IDD_RING_SIZE %d \n", IDD_RING_SIZE);
+	printk("IDD_RING_SIZE %ld \n", IDD_RING_SIZE);
 
 	for (i = 0; i < IDD_RING_SIZE; i++){
 		info.shadow[i].req.seq_no = i+1;
