@@ -79,7 +79,7 @@ static void __end_block_io_op(struct pending_req *pending_req, int error){
         if (atomic_dec_and_test(&pending_req->pendcnt)) {
                 make_response(pending_req->priv_d, pending_req->id,
                                 pending_req->operation, pending_req->status);
-                xen_idd_put(pending_req->priv_d);
+//                xen_idd_put(pending_req->priv_d);
         	free_req(pending_req);
         }
 }
@@ -180,7 +180,7 @@ static void unmap_pages(struct pending_req *req){
 		
 	}
 	
-	ret = gnttab_unmap_refs(unmap, NULL, pages, invcount);
+	ret = gnttab_unmap_refs(unmap, pages, invcount, 0);
 	BUG_ON(ret);
 }
 
@@ -216,8 +216,6 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	breq.sector_number = req->sector_number;
 	breq.nr_sects = 0;
 
-//	breq.bdev = blkdev_get_by_dev(breq.dev, FMODE_WRITE, NULL);
-	
 	breq.bdev = blkdev_get_by_path("/dev/ramd", FMODE_READ | FMODE_WRITE | FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE, NULL);
 	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), MINOR(breq.bdev->bd_inode->i_rdev));
 
@@ -258,19 +256,14 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		printk("NULL!!!\n");
 		return -ENOMEM;
 	}
-	xen_idd_get(be);
+//	xen_idd_get(be);
 
 #if 1
 	for (i = 0; i < nseg; i++) {
 
-//		while(1){
 		while ((bio == NULL) || bio_add_page(bio, pages[i], seg[i].nsec << 9, seg[i].buf & ~PAGE_MASK) == 0){
 			printk("bio %p pages[%d] %p \n",bio, i, pages[i]);
 			printk("seg[%d].nsec %u offset %ld\n",i, seg[i].nsec,  seg[i].buf & ~PAGE_MASK);
-//			if (bio != NULL){
-//				if(bio_add_page(bio, pages[i], seg[i].nsec << 9, seg[i].buf & ~PAGE_MASK) != 0)
-//					break;
-//			}
 
 			bio = bio_alloc(GFP_KERNEL, nseg-i);
 			if (unlikely(bio == NULL))
@@ -295,14 +288,14 @@ static int dispatch_rw_block_io(backend_info_t *be,
 #if 1
 //Sushrut : How to ensure flushing ? 
 // Use blk_start_plug and finish plug
-	blk_start_plug(&plug);
+//	blk_start_plug(&plug);
 
 	for (i = 0; i < nbio; i++){
 		printk("submitted bio %d\n", i);
-//		submit_bio(op, biolist[i]);
+		submit_bio(op, biolist[i]);
 	}
 
-	blk_finish_plug(&plug);
+//	blk_finish_plug(&plug);
 #endif
 
 	return 0;	
@@ -317,8 +310,8 @@ fail_response:
 	msleep(1);
 	return -EIO;
 fail_put_bio:
-//	for (i = 0; i < nbio; i++)
-//		bio_put(biolist[i]);
+	for (i = 0; i < nbio; i++)
+		bio_put(biolist[i]);
 	__end_block_io_op(pending_req, -EINVAL);
 	msleep(1);
 	return -EIO;
@@ -424,7 +417,7 @@ int idd_request_schedule(void *arg){
 		brelse(bh);
 #endif
 	}
-	xen_idd_put(be);
+//	xen_idd_put(be);
 
 	return 0;
 }
