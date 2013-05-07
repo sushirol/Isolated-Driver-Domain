@@ -140,7 +140,7 @@ typedef struct backend_info {
 	grant_handle_t *pending_grant_handles;
 	atomic_t refcnt;
 	spinlock_t blk_ring_lock;
-//	unsigned int persistent_gnt_c;
+	unsigned int persistent_gnt_c;
 	struct rb_root persistent_gnts;
 
 } backend_info_t;
