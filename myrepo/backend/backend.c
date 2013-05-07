@@ -30,10 +30,12 @@ static inline int vaddr_pagenr(struct pending_req *req, int seg){
         return (req - backend.pending_reqs) * IDD_MAX_SEGMENTS_PER_REQUEST + seg;
 }
 
-static inline unsigned long vaddr(struct pending_req *req, int seg)
+//static inline unsigned long vaddr(struct pending_req *req, int seg)
+static inline void * vaddr(struct pending_req *req, int seg)
 {
 	unsigned long pfn = page_to_pfn(backend.pending_page(req, seg));
-	return (unsigned long)pfn_to_kaddr(pfn);
+//	return (unsigned long)pfn_to_kaddr(pfn);
+	return pfn_to_kaddr(pfn);
 }
 
 static void free_req(struct pending_req *req){
@@ -71,23 +73,49 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 
 }
 
+static void unmap_pages(struct pending_req *req){
+	struct page *pages[IDD_MAX_SEGMENTS_PER_REQUEST];
+	struct gnttab_unmap_grant_ref unmap[IDD_MAX_SEGMENTS_PER_REQUEST];
+	unsigned int i, invcount = 0;
+	int ret;
+
+	for (i = 0; i < req->nr_pages; i++) {
+		if (!test_bit(i, req->unmap_seg))
+			continue;
+//		gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i),
+		gnttab_set_unmap_op(&unmap[invcount], (unsigned long)vaddr(req, i),
+				GNTMAP_host_map, 0);
+
+//		pages[invcount] = virt_to_page(vaddr(req, i));
+		pages[invcount] = virt_to_page((unsigned long)vaddr(req, i));
+		invcount++;
+		
+	}
+	
+	ret = gnttab_unmap_refs(unmap, pages, invcount, 0);
+	BUG_ON(ret);
+}
+
 static void __end_block_io_op(struct pending_req *pending_req, int error){
         if (error) {
                 printk("Buffer not up-to-date at end of operation, error=%d\n", error);
                 pending_req->status = -1;
         }
+//	printk(" %d before calling make_response\n",atomic_read(&pending_req->pendcnt));
         if (atomic_dec_and_test(&pending_req->pendcnt)) {
+		printk("calling make_response\n");
+		unmap_pages(pending_req);
                 make_response(pending_req->priv_d, pending_req->id,
                                 pending_req->operation, pending_req->status);
-//                xen_idd_put(pending_req->priv_d);
+                xen_idd_put(pending_req->priv_d);
         	free_req(pending_req);
         }
 }
 
 static void end_block_io_op(struct bio *bio, int error)
 {
-//        __end_block_io_op(bio->bi_private, error);
-	printk("panic ?? \n");
+        __end_block_io_op(bio->bi_private, error);
+	printk("in end_block_io_op \n");
         bio_put(bio);
 }
 
@@ -111,9 +139,9 @@ static int map_pages_to_req(struct idd_request *req, struct pending_req *pending
 
 	struct gnttab_map_grant_ref map[IDD_MAX_SEGMENTS_PER_REQUEST];
 	struct page *pages_to_gnt[IDD_MAX_SEGMENTS_PER_REQUEST];
-	phys_addr_t addr = 0;
-	int i, j;
-	bool new_map = false;
+//	phys_addr_t addr = 0;
+	void *addr = NULL;
+	int i;
 	int nseg = req->nr_segments;
 	int segs_to_map = 0;
 	int ret = 0;
@@ -124,64 +152,37 @@ static int map_pages_to_req(struct idd_request *req, struct pending_req *pending
 
 	for (i = 0; i < nseg; i++) {
 		uint32_t flags;
-		new_map = true;	
 		pages[i] = be->pending_page(pending_req, i);
 		printk("nseg %d pages[%d] %p\n", nseg, i, pages[i]);
 		addr = vaddr(pending_req, i);
-		printk("addr %lld\n",addr);
+		printk("addr %p\n",addr);
+//		rintk("addr %lld\n",addr);
+
+
 		pages_to_gnt[segs_to_map] = be->pending_page(pending_req, i);
 
-		if (new_map) {
-			flags = GNTMAP_host_map;
-			if (pending_req->operation != 1)
-				flags |= GNTMAP_readonly;
+		flags = GNTMAP_host_map;
+//		if (pending_req->operation != 1)
+//			flags |= GNTMAP_readonly;
 
-			gnttab_set_map_op(&map[segs_to_map++], addr,
-				flags, req->seg[i].gref,
-				DOMZERO);
-		}
+//		gnttab_set_map_op(&map[i], vaddr(pending_req, i),
+		gnttab_set_map_op(&map[i], (unsigned long)vaddr(pending_req, i),
+			flags, req->seg[i].gref, DOMZERO);
 	}
 #if 1
-	if (segs_to_map) {
-		ret = gnttab_map_refs(map, NULL, pages_to_gnt, segs_to_map);
-		BUG_ON(ret);
-	}
+	ret = gnttab_map_refs(map, NULL, &be->pending_page(pending_req, 0), nseg);
+	BUG_ON(ret);
 
 	bitmap_zero(pending_req->unmap_seg, IDD_MAX_SEGMENTS_PER_REQUEST);
-	for (i = 0, j = 0; i < nseg; i++) {
+	for (i = 0; i < nseg; i++) {
 		bitmap_set(pending_req->unmap_seg, i, 1);
-		if (ret) {
-			j++;
-			continue;
-		}
 
-		seg[i].buf = map[j++].dev_bus_addr | (req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
+		seg[i].buf = map[i].dev_bus_addr | (req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
 		printk("len = %u\n", seg[i].nsec << KERNEL_SECTOR_SHIFT);
 //xwen code : verified . returns correct offset and no of sects
 	}
 #endif
 	return 0;
-}
-
-static void unmap_pages(struct pending_req *req){
-	struct page *pages[IDD_MAX_SEGMENTS_PER_REQUEST];
-	struct gnttab_unmap_grant_ref unmap[IDD_MAX_SEGMENTS_PER_REQUEST];
-	unsigned int i, invcount = 0;
-	int ret;
-
-	for (i = 0; i < req->nr_pages; i++) {
-		if (!test_bit(i, req->unmap_seg))
-			continue;
-		gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i),
-				GNTMAP_host_map, 0);
-
-		pages[invcount] = virt_to_page(vaddr(req, i));
-		invcount++;
-		
-	}
-	
-	ret = gnttab_unmap_refs(unmap, pages, invcount, 0);
-	BUG_ON(ret);
 }
 
 static int dispatch_rw_block_io(backend_info_t *be,
@@ -256,46 +257,45 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		printk("NULL!!!\n");
 		return -ENOMEM;
 	}
-//	xen_idd_get(be);
+	xen_idd_get(be);
 
-#if 1
 	for (i = 0; i < nseg; i++) {
-
-		while ((bio == NULL) || bio_add_page(bio, pages[i], seg[i].nsec << 9, seg[i].buf & ~PAGE_MASK) == 0){
-			printk("bio %p pages[%d] %p \n",bio, i, pages[i]);
-			printk("seg[%d].nsec %u offset %ld\n",i, seg[i].nsec,  seg[i].buf & ~PAGE_MASK);
-
-			bio = bio_alloc(GFP_KERNEL, nseg-i);
+		while ((bio == NULL) ||
+			bio_add_page(bio, pages[i], seg[i].nsec << 9, seg[i].buf & ~PAGE_MASK) == 0) {
+	
+			bio = bio_alloc(GFP_KERNEL, nseg);
 			if (unlikely(bio == NULL))
 				goto fail_put_bio;
-			
-			biolist[nbio++] = bio;
-//Sushrut : add to biolist and submit bio later
 
+			biolist[nbio++] = bio;	
 			bio->bi_bdev = breq.bdev;
 			bio->bi_private = pending_req;
 			bio->bi_end_io = end_block_io_op;
 			bio->bi_sector  = breq.sector_number;
-
-			printk("nbio %d bio->bi_bdev %p bio->bi_private %p bio->bi_sector %ld  \n", nbio, bio->bi_bdev, bio->bi_private, bio->bi_sector);
+			printk("bio->bi_bdev %p bio->bi_private %p bio->bi_sector %ld  \n", bio->bi_bdev, bio->bi_private, bio->bi_sector);
+			printk("bio %p pages[%d] %p \n",bio, i, pages[i]);
+			printk("seg[%d].nsec %u offset %ld\n",i, seg[i].nsec,  seg[i].buf & ~PAGE_MASK);
 		}
-
 		breq.sector_number += seg[i].nsec;
 	}
-#endif
 	atomic_set(&pending_req->pendcnt, nbio);
 
 #if 1
-//Sushrut : How to ensure flushing ? 
+//Sushrut : How to flush ? 
 // Use blk_start_plug and finish plug
-//	blk_start_plug(&plug);
-
-	for (i = 0; i < nbio; i++){
-		printk("submitted bio %d\n", i);
-		submit_bio(op, biolist[i]);
+	if(req->data_direction == 1){
+		for(i=0; i < nseg; i++){
+			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
+                		vaddr(pending_req, i), PAGE_SIZE, 1);
+		}
 	}
+		
+	blk_start_plug(&plug);
+	for (i = 0; i < nbio; i++)
+		make_response(be, req->seq_no, req->data_direction, 0);
+//		submit_bio(op, biolist[i]);
 
-//	blk_finish_plug(&plug);
+	blk_finish_plug(&plug);
 #endif
 
 	return 0;	
@@ -353,7 +353,7 @@ static int __do_block_io_op(backend_info_t *be){
 		if(dispatch_rw_block_io(be, &req, pending_req)){
 			break;
 		}
-// Sushrut : yeild or cond_resched ?
+// Sushrut : yield or cond_resched ?
 		cond_resched();
 	}
 	return more_to_do;
@@ -417,7 +417,7 @@ int idd_request_schedule(void *arg){
 		brelse(bh);
 #endif
 	}
-//	xen_idd_put(be);
+	xen_idd_put(be);
 
 	return 0;
 }
