@@ -154,6 +154,8 @@ static int idd_queue_request(struct request *req){
 	bool new_persistent_gnts;
 	unsigned long id;
 
+	char * buffer = req->buffer;
+
 	struct scatterlist *sg;
 	struct grant *gnt_list_entry = NULL;
 	unsigned long buffer_mfn;
@@ -204,11 +206,6 @@ static int idd_queue_request(struct request *req){
 		return 1;
 	}
 	printk("DEBUG READ/WRITE %d!\n", count2++);
-#if 0
-	ring_req->priv_data = req;
-	ring_req->nbytes = nbytes;
-	ring_req->offset = offset;
-#endif
 	id = get_id_from_freelist(&info);
 	info.shadow[id].request = req;
 
@@ -216,8 +213,6 @@ static int idd_queue_request(struct request *req){
 	ring_req->data_direction=write;
 	ring_req->sector_number = blk_rq_pos(req);
 
-//	printk("req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
-//	printk("seq_no %lu offset %lu sector %lu\n",ring_req->seq_no, ring_req->offset,start_sector);
 	printk("id %llu \n",ring_req->seq_no);
         smp_mb();
 
@@ -230,7 +225,6 @@ static int idd_queue_request(struct request *req){
 	}
 #if 1
 	for_each_sg(info.sg, sg, ring_req->nr_segments, i) {
-		// KERNEL_SECTOR_SHIFT
 		fsect = sg->offset >> KERNEL_SECTOR_SHIFT;
 		lsect = fsect + (sg->length >> KERNEL_SECTOR_SHIFT) - 1;
 		
@@ -281,17 +275,9 @@ static int idd_queue_request(struct request *req){
 			shared_data = kmap_atomic(pfn_to_page(gnt_list_entry->pfn));
 			bvec_data = kmap_atomic(sg_page(sg));
 
-			/*
-			 * this does not wipe data stored outside the
-			 * range sg->offset..sg->offset+sg->length.
-			 * Therefore, blkback *could* see data from
-			 * previous requests. This is OK as long as
-			 * persistent grants are shared with just one
-			 * domain. It may need refactoring if this
-			 * changes
-			 */
-
 			memcpy(shared_data + sg->offset, bvec_data + sg->offset, sg->length);
+			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
+					buffer, sg->length, 1);	
 			kunmap_atomic(bvec_data);
 			kunmap_atomic(shared_data);
 #endif
@@ -336,6 +322,12 @@ void idd_device_request(struct request_queue *q)
 			blk_rq_cur_sectors(req), blk_rq_sectors(req),
 			req->buffer, rq_data_dir(req) ? "write" : "read");
 
+		if(rq_data_dir(req)){
+			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
+					req->buffer, (blk_rq_cur_sectors(req) *KERNEL_SECTOR_SIZE), 1);	
+		}
+		printk("\n");
+
 		if (idd_queue_request(req)) {
 			blk_requeue_request(q, req);
 wait:
@@ -345,7 +337,7 @@ wait:
 	
 		queued++;
 	}
-	
+
 	if(queued!=0){
 		flush_requests(&info);
 	}
