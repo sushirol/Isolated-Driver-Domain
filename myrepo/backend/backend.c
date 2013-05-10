@@ -30,12 +30,12 @@ static inline int vaddr_pagenr(struct pending_req *req, int seg){
         return (req - backend.pending_reqs) * IDD_MAX_SEGMENTS_PER_REQUEST + seg;
 }
 
-//static inline unsigned long vaddr(struct pending_req *req, int seg)
-static inline void * vaddr(struct pending_req *req, int seg)
+//static inline void * vaddr(struct pending_req *req, int seg)
+static inline unsigned long vaddr(struct pending_req *req, int seg)
 {
 	unsigned long pfn = page_to_pfn(backend.pending_page(req, seg));
-//	return (unsigned long)pfn_to_kaddr(pfn);
-	return pfn_to_kaddr(pfn);
+	return (unsigned long)pfn_to_kaddr(pfn);
+//	return pfn_to_kaddr(pfn);
 }
 
 static void free_req(struct pending_req *req){
@@ -77,19 +77,18 @@ static void unmap_pages(struct pending_req *req){
 	struct page *pages[IDD_MAX_SEGMENTS_PER_REQUEST];
 	struct gnttab_unmap_grant_ref unmap[IDD_MAX_SEGMENTS_PER_REQUEST];
 	unsigned int i, invcount = 0;
+	grant_handle_t handle;
 	int ret;
 
 	for (i = 0; i < req->nr_pages; i++) {
-		if (!test_bit(i, req->unmap_seg))
+		handle = pending_handle(req, i);
+		if(handle == IDD_INVALID_HANDLE)
 			continue;
-//		gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i),
-		gnttab_set_unmap_op(&unmap[invcount], (unsigned long)vaddr(req, i),
+		gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i),
 				GNTMAP_host_map, 0);
-
-//		pages[invcount] = virt_to_page(vaddr(req, i));
-		pages[invcount] = virt_to_page((unsigned long)vaddr(req, i));
+		pending_handle(req, i) = IDD_INVALID_HANDLE;
+		pages[invcount] = virt_to_page(vaddr(req, i));
 		invcount++;
-		
 	}
 	
 	ret = gnttab_unmap_refs(unmap, pages, invcount, 0);
@@ -134,55 +133,47 @@ static struct pending_req *alloc_req(void){
 	return req;
 }
 
-static int map_pages_to_req(struct idd_request *req, struct pending_req *pending_req, 
-			struct seg_buf seg[], struct page *pages[]){
+static int map_pages_to_req(struct idd_request *req, 
+				struct pending_req *pending_req, 
+				struct seg_buf seg[]){
 
 	struct gnttab_map_grant_ref map[IDD_MAX_SEGMENTS_PER_REQUEST];
-	struct page *pages_to_gnt[IDD_MAX_SEGMENTS_PER_REQUEST];
-//	phys_addr_t addr = 0;
-	void *addr = NULL;
 	int i;
 	int nseg = req->nr_segments;
-	int segs_to_map = 0;
 	int ret = 0;
-	backend_info_t *be = pending_req->priv_d;
-
-
-//code from xen
 
 	for (i = 0; i < nseg; i++) {
 		uint32_t flags;
-		pages[i] = be->pending_page(pending_req, i);
-		printk("nseg %d pages[%d] %p\n", nseg, i, pages[i]);
-		addr = vaddr(pending_req, i);
-		printk("addr %p\n",addr);
-//		rintk("addr %lld\n",addr);
 
+//		flags = GNTMAP_host_map | GNTMAP_application_map | GNTMAP_contains_pte;
+		flags = GNTMAP_host_map ;
+		if (pending_req->operation != 0)
+			flags |= GNTMAP_readonly;
 
-		pages_to_gnt[segs_to_map] = be->pending_page(pending_req, i);
-
-		flags = GNTMAP_host_map;
-//		if (pending_req->operation != 1)
-//			flags |= GNTMAP_readonly;
-
-//		gnttab_set_map_op(&map[i], vaddr(pending_req, i),
-		gnttab_set_map_op(&map[i], (unsigned long)vaddr(pending_req, i),
+		gnttab_set_map_op(&map[i], vaddr(pending_req, i),
 			flags, req->seg[i].gref, DOMZERO);
 	}
-#if 1
-	ret = gnttab_map_refs(map, NULL, &be->pending_page(pending_req, 0), nseg);
+
+	ret = gnttab_map_refs(map, NULL, &backend.pending_page(pending_req, 0), nseg);
 	BUG_ON(ret);
 
-	bitmap_zero(pending_req->unmap_seg, IDD_MAX_SEGMENTS_PER_REQUEST);
 	for (i = 0; i < nseg; i++) {
-		bitmap_set(pending_req->unmap_seg, i, 1);
 
-		seg[i].buf = map[i].dev_bus_addr | (req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
+		if (unlikely(map[i].status != 0)) {
+			printk("invalid buffer -- could not remap it\n");
+			map[i].handle = IDD_INVALID_HANDLE;
+			ret |= 1;
+		}
+		pending_handle(pending_req, i) = map[i].handle;
+		if(ret)
+			continue;
+
+
+		seg[i].buf = map[i].dev_bus_addr | 
+			(req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
 		printk("len = %u\n", seg[i].nsec << KERNEL_SECTOR_SHIFT);
-//xwen code : verified . returns correct offset and no of sects
 	}
-#endif
-	return 0;
+	return ret;
 }
 
 static int dispatch_rw_block_io(backend_info_t *be,
@@ -196,7 +187,6 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	int i, nbio = 0;
 	int op;
 	struct blk_plug plug;
-	struct page *pages[IDD_MAX_SEGMENTS_PER_REQUEST];
 	
 	if(req->data_direction == 1)
 		op = WRITE_ODIRECT;
@@ -209,36 +199,19 @@ static int dispatch_rw_block_io(backend_info_t *be,
 
 	nseg = req->nr_segments;
 
-	if (unlikely(nseg == 0) || unlikely(nseg > IDD_MAX_SEGMENTS_PER_REQUEST)) {
+	if (unlikely(nseg == 0) || 
+		unlikely(nseg > IDD_MAX_SEGMENTS_PER_REQUEST)) {
 		printk("Bad number of segments in request (%d)\n", nseg);
 		goto fail_response;
 	}
 
 	breq.sector_number = req->sector_number;
 	breq.nr_sects = 0;
-
-	breq.bdev = blkdev_get_by_path("/dev/ramd", FMODE_READ | FMODE_WRITE | FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE, NULL);
-	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), MINOR(breq.bdev->bd_inode->i_rdev));
-
-	printk("Major %d Minor %d bdev %p bd_disk %p \n",MAJOR(breq.bdev->bd_inode->i_rdev), MINOR(breq.bdev->bd_inode->i_rdev),breq.bdev, breq.bdev->bd_disk);
-
-
-	if (IS_ERR(breq.bdev)) {
-		printk("xen_vbd_create: device %08x could not be opened.\n",breq.dev);
-		return -ENOENT;
-	}
-
-	if (breq.bdev->bd_disk == NULL) {
-		printk("xen_vbd_create: device %08x doesn't exist.\n",breq.dev);
-		return -ENOENT;
-	}
-
 	pending_req->priv_d = be;
 	pending_req->id = req->seq_no;
 	pending_req->operation = req->data_direction;
 	pending_req->status = 0;
 	pending_req->nr_pages = nseg;
-
 
 //Sushrut : fill seg struct
 	for (i = 0; i < nseg; i++) {
@@ -249,19 +222,49 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
+	breq.bdev = blkdev_get_by_path("/dev/ramd", 
+			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
+			FMODE_PREAD | FMODE_PWRITE, NULL);
+	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
+			MINOR(breq.bdev->bd_inode->i_rdev));
+
+	printk("Major %d Minor %d bdev %p bd_disk %p \n",
+			MAJOR(breq.bdev->bd_inode->i_rdev), 
+			MINOR(breq.bdev->bd_inode->i_rdev),
+			breq.bdev, breq.bdev->bd_disk);
+
+
+	if (IS_ERR(breq.bdev)) {
+		printk("xen_vbd_create: device %08x could \
+			not be opened.\n",breq.dev);
+		return -ENOENT;
+	}
+
+	if (breq.bdev->bd_disk == NULL) {
+		printk("xen_vbd_create: device %08x doesn't \
+		exist.\n",breq.dev);
+		return -ENOENT;
+	}
+
+	for (i = 0; i < nseg; i++) {
+		if (((int)breq.sector_number|(int)seg[i].nsec) &
+		((bdev_logical_block_size(breq.bdev) >> 9) - 1)) {
+			printk("Misaligned I/O request from domain 0\n");
+			goto fail_response;
+		}
+	}	
+
 //Sushrut : insert pages into bio
-	if (map_pages_to_req(req, pending_req, seg, pages))
+	if (map_pages_to_req(req, pending_req, seg))
 		goto fail_flush;
 
-	if(pages[0] == NULL){
-		printk("NULL!!!\n");
-		return -ENOMEM;
-	}
 	xen_idd_get(be);
 
 	for (i = 0; i < nseg; i++) {
-		while ((bio == NULL) ||
-			bio_add_page(bio, pages[i], seg[i].nsec << 9, seg[i].buf & ~PAGE_MASK) == 0) {
+		while ((bio == NULL) ||	bio_add_page(bio, 
+					be->pending_page(pending_req, i),
+					seg[i].nsec << 9, 
+					seg[i].buf & ~PAGE_MASK) == 0) {
 	
 			bio = bio_alloc(GFP_KERNEL, nseg);
 			if (unlikely(bio == NULL))
@@ -272,40 +275,35 @@ static int dispatch_rw_block_io(backend_info_t *be,
 			bio->bi_private = pending_req;
 			bio->bi_end_io = end_block_io_op;
 			bio->bi_sector  = breq.sector_number;
-			printk("bio->bi_bdev %p bio->bi_private %p bio->bi_sector %ld  \n", bio->bi_bdev, bio->bi_private, bio->bi_sector);
-			printk("bio %p pages[%d] %p \n",bio, i, pages[i]);
-			printk("seg[%d].nsec %u offset %ld\n",i, seg[i].nsec,  seg[i].buf & ~PAGE_MASK);
+			printk("bio->bi_bdev %p bio->bi_private %p \
+				bio->bi_sector %ld  \n", bio->bi_bdev, 
+				bio->bi_private, bio->bi_sector);
 		}
 		breq.sector_number += seg[i].nsec;
 	}
 	atomic_set(&pending_req->pendcnt, nbio);
 
-#if 1
-//Sushrut : How to flush ? 
-// Use blk_start_plug and finish plug
 	if(req->data_direction == 1){
 		for(i=0; i < nseg; i++){
 			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
-                		vaddr(pending_req, i), PAGE_SIZE, 1);
+                		(void *)vaddr(pending_req, i), PAGE_SIZE, 1);
 		}
 	}
 		
 	blk_start_plug(&plug);
 	for (i = 0; i < nbio; i++)
-		make_response(be, req->seq_no, req->data_direction, 0);
-//		submit_bio(op, biolist[i]);
+		submit_bio(op, biolist[i]);
+//		end_block_io_op(biolist[i], 0);
 
 	blk_finish_plug(&plug);
-#endif
 
 	return 0;	
+
 fail_flush:
 	unmap_pages(pending_req);
 
 fail_response:	
-	
 	make_response(be, req->seq_no, req->data_direction, -1);
-
 	free_req(pending_req);
 	msleep(1);
 	return -EIO;
@@ -374,10 +372,7 @@ static int do_block_io_op(backend_info_t *be){
 
 int idd_request_schedule(void *arg){
 
-	struct block_device *bdev;
 	backend_info_t *be = (backend_info_t *)arg;
-
-	bdev = blkdev_get_by_path("/dev/ramd", FMODE_READ | FMODE_WRITE | FMODE_LSEEK | FMODE_PREAD | FMODE_PWRITE, NULL);
 
 	while(!kthread_should_stop()){
 		if (try_to_freeze())
@@ -400,22 +395,6 @@ int idd_request_schedule(void *arg){
 		if (do_block_io_op(be))
 			be->waiting_reqs = 1;
 
-#if 0
-		struct buffer_head * bh;
-
-		// request larger than 4k, split request.
-
-		if(req == WRITE) {
-			bh = __getblk(bdev, req->sector_number, size )
-			memcpy(req->pages, bh->b_data);
-			mark_buffer_dirty
-		}
-		else{
-			bh = __bread(bdev,sectore_num, size )
-			memcpy( bh->b_data, req->pages);
-		}
-		brelse(bh);
-#endif
 	}
 	xen_idd_put(be);
 
@@ -532,9 +511,14 @@ static int blk_init(void)
 
 	mmap_pages = xen_idd_reqs * IDD_MAX_SEGMENTS_PER_REQUEST;
 
-	backend.pending_reqs = kzalloc(sizeof(backend.pending_reqs[0])* xen_idd_reqs, GFP_KERNEL);
+	backend.pending_reqs = kzalloc(sizeof(backend.pending_reqs[0])* 
+					xen_idd_reqs, GFP_KERNEL);
+	
+	backend.pending_grant_handles = kmalloc(sizeof(backend.pending_grant_handles[0]) *
+					mmap_pages, GFP_KERNEL);
 
-	backend.pending_pages = kzalloc(sizeof(backend.pending_pages[0]) * mmap_pages, GFP_KERNEL);
+	backend.pending_pages = kzalloc(sizeof(backend.pending_pages[0]) * 
+					mmap_pages, GFP_KERNEL);
 
 	if (!backend.pending_reqs || !backend.pending_pages) {
 		err = -ENOMEM;
@@ -542,7 +526,7 @@ static int blk_init(void)
 	}
 
 	for(i=0; i < mmap_pages ; i++){
-		
+		backend.pending_grant_handles[i] = IDD_INVALID_HANDLE;
 		backend.pending_pages[i] = alloc_page(GFP_KERNEL);
 		if(backend.pending_pages[i] == NULL){
 			err = -ENOMEM;
