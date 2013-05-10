@@ -117,9 +117,13 @@ static int get_id_from_freelist(idd_irq_info_t *ptr_info)
 	unsigned long free = ptr_info->shadow_free;
 	BUG_ON(free >= IDD_RING_SIZE);
 	ptr_info->shadow_free = ptr_info->shadow[free].req.seq_no;
-	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llu\n", free,ptr_info->shadow_free, free, ptr_info->shadow[free].req.seq_no);
+	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llu\n", 
+			free,ptr_info->shadow_free, free, 
+			ptr_info->shadow[free].req.seq_no);
 	ptr_info->shadow[free].req.seq_no = 0x0fffffee; /* debug */
-	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llx\n", free,ptr_info->shadow_free, free, ptr_info->shadow[free].req.seq_no);
+	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llx\n", 
+			free,ptr_info->shadow_free, free, 
+			ptr_info->shadow[free].req.seq_no);
 	printk("return free %lu\n", free);
 	printk("\n");
 	return free;
@@ -128,7 +132,6 @@ static int get_id_from_freelist(idd_irq_info_t *ptr_info)
 static int add_id_to_freelist(idd_irq_info_t *ptr_info,
 		unsigned long id)
 {
-	printk("before shadow_free %lu shadow[%ld].req.seq_no %llu, id %ld\n", ptr_info->shadow_free, id, ptr_info->shadow[id].req.seq_no,id);
 	if (ptr_info->shadow[id].req.seq_no != id){
 		printk("Went wrong, both equal\n");
 		return -EINVAL;
@@ -140,8 +143,6 @@ static int add_id_to_freelist(idd_irq_info_t *ptr_info,
 	ptr_info->shadow[id].req.seq_no  = ptr_info->shadow_free;
 	ptr_info->shadow[id].request = NULL;
 	ptr_info->shadow_free = id;
-	printk("after shadow_free %lu shadow[%ld].req.seq_no %llu, id %ld\n", ptr_info->shadow_free, id, ptr_info->shadow[id].req.seq_no,id);
-	printk("\n");
 	return 0;
 }
 
@@ -151,15 +152,10 @@ static int idd_queue_request(struct request *req){
 	struct idd_request *ring_req;
 	int write, i, ref;
 	unsigned int fsect, lsect;
-	bool new_persistent_gnts;
 	unsigned long id;
 
-	char * buffer = req->buffer;
-
 	struct scatterlist *sg;
-	struct grant *gnt_list_entry = NULL;
 	unsigned long buffer_mfn;
-	struct page *granted_page;
 	grant_ref_t gref_head;
 
 	start_sector = blk_rq_pos(req);
@@ -178,13 +174,9 @@ static int idd_queue_request(struct request *req){
 		workaround = 1;
         smp_mb();
 
-#if 1
-	if (info.persistent_gnts_c < IDD_MAX_SEGMENTS_PER_REQUEST) {
-		new_persistent_gnts = 1;
-		if (gnttab_alloc_grant_references(
-			IDD_MAX_SEGMENTS_PER_REQUEST - info.persistent_gnts_c,
-			&gref_head) < 0){
-				printk("IS THIS AN ERROR ? \n");
+
+	if(gnttab_alloc_grant_references(
+		IDD_MAX_SEGMENTS_PER_REQUEST, &gref_head) < 0){
 #if 0
 				gnttab_request_free_callback(
 					&info.callback,
@@ -192,12 +184,10 @@ static int idd_queue_request(struct request *req){
 					&info,
 					IDD_MAX_SEGMENTS_PER_REQUEST);
 #endif
+				printk("IS THIS AN ERROR ? \n");
 				return 1;
-		}
-	}else{
-		new_persistent_gnts = 0;
+			
 	}
-#endif
 
 	ring_req = RING_GET_REQUEST(&info.main_ring, info.main_ring.req_prod_pvt);
 	if(ring_req == NULL){
@@ -210,8 +200,8 @@ static int idd_queue_request(struct request *req){
 	info.shadow[id].request = req;
 
 	ring_req->seq_no = id;
-	ring_req->data_direction=write;
 	ring_req->sector_number = blk_rq_pos(req);
+	ring_req->data_direction=write;
 
 	printk("id %llu \n",ring_req->seq_no);
         smp_mb();
@@ -222,82 +212,29 @@ static int idd_queue_request(struct request *req){
 		ring_req->nr_segments = blk_rq_map_sg(req->q, req, info.sg);
 		BUG_ON(req->nr_phys_segments > IDD_MAX_SEGMENTS_PER_REQUEST);
 		BUG_ON(ring_req->nr_segments > IDD_MAX_SEGMENTS_PER_REQUEST);
-	}
-#if 1
-	for_each_sg(info.sg, sg, ring_req->nr_segments, i) {
-		fsect = sg->offset >> KERNEL_SECTOR_SHIFT;
-		lsect = fsect + (sg->length >> KERNEL_SECTOR_SHIFT) - 1;
+
+		for_each_sg(info.sg, sg, ring_req->nr_segments, i) {
+			buffer_mfn = pfn_to_mfn(page_to_pfn(sg_page(sg)));
+			fsect = sg->offset >> KERNEL_SECTOR_SHIFT;
+			lsect = fsect + (sg->length >> KERNEL_SECTOR_SHIFT) - 1;
 		
-		/* Check if we have grants allocated requests */
-		if (info.persistent_gnts_c) {
-#if 1
-			BUG_ON(llist_empty(&info.persistent_gnts));
-			gnt_list_entry = llist_entry(
-						llist_del_first(&info.persistent_gnts),
-						struct grant, node);
-			ref = gnt_list_entry->gref;
-			buffer_mfn = pfn_to_mfn(gnt_list_entry->pfn);
-#endif
-			info.persistent_gnts_c--;
-#if 1
-		}else{
-		/* if not then allocate grants */
 			ref = gnttab_claim_grant_reference(&gref_head);
 			BUG_ON(ref == -ENOSPC);
 			
-			gnt_list_entry = kmalloc(sizeof(struct grant), GFP_ATOMIC);
-			if (!gnt_list_entry)
-				return -ENOMEM;
+			gnttab_grant_foreign_access_ref(ref, info.domid, 
+					buffer_mfn, rq_data_dir(req));
 
-			granted_page = alloc_page(GFP_ATOMIC);
-			if (!granted_page) {
-				kfree(gnt_list_entry);
-				return -ENOMEM;
-			}
-			
-			gnt_list_entry->pfn = page_to_pfn(granted_page);
-			gnt_list_entry->gref = ref;
-			buffer_mfn = pfn_to_mfn(page_to_pfn(granted_page));
-			gnttab_grant_foreign_access_ref(ref, info.domid, buffer_mfn, 0);
-#endif
+			info.shadow[id].frame[i] = mfn_to_pfn(buffer_mfn);
+			ring_req->seg[i] = (struct idd_request_segment) {
+						.gref       = ref,
+						.first_sect = fsect,
+						.last_sect  = lsect };
 		}
-		info.shadow[id].grants_used[i] = gnt_list_entry;
-		
-		if(write){
-//			printk("SENDING WRITE !\n");
-			printk("offset %u + length %u = %u PAGE SIZE %lu\n", sg->offset, sg->length, sg->offset + sg->length, PAGE_SIZE);
-#if 1
-			char *bvec_data;
-			void *shared_data;
-
-			BUG_ON(sg->offset + sg->length > PAGE_SIZE);
-
-			shared_data = kmap_atomic(pfn_to_page(gnt_list_entry->pfn));
-			bvec_data = kmap_atomic(sg_page(sg));
-
-			memcpy(shared_data + sg->offset, bvec_data + sg->offset, sg->length);
-			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
-					buffer, sg->length, 1);	
-			kunmap_atomic(bvec_data);
-			kunmap_atomic(shared_data);
-#endif
-		}
-#if 1
-		info.shadow[id].frame[i] = mfn_to_pfn(buffer_mfn);
-		ring_req->seg[i] = (struct idd_request_segment) {
-					.gref       = ref,
-					.first_sect = fsect,
-					.last_sect  = lsect };
-#endif
 	}
-#endif
 	info.main_ring.req_prod_pvt++;
 	/* Keep a private copy so we can reissue requests when recovering. */
 	info.shadow[id].req = *ring_req;
-#if 1
-	if (new_persistent_gnts)
-		gnttab_free_grant_references(gref_head);
-#endif
+	gnttab_free_grant_references(gref_head);
 	return 0;
 }
 
@@ -350,34 +287,9 @@ struct block_device_operations idd_fops = {
 
 static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 	int i = 0;
-#if 0
-	struct bio_vec *bvec;
-	struct req_iterator iter;
-	unsigned long flags;
-	char *bvec_data;
-	void *shared_data;
-	unsigned int offset = 0;
 
-	if (ring_rsp->op == 0){
-		rq_for_each_segment(bvec, s->request, iter) {
-			BUG_ON((bvec->bv_offset + bvec->bv_len) > PAGE_SIZE);
-			if (bvec->bv_offset < offset)
-				i++;
-			
-			BUG_ON(i >= s->req.nr_segments);
-			shared_data = kmap_atomic(pfn_to_page(s->grants_used[i]->pfn));
-			bvec_data = bvec_kmap_irq(bvec, &flags);
-			memcpy(bvec_data, shared_data + bvec->bv_offset,
-				bvec->bv_len);
-			bvec_kunmap_irq(bvec_data, &flags);
-			kunmap_atomic(shared_data);
-			offset = bvec->bv_offset + bvec->bv_len;
-		}
-	}
-#endif
 	for (i = 0; i < s->req.nr_segments; i++) {
-		llist_add(&s->grants_used[i]->node, &info.persistent_gnts);
-		info.persistent_gnts_c++;
+		gnttab_end_foreign_access(s->req.seg[i].gref, 0, 0UL);
 	}
 }
 
@@ -388,10 +300,7 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 	struct idd_response *ring_rsp;
 	struct request *req;
 	unsigned long flags;
-//	int error;
-
-//	char * buffer;
-//	unsigned long start_sector, sector_cnt, offset, nbytes;
+	int error;
 
 	spin_lock_irqsave(&info.io_lock, flags);
 
@@ -416,13 +325,9 @@ again:
 		printk("Debug: INTERRUPT req_prod_pvt %d ", info.main_ring.req_prod_pvt);
 		printk("Debug: INTERRUPT req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
 
-#if 0
-		if (id >= BLK_RING_SIZE) {
-			WARN(1, "%s: response to %s has incorrect id (%ld)\n",
-				info.gd->disk_name, op_name(ring_rsp->op), id);
+		if (id >= IDD_RING_SIZE) {
 			continue;
 		}
-#endif
 		
 		req  = info.shadow[id].request;
 		
@@ -434,8 +339,8 @@ again:
 				op_name(ring_rsp->op), id);
 			continue;
 		}
-		
-//		req = ring_rsp->priv_data;
+//		error = (bret->status == BLKIF_RSP_OKAY) ? 0 : -EIO;
+		error = 0;
 		switch(ring_rsp->op){
 			case 0:
 			case 1:
@@ -456,18 +361,6 @@ again:
 	kick_pending_request_queues(&info);
 	spin_unlock_irqrestore(&info.io_lock, flags);
 
-
-#if 0
-				buffer = req->buffer;
-				start_sector = blk_rq_pos(req);
-				sector_cnt = blk_rq_cur_sectors(req);
-
-				offset = start_sector * KERNEL_SECTOR_SIZE;
-				nbytes = sector_cnt * KERNEL_SECTOR_SIZE;
-
-//				memcpy(buffer,(void *)info.io_data_page,nbytes);
-#endif
-	
 	return IRQ_HANDLED;
 }
 
@@ -556,8 +449,6 @@ static int idd_init(void)
 //	info.io_data_page = (void *)shared_vm->addr;
 
 	sg_init_table(info.sg, IDD_MAX_SEGMENTS_PER_REQUEST);
-	init_llist_head(&info.persistent_gnts);
-	info.persistent_gnts_c = 0;
 	info.shadow_free = 0;
 
 	INIT_WORK(&info.work, idd_restart_queue);
