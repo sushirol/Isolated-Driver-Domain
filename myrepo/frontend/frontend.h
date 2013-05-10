@@ -86,8 +86,6 @@ typedef struct idd_irq_info {
 	struct scatterlist sg[IDD_MAX_SEGMENTS_PER_REQUEST];
 	unsigned long id;
 	struct request_queue *rq;
-	struct llist_head persistent_gnts;
-	unsigned int persistent_gnts_c;
 	struct idd_shadow shadow[IDD_RING_SIZE];
 	unsigned long shadow_free;
 	struct gnttab_free_callback callback;
