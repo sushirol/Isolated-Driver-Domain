@@ -27,15 +27,15 @@ struct file *file;
 int f;
 
 static inline int vaddr_pagenr(struct pending_req *req, int seg){
-        return (req - backend.pending_reqs) * IDD_MAX_SEGMENTS_PER_REQUEST + seg;
+	int ret;
+	ret = (req - backend.pending_reqs) * IDD_MAX_SEGMENTS_PER_REQUEST + seg;
+	return ret;
 }
 
-//static inline void * vaddr(struct pending_req *req, int seg)
 static inline unsigned long vaddr(struct pending_req *req, int seg)
 {
 	unsigned long pfn = page_to_pfn(backend.pending_page(req, seg));
 	return (unsigned long)pfn_to_kaddr(pfn);
-//	return pfn_to_kaddr(pfn);
 }
 
 static void free_req(struct pending_req *req){
@@ -60,7 +60,6 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	resp.priv_data = NULL;
 	resp.res = 9;
 
-	printk("makeing response\n");
 	spin_lock_irqsave(&be->blk_ring_lock, flags);
 
 	memcpy(RING_GET_RESPONSE(&be->main_ring, backend.main_ring.rsp_prod_pvt),&resp, sizeof(resp));
@@ -85,7 +84,7 @@ static void unmap_pages(struct pending_req *req){
 		if(handle == IDD_INVALID_HANDLE)
 			continue;
 		gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i),
-				GNTMAP_host_map, 0);
+				GNTMAP_host_map, handle);
 		pending_handle(req, i) = IDD_INVALID_HANDLE;
 		pages[invcount] = virt_to_page(vaddr(req, i));
 		invcount++;
@@ -100,9 +99,7 @@ static void __end_block_io_op(struct pending_req *pending_req, int error){
                 printk("Buffer not up-to-date at end of operation, error=%d\n", error);
                 pending_req->status = -1;
         }
-//	printk(" %d before calling make_response\n",atomic_read(&pending_req->pendcnt));
         if (atomic_dec_and_test(&pending_req->pendcnt)) {
-		printk("calling make_response\n");
 		unmap_pages(pending_req);
                 make_response(pending_req->priv_d, pending_req->id,
                                 pending_req->operation, pending_req->status);
@@ -114,7 +111,6 @@ static void __end_block_io_op(struct pending_req *pending_req, int error){
 static void end_block_io_op(struct bio *bio, int error)
 {
         __end_block_io_op(bio->bi_private, error);
-	printk("in end_block_io_op \n");
         bio_put(bio);
 }
 
@@ -145,7 +141,6 @@ static int map_pages_to_req(struct idd_request *req,
 	for (i = 0; i < nseg; i++) {
 		uint32_t flags;
 
-//		flags = GNTMAP_host_map | GNTMAP_application_map | GNTMAP_contains_pte;
 		flags = GNTMAP_host_map ;
 		if (pending_req->operation != 0)
 			flags |= GNTMAP_readonly;
@@ -171,7 +166,6 @@ static int map_pages_to_req(struct idd_request *req,
 
 		seg[i].buf = map[i].dev_bus_addr | 
 			(req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
-		printk("len = %u\n", seg[i].nsec << KERNEL_SECTOR_SHIFT);
 	}
 	return ret;
 }
@@ -187,7 +181,7 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	int i, nbio = 0;
 	int op;
 	struct blk_plug plug;
-	
+
 	if(req->data_direction == 1)
 		op = WRITE_ODIRECT;
 	else if(req->data_direction == 0)
@@ -216,7 +210,7 @@ static int dispatch_rw_block_io(backend_info_t *be,
 //Sushrut : fill seg struct
 	for (i = 0; i < nseg; i++) {
 		seg[i].nsec = req->seg[i].last_sect - req->seg[i].first_sect + 1;
-		if ((req->seg[i].last_sect >= (PAGE_SIZE >> 9)) ||
+		if ((req->seg[i].last_sect >= (PAGE_SIZE >> KERNEL_SECTOR_SHIFT)) ||
 			(req->seg[i].last_sect < req->seg[i].first_sect))
 			goto fail_response;
 		breq.nr_sects += seg[i].nsec;
@@ -227,12 +221,6 @@ static int dispatch_rw_block_io(backend_info_t *be,
 			FMODE_PREAD | FMODE_PWRITE, NULL);
 	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
 			MINOR(breq.bdev->bd_inode->i_rdev));
-
-	printk("Major %d Minor %d bdev %p bd_disk %p \n",
-			MAJOR(breq.bdev->bd_inode->i_rdev), 
-			MINOR(breq.bdev->bd_inode->i_rdev),
-			breq.bdev, breq.bdev->bd_disk);
-
 
 	if (IS_ERR(breq.bdev)) {
 		printk("xen_vbd_create: device %08x could \
@@ -255,6 +243,7 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	}	
 
 //Sushrut : insert pages into bio
+
 	if (map_pages_to_req(req, pending_req, seg))
 		goto fail_flush;
 
@@ -275,25 +264,24 @@ static int dispatch_rw_block_io(backend_info_t *be,
 			bio->bi_private = pending_req;
 			bio->bi_end_io = end_block_io_op;
 			bio->bi_sector  = breq.sector_number;
-			printk("bio->bi_bdev %p bio->bi_private %p \
-				bio->bi_sector %ld  \n", bio->bi_bdev, 
-				bio->bi_private, bio->bi_sector);
 		}
 		breq.sector_number += seg[i].nsec;
 	}
 	atomic_set(&pending_req->pendcnt, nbio);
 
+/*
 	if(req->data_direction == 1){
 		for(i=0; i < nseg; i++){
 			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
                 		(void *)vaddr(pending_req, i), PAGE_SIZE, 1);
 		}
 	}
+*/
 		
 	blk_start_plug(&plug);
-	for (i = 0; i < nbio; i++)
+	for (i = 0; i < nbio; i++){
 		submit_bio(op, biolist[i]);
-//		end_block_io_op(biolist[i], 0);
+	}
 
 	blk_finish_plug(&plug);
 
@@ -323,7 +311,6 @@ static int __do_block_io_op(backend_info_t *be){
 
 	rc = be->main_ring.req_cons;
 	rp = be->main_ring.sring->req_prod;
-	printk("rc %d rp %d\n", rc, rp);
 	rmb();
 	
 	while (rc != rp) {
@@ -332,7 +319,6 @@ static int __do_block_io_op(backend_info_t *be){
 		
 		if (kthread_should_stop()) {
 			more_to_do = 1;
-			printk("More to do 1\n");
 			break;
 		}
 		
@@ -343,7 +329,6 @@ static int __do_block_io_op(backend_info_t *be){
 		}
 
 		memcpy(&req, RING_GET_REQUEST(&be->main_ring, rc), sizeof(req));
-		printk("copied request \n");
 
 		be->main_ring.req_cons = ++rc;
 		barrier();
@@ -365,7 +350,6 @@ static int do_block_io_op(backend_info_t *be){
 		if (more_to_do)
 			break;
 		RING_FINAL_CHECK_FOR_REQUESTS(&be->main_ring, more_to_do);
-		printk("more to do %d\n", more_to_do);
 	} while (more_to_do);
 	return more_to_do;
 }
@@ -378,8 +362,6 @@ int idd_request_schedule(void *arg){
 		if (try_to_freeze())
 			continue;
 		
-		printk("printk\n");
-
 		wait_event_interruptible(
 			be->wq,
 			be->waiting_reqs || kthread_should_stop());
@@ -388,7 +370,6 @@ int idd_request_schedule(void *arg){
 			be->pending_free_wq,
 			!list_empty(&be->pending_free) ||
 			kthread_should_stop());
-
 
 		be->waiting_reqs = 0;
 		smp_mb();
@@ -409,7 +390,6 @@ static void idd_notify_work(backend_info_t *be)
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-	printk("interrupt got !\n");
 	idd_notify_work(dev_id);
         return IRQ_HANDLED;
 }
@@ -417,7 +397,6 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 static void *idd_alloc_shared(uint32_t *gref)
 {
 	struct page *page = alloc_page(GFP_KERNEL | __GFP_ZERO);
-//	struct page *page = alloc_pages(GFP_KERNEL | __GFP_ZERO, 3);
 	if (!page)
 		return NULL;
 	*gref = gnttab_grant_foreign_access(DOMZERO, pfn_to_mfn(page_to_pfn(page)), 0);
@@ -465,13 +444,6 @@ static int blk_init(void)
 	data.main_ring_gref = backend.main_ring_gref;
         printk("DEBUG : main_ring_gref %u %u\n",data.main_ring_gref,backend.main_ring_gref);
 
-/********************* SHARED IO DATA PAGE *****************************/
-
-	backend.io_data_page = (void *)idd_alloc_shared(&backend.data_ring_gref);	
-	data.data_ring_gref = backend.data_ring_gref;
-	smp_mb();
-        printk("DEBUG : data_ring_gref %u %u\n",data.data_ring_gref,backend.data_ring_gref);
-		
 /********************** EVERYTHING BELOW IS A EVENT CHANNEL *******************/
 	backend.ring_irq = -1;
 	ring_alloc.dom = DOMID_SELF;
@@ -510,6 +482,8 @@ static int blk_init(void)
 	init_waitqueue_head(&backend.wq);
 
 	mmap_pages = xen_idd_reqs * IDD_MAX_SEGMENTS_PER_REQUEST;
+
+	printk("mmap_pages = %d\n", mmap_pages);
 
 	backend.pending_reqs = kzalloc(sizeof(backend.pending_reqs[0])* 
 					xen_idd_reqs, GFP_KERNEL);
@@ -559,9 +533,6 @@ end:
 
 static void blk_cleanup(void)
 {
-	printk("Removing module\n");
-//        fput(file);
-//        sys_close(f);
 	unbind_from_irqhandler(backend.ring_irq, &backend);
 }
 
