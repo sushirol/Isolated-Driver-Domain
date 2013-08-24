@@ -54,12 +54,10 @@ struct grant {
 idd_irq_info_t info;
 static struct request_queue *Queue;
 int major_num=0;
-static int count1 =0, count2 = 0;
 module_init(idd_init);
 module_exit(idd_cleanup);
 
 int workaround = 0;
-//static int counter=0;
 
 void idd_device_request(struct request_queue *);
 
@@ -91,7 +89,6 @@ static inline void flush_requests(idd_irq_info_t *flush_info)
 
 	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
 	notify_remote_via_irq(flush_info->ring_irq);
-	printk("notify read backend! seq_no \n");
 }
 
 static void kick_pending_request_queues(idd_irq_info_t *kick_info)
@@ -117,15 +114,7 @@ static int get_id_from_freelist(idd_irq_info_t *ptr_info)
 	unsigned long free = ptr_info->shadow_free;
 	BUG_ON(free >= IDD_RING_SIZE);
 	ptr_info->shadow_free = ptr_info->shadow[free].req.seq_no;
-	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llu\n", 
-			free,ptr_info->shadow_free, free, 
-			ptr_info->shadow[free].req.seq_no);
 	ptr_info->shadow[free].req.seq_no = 0x0fffffee; /* debug */
-	printk("free %lu shadow_free %lu shadow[%lu].req.seq_no %llx\n", 
-			free,ptr_info->shadow_free, free, 
-			ptr_info->shadow[free].req.seq_no);
-	printk("return free %lu\n", free);
-	printk("\n");
 	return free;
 }
 
@@ -195,7 +184,6 @@ static int idd_queue_request(struct request *req){
 		BUG_ON(1);
 		return 1;
 	}
-	printk("DEBUG READ/WRITE %d!\n", count2++);
 	id = get_id_from_freelist(&info);
 	info.shadow[id].request = req;
 
@@ -203,7 +191,6 @@ static int idd_queue_request(struct request *req){
 	ring_req->sector_number = blk_rq_pos(req);
 	ring_req->data_direction=write;
 
-	printk("id %llu \n",ring_req->seq_no);
         smp_mb();
 
 	if (unlikely(req->cmd_flags & (REQ_DISCARD | REQ_SECURE))) {
@@ -254,16 +241,12 @@ void idd_device_request(struct request_queue *q)
                         continue;
                 }
 		
-		printk("do_blk_req %p: cmd %p, sec %lx, (%u/%u) buffer:%p [%s]\n",
-			req, req->cmd, (unsigned long)blk_rq_pos(req),
-			blk_rq_cur_sectors(req), blk_rq_sectors(req),
-			req->buffer, rq_data_dir(req) ? "write" : "read");
-
-		if(rq_data_dir(req)){
+/*		if(rq_data_dir(req)){
 			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
 					req->buffer, (blk_rq_cur_sectors(req) *KERNEL_SECTOR_SIZE), 1);	
 		}
-		printk("\n");
+//		printk("\n");
+*/
 
 		if (idd_queue_request(req)) {
 			blk_requeue_request(q, req);
@@ -321,9 +304,6 @@ again:
 		ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
 		id  = ring_rsp->seq_no;
 
-		printk("DEBUG INTERRUPT %d : Write result %d seq no %lu\n", count1++, ring_rsp->res, ring_rsp->seq_no);
-		printk("Debug: INTERRUPT req_prod_pvt %d ", info.main_ring.req_prod_pvt);
-		printk("Debug: INTERRUPT req_prod %d rsp_prod %d\n", info.main_ring.sring->req_prod, info.main_ring.sring->rsp_prod);
 
 		if (id >= IDD_RING_SIZE) {
 			continue;
@@ -418,8 +398,6 @@ static int idd_init(void)
 //frontend.c
 	idd_connect_t data;
 	int err=0,i = 0;
-//	struct vm_struct* shared_vm;
-	printk("Inseting module frontend\n");
 
 /************************* EVERYTHING BELOW IS RELATED TO RING BUFFER ******************/
 	sema_init(&info.notify_sem, 0);
@@ -433,7 +411,6 @@ static int idd_init(void)
         printk("dom.port %u data.domid %u\n",data.ring_port,data.domid);
 
         printk("DEBUG : main_ring_gref %u\n",data.main_ring_gref);
-        printk("DEBUG : data_ring_gref %u\n",data.data_ring_gref);
 
 	info.domid = data.domid;
 	info.main_ring_area = idd_alloc_shared(data.main_ring_gref, data.domid, &info.main_ring_handle);
@@ -443,10 +420,6 @@ static int idd_init(void)
         }
 	FRONT_RING_INIT(&info.main_ring, (struct idd_sring *) info.main_ring_area->addr, PAGE_SIZE);
 	spin_lock_init(&info.io_lock);
-
-/*********************** SHARED IO DATA PAGE **************************************/
-//	shared_vm = idd_alloc_shared(data.data_ring_gref, data.domid, &info.data_ring_handle);
-//	info.io_data_page = (void *)shared_vm->addr;
 
 	sg_init_table(info.sg, IDD_MAX_SEGMENTS_PER_REQUEST);
 	info.shadow_free = 0;
