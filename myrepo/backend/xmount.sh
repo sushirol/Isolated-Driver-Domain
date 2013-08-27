@@ -19,7 +19,7 @@
 #sudo umount /hvm/boot
 #sudo umount /hvm
 
-sudo /root/dev/scripts/xumount.sh
+sudo ./xumount.sh
 
 #sudo mount -o loop,rw,offset=599785472 /etc/xen/xen_disk/disk.img /hvm
 #sudo mount -o loop,rw,offset=512 /etc/xen/xen_disk/disk.img /hvm/boot
