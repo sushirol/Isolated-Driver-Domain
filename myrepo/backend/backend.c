@@ -182,6 +182,8 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	int op;
 	struct blk_plug plug;
 
+	if(req->data_direction != 0)
+		printk("data direction %d\n", req->data_direction);
 	if(req->data_direction == 1)
 		op = WRITE_ODIRECT;
 	else if(req->data_direction == 0)
@@ -255,7 +257,7 @@ static int dispatch_rw_block_io(backend_info_t *be,
 					seg[i].nsec << 9, 
 					seg[i].buf & ~PAGE_MASK) == 0) {
 	
-			bio = bio_alloc(GFP_KERNEL, nseg);
+			bio = bio_alloc(GFP_KERNEL, nseg - i );
 			if (unlikely(bio == NULL))
 				goto fail_put_bio;
 
