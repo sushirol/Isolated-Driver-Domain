@@ -27,10 +27,10 @@
 
 #define PART_NO 1
 #define KERNEL_SECTOR_SIZE 512
-//#define DISK_CAPACITY 20971520
 //#define DISK_CAPACITY 419430400
-//#define DISK_CAPACITY 512000000
-#define DISK_CAPACITY 510951424
+#define DISK_CAPACITY 512000000
+//#define DISK_CAPACITY 1017118720
+//#define DISK_CAPACITY 1016069632
 #define DEVICE_NAME "ramd"
 
 MODULE_LICENSE("GPL");
@@ -321,8 +321,7 @@ again:
 				op_name(ring_rsp->op), id);
 			continue;
 		}
-//		error = (bret->status == BLKIF_RSP_OKAY) ? 0 : -EIO;
-		error = 0;
+		error = (ring_rsp->res == 0) ? 0 : -EIO;
 		switch(ring_rsp->op){
 			case 0:
 			case 1:
