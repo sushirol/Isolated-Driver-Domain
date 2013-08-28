@@ -58,7 +58,10 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	resp.op = op;
 	resp.seq_no = id;
 	resp.priv_data = NULL;
-	resp.res = 9;
+	resp.res = st;
+
+	if(op)
+		printk("write result %d\n",st);
 
 	spin_lock_irqsave(&be->blk_ring_lock, flags);
 
@@ -184,6 +187,7 @@ static int dispatch_rw_block_io(backend_info_t *be,
 
 	if(req->data_direction != 0)
 		printk("data direction %d\n", req->data_direction);
+
 	if(req->data_direction == 1)
 		op = WRITE_ODIRECT;
 	else if(req->data_direction == 0)
