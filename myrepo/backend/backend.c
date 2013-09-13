@@ -60,9 +60,6 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	resp.priv_data = NULL;
 	resp.res = st;
 
-	if(op)
-		printk("write result %d\n",st);
-
 	spin_lock_irqsave(&be->blk_ring_lock, flags);
 
 	memcpy(RING_GET_RESPONSE(&be->main_ring, backend.main_ring.rsp_prod_pvt),&resp, sizeof(resp));
@@ -185,9 +182,6 @@ static int dispatch_rw_block_io(backend_info_t *be,
 	int op;
 	struct blk_plug plug;
 
-	if(req->data_direction != 0)
-		printk("data direction %d\n", req->data_direction);
-
 	if(req->data_direction == 1)
 		op = WRITE_ODIRECT;
 	else if(req->data_direction == 0)
@@ -222,7 +216,8 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
-	breq.bdev = blkdev_get_by_path("/dev/ramd", 
+//	breq.bdev = blkdev_get_by_path("/dev/ramd", 
+	breq.bdev = blkdev_get_by_path("/dev/loop0", 
 			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
 			FMODE_PREAD | FMODE_PWRITE, NULL);
 	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
