@@ -27,10 +27,11 @@
 
 #define PART_NO 1
 #define KERNEL_SECTOR_SIZE 512
-//#define DISK_CAPACITY 419430400
-#define DISK_CAPACITY 512000000
+//#define DISK_CAPACITY 512000000
 //#define DISK_CAPACITY 1017118720
 //#define DISK_CAPACITY 1016069632
+#define DISK_CAPACITY 5368709120
+
 #define DEVICE_NAME "ramd"
 
 MODULE_LICENSE("GPL");
@@ -42,7 +43,6 @@ static void idd_cleanup(void);
 static struct new_device_t {
 	unsigned long size;
 	spinlock_t lock;
-	u8 *data;
 	struct gendisk *gd;
 	struct device dev;
 }new_device;
@@ -455,17 +455,11 @@ static int idd_init(void)
 /************************* EVERYTHING BELOW IS RELATED TO RAMDISK ******************/
 	//device registration
 	new_device.size = DISK_CAPACITY;
-	new_device.data=vmalloc(new_device.size);
-	if(new_device.data == NULL){
-		err = -ENOMEM;
-		goto end3;
-	}
 
 	Queue = blk_init_queue(idd_device_request, &info.io_lock);
 	if(Queue == NULL)
-		goto end4;
+		goto end3;
 	blk_queue_max_segments(Queue, IDD_MAX_SEGMENTS_PER_REQUEST);
-//	blk_queue_logical_block_size(Queue, sector_size);
 	blk_queue_max_hw_sectors(Queue, 512);
 	blk_queue_segment_boundary(Queue, PAGE_SIZE - 1);
 	blk_queue_max_segment_size(Queue, PAGE_SIZE);
@@ -476,7 +470,7 @@ static int idd_init(void)
 	major_num = register_blkdev(0,DEVICE_NAME);
 	if(major_num <= 0){
 		printk("failed to register\n");
-		goto end4;
+		goto end3;
 	}else{
 		printk("registeration successful major_num %d\n",major_num);
 	}
@@ -505,8 +499,6 @@ static int idd_init(void)
         return 0;
 out_unregister:
 	unregister_blkdev(major_num, DEVICE_NAME);
-end4:
-	vfree(new_device.data);
 end3:
 	unbind_from_irqhandler(info.ring_irq, &info);
 end2:
@@ -522,6 +514,5 @@ static void idd_cleanup(void)
 	printk("unregister blkdev\n");
 	unregister_blkdev(major_num,DEVICE_NAME);
 	blk_cleanup_queue(Queue);
-	vfree(new_device.data);
 }
 
