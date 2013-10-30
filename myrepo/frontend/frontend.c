@@ -27,10 +27,10 @@
 
 #define PART_NO 1
 #define KERNEL_SECTOR_SIZE 512
-//#define DISK_CAPACITY 512000000
+#define DISK_CAPACITY 2048000000
 //#define DISK_CAPACITY 1017118720
 //#define DISK_CAPACITY 1016069632
-#define DISK_CAPACITY 5368709120
+//#define DISK_CAPACITY 5368709120
 
 #define DEVICE_NAME "ramd"
 
@@ -61,7 +61,7 @@ module_exit(idd_cleanup);
 
 int workaround = 0;
 
-void idd_device_request(struct request_queue *);
+void do_idd_request(struct request_queue *);
 
 static const char *op_name(int op)
 {
@@ -96,10 +96,8 @@ static inline void flush_requests(idd_irq_info_t *flush_info)
 static void kick_pending_request_queues(idd_irq_info_t *kick_info)
 {
 	if (!RING_FULL(&kick_info->main_ring)) {
-		/* Re-enable calldowns. */
 		blk_start_queue(kick_info->rq);
-		/* Kick things off immediately. */
-		idd_device_request(kick_info->rq);
+		do_idd_request(kick_info->rq);
 	}
 }
 
@@ -149,13 +147,14 @@ static int idd_queue_request(struct request *req){
 	unsigned long buffer_mfn;
 	grant_ref_t gref_head;
 
+	dump_stack();
 	start_sector = blk_rq_pos(req);
 	sector_cnt = blk_rq_cur_sectors(req);
 
 	offset = start_sector * KERNEL_SECTOR_SIZE;
 	nbytes = sector_cnt * KERNEL_SECTOR_SIZE;
 	write = rq_data_dir(req);
-		
+
 	if( (offset + nbytes) > new_device.size) {
 		printk("Beyond-end write(%ld,%ld)\n",offset,nbytes);
 		return 1;
@@ -227,10 +226,11 @@ static int idd_queue_request(struct request *req){
 	return 0;
 }
 
-void idd_device_request(struct request_queue *q)
+void do_idd_request(struct request_queue *q)
 {
 	struct request *req;
 	int queued = 0;
+
 
 	while ((req = blk_peek_request(q)) != NULL) {
 		if (RING_FULL(&info.main_ring))
@@ -261,6 +261,7 @@ wait:
 	}
 
 	if(queued!=0){
+		printk("%d reuests flushed\n",queued);
 		flush_requests(&info);
 	}
 }
@@ -456,7 +457,7 @@ static int idd_init(void)
 	//device registration
 	new_device.size = DISK_CAPACITY;
 
-	Queue = blk_init_queue(idd_device_request, &info.io_lock);
+	Queue = blk_init_queue(do_idd_request, &info.io_lock);
 	if(Queue == NULL)
 		goto end3;
 	blk_queue_max_segments(Queue, IDD_MAX_SEGMENTS_PER_REQUEST);
