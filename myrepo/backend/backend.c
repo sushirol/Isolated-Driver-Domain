@@ -216,8 +216,8 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
-//	breq.bdev = blkdev_get_by_path("/dev/ramd", 
-	breq.bdev = blkdev_get_by_path("/dev/loop0", 
+	breq.bdev = blkdev_get_by_path("/dev/ramd", 
+//	breq.bdev = blkdev_get_by_path("/dev/loop0", 
 			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
 			FMODE_PREAD | FMODE_PWRITE, NULL);
 	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
