@@ -147,7 +147,7 @@ static int idd_queue_request(struct request *req){
 	unsigned long buffer_mfn;
 	grant_ref_t gref_head;
 
-	dump_stack();
+//	dump_stack();
 	start_sector = blk_rq_pos(req);
 	sector_cnt = blk_rq_cur_sectors(req);
 
@@ -261,7 +261,7 @@ wait:
 	}
 
 	if(queued!=0){
-		printk("%d reuests flushed\n",queued);
+//		printk("%d reuests flushed\n",queued);
 		flush_requests(&info);
 	}
 }
