@@ -22,14 +22,14 @@
 #include <xen/xenbus.h>
 #include <xen/events.h>
 #include <linux/workqueue.h>
+#include <linux/freezer.h>
 
 #include "frontend.h"
 
 #define PART_NO 1
 #define KERNEL_SECTOR_SIZE 512
 #define DISK_CAPACITY 2048000000
-//#define DISK_CAPACITY 1017118720
-//#define DISK_CAPACITY 1016069632
+//#define DISK_CAPACITY 512000000
 //#define DISK_CAPACITY 5368709120
 
 #define DEVICE_NAME "ramd"
@@ -59,7 +59,7 @@ int major_num=0;
 module_init(idd_init);
 module_exit(idd_cleanup);
 
-int workaround = 0;
+unsigned long sleep_cond=0;
 
 void do_idd_request(struct request_queue *);
 
@@ -85,13 +85,15 @@ static void idd_restart_queue_callback(void *arg)
 }
 #endif
 
+#if 0
 static inline void flush_requests(idd_irq_info_t *flush_info)
 {
 	int notify;
 
-	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
-	notify_remote_via_irq(flush_info->ring_irq);
+//	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
+//	notify_remote_via_irq(flush_info->ring_irq);
 }
+#endif
 
 static void kick_pending_request_queues(idd_irq_info_t *kick_info)
 {
@@ -147,7 +149,7 @@ static int idd_queue_request(struct request *req){
 	unsigned long buffer_mfn;
 	grant_ref_t gref_head;
 
-	dump_stack();
+//	dump_stack();
 	start_sector = blk_rq_pos(req);
 	sector_cnt = blk_rq_cur_sectors(req);
 
@@ -159,11 +161,6 @@ static int idd_queue_request(struct request *req){
 		printk("Beyond-end write(%ld,%ld)\n",offset,nbytes);
 		return 1;
 	}
-
-	if(workaround == 0)
-		workaround = 1;
-        smp_mb();
-
 
 	if(gnttab_alloc_grant_references(
 		IDD_MAX_SEGMENTS_PER_REQUEST, &gref_head) < 0){
@@ -229,7 +226,7 @@ static int idd_queue_request(struct request *req){
 void do_idd_request(struct request_queue *q)
 {
 	struct request *req;
-	int queued = 0;
+	int notify = 0;
 
 
 	while ((req = blk_peek_request(q)) != NULL) {
@@ -243,13 +240,6 @@ void do_idd_request(struct request_queue *q)
                         continue;
                 }
 		
-/*		if(rq_data_dir(req)){
-			print_hex_dump(KERN_DEBUG, "",DUMP_PREFIX_OFFSET, 16, 1,
-					req->buffer, (blk_rq_cur_sectors(req) *KERNEL_SECTOR_SIZE), 1);	
-		}
-//		printk("\n");
-*/
-
 		if (idd_queue_request(req)) {
 			blk_requeue_request(q, req);
 wait:
@@ -257,13 +247,9 @@ wait:
 			break;
 		}
 	
-		queued++;
+  	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info.main_ring, notify);
 	}
 
-	if(queued!=0){
-		printk("%d reuests flushed\n",queued);
-		flush_requests(&info);
-	}
 }
 
 struct block_device_operations idd_fops = {
@@ -281,69 +267,71 @@ static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
+  printk("sleep cond %lu\n",sleep_cond);
+	return IRQ_HANDLED;
+}
 
-	RING_IDX rp,i;
+int idd_read_response(void *arg){
+
+  RING_IDX rp,i;
 	struct idd_response *ring_rsp;
 	struct request *req;
 	unsigned long flags;
 	int error;
 
-	spin_lock_irqsave(&info.io_lock, flags);
+  while(!kthread_should_stop()){
+    if(try_to_freeze())
+      continue;
 
-	if(workaround == 0){
-		printk("fake interrrupt handled !\n");
-		spin_unlock_irqrestore(&info.io_lock, flags);
-		return IRQ_HANDLED;
-	}
+	  spin_lock_irqsave(&info.io_lock, flags);
 
 again:
-	rp = info.main_ring.sring->rsp_prod;
-        rmb();
+  	rp = info.main_ring.sring->rsp_prod;
+    rmb();
 	
-	for (i = info.main_ring.rsp_cons; i != rp; i++) {
+	  for (i = info.main_ring.rsp_cons; i != rp; i++) {
+		  unsigned long id;
+      sleep_cond = 0;
+		  ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
+		  id  = ring_rsp->seq_no;
 
-		unsigned long id;
+  		if (id >= IDD_RING_SIZE)
+	  		continue;
 		
-		ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
-		id  = ring_rsp->seq_no;
-
-
-		if (id >= IDD_RING_SIZE) {
-			continue;
-		}
+	  	req  = info.shadow[id].request;
 		
-		req  = info.shadow[id].request;
+		  if(req!=NULL)
+			  idd_completion(&info.shadow[id], ring_rsp);
 		
-		if(req!=NULL)
-			idd_completion(&info.shadow[id], ring_rsp);
-		
-		if (add_id_to_freelist(&info, id)) {
-			WARN(1, "response to %s (id %ld) couldn't be recycled!\n",
-				op_name(ring_rsp->op), id);
-			continue;
-		}
-		error = (ring_rsp->res == 0) ? 0 : -EIO;
-		switch(ring_rsp->op){
-			case 0:
-			case 1:
-				__blk_end_request_all(req, 0);
-				break;
-			default:
-				BUG();
-		}
-	}
-	info.main_ring.rsp_cons = i;
-	if (i != info.main_ring.req_prod_pvt) {
-		int more_to_do;
-		RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
-		if (more_to_do)
-			goto again;
-	} else
-		info.main_ring.sring->rsp_event = i + 1;
-	kick_pending_request_queues(&info);
-	spin_unlock_irqrestore(&info.io_lock, flags);
-
-	return IRQ_HANDLED;
+		  if (add_id_to_freelist(&info, id)) {
+			  WARN(1, "response to %s (id %ld) couldn't be recycled!\n",
+				  op_name(ring_rsp->op), id);
+			  continue;
+		  }
+		  error = (ring_rsp->res == 0) ? 0 : -EIO;
+		  switch(ring_rsp->op){
+			  case 0:
+			  case 1:
+				  __blk_end_request_all(req, 0);
+				  break;
+			  default:
+				  BUG();
+		  }
+	  }
+    sleep_cond++;
+	  info.main_ring.rsp_cons = i;
+	  if (i != info.main_ring.req_prod_pvt) {
+		  int more_to_do;
+		  RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
+		  if (more_to_do)
+		   goto again;
+	  } else
+		  info.main_ring.sring->rsp_event = i + 1;
+	
+    kick_pending_request_queues(&info);
+	  spin_unlock_irqrestore(&info.io_lock, flags);
+  }
+  return 0;
 }
 
 static struct vm_struct *idd_alloc_shared(uint32_t gref, uint32_t domid,
@@ -495,9 +483,11 @@ static int idd_init(void)
 
 	info.rq = new_device.gd->queue;
 
-        smp_mb();
+  info.response_thread = kthread_run(idd_read_response, &info, "response_thread");
 
-        return 0;
+  smp_mb();
+
+  return 0;
 out_unregister:
 	unregister_blkdev(major_num, DEVICE_NAME);
 end3:
@@ -510,6 +500,7 @@ end :
 
 static void idd_cleanup(void)
 {
+  kthread_stop (info.response_thread);
 	del_gendisk(new_device.gd);
 	put_disk(new_device.gd);
 	printk("unregister blkdev\n");
