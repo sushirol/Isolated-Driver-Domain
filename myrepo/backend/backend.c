@@ -23,8 +23,7 @@ MODULE_DESCRIPTION("A simple block device");
 
 static backend_info_t backend;
 
-struct file *file;
-int f;
+unsigned long sleep_cond=0;
 
 static inline int vaddr_pagenr(struct pending_req *req, int seg){
 	int ret;
@@ -216,8 +215,8 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
-//	breq.bdev = blkdev_get_by_path("/dev/ramd", 
-	breq.bdev = blkdev_get_by_path("/dev/loop0", 
+	breq.bdev = blkdev_get_by_path("/dev/ramd", 
+//	breq.bdev = blkdev_get_by_path("/dev/loop0", 
 			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
 			FMODE_PREAD | FMODE_PWRITE, NULL);
 	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
@@ -358,24 +357,35 @@ static int do_block_io_op(backend_info_t *be){
 int idd_request_schedule(void *arg){
 
 	backend_info_t *be = (backend_info_t *)arg;
+	RING_IDX rc, rp;
 
 	while(!kthread_should_stop()){
 		if (try_to_freeze())
 			continue;
 		
-		wait_event_interruptible(
-			be->wq,
-			be->waiting_reqs || kthread_should_stop());
+    /*wait_event_interruptible(*/
+    /*be->wq,*/
+    /*be->waiting_reqs || kthread_should_stop());*/
 
 		wait_event_interruptible(
 			be->pending_free_wq,
 			!list_empty(&be->pending_free) ||
 			kthread_should_stop());
 
-		be->waiting_reqs = 0;
-		smp_mb();
-		if (do_block_io_op(be))
-			be->waiting_reqs = 1;
+    /*be->waiting_reqs = 0;*/
+    /*smp_mb();*/
+    /*if (do_block_io_op(be))*/
+	 		/*be->waiting_reqs = 1;*/
+
+  	rc = be->main_ring.req_cons;
+	  rp = be->main_ring.sring->req_prod;
+    sleep_cond++;
+	  rmb();
+	
+	  if  (rc != rp && !RING_REQUEST_CONS_OVERFLOW(&be->main_ring, rc)){
+      sleep_cond=0;
+  		do_block_io_op(be);
+    }
 
 	}
 	xen_idd_put(be);
@@ -383,15 +393,19 @@ int idd_request_schedule(void *arg){
 	return 0;
 }
 
-static void idd_notify_work(backend_info_t *be)
-{
-	be->waiting_reqs = 1;
-	wake_up(&be->wq);
-}
+/*
+ *static void idd_notify_work(backend_info_t *be)
+ *{
+ *  be->waiting_reqs = 1;
+ *  wake_up(&be->wq);
+ *  printk("interrupt ignored\n");
+ *}
+ */
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-	idd_notify_work(dev_id);
+//	idd_notify_work(dev_id);
+    printk("sleep cond %lu\n",sleep_cond);
         return IRQ_HANDLED;
 }
 
@@ -534,6 +548,7 @@ end:
 
 static void blk_cleanup(void)
 {
+  kthread_stop (backend.request_thread);
 	unbind_from_irqhandler(backend.ring_irq, &backend);
 }
 
