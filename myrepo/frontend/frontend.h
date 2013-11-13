@@ -91,6 +91,7 @@ typedef struct idd_irq_info {
 	struct gnttab_free_callback callback;
 	struct work_struct work;
 	spinlock_t io_lock;
+  struct task_struct *response_thread;
 } idd_irq_info_t;
 
 
