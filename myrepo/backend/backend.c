@@ -23,7 +23,7 @@ MODULE_DESCRIPTION("A simple block device");
 
 static backend_info_t backend;
 
-unsigned long sleep_cond=0;
+int sleep_cond=0;
 
 static inline int vaddr_pagenr(struct pending_req *req, int seg){
 	int ret;
@@ -53,6 +53,7 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	struct idd_response resp;
 	unsigned long flags;
 	int notify;
+  int status;
 
 	resp.op = op;
 	resp.seq_no = id;
@@ -65,9 +66,14 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 	be->main_ring.rsp_prod_pvt++;
 
 	RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(&be->main_ring, notify);
+//  printk("remote thread status %d \n",atomic_read(&(be->main_ring.sring->rsp_status)));
+  status = atomic_read(&(be->main_ring.sring->rsp_status));
+  smp_mb();
+  if(status == 0){
+//    printk("Frontend response handling thread was sleeping. Sending interrupt\n");
+    notify_remote_via_irq(be->ring_irq);
+  }
 	spin_unlock_irqrestore(&be->blk_ring_lock, flags);
-
-	notify_remote_via_irq(be->ring_irq);
 
 }
 
@@ -293,13 +299,13 @@ fail_flush:
 fail_response:	
 	make_response(be, req->seq_no, req->data_direction, -1);
 	free_req(pending_req);
-	msleep(1);
+//	msleep(1);
 	return -EIO;
 fail_put_bio:
 	for (i = 0; i < nbio; i++)
 		bio_put(biolist[i]);
 	__end_block_io_op(pending_req, -EINVAL);
-	msleep(1);
+//	msleep(1);
 	return -EIO;
 }
 
@@ -358,35 +364,51 @@ int idd_request_schedule(void *arg){
 
 	backend_info_t *be = (backend_info_t *)arg;
 	RING_IDX rc, rp;
+  int status;
+  int more_to_do;
 
 	while(!kthread_should_stop()){
 		if (try_to_freeze())
 			continue;
-		
-    /*wait_event_interruptible(*/
-    /*be->wq,*/
-    /*be->waiting_reqs || kthread_should_stop());*/
+again:
+    wait_event_interruptible(
+      be->wq,
+      be->waiting_reqs || kthread_should_stop());
 
 		wait_event_interruptible(
 			be->pending_free_wq,
 			!list_empty(&be->pending_free) ||
 			kthread_should_stop());
 
-    /*be->waiting_reqs = 0;*/
-    /*smp_mb();*/
-    /*if (do_block_io_op(be))*/
-	 		/*be->waiting_reqs = 1;*/
+    /*
+     *if (do_block_io_op(be))
+		 *   be->waiting_reqs = 1;
+     */
+
+//    do_block_io_op(be);
 
   	rc = be->main_ring.req_cons;
 	  rp = be->main_ring.sring->req_prod;
-    sleep_cond++;
 	  rmb();
 	
 	  if  (rc != rp && !RING_REQUEST_CONS_OVERFLOW(&be->main_ring, rc)){
       sleep_cond=0;
   		do_block_io_op(be);
     }
-
+    sleep_cond++;
+    /*IF THRESHHOLD IS REACHED THEN SLEEP*/
+    status = atomic_read(&(backend.main_ring.sring->req_status));
+    smp_mb();
+    if(sleep_cond > 5000 && status==RUNNING){
+      atomic_set(&(backend.main_ring.sring->req_status), SLEEPING);
+      be->waiting_reqs = 0;
+      RING_FINAL_CHECK_FOR_REQUESTS(&be->main_ring, more_to_do);
+      if (more_to_do)
+        goto again;
+      smp_mb();
+//      printk("Sleeping thread %d\n",sleep_cond);
+      smp_mb();
+    }
 	}
 	xen_idd_put(be);
 
@@ -398,15 +420,22 @@ int idd_request_schedule(void *arg){
  *{
  *  be->waiting_reqs = 1;
  *  wake_up(&be->wq);
- *  printk("interrupt ignored\n");
  *}
  */
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-//	idd_notify_work(dev_id);
-    printk("sleep cond %lu\n",sleep_cond);
-        return IRQ_HANDLED;
+  int status;
+  backend.waiting_reqs = 1;
+  status = atomic_read(&(backend.main_ring.sring->req_status));
+  smp_wmb();
+  if(status == SLEEPING)
+    wake_up(&backend.wq);
+
+  atomic_set(&(backend.main_ring.sring->req_status), 1);
+  smp_wmb();
+//  printk("Waking up request thread. new status %d \n",atomic_read(&(backend.main_ring.sring->req_status)));
+  return IRQ_HANDLED;
 }
 
 static void *idd_alloc_shared(uint32_t *gref)
