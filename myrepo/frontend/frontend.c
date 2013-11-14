@@ -58,6 +58,7 @@ module_init(idd_init);
 module_exit(idd_cleanup);
 
 unsigned long sleep_cond=0;
+int workaround = 0;
 
 void do_idd_request(struct request_queue *);
 
@@ -83,15 +84,21 @@ static void idd_restart_queue_callback(void *arg)
 }
 #endif
 
-#if 0
 static inline void flush_requests(idd_irq_info_t *flush_info)
 {
 	int notify;
+  int status;
 
-//	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
-//	notify_remote_via_irq(flush_info->ring_irq);
+	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
+
+//  printk("remote thread status %d \n",atomic_read(&(info.main_ring.sring->req_status)));
+    status = atomic_read(&(flush_info->main_ring.sring->req_status));
+    smp_mb();
+    if(status == SLEEPING){
+//      printk("Backend request handler thread was sleeping. sending interrupt status %d\n",status);
+	    notify_remote_via_irq(flush_info->ring_irq);
+    }
 }
-#endif
 
 static void kick_pending_request_queues(idd_irq_info_t *kick_info)
 {
@@ -224,8 +231,6 @@ static int idd_queue_request(struct request *req){
 void do_idd_request(struct request_queue *q)
 {
 	struct request *req;
-	int notify = 0;
-
 
 	while ((req = blk_peek_request(q)) != NULL) {
 		if (RING_FULL(&info.main_ring))
@@ -244,10 +249,8 @@ wait:
 			blk_stop_queue(q);
 			break;
 		}
-	
-  	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&info.main_ring, notify);
+    flush_requests(&info);
 	}
-
 }
 
 struct block_device_operations idd_fops = {
@@ -265,8 +268,11 @@ static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-  printk("sleep cond %lu\n",sleep_cond);
-	return IRQ_HANDLED;
+//  printk("sleep cond %lu\n",sleep_cond);
+	atomic_set(&(info.main_ring.sring->rsp_status), 1);
+  smp_mb();
+//  printk("Waking up local response thread. new status %d \n",atomic_read(&(info.main_ring.sring->rsp_status)));
+  return IRQ_HANDLED;
 }
 
 int idd_read_response(void *arg){
