@@ -57,7 +57,7 @@ int major_num=0;
 module_init(idd_init);
 module_exit(idd_cleanup);
 
-unsigned long sleep_cond=0;
+int sleep_cond=0;
 int workaround = 0;
 
 void do_idd_request(struct request_queue *);
@@ -91,13 +91,13 @@ static inline void flush_requests(idd_irq_info_t *flush_info)
 
 	RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
 
-//  printk("remote thread status %d \n",atomic_read(&(info.main_ring.sring->req_status)));
-    status = atomic_read(&(flush_info->main_ring.sring->req_status));
-    smp_mb();
-    if(status == SLEEPING){
-//      printk("Backend request handler thread was sleeping. sending interrupt status %d\n",status);
-	    notify_remote_via_irq(flush_info->ring_irq);
-    }
+  status = atomic_read(&(flush_info->main_ring.sring->req_status));
+  smp_mb();
+//  printk("remote thread status %d \n",status);
+  if(status == SLEEPING){
+//    printk("Backend request handler thread was sleeping. sending interrupt status %d\n",status);
+	  notify_remote_via_irq(flush_info->ring_irq);
+  }
 }
 
 static void kick_pending_request_queues(idd_irq_info_t *kick_info)
@@ -268,10 +268,18 @@ static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
-//  printk("sleep cond %lu\n",sleep_cond);
-	atomic_set(&(info.main_ring.sring->rsp_status), 1);
-  smp_mb();
-//  printk("Waking up local response thread. new status %d \n",atomic_read(&(info.main_ring.sring->rsp_status)));
+  int status;
+  info.waiting_rsps = 1;
+  status = atomic_read(&(info.main_ring.sring->rsp_status));
+  smp_wmb();
+  if(status == SLEEPING){
+//    printk("Waking up local response thread. old_status %d \n",status);
+    wake_up(&info.wq);
+  }
+
+	atomic_set(&(info.main_ring.sring->rsp_status), RUNNING);
+  smp_wmb();
+//  printk("probably new_status %d \n",atomic_read(&(info.main_ring.sring->rsp_status)));
   return IRQ_HANDLED;
 }
 
@@ -282,15 +290,23 @@ int idd_read_response(void *arg){
 	struct request *req;
 	unsigned long flags;
 	int error;
+  int status;
+		  int more_to_do;
+
+//  printk("info.waiting_rsps %d\n", info.waiting_rsps);
 
   while(!kthread_should_stop()){
     if(try_to_freeze())
       continue;
 
-	  spin_lock_irqsave(&info.io_lock, flags);
+    wait_event_interruptible(
+        info.wq,
+        info.waiting_rsps || kthread_should_stop());
+
+    spin_lock_irqsave(&info.io_lock, flags);
 
 again:
-  	rp = info.main_ring.sring->rsp_prod;
+    rp = info.main_ring.sring->rsp_prod;
     rmb();
 	
 	  for (i = info.main_ring.rsp_cons; i != rp; i++) {
@@ -322,17 +338,28 @@ again:
 				  BUG();
 		  }
 	  }
-    sleep_cond++;
 	  info.main_ring.rsp_cons = i;
-	  if (i != info.main_ring.req_prod_pvt) {
-		  int more_to_do;
-		  RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
-		  if (more_to_do)
-		   goto again;
-	  } else
+    if (i != info.main_ring.req_prod_pvt) {
+      RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
+      if (more_to_do)
+       goto again;
+    } else
 		  info.main_ring.sring->rsp_event = i + 1;
-	
     kick_pending_request_queues(&info);
+
+    sleep_cond++;
+    status = atomic_read(&(info.main_ring.sring->rsp_status));
+    smp_mb();
+    if(sleep_cond > 50000 && status==RUNNING){
+//      printk("Sleeping thread %d\n",sleep_cond);
+      atomic_set(&(info.main_ring.sring->rsp_status), SLEEPING);
+      smp_mb();
+      info.waiting_rsps = 0;
+      sleep_cond = 0;
+      RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
+      if (more_to_do)
+        goto again;
+    }
 	  spin_unlock_irqrestore(&info.io_lock, flags);
   }
   return 0;
@@ -488,6 +515,8 @@ static int idd_init(void)
 	info.rq = new_device.gd->queue;
 
   info.response_thread = kthread_run(idd_read_response, &info, "response_thread");
+  init_waitqueue_head(&info.wq);
+  info.waiting_rsps=1;
 
   smp_mb();
 
