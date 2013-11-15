@@ -69,8 +69,8 @@ static void make_response(backend_info_t *be, u64 id, unsigned short op, int st)
 //  printk("remote thread status %d \n",atomic_read(&(be->main_ring.sring->rsp_status)));
   status = atomic_read(&(be->main_ring.sring->rsp_status));
   smp_mb();
-  if(status == 0){
-//    printk("Frontend response handling thread was sleeping. Sending interrupt\n");
+  if(status == SLEEPING){
+//    printk("Frontend response handling thread was sleeping %d. Sending interrupt\n",status);
     notify_remote_via_irq(be->ring_irq);
   }
 	spin_unlock_irqrestore(&be->blk_ring_lock, flags);
@@ -367,14 +367,15 @@ int idd_request_schedule(void *arg){
   int status;
   int more_to_do;
 
+  printk("waiting req value %d\n",be->waiting_reqs);
 	while(!kthread_should_stop()){
 		if (try_to_freeze())
 			continue;
-again:
     wait_event_interruptible(
       be->wq,
       be->waiting_reqs || kthread_should_stop());
 
+again:
 		wait_event_interruptible(
 			be->pending_free_wq,
 			!list_empty(&be->pending_free) ||
@@ -399,14 +400,14 @@ again:
     /*IF THRESHHOLD IS REACHED THEN SLEEP*/
     status = atomic_read(&(backend.main_ring.sring->req_status));
     smp_mb();
-    if(sleep_cond > 5000 && status==RUNNING){
+    if(sleep_cond > 50000 && status==RUNNING){
+//      printk("Sleeping thread %d\n",sleep_cond);
       atomic_set(&(backend.main_ring.sring->req_status), SLEEPING);
       be->waiting_reqs = 0;
+      sleep_cond=0;
       RING_FINAL_CHECK_FOR_REQUESTS(&be->main_ring, more_to_do);
       if (more_to_do)
         goto again;
-      smp_mb();
-//      printk("Sleeping thread %d\n",sleep_cond);
       smp_mb();
     }
 	}
@@ -432,7 +433,7 @@ static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
   if(status == SLEEPING)
     wake_up(&backend.wq);
 
-  atomic_set(&(backend.main_ring.sring->req_status), 1);
+  atomic_set(&(backend.main_ring.sring->req_status), RUNNING);
   smp_wmb();
 //  printk("Waking up request thread. new status %d \n",atomic_read(&(backend.main_ring.sring->req_status)));
   return IRQ_HANDLED;
@@ -524,6 +525,7 @@ static int blk_init(void)
 
 	init_waitqueue_head(&backend.pending_free_wq);
 	init_waitqueue_head(&backend.wq);
+  backend.waiting_reqs=1;
 
 	mmap_pages = xen_idd_reqs * IDD_MAX_SEGMENTS_PER_REQUEST;
 
