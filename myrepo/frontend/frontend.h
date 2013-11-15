@@ -92,6 +92,8 @@ typedef struct idd_irq_info {
 	struct work_struct work;
 	spinlock_t io_lock;
   struct task_struct *response_thread;
+  wait_queue_head_t wq;
+  unsigned int waiting_rsps;
 } idd_irq_info_t;
 
 
