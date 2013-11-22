@@ -221,24 +221,31 @@ static int dispatch_rw_block_io(backend_info_t *be,
 		breq.nr_sects += seg[i].nsec;
 	}
 
-	breq.bdev = blkdev_get_by_path("/dev/ramd", 
-//	breq.bdev = blkdev_get_by_path("/dev/loop0", 
-			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
-			FMODE_PREAD | FMODE_PWRITE, NULL);
-	breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
-			MINOR(breq.bdev->bd_inode->i_rdev));
+/*
+ *  breq.bdev = blkdev_get_by_path("/dev/ramd", 
+ *	breq.bdev = blkdev_get_by_path("/dev/loop0", 
+ *      FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
+ *      FMODE_PREAD | FMODE_PWRITE, NULL);
+ *  breq.dev = MKDEV(MAJOR(breq.bdev->bd_inode->i_rdev), 
+ *    MINOR(breq.bdev->bd_inode->i_rdev));
+ */
 
-	if (IS_ERR(breq.bdev)) {
-		printk("xen_vbd_create: device %08x could \
-			not be opened.\n",breq.dev);
-		return -ENOENT;
-	}
+  breq.bdev = be->bdev;
+  breq.dev = be->dev;
 
-	if (breq.bdev->bd_disk == NULL) {
-		printk("xen_vbd_create: device %08x doesn't \
-		exist.\n",breq.dev);
-		return -ENOENT;
-	}
+/*
+ *  if (IS_ERR(breq.bdev)) {
+ *    printk("xen_vbd_create: device %08x could \
+ *      not be opened.\n",breq.dev);
+ *    return -ENOENT;
+ *  }
+ *
+ *  if (breq.bdev->bd_disk == NULL) {
+ *    printk("xen_vbd_create: device %08x doesn't \
+ *    exist.\n",breq.dev);
+ *    return -ENOENT;
+ *  }
+ */
 
 	for (i = 0; i < nseg; i++) {
 		if (((int)breq.sector_number|(int)seg[i].nsec) &
@@ -470,8 +477,13 @@ static int blk_init(void)
 	int err=0;
 	struct idd_sring *sring;
 
-	sema_init(&backend.rsp_ring_sem,1);
-	sema_init(&backend.req_ring_sem,1);
+	backend.bdev = blkdev_get_by_path("/dev/ramd", 
+//bdev = blkdev_get_by_path("/dev/loop0", 
+			FMODE_READ | FMODE_WRITE | FMODE_LSEEK | 
+			FMODE_PREAD | FMODE_PWRITE, NULL);
+
+	backend.dev = MKDEV(MAJOR(backend.bdev->bd_inode->i_rdev), 
+			MINOR(backend.bdev->bd_inode->i_rdev));
 
 /********************** EVERYTHING BELOW IS A RING BUFFER *******************/
 
@@ -517,7 +529,6 @@ static int blk_init(void)
 	if (unlikely(err != 0))
 		goto end4; //TODO
 
-	init_waitqueue_head(&backend.request_queue);
 	INIT_LIST_HEAD(&backend.pending_free);
 	spin_lock_init(&backend.pending_free_lock);
 
