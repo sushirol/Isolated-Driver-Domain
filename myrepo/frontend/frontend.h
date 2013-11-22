@@ -72,19 +72,13 @@ struct idd_shadow {
  
 typedef struct idd_irq_info {
 	struct idd_front_ring main_ring;
-	struct idd_front_ring data_ring;
 	struct vm_struct *main_ring_area;
-	struct vm_struct *data_ring_area;
  	grant_handle_t main_ring_handle;
-	grant_handle_t data_ring_handle;
-//	int main_irq;
 	int ring_irq;
 	uint32_t domid;
 	struct semaphore rw_sem;
 	struct semaphore notify_sem;
-//	void * io_data_page;
 	struct scatterlist sg[IDD_MAX_SEGMENTS_PER_REQUEST];
-	unsigned long id;
 	struct request_queue *rq;
 	struct idd_shadow shadow[IDD_RING_SIZE];
 	unsigned long shadow_free;
