@@ -69,8 +69,8 @@ DEFINE_RING_TYPES(idd, struct idd_request, struct idd_response);
 
 struct bd_req {
 	unsigned short dev;
-	uint64_t nr_sects;
 	struct block_device *bdev;
+	uint64_t nr_sects;
 	uint64_t sector_number;
 };
 
@@ -103,34 +103,19 @@ struct persistent_gnt {
 	uint64_t dev_bus_addr;
 	struct rb_node node;
 };
-  
+
 typedef struct backend_info {
 	struct idd_back_ring main_ring;
-	struct idd_back_ring data_ring;
-	struct task_struct *main_thread;
 	struct task_struct *request_thread;
 	uint32_t main_ring_gref;
-	uint32_t data_ring_gref;
-        int main_irq;
-        int ring_irq;
-        int main_avail;
-        int request_avail;
-        struct semaphore main_sem;
-        struct semaphore rsp_ring_sem;
-        struct semaphore req_ring_sem;
-        wait_queue_head_t main_queue;
-        wait_queue_head_t request_queue;
-        struct spinlock ring_lock;
-        struct spinlock list_lock;
-	void * io_data_page;
-        struct work_struct write_task;
-        struct work_struct read_task;
-        struct idd_request *rw_req;
-	unsigned long id;
+  int ring_irq;
+
+//  struct semaphore rsp_ring_sem;
+//  struct semaphore req_ring_sem;
+//  wait_queue_head_t request_queue;
 	
 	wait_queue_head_t wq;
 	unsigned int waiting_reqs;
-	struct idd_bd bd;
 	struct pending_req *pending_reqs;
 	/* List of all 'pending_req' available */
 	struct list_head pending_free;
@@ -143,6 +128,8 @@ typedef struct backend_info {
 	unsigned int persistent_gnt_c;
 	struct rb_root persistent_gnts;
 
+	unsigned short dev;
+	struct block_device *bdev;
 } backend_info_t;
 
 typedef struct idd_connect{
