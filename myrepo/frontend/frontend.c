@@ -228,10 +228,27 @@ static int idd_queue_request(struct request *req){
 	return 0;
 }
 
+static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
+	int i = 0;
+
+	for (i = 0; i < s->req.nr_segments; i++) {
+		gnttab_end_foreign_access(s->req.seg[i].gref, 0, 0UL);
+	}
+}
+
+
 void do_idd_request(struct request_queue *q)
 {
 	struct request *req;
+  int cont_counter = 0;
+  RING_IDX rp;
+  RING_IDX i;
+  struct idd_response *ring_rsp;
+  struct request *read_req;
+//	unsigned long flags;
+  int error;
 
+out_while:
 	while ((req = blk_peek_request(q)) != NULL) {
 		if (RING_FULL(&info.main_ring))
 			goto wait;
@@ -250,21 +267,69 @@ wait:
 			break;
 		}
     flush_requests(&info);
+#if 1
+    while(1){
+start_over:
+    	rp = info.main_ring.sring->rsp_prod;
+      rmb();
+      if(info.main_ring.rsp_cons != rp){
+        cont_counter=0;
+      }else{
+        cont_counter++;
+        if(cont_counter>5){
+          goto out_while;
+        }
+        goto start_over;
+      }
+	    for (i = info.main_ring.rsp_cons; i != rp; i++) {
+		    unsigned long id;
+        ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
+      	if(ring_rsp == NULL){
+      		printk("NULL RING_GET_RESPONSE\n");
+        	BUG_ON(1);
+	      	goto out_while;
+      	}
+		    id  = ring_rsp->seq_no;
+
+    		if (id >= IDD_RING_SIZE){
+            printk("unlikely\n");
+		    	continue;
+	    	}
+		
+    		read_req  = info.shadow[id].request;
+		    if(read_req!=NULL)
+			    idd_completion(&info.shadow[id], ring_rsp);
+        else
+          printk("reead_req NULL\n");
+		
+		    if (add_id_to_freelist(&info, id)) {
+			      WARN(1, "response to %s (id %ld) couldn't be recycled!\n",
+				    op_name(ring_rsp->op), id);
+			      continue;
+		    }
+		    error = (ring_rsp->res == 0) ? 0 : -EIO;
+		    switch(ring_rsp->op){
+			    case 0:
+			    case 1:
+				    __blk_end_request_all(read_req, 0);
+				    break;
+			    default:
+				    BUG();
+		    }
+	    }
+
+	    info.main_ring.rsp_cons = i;
+//	    if (i == info.main_ring.req_prod_pvt){
+		    info.main_ring.sring->rsp_event = i + 1;
+//      }
+    }
+#endif
 	}
 }
 
 struct block_device_operations idd_fops = {
 	.owner = THIS_MODULE
 };
-
-
-static void idd_completion(struct idd_shadow *s, struct idd_response *ring_rsp){
-	int i = 0;
-
-	for (i = 0; i < s->req.nr_segments; i++) {
-		gnttab_end_foreign_access(s->req.seg[i].gref, 0, 0UL);
-	}
-}
 
 static irqreturn_t irq_ring_interrupt(int irq, void *dev_id)
 {
