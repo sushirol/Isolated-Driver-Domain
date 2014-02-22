@@ -1,3 +1,3 @@
 ./xumount.sh
-mount /dev/sda5 /hvm
+mount /dev/sdaX /hvm
 
