@@ -1,0 +1,63 @@
+% TODO edit
+
+A system is judged by the quality of services it offer and its ability to function reliably. Even though reliability of operating system has been studied for several decades, it remains a major concern even today. Characteristics of operating system which makes them unstable and insecure are size and complexity. If we consider Linux kernel; it has over 15 million lines of code. One of the software reliability study shows that a code contains 6 to 16 bugs per 1000 lines of executable code\cite{Basili:1984:SEC:69605.2085}\cite{Tanenbaum06canwe}. Some other studies even says 2 to 75 bugs per 1000 lines of code \cite{Ostrand:2002:DFL:566172.566181}. Using a minimum estimate of 6 bugs per 1000 lines, the Linux kernel has around 90,000 bugs. Also one of the study shows that the device drivers have error rate 3 to 7 times higher than ordinary code\cite{Chou:2001:ESO:502034.502042}. So considering the fact that 70\% of the operating system consists of device drivers, our calculation of 90000 bugs can be an understatement\cite{Chou:2001:ESO:502034.502042}. To make a system reliable, finding all these bugs and fixing them is definitely not a feasible option considering the fact that bug fixes introduces new lines of code and hence new bugs.
+
+\pagebreak
+
+\section {Problem Statement}
+
+Large size of system makes it impossible for one person to understand the code. At the same time complexity and tightly coupled device drivers and linux kernel makes it difficult to isolate a fault in a device driver. Difficulty in isolating faults in a device driver makes system unreliable and less robust, and hence the problem we try to solve here is of tightly coupled operating system. 
+
+Monolithic kernel components doesn’t have the kind of isolation user level applications has. In a monolithic kernel, one of the millions lines of the kernel can overwrite kernel data structure used by an unrelated component and crash the system. This threat can be reduced by executing each device driver in an isolated environment from kernel. But a device driver is dependent upon many kernel components like memory management, scheduler etc., hence it is difficult to isolated device driver from kernel and execute it separately.
+
+\pagebreak
+  
+\section {Proposed Solution} 
+Unlike user applications, modern operating system kernel contains couple of hundred or thousand procedures linked together as a single program\cite{Tanenbaum06canwe}. Any one of the millions lines of the kernel can overwrite/corrupt kernel data structure.
+
+In modern operating systems "Memory protection" is a way to control memory access rights. Memory protection prevents a process from accessing memory that has not been allocated to it, preventing a line of code within a process affecting other processes, or the operating system\cite{Denning:1970:VM:356571.356573}\cite{Galvin}. Unlike user applications, kernel has hundreds of procedure linked together, which makes it difficult to prevent an access to kernel data structure with memory protection.
+
+The idea is to run a special program called a hypervisor. Hypervisor is capable of running multiple operating systems at a same time called as a virtual machine\cite{Goldberg:1973:AVM:800122.803950}. Hypervisor is commonly used to allow running of different operating systems such as Linux, Oracle, and Windows at same time, or is used to exploit the hardware. The use of virtual machines has a well-deserved reputation for extremely good fault isolation. Since none of the virtual machines even know about the other ones, malfunctioning of one virtual machine cannot spread to other\cite{LeVasseur04UnmodifiedDriverReuse}.
+
+We propose an infrastructure which exploits the virtualization to isolate such linked procedures. In a virtualized environment, each virtual machine has an allocated memory, and because of memory protection mechanism, one virtual machine can not affect the memory of any other virtual machine. 
+
+Exploiting this property we run a kernel and device driver in a new virtual machine, whereas user application and a kernel runs in separate virtual machine, making it impossible to corrupt kernel data structure by a device driver running in another virtual machine. Isolation of a device driver and a kernel can be achieved by running device driver in separate virtual machine than virtual machine which is running user application. Our solution here adapts the concept, protection of faults in an operating system\cite{LeVasseur04UnmodifiedDriverReuse}.
+
+\pagebreak
+
+\section{Core Contributions}
+
+Technical core contributions of this report with respect to operating system design can be divided into two parts. 
+\begin{enumerate}
+\item Device driver isolation implementation 
+\item Performance comparison of spinning and event channel.
+\end{enumerate}
+
+These contributions are listed below. 
+
+\subsection{Device driver isolation}
+
+An approach based on virtualization to decouple device driver from linux kernel, and partition existing kernel into application domain, and isolated device driver domain. Application domain would serve system calls related to core linux kernel functionality, whereas isolated device driver would serve system calls related to corresponding device driver.
+
+\subsection{Performance comparison}
+
+We implement request and response availability notification with mechanism provided by xen, which follows interrupt based model. We implement same part with spinning of threads to avoid context switch and compare the performance of isolated device driver.
+
+We aim to find if there is any perfomance degradation in system because of context switch.
+
+\pagebreak
+\section {Organization}
+
+This section gives the organization and roadmap of the thesis.
+
+\begin{enumerate}
+\item Chapter 2 gives the background on memory protection, virtualization, Xen Hypervisor, inter-domain communication, processes and threads. 
+\item Chapter 3 gives the introduction to design of the system to isolate device driver. 
+\item Chapter 4 discusses the detailed design and implementation to isolate device driver. 
+\item Chapter 5 evaluate the performance of Independent device driver with different designs. 
+\item Chapter 6 reviews related work in the area of kernel fault tolerance. 
+\item Chapter 7 concludes the report and lists down the topics where this work can be extended.
+\end{enumerate}
+
+% ref
+\ifbool{toShowBibliography}{\bibliography{references}}{}
