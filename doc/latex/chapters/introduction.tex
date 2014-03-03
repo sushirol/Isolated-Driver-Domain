@@ -1,50 +1,39 @@
 % TODO edit
 
-A system is judged by the quality of services it offers and its ability to function reliably. Even though reliability of operating system has been studied for several decades, it remains a major concern even today. The characteristics of operating systems which makes them unstable and insecure are size and complexity. If we consider Linux kernel; it has over 15 million lines of code. One of the software reliability study shows that a code contains 6 to 16 bugs per 1000 lines of executable code\cite{Basili:1984:SEC:69605.2085}\cite{Tanenbaum06canwe}. Some other studies even say 2 to 75 bugs per 1000 lines of code \cite{Ostrand:2002:DFL:566172.566181}. Using a minimum estimate of 6 bugs per 1000 lines, the Linux kernel has around 90,000 bugs. Also one of the study shows that the device drivers have error rate 3 to 7 times higher than ordinary code\cite{Chou:2001:ESO:502034.502042}. So considering the fact that 70\% of the operating system consists of device drivers, our calculation of 90000 bugs can be an understatement\cite{Chou:2001:ESO:502034.502042}. To make a system reliable, finding all these bugs and fixing them is definitely not a feasible option considering the fact that bug fixes introduces new lines of code and hence new bugs.
+A system is judged by the quality of the services it offers and its ability to function reliably. Even though reliability of operating systems has been studied for several decades, it remains a major concern today. The characteristics of operating systems which make them unstable are size and complexity. 
+\\
+Software reliability study shows that 6 to 16 number of errors/1000 executable lines can be found within a module\cite{Basili:1984:SEC:69605.2085}\cite{Tanenbaum06canwe}. Linux kernel has over 15 million lines of code. If we assume minimum estimate, Linux kernel has around 90,000 bugs. Researchers have shown that the error rate for device drivers is higher than the error rate for the rest of the kernel\cite{Chou:2001:ESO:502034.502042}. Considering the fact that the operating system predominantly consists of device drivers, the faults in device drivers make the operating system unreliable\cite{Chou:2001:ESO:502034.502042}.
 
 \pagebreak
 
 \section {Problem Statement}
 
-Large size of system makes it impossible for one person to understand the code. At the same time complexity and tightly coupled device driver and linux kernel makes it difficult to isolate a fault in a device driver. The difficulty in isolating faults in a device driver makes system unreliable and less robust, thus, the problem we try to solve here is of tightly coupled operating system. 
+In order to make a system reliable, it is essential that a device driver code does not contain any bug. However, finding all these bugs and fixing them is difficult since bug fixes introduces new lines of code resulting in new bugs. 
 \\
-Monolithic kernel components doesn’t have the kind of isolation user level applications has. In a monolithic kernel, one of the millions lines of the kernel can overwrite kernel data structure used by an unrelated component and crash the system. This threat can be reduced by executing each device driver in an isolated environment from kernel. However, a device driver is dependent upon many kernel components like memory management, scheduler etc., hence it is difficult to isolate device driver from the kernel and execute it separately.
+In modern operating systems memory protection is a way to control memory access rights. The memory protection prevents a process from accessing memory that has not been allocated to it. The memory protection prevents a bug within a process from affecting other processes, or the operating system\cite{Denning:1970:VM:356571.356573}\cite{Galvin}. Monolithic kernel component do not have the same level of isolation the user level applications have. Unlike user applications, monolithic kernel has hundreds of procedures linked together. As a result, any portion of the kernel can access and potentially overwrite any kernel data strcuture used by an unrelated component. Such a non existant isolation between kernel and device driver causes a bug in device drivers to corrupt the memory of the other kernel components. This memory corruption might lead to system crash. Hence the underlying cause of unreliability in the operating system is the tight coupling between device driver and linux kernel.
 
 \pagebreak
   
 \section {Proposed Solution} 
-Unlike user applications, modern operating system kernel contains couple of hundred or thousand procedures linked together as a single program\cite{Tanenbaum06canwe}. Any one of the millions lines of the kernel can overwrite/corrupt kernel data structure.
+
+The reliability of a system can be improved by executing device drivers in an isolated environment from the kernel. The dependency of device drivers on other kernel components such as memory management, scheduler etc. make it difficult to isolate device drivers from the kernel.
 \\
-In modern operating systems "Memory protection" is a way to control memory access rights. Memory protection prevents a process from accessing memory that has not been allocated to it, preventing a line of code within a process affecting other processes, or the operating system\cite{Denning:1970:VM:356571.356573}\cite{Galvin}. Unlike user applications, kernel has hundreds of procedure linked together, which makes it difficult to prevent an access to kernel data structure with memory protection.
+Our solution here adapts the concept of 'virtulization based fault protection in operating systems' proposed by LeVasseur et. al. \cite{LeVasseur04UnmodifiedDriverReuse}, Tanenbaum et. al.\cite{Tanenbaum06canwe}, Nooks\cite{Swift:2002:NAR:1133373.1133393}, Soltesz et. al. \cite{Soltesz:2007:COS:1272998.1273025}. The solution we implement runs a special program called hypervisor. Hypervisor is commonly used to run multiple operating systems in parallel, by exploiting the hardware. The use of virtual machines has a well-deserved reputation for extremely good fault isolation. Since none of the virtual machines are aware of the other virtual machines, malfunctioning of one virtual machine cannot spread to the others.
 \\
-The idea is to run a special program called a hypervisor. Hypervisor is capable of running multiple operating systems at the same time called a virtual machine\cite{Goldberg:1973:AVM:800122.803950}. Hypervisor is commonly used to allow different operating systems such as Linux, Oracle, and Windows, to run at the same time, or to exploit the hardware. The use of virtual machines has a well-deserved reputation for extremely good fault isolation. Since none of the virtual machines even know about the other ones, malfunctioning of one virtual machine cannot spread to the other\cite{LeVasseur04UnmodifiedDriverReuse}.
-\\
-We propose an infrastructure which exploits the virtualization to isolate such linked procedures. In a virtualized environment, each virtual machine has an allocated memory, and because of memory protection mechanism, one virtual machine cannot affect the memory of any other virtual machine.
-\\
-Thus, by exploiting this property we run a kernel and device driver in a separate virtual machine, whereas user application and a kernel runs in a same virtual machine, making it impossible to corrupt kernel data structure by a device driver running in another virtual machine. The isolation of a device driver and a kernel can be achieved by running the device driver in a separate virtual machine other than the virtual machine running the user application. Our solution here adapts the concept, protection of faults in an operating system\cite{LeVasseur04UnmodifiedDriverReuse}.
+In a virtualized environment, all virtual machines run as separate user processes in different address spaces. Thus, to exploit the memory protection capability between virtual machines, we run a device driver with minimilastic kernel in one virtual machine, and run user applications and a kernel together in the other virtual machine. As a result, a device driver is isolated from the linux kernel, making it impossible for the device driver to corrupt any kernel data structure in the virtual machine running user applications. 
 
 \pagebreak
 
 \section{Core Contributions}
 
-Technical core contributions of this project can be divided into two parts. 
+The core contributions of this project can be divided into two parts. 
 
 \begin{enumerate}
-\item Device driver isolation implementation 
-\item Performance comparison of spinning and event channel.
+\item The implementation of the device driver isolation concept using two approaches. 
+\item The performance comparison of the approaches.
 \end{enumerate}
 
-These contributions are listed below. 
-
-\subsection{Device driver isolation}
-
-An approach based on virtualization to decouple device driver from linux kernel, and partition existing kernel into application domain, and isolated device driver domain. The application domain would serve system calls related to core linux kernel functionality, whereas the isolated device driver would serve system calls related to corresponding device driver.
-
-\subsection{Performance comparison}
-
-We implement request and response availability notification with mechanism provided by Xen, which follows interrupt based model. We implement the same part with spinning of threads to avoid context switch and compare the performance of isolated device driver.
-\\
-We aim to find if there is any performance degradation in system because of context switch.
+The first approach implements device driver isolation using interrupt based communication between front end and back end device drivers. Xen uses the same approach for implementation of the driver domain\cite{driverdomain}. This interrupt based model requires context switches\cite{Barham:2003:XAV:945445.945462}. The second approach implements the communication between front end and back end device drivers using spinning of threads. The spinning based model does not require the context switches. This report presents the performance comparison of both the approaches. In addition, the report aims to find if the performance degradation can be attributed to the context switches.
 
 \pagebreak
 \section {Organization}
