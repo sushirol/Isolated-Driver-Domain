@@ -22,9 +22,9 @@ In a virtualized environment, all virtual machines run as separate user processe
 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=.35]{xen-split}
+\includegraphics[scale=.40, angle=270]{xen-split}
 \caption{Split device driver model}
-\label{fig:xen-split}
+\label{xen-split}
 \end{figure}
 
 As shown in Figure~\ref{xen-split}, Xen follows a split device driver model. Xen has a front end driver in the guest operating system and a back end driver in the driver domain. The front end and the back end driver transfer data between domains over a channel that is provided by the Xen virtual machine monitor. Within the driver domain, back end driver is used to demultiplex incoming data to the device and to multiplex outgoing data between the device and the guest domain\cite{driverdomain}
