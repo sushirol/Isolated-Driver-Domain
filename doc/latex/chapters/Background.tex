@@ -40,13 +40,13 @@ Thread is also called as a light-weight process. The implementation of threads a
 
 Multithreading is implemented by time division multiplexing on a single processor. In time division multiplexing, the processor switches between different threads. The switch between threads is called as the context switch. The context switch makes the user feel that the threads or tasks are running concurrently. However, on a multi-core system or multi-processor system, threads can run truly concurrently, with every processor or core executing a separate thread simultaneously. 
 \\
-In a context switch the state of a process is stored and restored, so that the execution can be resumed from the same point at a later time. The state of the process is also called as context. The context is determined by the processor and the operating system. Context switching makes it possible for multiple processes or threads to share a single processor. Usually context switches are computationally intensive. Switching between two process requires good amount of computation and time to save and load registers, memory maps, and updating various tables.\cite{Galvin} 
+In a context switch the state of a process is stored and restored, so that the execution can be resumed from the same point at a later time. The state of the process is also called as context. The context is determined by the processor and the operating system. Context switching makes it possible for multiple processes or threads to share a single processor. Usually context switches are computationally intensive. Switching between two process requires good amount of computation and time to save and load registers, memory maps, and updating various tables\cite{Galvin} .
 
 \subsection{Spinlocks and spinning}
 
-Spinlock is a lock which causes a thread trying to acquire it to spin continuously checking if the lock is available. Spinning is a technique in which a process repeatedly checks to see if a condition is true. Spinlock is one of the locking mechanisms designed to work in a multiprocessing environment. Spinlocks are similar to the semaphores, except that when a process finds the lock closed by another process, it spins around continuously. Spinning is implemented by executing an instruction in a loop. \cite{Bovet:2005:ULK:1077084}
+Spinlock is a lock which causes a thread trying to acquire it to spin continuously checking if the lock is available. Spinning is a technique in which a process repeatedly checks to see if a condition is true. Spinlock is one of the locking mechanisms designed to work in a multiprocessing environment. Spinlocks are similar to the semaphores, except that when a process finds the lock closed by another process, it spins around continuously. Spinning is implemented by executing an instruction in a loop\cite{Bovet:2005:ULK:1077084}.
 \\
-Whenever a lock is not available, a CPU either spins or does a context switch. In a uniprocessor environment, the waiting process keeps spinning for the lock. However, the other process holding the lock might not have a chance to release it, because of which spin lock could deteriorate the performance in a uniprocessor environment. In a multiprocessor environment, spin locks can be more efficient. Overhead for spinlocks is very small. On the other hand, a context switch takes a significant amount of time, so it is more efficient for each process to keep its own CPU and simply spin while waiting for a resource. \cite{Bovet:2005:ULK:1077084} Because spinlocks avoid overhead from operating system process re-scheduling or context switching, spinlocks are efficient if threads are only likely to be blocked for a short period. For the above reasons, spinlocks are often used inside operating system kernels.
+Whenever a lock is not available, a CPU either spins or does a context switch. In a uniprocessor environment, the waiting process keeps spinning for the lock. However, the other process holding the lock might not have a chance to release it, because of which spin lock could deteriorate the performance in a uniprocessor environment. In a multiprocessor environment, spin locks can be more efficient. Overhead for spinlocks is very small. On the other hand, a context switch takes a significant amount of time, so it is more efficient for each process to keep its own CPU and simply spin while waiting for a resource\cite{Bovet:2005:ULK:1077084}. Because spinlocks avoid overhead from operating system process re-scheduling or context switching, spinlocks are efficient if threads are only likely to be blocked for a short period. For the above reasons, spinlocks are often used inside operating system kernels.
 
 %adaptive spinning
 
@@ -170,7 +170,7 @@ There are two types of hypervisors \cite{Goldberg:1973:AVM:800122.803950}
 \label{Type 1 hypervisor}
 \end{figure}
 \begin{description}
-\item Type 2 hypervisors are also called as hosted hypervisors. Type 2 hypervisor runs within a conventional operating-system environment. Type 2 hypervisor runs at a distinct second software level whereas, guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors.\cite{Sugerman:2001:VID:647055.715774, citeulike:3149886}
+\item Type 2 hypervisors are also called as hosted hypervisors. Type 2 hypervisor runs within a conventional operating-system environment. Type 2 hypervisor runs at a distinct second software level whereas, guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors\cite{Sugerman:2001:VID:647055.715774, citeulike:3149886}.
 \end{description}
 \begin{figure}[!ht]
 \centering
@@ -185,7 +185,7 @@ Xen\cite{Barham:2003:XAV:1165389.945462} is a widely known Type I hypervisor tha
 \\
 The purpose of a hypervisor is to allow guests to be run. Xen runs guests in environments known as domains. Domain 0 is the first guest to run, and has elevated privileges. Xen loads a Domain 0 guest kernel during boot. Other unpriviledged domains are called as domain U. Xen hypervisor does not include device drivers. Device management is included in privileged domain $Dom 0$. $Dom 0$ uses the device drivers which are present in its guest kernel implementation. However, $dom U$ accesses devices using a split device driver architecture. In the split device architecture a front end driver in a guest domain communicates with a back end driver in $Dom 0$.
 \\
-Figure~\ref{xen-split2} shows what happens to a data when it is sent by an application running in a domU guest. First, it travels through the file system as it would normally. However, at the end of the stack the normal block device driver does not exist. Instead, a simple peice of code called the front end puts the data into the shared memory. The other half of the split device driver called the back end, running on the dom0 guest, reads the data from the buffer, sends it way down to the real device driver. The data is written on actual physical device. In conclusion, split device driver can be explained as a way to move data from the domU guests to the dom0 guest, usually using ring buffers in shared memory. \cite{Chisnall:2007:DGX:1407351}
+Figure~\ref{xen-split2} shows what happens to a data when it is sent by an application running in a domU guest. First, it travels through the file system as it would normally. However, at the end of the stack the normal block device driver does not exist. Instead, a simple piece of code called the front end puts the data into the shared memory. The other half of the split device driver called the back end, running on the dom0 guest, reads the data from the buffer, sends it way down to the real device driver. The data is written on actual physical device. In conclusion, split device driver can be explained as a way to move data from the domU guests to the dom0 guest, usually using ring buffers in shared memory\cite{Chisnall:2007:DGX:1407351}.
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=.40, angle=270]{xen-split}
@@ -202,7 +202,7 @@ Xen provides an inter-domain memory sharing API accessed through the guest kerne
 \label{xen}
 \end{figure}
 
-In driver domain implementation, xen uses shared I/O ring buffers and event channel.\cite{Barham:2003:XAV:1165389.945462, Nikolaev:2013:VOS:2517349.2522719, Ruslan}
+In driver domain implementation, xen uses shared I/O ring buffers and event channel\cite{Barham:2003:XAV:1165389.945462, Nikolaev:2013:VOS:2517349.2522719, Ruslan}.
 
 \subsubsection{Hypercalls and events}
 
