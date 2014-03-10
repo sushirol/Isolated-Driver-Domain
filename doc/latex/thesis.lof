@@ -11,15 +11,26 @@
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Kernel space}}{14}{figure.2.8}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Kernel space}}{14}{figure.2.9}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Kernel space}}{15}{figure.2.10}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Operating System Architecture}}{15}{figure.2.11}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Virtualization}}{17}{figure.2.12}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Type 1 hypervisor}}{17}{figure.2.13}
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Type 2 hypervisor}}{18}{figure.2.14}
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Xen split device driver}}{19}{figure.2.15}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Operating System Architecture}}{16}{figure.2.11}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Virtualization}}{18}{figure.2.12}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces Type 1 hypervisor}}{18}{figure.2.13}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Type 2 hypervisor}}{19}{figure.2.14}
+\contentsline {figure}{\numberline {2.15}{\ignorespaces Xen split device driver}}{20}{figure.2.15}
 \contentsline {figure}{\numberline {2.16}{\ignorespaces Xen}}{20}{figure.2.16}
-\contentsline {figure}{\numberline {2.17}{\ignorespaces Ring I/O buffer}}{21}{figure.2.17}
-\contentsline {figure}{\numberline {2.18}{\ignorespaces Ring I/O buffer}}{22}{figure.2.18}
+\contentsline {figure}{\numberline {2.17}{\ignorespaces Ring I/O buffer}}{22}{figure.2.17}
+\contentsline {figure}{\numberline {2.18}{\ignorespaces Ring I/O buffer}}{23}{figure.2.18}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview}}{26}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System Components}}{27}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Tightly coupled System}}{29}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces System with kernel and decoupled, standalone device driver}}{29}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Each instance of device driver runs with a kernel}}{30}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces All the instances of operating system execute over VMM}}{30}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Device driver crash}}{31}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces High Availability}}{31}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Component wise view of Figure 4}}{32}{figure.3.9}
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Introduction of front end and back end modules}}{32}{figure.3.10}
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Introduction of Communication module}}{33}{figure.3.11}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

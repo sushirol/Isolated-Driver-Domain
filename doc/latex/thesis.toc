@@ -12,51 +12,54 @@
 \contentsline {section}{\numberline {2.2}Memory protection}{11}{section.2.2}
 \contentsline {subsection}{\numberline {2.2.1}User level}{11}{subsection.2.2.1}
 \contentsline {subsection}{\numberline {2.2.2}kernel level}{13}{subsection.2.2.2}
-\contentsline {section}{\numberline {2.3}Virtualization}{15}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}Hypervisor}{16}{subsection.2.3.1}
+\contentsline {section}{\numberline {2.3}Virtualization}{16}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}Hypervisor}{17}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Xen Hypervisor}{18}{subsection.2.3.2}
-\contentsline {subsubsection}{\numberline {2.3.2.1}Hypercalls and events}{19}{subsubsection.2.3.2.1}
-\contentsline {subsubsection}{\numberline {2.3.2.2}Data Transfer: I/O Rings}{20}{subsubsection.2.3.2.2}
-\contentsline {chapter}{\numberline {3}System Introduction}{23}{chapter.3}
-\contentsline {section}{\numberline {3.1}Design Goals}{23}{section.3.1}
-\contentsline {section}{\numberline {3.2}System overview}{23}{section.3.2}
-\contentsline {section}{\numberline {3.3}System components}{24}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Front end module}{24}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Back end Module}{24}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Communication module}{24}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}System design}{25}{section.3.4}
-\contentsline {chapter}{\numberline {4}System Design and Implementation}{26}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Overview}{27}{section.4.1}
-\contentsline {section}{\numberline {4.2}Implementation}{27}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Communication component}{27}{subsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.1.1}Ring buffer}{27}{subsubsection.4.2.1.1}
-\contentsline {subsubsection}{\numberline {4.2.1.2}Shared pages}{27}{subsubsection.4.2.1.2}
-\contentsline {subsubsubsection}{\numberline {4.2.1.2.1}Hypercall interface}{27}{subsubsubsection.1}
-\contentsline {subsubsubsection}{\numberline {4.2.1.2.2}Other interfaces}{27}{subsubsubsection.2}
-\contentsline {subsection}{\numberline {4.2.2}Application domain}{27}{subsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.2.1}Front end driver}{27}{subsubsection.4.2.2.1}
-\contentsline {subsubsubsection}{\numberline {4.2.2.1.3}Initialization}{27}{subsubsubsection.3}
-\contentsline {subsubsubsection}{\numberline {4.2.2.1.4}Create request}{27}{subsubsubsection.4}
-\contentsline {subsubsubsection}{\numberline {4.2.2.1.5}Enqueue request}{27}{subsubsubsection.5}
-\contentsline {subsubsubsection}{\numberline {4.2.2.1.6}Dequeue response}{27}{subsubsubsection.6}
-\contentsline {subsection}{\numberline {4.2.3}Storage domain}{27}{subsection.4.2.3}
-\contentsline {subsubsection}{\numberline {4.2.3.1}Back end driver}{27}{subsubsection.4.2.3.1}
-\contentsline {subsubsubsection}{\numberline {4.2.3.1.7}Initialization}{27}{subsubsubsection.7}
-\contentsline {subsubsubsection}{\numberline {4.2.3.1.8}Dequeue request}{27}{subsubsubsection.8}
-\contentsline {subsubsubsection}{\numberline {4.2.3.1.9}Create BIO}{27}{subsubsubsection.9}
-\contentsline {subsubsubsection}{\numberline {4.2.3.1.10}Make response and Enqueue}{27}{subsubsubsection.10}
-\contentsline {chapter}{\numberline {5}Related Work}{28}{chapter.5}
-\contentsline {section}{\numberline {5.1}Driver protection approaches }{28}{section.5.1}
-\contentsline {section}{\numberline {5.2}Existing Kernel designs}{28}{section.5.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{29}{chapter.6}
-\contentsline {section}{\numberline {6.1}Goals and Methodology}{29}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Goals}{29}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Experiment Set Up}{29}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}System Overhead}{30}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Copy Overhead}{30}{subsection.6.2.1}
-\contentsline {section}{\numberline {6.3}Results with event channel}{31}{section.6.3}
-\contentsline {section}{\numberline {6.4}Results with spinning}{32}{section.6.4}
-\contentsline {section}{\numberline {6.5}Comparision}{33}{section.6.5}
-\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{34}{chapter.7}
-\contentsline {section}{\numberline {7.1}Contributions}{34}{section.7.1}
-\contentsline {section}{\numberline {7.2}Future Work}{35}{section.7.2}
+\contentsline {subsubsection}{\numberline {2.3.2.1}Hypercalls and events}{21}{subsubsection.2.3.2.1}
+\contentsline {subsubsection}{\numberline {2.3.2.2}Data Transfer: I/O Rings}{21}{subsubsection.2.3.2.2}
+\contentsline {chapter}{\numberline {3}System Introduction}{24}{chapter.3}
+\contentsline {section}{\numberline {3.1}Design Goals}{24}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Performance improvement}{24}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Strong isolation}{25}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Compatibility and transperency}{25}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}System overview}{26}{section.3.2}
+\contentsline {section}{\numberline {3.3}System components}{27}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Front end driver}{27}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Back end driver}{28}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Communication module}{28}{subsection.3.3.3}
+\contentsline {section}{\numberline {3.4}System design}{29}{section.3.4}
+\contentsline {chapter}{\numberline {4}System Design and Implementation}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Overview}{35}{section.4.1}
+\contentsline {section}{\numberline {4.2}Implementation}{35}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Communication component}{35}{subsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.1.1}Ring buffer}{35}{subsubsection.4.2.1.1}
+\contentsline {subsubsection}{\numberline {4.2.1.2}Shared pages}{35}{subsubsection.4.2.1.2}
+\contentsline {subsubsubsection}{\numberline {4.2.1.2.1}Hypercall interface}{35}{subsubsubsection.1}
+\contentsline {subsubsubsection}{\numberline {4.2.1.2.2}Other interfaces}{35}{subsubsubsection.2}
+\contentsline {subsection}{\numberline {4.2.2}Application domain}{35}{subsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.2.1}Front end driver}{35}{subsubsection.4.2.2.1}
+\contentsline {subsubsubsection}{\numberline {4.2.2.1.3}Initialization}{35}{subsubsubsection.3}
+\contentsline {subsubsubsection}{\numberline {4.2.2.1.4}Create request}{35}{subsubsubsection.4}
+\contentsline {subsubsubsection}{\numberline {4.2.2.1.5}Enqueue request}{35}{subsubsubsection.5}
+\contentsline {subsubsubsection}{\numberline {4.2.2.1.6}Dequeue response}{35}{subsubsubsection.6}
+\contentsline {subsection}{\numberline {4.2.3}Storage domain}{35}{subsection.4.2.3}
+\contentsline {subsubsection}{\numberline {4.2.3.1}Back end driver}{35}{subsubsection.4.2.3.1}
+\contentsline {subsubsubsection}{\numberline {4.2.3.1.7}Initialization}{35}{subsubsubsection.7}
+\contentsline {subsubsubsection}{\numberline {4.2.3.1.8}Dequeue request}{35}{subsubsubsection.8}
+\contentsline {subsubsubsection}{\numberline {4.2.3.1.9}Create BIO}{35}{subsubsubsection.9}
+\contentsline {subsubsubsection}{\numberline {4.2.3.1.10}Make response and Enqueue}{35}{subsubsubsection.10}
+\contentsline {chapter}{\numberline {5}Related Work}{36}{chapter.5}
+\contentsline {section}{\numberline {5.1}Driver protection approaches }{36}{section.5.1}
+\contentsline {section}{\numberline {5.2}Existing Kernel designs}{36}{section.5.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{37}{chapter.6}
+\contentsline {section}{\numberline {6.1}Goals and Methodology}{37}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Goals}{37}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Experiment Set Up}{37}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}System Overhead}{38}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Copy Overhead}{38}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Results with event channel}{39}{section.6.3}
+\contentsline {section}{\numberline {6.4}Results with spinning}{40}{section.6.4}
+\contentsline {section}{\numberline {6.5}Comparision}{41}{section.6.5}
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{42}{chapter.7}
+\contentsline {section}{\numberline {7.1}Contributions}{42}{section.7.1}
+\contentsline {section}{\numberline {7.2}Future Work}{43}{section.7.2}
