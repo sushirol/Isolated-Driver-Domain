@@ -101,35 +101,37 @@ Consider an example in below diagram.
 
 Kernel reserves upper $1Gb$ of virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two regions. First region contains page table references to every page in the system. It is used to do translation of address from physical to virtual when kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of kernel memory is used by the memory allocator such as $vmalloc()$, the allocated memory is mapped by kernel modules using $kmap()$ or $vremap()$. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at CPL 0 can access the 1 GB of kernel memory, and hence any kernel component can access and corrupt the kernel data structure. 
 \\
-Consider an example in the diagram below.
-\\
+Consider an example below.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{mem_ks1}
 \caption{Kernel space}
-\label{fig:Kernel space}
+\label{fig:Kernel space1}
 \end{figure}
-\\
-\begin{description}
-\item In the above system Chromium browser, word processor and pdf reader are running as 3 different processes in the user space and many different kernel components are running.
+
+\begin{enumerate}
+\item In the system shown in figure~\ref{fig:Kernel space1}, Chromium browser, word processor and pdf reader are running as 3 different processes in the user space and many different kernel components are running.
 \item The network driver hits a bug, and corrupts a kernel data structure. This memory corruption might crash the other components, and might lead to a system crash.
-\item Ideally with proper memory protection policy implementation and proper decoupling between network device driver and kernel, only network device driver and applications using network device driver (chromium in this case) should have been crashed. But because of tight coupling between device driver and kernel, complete system crashes.
-\end{description}
+\item Ideally with proper memory protection policy implementation and proper decoupling between network device driver and kernel, only network device driver and applications using network device driver (chromium in this case) should have been crashed. 
+\item But because of tight coupling between device driver and kernel, complete system crashes.
+\end{enumerate}
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{mem_ks2}
 \caption{Kernel space}
-\label{fig:Kernel space}
+\label{fig:Kernel space2}
 \end{figure}
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{mem_ks3}
 \caption{Kernel space}
-\label{fig:Kernel space}
+\label{fig:Kernel space3}
 \end{figure}
 
-\pagebreak
 
+\clearpage
 \section{Virtualization}
 
 \begin{figure}[!ht]
