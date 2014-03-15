@@ -14,7 +14,8 @@
 % \documentclass[12pt]{report}
 % \documentclass[12pt,dvips]{report} %% TODO CHANGED THIS .. removed dvips .. printer friendly
 
-\documentclass[12pt,dvips]{report}
+\documentclass[12pt]{report}
+%\documentclass[12pt,dvips]{report}
 \setlength{\textwidth}{6.5in}
 \setlength{\textheight}{8.5in}
 \setlength{\evensidemargin}{0in}
@@ -24,11 +25,9 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{0.1in}
 
-%\setcounter{secnumdepth}{3}
-%\setcounter{tocdepth}{3}
-
-% Uncomment for double-spaced document.
 \renewcommand{\baselinestretch}{2}
+
+\usepackage{pdfpages}
 
 \usepackage{graphicx}
 \graphicspath{ {images/} }
