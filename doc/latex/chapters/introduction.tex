@@ -21,7 +21,7 @@ Despite the advances in virtualization technology, the overhead of I/O virtualiz
 In a virtualized environment, all virtual machines run as separate user processes in different address spaces. Thus, to exploit the memory protection capability between virtual machines, xen runs a device driver with a minimalistic kernel in a separate domain, and runs user applications and a kernel in the guest domain. As a result, a device driver is isolated from the Linux kernel, making it impossible for the device driver to corrupt any kernel data structure in the virtual machine running user applications. 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=.40, angle=270]{xen-split}
+\includegraphics[scale=.50]{xen-split-tcp.pdf}
 \caption{Split device driver model}
 \label{fig:xen-split}
 \end{figure}
