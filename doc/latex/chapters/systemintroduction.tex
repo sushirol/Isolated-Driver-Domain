@@ -1,20 +1,18 @@
-\section{Design Goals}\label{designgoals}
+\section{Design Goal}\label{sec:goals}
 
-The goal of the Xen driver domain system is to provide full isolation between device driver and monolithic kernel, and at the same time avoiding modifications to the device drivers. The goal of this thesis is to minimize the performance penalty because of the communication between the domains. In the Xen driver domain system implementation, we explore opportunities to minimize the overhead because of the communication module and achieve the original goals of the system such as application compatibility, transparency and strong isolation. 
-\\
-In this section we will discuss each goal briefly. 
+The goal of the IDDR is to provide full isolation between device driver and monolithic kernel, and at the same time avoiding modifications to the device drivers. The goal of this thesis is to minimize the performance penalty because of the communication between the domains. In the IDDR implementation, we explore opportunities to minimize the overhead because of the communication module and achieve the original goals of the system such as application compatibility, transparency and strong isolation. 
 \\
 \subsection{Performance improvement}
 
-Xen driver domain system is the Xen hypervisor based solution to isolate the device driver from monolithic kernel. Even though Xen driver domain system provides better robustness for operating systems, it deteriorates the performance. The reasons for the performance deterioration can be due to the introduction of an extra layer of hypervisor, data copy overhead or overhead of communication between the domains. For data intensive operations such as read and write, Xen driver domain system transfers data between hardware and the driver domain domU. Also, the same data is transferred between driver domain domU and the application domain. The extra copy from the driver domain domU to the application domain explains the reasons for the performance degradation. The Xen driver domain system runs the device driver in a separate domU. The application domain and driver domain domU communicate with each other in order to send requests and get responses from the device driver. The communication between domains adds an overhead to the system performance. Our goal is to minimize the overhead during communication between the driver domain domU and the application domain.
+IDDR is the re-implementation of the Xen driver domain, Xen driver domain is a Xen hypervisor based solution to isolate the device driver from monolithic kernel. Even though IDDR provides better robustness for operating systems, it deteriorates the performance. The reasons for the performance deterioration can be due to the introduction of an extra layer of hypervisor, data copy overhead or overhead of communication between the domains. For data intensive operations such as read and write, IDDR transfers data between hardware and the driver domain. Also, the same data is transferred between driver domain and the application domain. The extra copy from the driver domain to the application domain explains the reasons for the performance degradation. The IDDR runs the device driver in a separate domain. The application domain and driver domain communicate with each other in order to send requests and get responses from the device driver. The communication between domains adds an overhead to the system performance. Our goal is to minimize the overhead during communication between the driver domain and the application domain.
 
+\section{Isolated Device Driver properties}
+\label{sec:properties}
 \subsection{Strong isolation}
-
-One of the main goals of the Xen driver domain system is to provide strong isolation. The Xen driver domain system implementation adds an extra layer of isolation in the design which provides fault isolation between kernel and the device driver. It also adds the ability to manage individual components independently, thus, increasing the availability of the system. While exploring the opportunities to improve the performance of the Xen driver domain system, it is essential that the main goal of the Xen driver domain system is not compromised.
+One of the main goals of the IDDR is to provide strong isolation. The IDDR implementation adds an extra layer of isolation in the design which provides fault isolation between kernel and the device driver. It also adds the ability to manage individual components independently, thus, increasing the availability of the system. While exploring the opportunities to improve the performance of the IDDR, it is essential that the main goal of the IDDR is not compromised.
 
 \subsection{Compatibility and transparency} 
-\label{subsec:compatibility}
-The extension of existing OS structure usually results in a large number of broken applications. In the past, Microkernels required effort to retain compatibility with the existing applications\cite{Heiser06arevirtualmachine}. In order to provide compatibility with applications, either an emulation layer was implemented \cite{Heiser06arevirtualmachine}, or a multiserver operating system \cite{Gefflaut00thesawmill,Tanenbaum06canwe} was built on top of a microkernel. Since the Xen driver domain system maintains compatibility between existing device drivers and applications, it is one of the basic goals of our solution to achieve the compatibility and transparency. Our solution makes sure that the performance improvement implementation will not require any changes in the device driver and the application to run the system.
+The extension of existing OS structure usually results in a large number of broken applications. In the past, Microkernels required effort to retain compatibility with the existing applications~\cite{Heiser06arevirtualmachine}. In order to provide compatibility with applications, either an emulation layer was implemented~\cite{Heiser06arevirtualmachine}, or a multiserver operating system~\cite{Gefflaut00thesawmill, Tanenbaum06canwe} was built on top of a microkernel. Since the IDDR maintains compatibility between existing device drivers and applications, it is one of the basic goals of our solution to achieve the compatibility and transparency. Our solution makes sure that the performance improvement implementation will not require any changes in the device driver and the application to run the system.
 
 \pagebreak
 
@@ -26,7 +24,7 @@ The architectural overview of the system is presented in Figure~\ref{fig:overvie
 \caption{Overview}
 \label{fig:overview}
 \end{figure}
-An overview of the architecture shows that the Xen driver domain system partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Since in the Xen driver domain system implementation, a device driver cannot run standalone in a separate domU, hence the \textit{driver domain} domU runs a minimalistic kernel with the device driver. The \textit{driver domain} domU does not run any applications. The application domain is dedicated to the core system tasks such as process management, scheduling, user memory management, and IPC. The sole task of driver domain domU is to handle requests coming from the user processes managed by the application domain.
+An overview of the architecture shows that the IDDR partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Since in the IDDR implementation, a device driver cannot run standalone in a separate domU, hence the \textit{driver domain} runs a minimalistic kernel with the device driver. The \textit{driver domain} does not run any applications. The application domain is dedicated to the core system tasks such as process management, scheduling, user memory management, and IPC. The sole task of driver domain is to handle requests coming from the user processes managed by the application domain.
 \pagebreak
 
 \section{System components}\label{components}
@@ -40,11 +38,11 @@ An overview of the architecture shows that the Xen driver domain system partitio
 
 \subsection{Front end driver}
 \label{subsec:frontend}
-As mentioned earlier in section~\ref{subsec:compatibility}, transperency is one the design goals of the Xen driver domain system, which requires us to avoid any changes to the kernel as well as the device driver. In Xen driver domain system, the device driver runs in the driver domain domU and the user applications run in the application domain. Hence, the user application will not know about the device driver execution in the driver domain domU. Thus, it is not possible for the application to send requests to the driver in the driver domain domU, without making any changes to the kernel. As a result, Xen driver domain system runs a piece of a code called \textit{front end} in an application domain. The front end driver acts as a substitute for the device driver. The main functionality of the front end driver is to accept requests from the user application, process the requests, enqueue the requests for the driver domain domU and notify the driver domain domU. It also takes care of the processing of the responses and ending the corresponding requests.
+As mentioned earlier in section~\ref{sec:properties}, transperency is one the properties of the IDDR, which requires us to avoid any changes to the kernel as well as the device driver. In the IDDR, the device driver runs in the driver domain and the user applications run in the application domain. Hence, the user application will not know about the device driver execution in the driver domain. Thus, it is not possible for the application to send requests to the driver in the driver domain, without making any changes to the kernel. As a result, IDDR runs a piece of a code called \textit{front end} in an application domain. The front end driver acts as a substitute for the device driver. The main functionality of the front end driver is to accept requests from the user application, process the requests, enqueue the requests for the driver domain and notify the driver domain. It also takes care of the processing of the responses and ending the corresponding requests.
 
 \subsection{Back end driver}
 \label{subsec:backend}
-The kernel and the device driver provide a functionality to accept requests from the user application running in the same domain. The kernel is not capable of accepting the requests from the application running in a separate domain without making any changes to the kernel code. At the same time, device driver is not capable of sending responses back to the application domain without making any changes to the device driver code. In order to avoid making any changes to the device driver and kernel, a piece of code called the \textit{back end driver} runs in the driver domain domU. The responsibility of a back end driver is to accept requests from the application domain and forward them to the device driver. The back end driver sends the responses and notifies the application domain after receiving the responses from the device driver.
+The kernel and the device driver provide a functionality to accept requests from the user application running in the same domain. The kernel is not capable of accepting the requests from the application running in a separate domain without making any changes to the kernel code. At the same time, device driver is not capable of sending responses back to the application domain without making any changes to the device driver code. In order to avoid making any changes to the device driver and kernel, a piece of code called the \textit{back end driver} runs in the driver domain. The responsibility of a back end driver is to accept requests from the application domain and forward them to the device driver. The back end driver sends the responses and notifies the application domain after receiving the responses from the device driver.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{component1}
@@ -59,7 +57,7 @@ The kernel and the device driver provide a functionality to accept requests from
 \end{figure}
 
 \subsection{Communication module}
-The communication module is a communication channel between the front end driver and the back end driver. Unlike the back end and the front end driver, the communication module is not a separate physical entity or a kernel module. The communication channel exists in the front and the back end driver. It is logically divided into three parts. The responsibility of the first part is to forward the requests from the application domain to the driver domain domU as well as to forward the responses from the driver domain domU to the application domain. The responsibility of the second part is to share the read and write data and the responsibility of the third part is to notify the other domain upon the occurrence of a particular event. 
+The communication module is a communication channel between the front end driver and the back end driver. Unlike the back end and the front end driver, the communication module is not a separate physical entity or a kernel module. The communication channel exists in the front and the back end driver. It is logically divided into three parts. The responsibility of the first part is to forward the requests from the application domain to the driver domain as well as to forward the responses from the driver domain to the application domain. The responsibility of the second part is to share the read and write data and the responsibility of the third part is to notify the other domain upon the occurrence of a particular event. 
 
 Figure~\ref{fig:communication} illustrates the role of the communication model. 
 \begin{figure}[!ht]
@@ -77,7 +75,7 @@ Figure~\ref{fig:communication} illustrates the role of the communication model.
 \caption{Tightly coupled System}
 \label{fig:monolithic}
 \end{figure}
-Figure~\ref{fig:monolithic} shows the architectural overview of the modern operating system with a monolithic kernel and Figure~\ref{fig:isolated} illustrates the concept of the Xen driver domain.
+Figure~\ref{fig:monolithic} shows the architectural overview of the modern operating system with a monolithic kernel and Figure~\ref{fig:isolated} illustrates the concept of the IDDR.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRoverview}
@@ -85,17 +83,13 @@ Figure~\ref{fig:monolithic} shows the architectural overview of the modern opera
 \label{fig:isolated}
 \end{figure}
 
-The following section explains the design evolution of the Xen driver domain in brief. 
+The following section explains the design evolution of the IDDR in brief. 
 \\
-Although the solution to provide more protection at the kernel level is to isolate the device driver from the Linux kernel, it is not possible to run a standalone device driver. A device driver is dependent on the kernel components such as scheduler, memory management unit etc. Hence an instance of a minimalistic kernel runs with the device driver removing the dependency. Figure~\ref{fig:isolated with kern} represents the concept. 
-
-----
-
-
-It is not possible to run multiple monolithic kernels over the same hardware without any virtual machine monitor. Thus, virtualization is used for running multiple monolithic kernels on a virtual machine monitor.
----
-
-Figure~\ref{fig:driver crash} and Figure~\ref{fig:high avail} explains the effects of a malicious activity occurring in the device driver isolated from the Linux kernel. When a device driver running in a driver domain domU hits a bug, it crashes the kernel of the driver domain and hence the driver domain itself. In addition, applications expecting a response from the driver domain might hang or crash waiting for the response. But due to the address space separation of the application domain and the driver domain, the application domain will remain intact.   
+Although the solution to provide more protection at the kernel level is to isolate the device driver from the Linux kernel, it is not possible to run a standalone device driver. A device driver is dependent on the kernel components such as scheduler, memory management unit etc. Hence an instance of a minimalistic kernel runs with the device driver removing the dependency. 
+\\
+Event though device driver can be isolated from Linux kernel by running it with a new instance of minimalistic kernel, it is not possible to run multiple kernels over the same hardware without any virtual machine monitor. Thus, virtualization is used for running multiple monolithic kernels on a virtual machine monitor.
+\\
+Figure~\ref{fig:driver crash} and Figure~\ref{fig:high avail} explains the effects of a malicious activity occurring in the device driver isolated from the Linux kernel. When a device driver running in a driver domain hits a bug, it crashes the kernel of the driver domain and hence the driver domain itself. In addition, applications expecting a response from the driver domain might hang or crash waiting for the response. But due to the address space separation of the application domain and the driver domain, the application domain will remain intact.   
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRcrash1}
