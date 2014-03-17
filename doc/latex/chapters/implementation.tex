@@ -1,7 +1,7 @@
-This chapter describes the specific implementation details of the Xen driver domain system and its communication channel.
+This chapter describes the specific implementation details of the IDDR and its communication channel.
 
 \section{Implementation Overview} 
-The Xen driver domain system is implemented with linux kernel 3.5.0 and Xen hypervisor 4.2.1. For the prototype, we implemented the Xen driver domain system with the block device driver. Both the application domain and the driver domain domU run the same linux kernel. The following table summarizes our implementation efforts of the Xen driver domain system. 
+The IDDR system is implemented with Linux kernel 3.5.0 and Xen hypervisor 4.2.1. For the prototype, we implemented the IDDR system with the isolated block device driver. Both the application domain and the driver domain run the same Linux kernel. The following table summarizes our implementation efforts of the IDDR system. 
 
 \begin{center}
 \begin{tabular}{|r|l|} 
@@ -13,12 +13,12 @@ The Xen driver domain system is implemented with linux kernel 3.5.0 and Xen hype
   Front-end Driver & 647 \\
   Back-end Driver & 752 \\
   \hline 
-  Total & tt\\
+  Total & 1656\\
   \hline
 \end{tabular}
 \end{center}
 
-As we observe from the table, the block device driver is unchanged, small number of changes were made to linux kernel and Xen hypervisor. However, we maintain the application compatibility.  
+As we observe from the table, the block device driver is unchanged, small number of changes were made to the Linux kernel and the Xen hypervisor. However, we maintain the application compatibility.
 \pagebreak
 
 \section{Implementation}
@@ -31,50 +31,32 @@ As we observe from the table, the block device driver is unchanged, small number
 \end{figure}
 
 \subsection{Communication component}
-The most important component in the Xen driver domain system implementation is the communication component. 
+The most important component in the IDDR system implementation is the communication component. 
 \\
-This section will describe the implementation details of the communication channel of xen driver domain system and the implementation details to improve performance of the commmunication channel.
+This section will describe the implementation details of the communication channel of the IDDR and the implementation details to improve performance of the communication channel.
 \begin{enumerate}
-\item In the original implementation of the communication channel, event channel is used for notifying driver domain domU and application domain when a request or response is available in the shared request and response queue.  
-\item In order to improve the performance of the system, we implement the communication channel in which the front end driver thread spins for the availablity of responses, and a dedicated thread in the back end driver spins for requests. In case of unavailablity of requests and responses, threads go to sleep. In this implementaion event channel is used only to wake these threads up from the remote domain.
+\item In the original implementation of the IDDR, communication channel uses event channel for notifying driver domain and application domain when a request or response is available in the shared request and response queue.
+\item In order to improve the performance of the IDDR system, we implement the communication channel in which the front end driver thread spins for the availability of responses, and a dedicated thread in the back end driver spins for requests. In case of unavailability of requests and responses, threads go to sleep. In this implementation event channel is used only to wake these threads up from the remote domain.
 \end{enumerate}
 
 The following subsections describe the implementation details of the communication channel with and without performance improvement measures.
 
 \subsubsection*{Ring buffer: I/O rings}
 \label{subsec:ringbuf}
-In the implementation of communication channel, for both approaches, ring buffer is used as a request and response queue. Ring buffer is a shared I/O ring explained in section~\ref{subsec:io rings}. A ring buffer is divided into front ring and back ring. The front ring is used as a request queue and  the back ring is used as a response queue. The front end driver recieves the request from an application, and converts the request into a format which  can be understood by the back end driver. The front end device driver then checks for a free space in the request queue for a new request, and allocates the space for the new request using the function \texttt{RING\_GET\_REQUEST}. 
-\begin{verbatim}
-ring_req = RING_GET_REQUEST(&info.main_ring, info.main_ring.req_prod_pvt);
-if(ring_req == NULL){
- printk("NULL RING_GET_REQUEST\n");
- BUG_ON(1);
- return 1;
-}
-ring_req->seq_no = id;
-ring_req->sector_number = blk_rq_pos(req);
-ring_req->data_direction=write;
-\end{verbatim}
+In the implementation of communication channel, for both approaches, ring buffer is used as a request and response queue. Ring buffer is a shared I/O ring explained in section~\ref{subsec:io rings}. A ring buffer is divided into front ring and back ring. The front ring is used as a request queue and the back ring is used as a response queue. The front end driver recieves the request from an application, and converts the request into a format which can be understood by the back end driver. The front end device driver then checks for a free space in the request queue for a new request, and allocates the space for the new request using the function \texttt{RING\_GET\_REQUEST}. 
+\\
 After batching sufficient requests together, the front end device driver pushes the requests to the front ring using the function \texttt{RING\_PUSH\_REQUESTS\_AND\_CHECK\_NOTIFY}
-\begin{verbatim}
-static inline void flush_requests(idd_irq_info_t *flush_info)
-{
- int notify;
- RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
- notify_remote_via_irq(flush_info->ring_irq);
-}
-\end{verbatim}
 
 \subsubsection*{Shared pages}
 Since the ring buffer is not large enough to hold the read and write data of responses and requests, we use it only for sharing the requests and responses. In order to share an actual data we use shared pages. 
 
 \subsubsubsection*{Grant Table} 
-Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring frames between the domains. It is an interface for granting foreign access to machine frames and sharing memory between underprivileged domains provided by the Xen hypervisor. In Xen, each domain has a respective grant table data structure, which is shared with the Xen hypervisor. The grant table data structure is used by Xen to verify the access permission other domains have on the page allocated by a domain\cite{granttable}.
+Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring frames between the domains. It is an interface for granting foreign access to machine frames and sharing memory between underprivileged domains provided by the Xen hypervisor. In Xen, each domain has a respective grant table data structure, which is shared with the Xen hypervisor. The grant table data structure is used by Xen to verify the access permission other domains have on the page allocated by a domain~\cite{granttable}.
 
 \subsubsubsection*{Grant References}
 Grant references are the entries in the grant table. A grant reference entry has every detail about the shared page, which removes the dependency on the real machine address of the shared page. Since there exists a fully virtualized memory, the biggest difficulty in sharing the memory correctly between domains is knowing its correct machine address. Removing the dependency with the real machine address makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462, granttable} 
 \\
-We use grant table so that the application domain grants the driver domain access to the the shared page, while retaining the ownershipn. The front end driver grants memory access to the back end driver, so that back end driver may read or write data into the shared memory as requested.
+We use grant table so that the application domain grants the driver domain access to the the shared page, while retaining the ownership. The front end driver grants memory access to the back end driver, so that back end driver may read or write data into the shared memory as requested.
 \\
 The steps we implement are:
 \begin{enumerate}
@@ -85,87 +67,18 @@ The steps we implement are:
 \item The application domain removes its grant.
 \end{enumerate}
 
+Implementation details of the above steps is explained below: 
 \begin{enumerate}
-\item Granting foreign domain access
-\begin{verbatim}
-for_each_sg(info.sg, sg, ring_req->nr_segments, i) {
-  buffer_mfn = pfn_to_mfn(page_to_pfn(sg_page(sg)));
-  fsect = sg->offset >> KERNEL_SECTOR_SHIFT;
-  lsect = fsect + (sg->length >> KERNEL_SECTOR_SHIFT) - 1;
-   
-  ref = gnttab_claim_grant_reference(&gref_head);
-  BUG_ON(ref == -ENOSPC);
-    
-  gnttab_grant_foreign_access_ref(ref, info.domid,.
-  buffer_mfn, rq_data_dir(req));
+\item To grant a foreign domain access, front end domain first claims a grant reference entry in the grant table using function \texttt{gnttab\_claim\_grant\_reference}, and after that grants the access to foreign domain using function \texttt{gnttab\_grant\_foreign\_access\_ref}.
 
-  info.shadow[id].frame[i] = mfn_to_pfn(buffer_mfn);
-  ring_req->seg[i] = (struct idd_request_segment) {
-      .gref       = ref,
-      .first_sect = fsect,
-      .last_sect  = lsect };
-}
-\end{verbatim}
+\item Back end driver maps foreign frames using \texttt{gnttab\_set\_map\_op} and flags \texttt{GNTMAP\_host\_map}.
 
-\item Mapping foreign frames
-\begin{verbatim}
-for (i = 0; i < nseg; i++) { 
-  flags = GNTMAP_host_map ;
-  if (pending_req->operation != 0)
-     flags |= GNTMAP_readonly;
-
-  gnttab_set_map_op(&map[i], vaddr(pending_req, i),
-  flags, req->seg[i].gref, DOMZERO);
-}
-
-ret = gnttab_map_refs(map, NULL, &backend.pending_page(pending_req, 0), nseg);
-BUG_ON(ret);
- 
-for (i = 0; i < nseg; i++) {
-  if (unlikely(map[i].status != 0)) {
-    printk("invalid buffer -- could not remap it\n");
-    map[i].handle = IDD_INVALID_HANDLE;
-    ret |= 1;
-  }
-
-  pending_handle(pending_req, i) = map[i].handle;
-  if(ret)
-    continue; 
-	seg[i].buf = map[i].dev_bus_addr |.
-	(req->seg[i].first_sect << KERNEL_SECTOR_SHIFT);
-}
-\end{verbatim}
-
-\item Unmapping foreign frames
-\begin{verbatim}
-for (i = 0; i < req->nr_pages; i++) {
-	handle = pending_handle(req, i); 
-  if(handle == IDD_INVALID_HANDLE)
-    continue;
-  gnttab_set_unmap_op(&unmap[invcount], vaddr(req, i), 
-      GNTMAP_host_map, handle);
-  pending_handle(req, i) = IDD_INVALID_HANDLE;
-  pages[invcount] = virt_to_page(vaddr(req, i));
-  invcount++;
-}  
-ret = gnttab_unmap_refs(unmap, pages, invcount, 0); 
-\end{verbatim}
-
-\item End foreign access
-\begin{verbatim}
-for (i = 0; i < s->req.nr_segments; i++) {
-	gnttab_end_foreign_access(s->req.seg[i].gref, 0, 0UL);
-}
-\end{verbatim}
+\item Back end driver unmaps the foreign frames using function \texttt{gnttab\_set\_unmap\_op} and \texttt{gnttab\_unmap\_refs}
+\item Front end driver removes foreign access to the frames using function \texttt{gnttab\_end\_foreign\_access}. \texttt{gnttab\_end\_foreign\_access} does not revoke access; it only prevents further mappings. Since \texttt{gnttab\_end\_foreign\_access} does not revoke access it is used after the block device driver has unmapped the frame\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462}.
 \end{enumerate}
 
-\texttt{gnttab\_end\_foreign\_access} does not revoke access; it only prevents further mappings. Since \texttt{gnttab\_end\_foreign\_access} does not revoke access it is used after the block device driver has unmapped the frame\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462}.
-
-%------------- proof read --
 \subsubsection*{Event Channel}
-Event channel is a mechanism provided by xen hypervisor for event notification. Xen Driver domain implementation use event channel to send notifications between domains that request and response is available in the request and response queue.
-\\
-However, in the implementation to improve the performance of the communication channel and hence the system we spin threads to share request and responses between domains and event channel is used only to wake up the both threads.
+Event channel is a mechanism provided by xen hypervisor for event notification. Basic implementation of the IDDR communication channel uses event channel to send notifications between domains that request and response is available in the request and response queue.
 
 \subsubsubsection*{Event channel : Hypercall interface}
 
@@ -177,35 +90,17 @@ However, in the implementation to improve the performance of the communication c
 Less privileged domains can allocate only their own ports, privileged domains can also allocate ports in other domains\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462}. 
 \texttt{bind\_evtchn\_to\_irqhandler} is used for assigning an interrupt handler for a notification.
 In driver domain implementation, back end driver allocates an event channel while initializing, and assigns an interrupt handler. 
-\begin{verbatim}
-ring_alloc.dom = DOMID_SELF;
-ring_alloc.remote_dom = DOMZERO;
-smp_mb();
-err = HYPERVISOR_event_channel_op(EVTCHNOP_alloc_unbound, &ring_alloc);
-if (unlikely(err != 0))
-  goto end2;
-\end{verbatim}
 
 \subsubsubsection*{Event channel: Other interfaces}
 
 \texttt{bind\_interdomain\_evtchn\_to\_irqhandler} is used for connecting to existing event channel as well as assigning an interrupt handler for handling a notification. In driver domain implementation back end driver allocates the event channel, and binds the interrupt handler to allocated event channel using \texttt{bind\_interdomain\_evtchn\_to\_irqhandler}.
+\\
+In driver domain implementation, front end driver connects to the event channel allocated by backend, using interface \texttt{bind\_interdomain\_evtchn\_to\_irqhandler}.
 
-\begin{verbatim}
-err = bind_evtchn_to_irqhandler(ring_alloc.port, irq_ring_interrupt,
-  0, "syscall_backend_irq_ring", &backend);
-\end{verbatim}
-In driver domain implementation, front end driver connects to the event channel allocated by backend, using interface \texttt{bind\_interdomain\_evtchn\_to\_irqhandler}.  
-\begin{verbatim}
-err = bind_interdomain_evtchn_to_irqhandler(data.domid, data.ring_port,
-    irq_ring_interrupt, 0, "ring_irq", NULL);
-if (unlikely(err < 0)) {
-	printk(KERN_WARNING "Cannot bind (main) event channel\n");
-	goto end2;
-}
-\end{verbatim}
+%However, in the implementation to improve the performance of the communication channel and hence the system we spin threads to share request and responses between domains and event channel is used only to wake up the both threads.
 
 \subsection{Application domain}
-Application domain is the domain running user applications. In the monolithic linux kernel, usually an user process sends the read write request to file system, which sends the read and write request to the block device driver. The block device driver serves the request and send back a response to the file system, which further sends the response to the user process. 
+Application domain is the domain running user applications. In the monolithic Linux kernel, usually an user process sends the read write request to file system, which sends the read and write request to the block device driver. The block device driver serves the request and send back a response to the file system, which further sends the response to the user process. 
 \\ 
 In Xen driver domain implementation block device runs separately in a driver domain. When user process sends a request to the file system, the file system needs to forward the request to storage domain. Like explained in the section~\ref{subsec:frontend}, in the implementation of xen driver domain, a piece of code is introduced which forwards the request to the domU running device drivers. 
 
@@ -228,30 +123,20 @@ Implementation details of front end driver is split into 4 stages.
 \end{enumerate}
 
 \subsubsubsection*{Initialization}
-During the initialization process the front end driver creates an interface for all the block devices. After creating the interface for all block devices, front end driver creates a kernel thread \texttt{read\_response\_thread}
-\begin{verbatim}
-info.response_thread = kthread_run(idd_read_response, &info, "read_response_thread");
-\end{verbatim}
-The core functionality of the \texttt{read\_response\_thread} is to dequeue the responses available in the ring buffer. However, there might be a case when no request is available in the ring buffer, but the request is expected to be present in the future. In such cases, \texttt{read\_response\_thread} thread spins for the responses.
+During the initialization process the front end driver creates an interface for all the block devices. The interface for each block driver is associated with a queue. Read and write requests issued on the interface gets enqued in the queue. After creating the interface for all block devices, front end driver creates a kernel thread \texttt{read\_response\_thread}
 \\
-The \texttt{read\_response\_thread} thread goes into sleep state after spinning for some time- threshold. 
+The core functionality of the \texttt{read\_response\_thread} is to dequeue the responses available in the ring buffer. However, there might be a case when no request is available in the ring buffer, but the request is expected to be present in the future. In such cases, \texttt{read\_response\_thread} thread spins for the responses. The \texttt{read\_response\_thread} thread goes into a sleep state after spinning for some time-threshold. 
 \\
 Obviously, a thread shouldn't sleep unless it is assured that somebody else, somewhere, will wake it up. The code doing the waking up job must also be able to identify the thread to be able to do its job. We use a data structure called a wait queue to find the sleeping thread. A wait queue is a list of threads, all waiting for a specific event\cite{galvin, Bovet:2005:ULK:1077084}.
 \\
-In Linux kernel like all other lists, a wait queue is managed by a wait queue head, of a data type \texttt{wait\_queue\_head\_t}, and is defined in \texttt{$<linux/wait.h>$}. A wait queue head is defined and initialized statically as follows:
+In Linux kernel like all other lists, a wait queue is managed by a wait queue head, of a data type \texttt{wait\_queue\_head\_t}, and is defined in \texttt{$<Linux/wait.h>$}. A wait queue head is defined and initialized statically as follows:
 \texttt{DECLARE\_WAIT\_QUEUE\_HEAD(name);}
 and dynamicly as follows:
 \texttt{wait\_queue\_head\_t my\_queue;}
 \texttt{init\_waitqueue\_head(\&my\_queue);}
 
-\begin{verbatim}
-info.response_thread = kthread_run(idd_read_response, &info, "read_response_thread");
-init_waitqueue_head(&info.wq);
-info.waiting_rsps=1;
-\end{verbatim}
-
 \subsubsubsection*{Create request}
-Front end driver dequeues the request submitted to the driver interface by an user process or the file system, and then converts the request into a request of structure type \texttt{idd\_request\_t}. The structure is as below:
+Front end driver dequeues the request submitted to the driver interface by a user process or the file system, and then converts the request into a request of structure type \texttt{idd\_request\_t}. The structure is as below:
 
 \begin{verbatim}
 struct idd_request {
@@ -275,95 +160,31 @@ Member of the structure are explained below.
 
 \subsubsubsection*{Enqueue request}
 
-Like explained in section~\ref{subsec:ringbuf}, \texttt{RING\_PUSH\_REQUESTS\_AND\_CHECK\_NOTIFY} is used for flushing request to the ring buffer, we use the same API to enqueue the request to the request queue.
-\begin{verbatim}
-  RING_PUSH_REQUESTS_AND_CHECK_NOTIFY(&flush_info->main_ring, notify);
-\end{verbatim}
-However, if the \texttt{read\_request\_thread} running in back end driver which accepts the requests is sleeping, then waking up the \texttt{read\_request\_thread} is more important task of front end driver. Wake up signal is sent to back end driver using an event channel. Before sending the notification, we check the state of the thread.
-\begin{verbatim}
-status = atomic_read(&(flush_info->main_ring.sring->req_status));
-smp_mb();
-
-if(status == SLEEPING){
-  notify_remote_via_irq(flush_info->ring_irq); 
-\end{verbatim}
-Status of the thread is saved in the shared memory. We use the atomic variables to save the state of threads to avoid race conditions. 
+Like explained in section~\ref{subsec:ringbuf}, \texttt{RING\_PUSH\_REQUESTS\_AND\_CHECK\_NOTIFY} is used for flushing request to the ring buffer, we use the same API to enqueue the request to the request queue. However, if the \texttt{read\_request\_thread} running in back end driver which accepts the requests is sleeping, then waking up the \texttt{read\_request\_thread} is more important task of front end driver. Wake up signal is sent to back end driver using an event channel. Before sending the notification, we check the state of the thread. Status of the thread is saved in the shared memory. We use the atomic variables to save the state of threads to avoid race conditions. 
 
 \subsubsubsection*{Dequeue response}
-
 Response is dequeued from the ring buffer by the \texttt{read\_response\_thread}. To dequeue the response from response queue, we use the ring buffer API \texttt{RING\_GET\_RESPONSE}. However, the important part in this stage it managing the \texttt{read\_response\_thread} thread. 
 \\
 When the response is not available \texttt{read\_response\_thread} spins for some time, and then goes to sleep. When the response is made available by the backend then depending upon the state of the thread, event channel interrupt is sent by the backend. If \texttt{read\_response\_thread} is in sleeping state then the backend driver will send an interrupt and the front end driver will wake up the thread, otherwise, no action is taken as thread is already spinning for the response.
 \\
-In interrupt handler shared atomic variable status is read by the front end driver and depending upon state action is taken.
-\begin{verbatim}
-status = atomic_read(&(info.main_ring.sring->rsp_status));
-if(status == SLEEPING){
-  wake_up(&info.wq);
-	info.waiting_rsps = 1;
-}
-atomic_set(&(info.main_ring.sring->rsp_status), RUNNING);
-smp_wmb();
-\end{verbatim}
-\texttt{read\_response\_thread} sleeps on the wait queue \texttt{info.wq} waiting for \texttt{info.waiting\_rsps} to be set.
+In interrupt handler shared atomic variable status is read by the front end driver and depending upon state action is taken. \texttt{read\_response\_thread} sleeps on the wait queue, waiting for a flag denoting availability of the response to be set. Once the response is available in the response queue, it is read using  ring buffer API \texttt{RING\_GET\_RESPONSE}.
 \\
-\begin{verbatim}
-wait_event_interruptible(
-  info.wq,
-  info.waiting_rsps || kthread_should_stop());
-\end{verbatim}
-Response is read using  ring buffer API \texttt{RING\_GET\_RESPONSE}.
-\begin{verbatim}
-rp = info.main_ring.sring->rsp_prod;
-
-for (i = info.main_ring.rsp_cons; i != rp; i++) {
-  unsigned long id;
-  sleep_cond = 0;
-  ring_rsp = RING_GET_RESPONSE(&info.main_ring, i);
-  id  = ring_rsp->seq_no;
-  if (id >= IDD_RING_SIZE)
-    continue;
-\end{verbatim}
-We also maintain an shadow table of all requests which are ended upon reading respective successful response. 
-\begin{verbatim}
-  req  = info.shadow[id].request;
-  if(req!=NULL)
-    idd_completion(&info.shadow[id], ring_rsp);
-  if (add_id_to_freelist(&info, id)) {
-    WARN(1, "response to %s (id %ld) couldn't be recycled!\n",
-      op_name(ring_rsp->op), id);
-    continue;
-  }
-  error = (ring_rsp->res == 0) ? 0 : -EIO;
-  __blk_end_request_all(req, 0);
-}
-\end{verbatim}
-Upon reading the responses, thread spins again for more responses and then goes to sleep.    
-We mark the state of the thread as \texttt{SLEEPING} and then check for the request queue to avoid race condition. If a request is present in the request queue then the request is served while state of the thread is still \texttt{SLEEPING}.
-\begin{verbatim}
-status = atomic_read(&(info.main_ring.sring->rsp_status));
-if(sleep_cond > THRESHOLD && status==RUNNING){
-  atomic_set(&(info.main_ring.sring->rsp_status), SLEEPING);
-  info.waiting_rsps = 0;
-  sleep_cond = 0;
-  RING_FINAL_CHECK_FOR_RESPONSES(&info.main_ring, more_to_do);
-  if (more_to_do)
-    goto again;
-}
-\end{verbatim}
+We also maintain an shadow table of all requests submitted to the back end driver. The requests are read from the shadow table and are ended upon successfully reading the respective response. The request is ended by using a function \texttt{\_\_blk\_end\_request\_all}
+\\
+Upon reading the responses, thread spins again for more responses and after reaching the threshold goes to sleep. We mark the state of the thread as \texttt{SLEEPING} and then check for the request queue to avoid race condition. If a request is present in the request queue then the request is served while state of the thread is still \texttt{SLEEPING}.
 
 \subsection{Driver domain}
 
-Driver domain is the domU running a device driver. In our implementation, driver domain runs block device driver. Usually in monolithic linux kernel an user process sends the read write request to a file system, which sends the read and write request to block device driver. Block device driver serves the request and responses back to file system, which further sends response to user process.
+Driver domain is the domU running a device driver. In our implementation, driver domain runs block device driver. Usually in monolithic Linux kernel an user process sends the read write request to a file system, which sends the read and write request to block device driver. Block device driver serves the request and responses back to file system, which further sends response to user process.
 \\  
-However, in driver domain implementation, block device runs separately in a driver domain. Like explained in a section~\ref{subsec:backend}, a peice of code called as a back end driver runs in a driver domain which accepts a request from application domain and forward the request to the device driver. Upon receiving the reponse from the device driver, back end driver sends back the response, and notifies the application domain.
+However, in driver domain implementation, block device runs separately in a driver domain. Like explained in a section~\ref{subsec:backend}, a piece of code called as a back end driver runs in a driver domain which accepts a request from application domain and forward the request to the device driver. Upon receiving the response from the device driver, back end driver sends back the response, and notifies the application domain.
 
 \subsubsection*{Back end driver}
 
-Back end driver is a kernel module and component of independent block device driver which runs in the storage domain. The core responsibility of back end end driver is :
+Back end driver is a kernel module and component of IDDR which runs in the driver domain. The core responsibility of back end end driver is :
 \begin{enumerate}
-\item Dequeue resquest from request queue.
-\item Convert to BIO request which can be understood by block device driver .
+\item Dequeue request from request queue.
+\item Convert to BIO request which can be understood by block device driver.
 \item Accept response from block device driver.
 \item Enqueue response into response queue.
 \end{enumerate}
@@ -377,138 +198,49 @@ Implementation details of back end driver can be split into 5 stages.
 \end{enumerate}
 
 \subsubsubsection*{Initialization}
-During initialization process Back end driver creates a kernel thread \texttt{read\_request\_thread}.
-\begin{verbatim}
-backend.request_thread = kthread_run(idd_request_schedule, &backend, "read_request_thread");
-\end{verbatim}
-
-The core functionality of the \texttt{read\_request\_thread} is to dequeue the requests available in the request queue. If request is not available in the request queue then thread waits on a wait queue. Similar to front end, back end driver initializes wait queue in initiazation process. 
+During initialization process Back end driver creates a kernel thread \texttt{read\_request\_thread}. The core functionality of the \texttt{read\_request\_thread} is to dequeue the requests available in the request queue. If request is not available in the request queue then thread waits on a wait queue. Similar to front end, back end driver initializes wait queue in initiazation process. 
 
 \subsubsubsection*{Dequeue request}
-Request is dequeued from the request queue by the \texttt{read\_resquest\_thread}. To dequeue a request, we use the ring buffer API \texttt{RING\_GET\_RESPONSE}. When the request queue is empty, \texttt{read\_resquest\_thread} spins for some time to checks if new requests are queued, after reaching threshold it goes to sleep. When the request is enqueued by front end driver then depending upon the state of the \texttt{read\_resquest\_thread}, an event channel interrupt is sent by the front end driver. If \texttt{read\_resquest\_thread} is in a sleeping state then front end driver will send an interrupt. In intrupt handler, back end driver will wake up the \texttt{read\_resquest\_thread}. If \texttt{read\_resquest\_thread} is already running then no action is taken. In interrupt handler, status is read from shared atomic variable by the back end driver.
-
-\begin{verbatim}
-status = atomic_read(&(backend.main_ring.sring->req_status));
-if(status == SLEEPING){
-	wake_up(&backend.wq);
-	backend.waiting_reqs = 1;
-}
-atomic_set(&(backend.main_ring.sring->req_status), RUNNING);
-\end{verbatim}
-\texttt{read\_resquest\_thread} sleeps on the wait queue \texttt{backend.wq} waiting for \texttt{backend.waiting\_reqs} to be set.
-\begin{verbatim}
-wait_event_interruptible(
-	be->wq,
-	be->waiting_reqs || kthread_should_stop());
-\end{verbatim}
-Request is read using ring buffer API \texttt{RING\_GET\_REQUESTS}.
-\begin{verbatim}
-rc = be->main_ring.req_cons;
-rp = be->main_ring.sring->req_prod;
-rmb();
-while (rc != rp) {
-  if (RING_REQUEST_CONS_OVERFLOW(&be->main_ring, rc))
-    break;
-  memcpy(&req, RING_GET_REQUEST(&be->main_ring, rc), sizeof(req));
-  be->main_ring.req_cons = ++rc;
-\end{verbatim}
-Upon reading requests, thread spins again for more responses. If a threshold is reached then the thread goes to sleep. We mark the state of the thread as \texttt{SLEEPING} and then check for the request queue one more time to avoid a race condition. If request is present in request queue then that request is served while state of the thread is still \texttt{SLEEPING}.
-
-\begin{verbatim}
-status = atomic_read(&(backend.main_ring.sring->req_status));
-if(sleep_cond > THRESHOLD && status==RUNNING){
-  atomic_set(&(backend.main_ring.sring->req_status), SLEEPING);
-  be->waiting_reqs = 0;
-  sleep_cond=0;
-  RING_FINAL_CHECK_FOR_REQUESTS(&be->main_ring, more_to_do);
-  if (more_to_do)
-    goto again;
-\end{verbatim}
+Request is dequeued from the request queue by the \texttt{read\_request\_thread}. To dequeue a request, we use the ring buffer API \texttt{RING\_GET\_RESPONSE}. When the request queue is empty, \texttt{read\_request\_thread} spins for some time to checks if new requests are queued, after reaching threshold it goes to sleep. When the request is enqueued by front end driver then depending upon the state of the \texttt{read\_request\_thread}, an event channel interrupt is sent by the front end driver. If \texttt{read\_request\_thread} is in a sleeping state then front end driver will send an interrupt. In intrupt handler, back end driver will wake up the \texttt{read\_request\_thread}. If \texttt{read\_request\_thread} is already running then no action is taken. In interrupt handler, status is read from shared atomic variable by the back end driver.
+\\
+\texttt{read\_request\_thread} sleeps on a wait queue waiting for a flag to be set. The flag denotes the avilability of the request in the request queue. The request is read from the request queue using ring buffer API \texttt{RING\_GET\_REQUESTS}.
+\\
+After reading the requests, \texttt{read\_request\_thread} thread spins again for more requests. If a threshold limit is reached then the \texttt{read\_request\_thread} thread goes to sleep. We mark the state of the thread as \texttt{SLEEPING} and then check for the request queue one more time to avoid a race condition. If request is present in request queue then that request is served while state of the thread is still \texttt{SLEEPING}.
 
 \subsubsubsection*{Create BIO}
 \label{subsec:createbio}
-Whenever the request thread receives a request to serve, the request thread creates the \texttt{bio} request for the corresponding request. \texttt{bio} structure is a basic container for block I/O within a kernel. \texttt{bio} structure is defined in \texttt{$<linux/blk_types.h>$}. \texttt{bio} structure represents active block I/O operations as a list of segments, and a segment is a chunk of buffers. The \texttt{bio} structure provides the capability for the kernel to perform block I/O operations of even a single buffer from multiple locations in memory. Vector I/O such as this is called scatter-gather I/O.
+Whenever the request thread receives a request to serve, the request thread creates the \texttt{bio} request for the corresponding request. \texttt{bio} structure is a basic container for block I/O within a kernel. \texttt{bio} structure is defined in \texttt{$<Linux/blk_types.h>$}. \texttt{bio} structure represents active block I/O operations as a list of segments, and a segment is a chunk of buffers. The \texttt{bio} structure provides the capability for the kernel to perform block I/O operations of even a single buffer from multiple locations in memory. Vector I/O such as this is called scatter-gather I/O.
 \\
-Following is the struct bio:
-\begin{verbatim}
-struct bio {
-  sector_t    bi_sector;  /* device address in 512 byte sectors */
-  struct bio    *bi_next; /* request queue link */
-  struct block_device *bi_bdev; /* associated block device */
-  unsigned long   bi_flags; /* status, command, etc */
-  unsigned long   bi_rw;    /* bottom bits READ/WRITE, top bits priority */
-  unsigned short  bi_vcnt;  /* how many bio_vec's */
-  unsigned short  bi_idx;   /* current index into bvl_vec */
-  unsigned int    bi_phys_segments; /* Number of segments in this BIO after physical address coalescing is performed. */
-  unsigned int    bi_size;  /* residual I/O count */
-  unsigned int    bi_seg_front_size;
-  unsigned int    bi_seg_back_size;
-  unsigned int    bi_max_vecs;  /* max bvl_vecs we can hold */
-  atomic_t    bi_cnt;   /* pin count */
-  struct bio_vec    *bi_io_vec; /* the actual vec list */
-  bio_end_io_t    *bi_end_io;  void      *bi_private;
-  bio_destructor_t  *bi_destructor; /* destructor */
-  struct bio_vec    bi_inline_vecs[0];
-};
-\end{verbatim}
-A request queued into the request queue by the front end driver is in format which is understood by back end driver, but we can not forward the same request to block device. We convert the dequeued request into \texttt{bio} request, so that the block device understands the request. To make the \texttt{bio} request, we need the associated block device structure \texttt{struct block\_device}. We get associated block device structure using function \texttt{blkdev\_get\_by\_path}.
-\begin{verbatim}
-backend.bdev = blkdev_get_by_path("/dev/ramd",
-  FMODE_READ | FMODE_WRITE | FMODE_LSEEK |
-  FMODE_PREAD | FMODE_PWRITE, NULL);
-
-backend.dev = MKDEV(MAJOR(backend.bdev->bd_inode->i_rdev),
-  MINOR(backend.bdev->bd_inode->i_rdev));
-\end{verbatim}
-Pages from shared memory are mapped and inserted into the \texttt{bio} structure using function \texttt{bio\_add\_page}. And other variables are copied into the \texttt{bio} structure from the dequeued request. 
-\begin{verbatim}
-for (i = 0; i < nseg; i++) {
-  while ((bio == NULL) || bio_add_page(bio,
-  be->pending_page(pending_req, i),
-  seg[i].nsec << 9,.
-  seg[i].buf & ~PAGE_MASK) == 0) {
-    bio = bio_alloc(GFP_KERNEL, nseg - i );
-    if (unlikely(bio == NULL))
-      goto fail_put_bio;
-    biolist[nbio++] = bio;  
-    bio->bi_bdev = breq.bdev;
-    bio->bi_private = pending_req;
-    bio->bi_end_io = end_block_io_op;
-    bio->bi_sector  = breq.sector_number;
-  }
-  breq.sector_number += seg[i].nsec;
-}
-\end{verbatim}
-At the end, the newly created \texttt{bio} request is sent to the lower layer for execution. 
-\begin{verbatim}
-for (i = 0; i < nbio; i++){
-  submit_bio(op, biolist[i]);
-}
-\end{verbatim}
-\texttt{bi\_end\_io} function pointer is a pointer to a callback function. Once bio request is completed, function pointed by \texttt{bi\_end\_io} gets called.
-\begin{verbatim}
-bio->bi_end_io = end_block_io_op; 
-\end{verbatim}
+% Following is the struct bio:
+% \begin{verbatim}
+% struct bio {
+%   sector_t    bi_sector;  /* device address in 512 byte sectors */
+%   struct bio    *bi_next; /* request queue link */
+%   struct block_device *bi_bdev; /* associated block device */
+%   unsigned long   bi_flags; /* status, command, etc */
+%   unsigned long   bi_rw;    /* bottom bits READ/WRITE, top bits priority */
+%   unsigned short  bi_vcnt;  /* how many bio_vec's */
+%   unsigned short  bi_idx;   /* current index into bvl_vec */
+%   unsigned int    bi_phys_segments; /* Number of segments in this BIO after physical address coalescing is performed. */
+%   unsigned int    bi_size;  /* residual I/O count */
+%   unsigned int    bi_seg_front_size;
+%   unsigned int    bi_seg_back_size;
+%   unsigned int    bi_max_vecs;  /* max bvl_vecs we can hold */
+%   atomic_t    bi_cnt;   /* pin count */
+%   struct bio_vec    *bi_io_vec; /* the actual vec list */
+%   bio_end_io_t    *bi_end_io;  void      *bi_private;
+%   bio_destructor_t  *bi_destructor; /* destructor */
+%   struct bio_vec    bi_inline_vecs[0];
+% };
+% \end{verbatim}
+A request queued into the request queue by the front end driver is in format which is understood by back end driver, but we cannot forward the same request to block device. We convert the dequeued request into \texttt{bio} request, so that the block device understands the request. In order to make the \texttt{bio} request, we need the associated block device structure \texttt{struct block\_device}. We get associated block device structure using function \texttt{blkdev\_get\_by\_path}. 
+\\
+Pages from shared memory are mapped and inserted into the \texttt{bio} structure using function \texttt{bio\_add\_page}. And other variables are copied into the \texttt{bio} structure from the dequeued request. At the end, the newly created \texttt{bio} request is sent to the lower layer for execution with \texttt{submit\_bio}. Once bio request is completed, function pointed by a function pointer \texttt{bi\_end\_io} gets called.
 
 \subsubsubsection*{Make response and Enqueue}
 Irrespective of the success or failure of the execution of \texttt{bio} request, the back end driver makes a response, which could be understood by the frontend. Like explained in subsection~\ref{subsec:createbio}, \texttt{bi\_end\_io} function pointer is a pointer to a callback function. Once bio request is completed, function pointed by \texttt{bi\_end\_io} gets called. We create a new response in this callback function.
 \\
-In this callback function we complete the \texttt{bio} request with function \texttt{bio\_put}. After that the result gets copied into a newly allocated response structure. The response is enqueued to response queue using \texttt{RING\_GET\_RESPONSE} and \texttt{RING\_PUSH\_RESPONSES\_AND\_CHECK\_NOTIFY}. Once the response is enqueued, depending upon the status of the remote thread-\texttt{read\_response\_thread}, a inturrupt signal is sent to the application domain.
-\begin{verbatim}
-resp.op = op;
-resp.seq_no = id;
-resp.priv_data = NULL;
-resp.res = st;
-spin_lock_irqsave(&be->blk_ring_lock, flags);
-memcpy(RING_GET_RESPONSE(&be->main_ring, backend.main_ring.rsp_prod_pvt),&resp, sizeof(resp));
-be->main_ring.rsp_prod_pvt++;
-RING_PUSH_RESPONSES_AND_CHECK_NOTIFY(&be->main_ring, notify);
-status = atomic_read(&(be->main_ring.sring->rsp_status));
-smp_mb();
-if(status == SLEEPING){
-  notify_remote_via_irq(be->ring_irq);
-\end{verbatim}    
-
+In this callback function we complete the \texttt{bio} request with function \texttt{bio\_put}. After that the result gets copied into a newly allocated response structure. The response is enqueued to response queue using \texttt{RING\_GET\_RESPONSE} and \texttt{RING\_PUSH\_RESPONSES\_AND\_CHECK\_NOTIFY}. Once the response is enqueued, depending upon the status of the remote thread-\texttt{read\_response\_thread}, a interrupt signal is sent to the application domain.
 \pagebreak
 
 % \bibliography{references}
