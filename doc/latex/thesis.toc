@@ -31,20 +31,20 @@
 \contentsline {section}{\numberline {4.1}Implementation Overview}{48}{section.4.1}
 \contentsline {section}{\numberline {4.2}Implementation}{50}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Communication component}{50}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}Application domain}{59}{subsection.4.2.2}
-\contentsline {subsection}{\numberline {4.2.3}Driver domain}{67}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Related Work}{76}{chapter.5}
-\contentsline {section}{\numberline {5.1}Driver protection approaches }{76}{section.5.1}
-\contentsline {section}{\numberline {5.2}Existing Kernel designs}{76}{section.5.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{77}{chapter.6}
-\contentsline {section}{\numberline {6.1}Goals and Methodology}{77}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Goals}{77}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Experiment Set Up}{77}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}System Overhead}{78}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Copy Overhead}{78}{subsection.6.2.1}
-\contentsline {section}{\numberline {6.3}Results with event channel}{79}{section.6.3}
-\contentsline {section}{\numberline {6.4}Results with spinning}{80}{section.6.4}
-\contentsline {section}{\numberline {6.5}Comparision}{81}{section.6.5}
-\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{82}{chapter.7}
-\contentsline {section}{\numberline {7.1}Contributions}{82}{section.7.1}
-\contentsline {section}{\numberline {7.2}Future Work}{83}{section.7.2}
+\contentsline {subsection}{\numberline {4.2.2}Application domain}{55}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.3}Driver domain}{60}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Related Work}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Driver protection approaches }{65}{section.5.1}
+\contentsline {section}{\numberline {5.2}Existing Kernel designs}{65}{section.5.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{66}{chapter.6}
+\contentsline {section}{\numberline {6.1}Goals and Methodology}{66}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Goals}{66}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Experiment Set Up}{66}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}System Overhead}{67}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Copy Overhead}{67}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}Results with event channel}{68}{section.6.3}
+\contentsline {section}{\numberline {6.4}Results with spinning}{69}{section.6.4}
+\contentsline {section}{\numberline {6.5}Comparision}{70}{section.6.5}
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{71}{chapter.7}
+\contentsline {section}{\numberline {7.1}Contributions}{71}{section.7.1}
+\contentsline {section}{\numberline {7.2}Future Work}{72}{section.7.2}
