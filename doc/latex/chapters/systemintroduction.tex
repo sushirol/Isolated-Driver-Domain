@@ -87,7 +87,7 @@ The following section explains the design evolution of the IDDR in brief.
 \\
 Although the solution to provide more protection at the kernel level is to isolate the device driver from the Linux kernel, it is not possible to run a standalone device driver. A device driver is dependent on the kernel components such as scheduler, memory management unit etc. Hence an instance of a minimalistic kernel runs with the device driver removing the dependency. 
 \\
-Event though device driver can be isolated from Linux kernel by running it with a new instance of minimalistic kernel, it is not possible to run multiple kernels over the same hardware without any virtual machine monitor. Thus, virtualization is used for running multiple monolithic kernels on a virtual machine monitor.
+Even though a device driver can be isolated from Linux kernel by running it with a new instance of minimalistic kernel, it is not possible to run multiple kernels over the same hardware without any virtual machine monitor. Thus, virtualization is used for running multiple monolithic kernels on a virtual machine monitor.
 \\
 Figure~\ref{fig:driver crash} and Figure~\ref{fig:high avail} explains the effects of a malicious activity occurring in the device driver isolated from the Linux kernel. When a device driver running in a driver domain hits a bug, it crashes the kernel of the driver domain and hence the driver domain itself. In addition, applications expecting a response from the driver domain might hang or crash waiting for the response. But due to the address space separation of the application domain and the driver domain, the application domain will remain intact.   
 \begin{figure}[!ht]
