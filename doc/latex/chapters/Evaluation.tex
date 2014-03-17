@@ -1,26 +1,43 @@
-% TODO edit
-
 \section{Goals and Methodology}
+The IDDR implementation uses the \texttt{Linux kernel 3.5.0} for both application and driver domains. We tested it with Arch Linux on \texttt{x86\_64} platform. The specification of the system used for evaluation is presented in the table~\ref{tab:config}. 
 
+\begin{center}
+\begin{tabular}{|r|l|} 
+  \hline
+  \label{tab:config}
+  System Parameter & Configuration \\
+  \hline
+  Processor & 2 X ??, ??.?? Ghz \\
+  Number of cores & 4 per processor \\
+  Hyperthreading & ?? \\
+  Turbo boost & ?? \\
+  L1 L2 cache & ??K/??K per core \\
+  L3 cache & ?? X ??MB \\
+  Main memory & ??GB \\
+  Storage & SATA, HDD ??RPM \\
+  \hline 
+\end{tabular}
+\end{center}
+ 
 \subsection{Goals}
+Our evaluation contains 
+\begin{enumerate} 
+\item comparison of Xen split driver and IDDR without any performance improvement, 
+\item an evaluation of IDDR performance improvement over base IDDR system,
+\end{enumerate}
+The goal of this evaluation is to show that by avoiding the use of event channel in communication channel improves the performance of the system. 
+\\
+We use ramdisk device, loop device, and SATA disk as a block device. We format the raw block device with ext2 file system. We run SysBench system performance benchmark on the file system to measure the performance of the system. We use a Linux system running inside a Xen domain as baselines of comparison. 
 
-\subsection {Experiment Set Up}
+\section{Xen split driver vs IDDR}
 
-Experiment Set Ups 
+We run sysbench performance benchmark on Xen split driver as xen driver domain follows the same split device driver model. We then compare the performance of the IDDR system which is a re-implementation of the xen driver domain by running SysBench on IDDR system too. 
+\\
+This performance comparison shows that the our implementation of Xen driver domain is comparable to the Xen driver domain. Hence, any performance improvement in the system can be compared with IDDR system.    
 
-\pagebreak
+
 \section{System Overhead}
 \subsection{Copy Overhead}
-\pagebreak
-
-\section {Results with event channel}
-
-Results goes here
-\pagebreak
-
-\section {Results with spinning}
-
-Results goes here
 \pagebreak
 
 \section {Comparision}
