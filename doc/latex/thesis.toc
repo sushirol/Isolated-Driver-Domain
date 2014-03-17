@@ -1,5 +1,5 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Problem Statement}{2}{section.1.1}
+\contentsline {section}{\numberline {1.1}Problem Statement}{3}{section.1.1}
 \contentsline {section}{\numberline {1.2}Proposed Solution}{4}{section.1.2}
 \contentsline {section}{\numberline {1.3}Core Contributions}{7}{section.1.3}
 \contentsline {section}{\numberline {1.4}Organization}{8}{section.1.4}
@@ -38,13 +38,11 @@
 \contentsline {section}{\numberline {5.2}Existing Kernel designs}{65}{section.5.2}
 \contentsline {chapter}{\numberline {6}Evaluation}{66}{chapter.6}
 \contentsline {section}{\numberline {6.1}Goals and Methodology}{66}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Goals}{66}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Experiment Set Up}{66}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}System Overhead}{67}{section.6.2}
-\contentsline {subsection}{\numberline {6.2.1}Copy Overhead}{67}{subsection.6.2.1}
-\contentsline {section}{\numberline {6.3}Results with event channel}{68}{section.6.3}
-\contentsline {section}{\numberline {6.4}Results with spinning}{69}{section.6.4}
-\contentsline {section}{\numberline {6.5}Comparision}{70}{section.6.5}
-\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{71}{chapter.7}
-\contentsline {section}{\numberline {7.1}Contributions}{71}{section.7.1}
-\contentsline {section}{\numberline {7.2}Future Work}{72}{section.7.2}
+\contentsline {subsection}{\numberline {6.1.1}Goals}{67}{subsection.6.1.1}
+\contentsline {section}{\numberline {6.2}Xen split driver vs IDDR}{68}{section.6.2}
+\contentsline {section}{\numberline {6.3}System Overhead}{68}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Copy Overhead}{68}{subsection.6.3.1}
+\contentsline {section}{\numberline {6.4}Comparision}{69}{section.6.4}
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{70}{chapter.7}
+\contentsline {section}{\numberline {7.1}Contributions}{70}{section.7.1}
+\contentsline {section}{\numberline {7.2}Future Work}{71}{section.7.2}

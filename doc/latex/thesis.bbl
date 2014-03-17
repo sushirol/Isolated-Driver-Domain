@@ -3,6 +3,10 @@
 \bibitem{driverdomain}
 
 
+\bibitem{coveritykernel}
+{Coverity - Linux kernel report}.
+\newblock \url{http://www.coverity.com/library/pdf/coverity_linuxsecurity.pdf}.
+
 \bibitem{hypercall}
 {hypercall}.
 \newblock \url{http://wiki.xen.org/wiki/Hypercall}.
