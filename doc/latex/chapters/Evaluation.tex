@@ -61,7 +61,7 @@ Similar setup is used for loop device and SATA disk.
 \caption{IDDR vs Xen split driver}
 \label{fig:iddrvsxen-loop-rd}
 \end{figure}
-Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} shows the performance of random reads-writes on a ramdisk, and figure~\ref{fig:iddrvsxen-loop-rd} shows the performance of random reads on a loop device. Both systems provide roughly similar performance. The figure~\ref{fig:iddrvsxen-ramdisk-rdwr} and figure~\ref{fig:iddrvsxen-loop-rd} shows that the performance of the IDDR is similar to Xen driver domain. In further section we evaluate the performance improvement against IDDR system.
+Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} shows the performance of random reads-writes on a ramdisk, and figure~\ref{fig:iddrvsxen-loop-rd} shows the performance of random reads on a loop device. Both systems provide roughly similar performance. The figures show that the performance of the IDDR is similar to Xen driver domain. In further section we evaluate the performance improvement against IDDR system.
 
 \section{IDDR performance improvement}
 We measure and compare the performance of the base IDDR system (event channel interrupt) and the new imrpoved IDDR system (Spinlock). We run the fileIO sysbench benchmark with random reads, random writes and mixed random reads-writes. 

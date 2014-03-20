@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  20 MAR 2014 13:06
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  20 MAR 2014 13:08
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -851,7 +851,7 @@ Package pdftex.def Info: images/iddrvsxen-loop-rd.pdf used on input line 60.
  [71 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/iddr
 vsxen-ramdisk-rdwr.pdf>] [72 <C:/Users/sushrut/Documents/git_co/remote-driver-d
 ev/doc/latex/images/iddrvsxen-loop-rd.pdf>]
-<images/threadvsspin.pdf, id=1056, 361.35pt x 216.81pt>
+<images/threadvsspin.pdf, id=1054, 361.35pt x 216.81pt>
 File: images/threadvsspin.pdf Graphic file (type pdf)
 
 <use images/threadvsspin.pdf>
@@ -907,9 +907,9 @@ iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files 
 (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x
 86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (96 pages, 1979716 bytes).
+Output written on thesis.pdf (96 pages, 1979344 bytes).
 PDF statistics:
- 1218 PDF objects out of 1440 (max. 8388607)
+ 1216 PDF objects out of 1440 (max. 8388607)
  272 named destinations out of 1000 (max. 500000)
  514 words of extra memory for PDF output out of 10000 (max. 10000000)
 
