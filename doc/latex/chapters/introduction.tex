@@ -30,7 +30,7 @@ The Xen isolated driver domain system follows an interrupt based approach in the
 \\[3mm]
 In order to improve the performance of the communication channel, we propose a solution in which a thread in the back end driver spins for the service request, and the front end driver spins for the availability of the corresponding responses. As the front end driver spins for the responses, and spinning does not involve any context switch, our solution performs better than the Xen isolated driver domain system.
 \\[3mm]
-The performance of the system is evaluated over block devices such as ramdisk device, loop device, and SATA disk. The raw block device is formatted with a file system and the IDDR system is evaluated by measuring the performance of the system with SysBench benchmark. The integrity of the system is checked by executing raw read/write, read/write ahead, read/write superblock, sync and flush tests on the block device. The evaluation of our solution shows that the performance of the system can be improved by avoiding the context switches in the communication channel. 
+The performance of the system is evaluated over block devices such as ramdisk device, loop device, and SATA disk. The raw block device is formatted with a file system and the IDDR system is evaluated by measuring the performance of the system with fileIO/SysBench benchmark. The integrity of the system is checked by executing raw read/write, read/write ahead, read/write superblock, sync and flush tests on the block device. The evaluation of our solution shows that the performance of the system can be improved by avoiding the context switches in the communication channel. 
  \pagebreak
 
 \section{Core Contributions}
