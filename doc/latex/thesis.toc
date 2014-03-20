@@ -34,15 +34,13 @@
 \contentsline {subsection}{\numberline {4.2.2}Application domain}{55}{subsection.4.2.2}
 \contentsline {subsection}{\numberline {4.2.3}Driver domain}{60}{subsection.4.2.3}
 \contentsline {chapter}{\numberline {5}Related Work}{65}{chapter.5}
-\contentsline {section}{\numberline {5.1}Driver protection approaches }{65}{section.5.1}
-\contentsline {section}{\numberline {5.2}Existing Kernel designs}{65}{section.5.2}
-\contentsline {chapter}{\numberline {6}Evaluation}{66}{chapter.6}
-\contentsline {section}{\numberline {6.1}Goals and Methodology}{66}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Goals}{67}{subsection.6.1.1}
-\contentsline {section}{\numberline {6.2}Xen split driver vs IDDR}{68}{section.6.2}
-\contentsline {section}{\numberline {6.3}System Overhead}{68}{section.6.3}
-\contentsline {subsection}{\numberline {6.3.1}Copy Overhead}{68}{subsection.6.3.1}
-\contentsline {section}{\numberline {6.4}Comparision}{69}{section.6.4}
-\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{70}{chapter.7}
-\contentsline {section}{\numberline {7.1}Contributions}{70}{section.7.1}
-\contentsline {section}{\numberline {7.2}Future Work}{71}{section.7.2}
+\contentsline {chapter}{\numberline {6}Evaluation}{67}{chapter.6}
+\contentsline {section}{\numberline {6.1}Goals and Methodology}{67}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Goals}{68}{subsection.6.1.1}
+\contentsline {section}{\numberline {6.2}Xen split driver vs IDDR}{69}{section.6.2}
+\contentsline {subsection}{\numberline {6.2.1}Experimental setup}{69}{subsection.6.2.1}
+\contentsline {section}{\numberline {6.3}IDDR performance improvement}{72}{section.6.3}
+\contentsline {subsection}{\numberline {6.3.1}Experimental setup}{72}{subsection.6.3.1}
+\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{74}{chapter.7}
+\contentsline {section}{\numberline {7.1}Contributions}{74}{section.7.1}
+\contentsline {section}{\numberline {7.2}Future Work}{75}{section.7.2}

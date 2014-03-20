@@ -1,10 +1,11 @@
-Related work goes here 
-
-aspos paper has good related work
- 
-%\section {Driver isolation approaches}
-\section {Driver protection approaches }
-\section{Existing Kernel designs}
+This chapter first presents existing inter domain communication approaches. Subsequently, the chapter presents work which improves the performance of inter domain communication.
+\\[3mm]
+%\section{Inter domain communication mechanism}
+In the past numerous  work on inter domain communication mechanisms was presented. Xen split drivers is one of the inter domain communication approach of Xen hypervisor~\cite{Fraser04safehardware}. The xen split drivers has overhead becuase of numerous context switches in form of event channel interrupts. It also incurs an overhead due to data copy, page flipping~\cite{Zhang:2007:XHI:1516124.1516138}. Xen hypervisor also provides a UNIX domain socket like interface for high throughput interdomain communication on the same system called XenSocket~\cite{Zhang:2007:XHI:1516124.1516138}. XenSocket replaces the page flipping design of the split driver. However, XenSocket needs an existing socket interface APIs to be changed. 
+\\[3mm]
+Fido~\cite{Burtsev:2009:FFI:1855807.1855832} is a shared memory based inter domain communication mechanism. Fido implements the fast interdomain communication mechanism by reducing data copies in Xen hypervisor. In contrast our system improves the inter domain communication mechanism of Split device drivers by avoiding the context switches.
+\\[3mm]
+VirtuOS~\cite{Nikolaev:2013:VOS:2517349.2522719} is a library level solution that allows processes to directly communicate with domain. 
 
 % \bibliography{references}
 \ifbool{toShowBibliography}{\bibliography{references}}{}

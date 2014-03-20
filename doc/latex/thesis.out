@@ -34,15 +34,13 @@
 \BOOKMARK [2][-]{subsection.4.2.2}{Application domain}{section.4.2}% 34
 \BOOKMARK [2][-]{subsection.4.2.3}{Driver domain}{section.4.2}% 35
 \BOOKMARK [0][-]{chapter.5}{Related Work}{}% 36
-\BOOKMARK [1][-]{section.5.1}{Driver protection approaches }{chapter.5}% 37
-\BOOKMARK [1][-]{section.5.2}{Existing Kernel designs}{chapter.5}% 38
-\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 39
-\BOOKMARK [1][-]{section.6.1}{Goals and Methodology}{chapter.6}% 40
-\BOOKMARK [2][-]{subsection.6.1.1}{Goals}{section.6.1}% 41
-\BOOKMARK [1][-]{section.6.2}{Xen split driver vs IDDR}{chapter.6}% 42
-\BOOKMARK [1][-]{section.6.3}{System Overhead}{chapter.6}% 43
-\BOOKMARK [2][-]{subsection.6.3.1}{Copy Overhead}{section.6.3}% 44
-\BOOKMARK [1][-]{section.6.4}{Comparision}{chapter.6}% 45
-\BOOKMARK [0][-]{chapter.7}{Conclusion and Future Work}{}% 46
-\BOOKMARK [1][-]{section.7.1}{Contributions}{chapter.7}% 47
-\BOOKMARK [1][-]{section.7.2}{Future Work}{chapter.7}% 48
+\BOOKMARK [0][-]{chapter.6}{Evaluation}{}% 37
+\BOOKMARK [1][-]{section.6.1}{Goals and Methodology}{chapter.6}% 38
+\BOOKMARK [2][-]{subsection.6.1.1}{Goals}{section.6.1}% 39
+\BOOKMARK [1][-]{section.6.2}{Xen split driver vs IDDR}{chapter.6}% 40
+\BOOKMARK [2][-]{subsection.6.2.1}{Experimental setup}{section.6.2}% 41
+\BOOKMARK [1][-]{section.6.3}{IDDR performance improvement}{chapter.6}% 42
+\BOOKMARK [2][-]{subsection.6.3.1}{Experimental setup}{section.6.3}% 43
+\BOOKMARK [0][-]{chapter.7}{Conclusion and Future Work}{}% 44
+\BOOKMARK [1][-]{section.7.1}{Contributions}{chapter.7}% 45
+\BOOKMARK [1][-]{section.7.2}{Future Work}{chapter.7}% 46

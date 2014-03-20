@@ -15,21 +15,24 @@ You're missing a field name---line 7 of file references.bib
 I'm skipping whatever remains of this entry
 Warning--entry type for "coveritykernel" isn't style-file defined
 --line 13 of file references.bib
-Repeated entry---line 427 of file references.bib
+Warning--entry type for "sysbench" isn't style-file defined
+--line 17 of file references.bib
+Repeated entry---line 423 of file references.bib
  : @inproceedings{Goldberg:1973:AVM:800122.803950
  :                                               ,
 I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 482 of file references.bib
+I was expecting a `,' or a `}'---line 478 of file references.bib
  : 
  : @webpage{hypercall,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--entry type for "hypercall" isn't style-file defined
---line 482 of file references.bib
+--line 478 of file references.bib
 Warning--entry type for "granttable" isn't style-file defined
---line 487 of file references.bib
+--line 483 of file references.bib
 Warning--to sort, need author or key in coveritykernel
 Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
+Warning--to sort, need author or key in sysbench
 (There were 4 error messages)

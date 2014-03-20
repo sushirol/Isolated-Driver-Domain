@@ -15,6 +15,10 @@
 {hypercall}.
 \newblock \url{http://xenbits.xen.org/docs/4.2-testing/misc/grant-tables.txt}.
 
+\bibitem{sysbench}
+{Sysbench performance measurement benchmark}.
+\newblock \url{http://sysbench.sourceforge.net/}.
+
 \bibitem{Agesen:2010:EXV:1899928.1899930}
 Ole Agesen, Alex Garthwaite, Jeffrey Sheldon, and Pratap Subrahmanyam.
 \newblock The evolution of an x86 virtual machine monitor.
@@ -48,6 +52,15 @@ Edouard Bugnion, Scott Devine, Kinshuk Govil, and Mendel Rosenblum.
 \newblock Disco: Running commodity operating systems on scalable
   multiprocessors.
 \newblock {\em ACM Trans. Comput. Syst.}, 15(4):412--447, November 1997.
+
+\bibitem{Burtsev:2009:FFI:1855807.1855832}
+Anton Burtsev, Kiran Srinivasan, Prashanth Radhakrishnan, Lakshmi~N.
+  Bairavasundaram, Kaladhar Voruganti, and Garth~R. Goodson.
+\newblock Fido: Fast inter-virtual-machine communication for enterprise
+  appliances.
+\newblock In {\em Proceedings of the 2009 Conference on USENIX Annual Technical
+  Conference}, USENIX'09, pages 25--25, Berkeley, CA, USA, 2009. USENIX
+  Association.
 
 \bibitem{citeulike:3149886}
 Fernando~L. Camargos, Gabriel Girard, and Benoit~D. Ligneris.
@@ -222,5 +235,13 @@ Michael~M. Swift, Steven Martin, Henry~M. Levy, and Susan~J. Eggers.
 Andrew~S. Tanenbaum, Jorrit~N. Herder, and Herbert Bos.
 \newblock Can we make operating systems reliable and secure.
 \newblock {\em Computer}, 39:44--51, 2006.
+
+\bibitem{Zhang:2007:XHI:1516124.1516138}
+Xiaolan Zhang, Suzanne McIntosh, Pankaj Rohatgi, and John~Linwood Griffin.
+\newblock Xensocket: A high-throughput interdomain transport for virtual
+  machines.
+\newblock In {\em Proceedings of the ACM/IFIP/USENIX 2007 International
+  Conference on Middleware}, Middleware '07, pages 184--203, New York, NY, USA,
+  2007. Springer-Verlag New York, Inc.
 
 \end{thebibliography}
