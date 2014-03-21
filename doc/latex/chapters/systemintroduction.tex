@@ -14,8 +14,6 @@ One of the main goals of the IDDR is to provide strong isolation. The IDDR imple
 \subsection{Compatibility and transparency} 
 The extension of existing OS structure usually results in a large number of broken applications. In the past, Microkernels required effort to retain compatibility with the existing applications~\cite{Heiser06arevirtualmachine}. In order to provide compatibility with applications, either an emulation layer was implemented~\cite{Heiser06arevirtualmachine}, or a multiserver operating system~\cite{Gefflaut00thesawmill, Tanenbaum06canwe} was built on top of a microkernel. Since the IDDR maintains compatibility between existing device drivers and applications, it is one of the basic goals of our solution to achieve the compatibility and transparency. Our solution makes sure that the performance improvement implementation will not require any changes in the device driver and the application to run the system.
 
-\pagebreak
-
 \section{System overview}\label{overview}
 The architectural overview of the system is presented in Figure~\ref{fig:overview} .
 \begin{figure}[!ht]
@@ -25,7 +23,6 @@ The architectural overview of the system is presented in Figure~\ref{fig:overvie
 \label{fig:overview}
 \end{figure}
 An overview of the architecture shows that the IDDR partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Since in the IDDR implementation, a device driver cannot run standalone in a separate domU, hence the \textit{driver domain} runs a minimalistic kernel with the device driver. The \textit{driver domain} does not run any applications. The application domain is dedicated to the core system tasks such as process management, scheduling, user memory management, and IPC. The sole task of driver domain is to handle requests coming from the user processes managed by the application domain.
-\pagebreak
 
 \section{System components}\label{components}
 3 main components of the design are Front end driver, Back end driver, Communication module.
@@ -66,7 +63,6 @@ Figure~\ref{fig:communication} illustrates the role of the communication model.
 \caption{Communication module}
 \label{fig:communication}
 \end{figure}
-\pagebreak
 
 \section{System design}\label{design}
 \begin{figure}[!ht]
@@ -102,6 +98,5 @@ Figure~\ref{fig:driver crash} and Figure~\ref{fig:high avail} explains the effec
 \caption{High Availability}
 \label{fig:high avail}
 \end{figure}
-\pagebreak
     
 \ifbool{toShowBibliography}{\bibliography{references}}{}

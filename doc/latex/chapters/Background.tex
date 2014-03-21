@@ -48,10 +48,6 @@ Spinlock is a lock which causes a thread trying to acquire it to spin continuous
 \\
 Whenever a lock is not available, a CPU either spins or does a context switch. In a uniprocessor environment, the waiting process keeps spinning for the lock. However, the other process holding the lock might not have a chance to release it, because of which spin lock could deteriorate the performance in a uniprocessor environment. In a multiprocessor environment, spin locks can be more efficient. Overhead for spinlocks is very small. On the other hand, a context switch takes a significant amount of time, so it is more efficient for each process to keep its own CPU and simply spin while waiting for a resource\cite{Bovet:2005:ULK:1077084}. Because spinlocks avoid overhead from operating system process re-scheduling or context switching, spinlocks are efficient if threads are only likely to be blocked for a short period. For the above reasons, spinlocks are often used inside operating system kernels.
 
-%adaptive spinning
-
-\pagebreak
-
 \section{Memory protection}
 
 The memory protection mechanism of computer systems control the access to objects. The main goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that each shared resource is used only in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage. However, memory protection systems only provide the mechanisms for enforcing policies and ensuring reliable systems. It is up to the administrators, programmers and users to implement those mechanisms\cite{Galvin, Graham:1971:PPP:1478873.1478928}. The following subsections explain how these policies are implemented at kernel level and user level. 
@@ -241,6 +237,5 @@ The notification is not sent for production of each request and response. A doma
 \caption{Ring I/O buffer}
 \label{fig:Ring buffer}
 \end{figure}
-\pagebreak
 
 \ifbool{toShowBibliography}{\bibliography{references}}{}

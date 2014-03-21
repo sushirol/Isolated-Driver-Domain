@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  20 MAR 2014 16:01
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  21 MAR 2014 16:29
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -405,9 +405,9 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 [6
 
-] [7] [8])
+] [7])
 \tf@toc=\write4
- [9]
+ [8] [9]
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.lof
 [10
 
@@ -425,7 +425,7 @@ Chapter 1.
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/introdu
 ction.tex [1
 
-] <images/xen-split-tcp.pdf, id=372, 963.6pt x 542.025pt>
+] <images/xen-split-tcp.pdf, id=369, 963.6pt x 542.025pt>
 File: images/xen-split-tcp.pdf Graphic file (type pdf)
 
 <use images/xen-split-tcp.pdf>
@@ -437,11 +437,17 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 17--18
  []
 
 [2] [3 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/xe
-n-split-tcp.pdf>] [4] [5] [6] [7])
+n-split-tcp.pdf>] [4] [5] [6]
+Overfull \hbox (1.39017pt too wide) in paragraph at lines 38--39
+[]\OT1/cmr/m/n/12 Re-implementation of the Xen's iso-lated driver do-main - Iso
+-lated De-vice Driver (IDDR). 
+ []
+
+[7] [8])
 Chapter 2.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Backgro
-und.tex <images/process.pdf, id=436, 963.6pt x 542.025pt>
+und.tex <images/process.pdf, id=437, 963.6pt x 542.025pt>
 File: images/process.pdf Graphic file (type pdf)
 
 <use images/process.pdf>
@@ -452,9 +458,9 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 14--15
  [][] 
  []
 
-[8
+[9
 
-] [9] <images/thread1.pdf, id=446, 963.6pt x 542.025pt>
+] [10] <images/thread1.pdf, id=447, 963.6pt x 542.025pt>
 File: images/thread1.pdf Graphic file (type pdf)
 
 <use images/thread1.pdf>
@@ -465,7 +471,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 27--28
  [][] 
  []
 
-<images/thread2.pdf, id=447, 963.6pt x 542.025pt>
+<images/thread2.pdf, id=448, 963.6pt x 542.025pt>
 File: images/thread2.pdf Graphic file (type pdf)
  <use images/thread2.pdf>
 Package pdftex.def Info: images/thread2.pdf used on input line 34.
@@ -475,114 +481,115 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 34--35
  [][] 
  []
 
-[10 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/proce
-ss.pdf>] [11 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/ima
-ges/thread1.pdf>] [12 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/
-latex/images/thread2.pdf>] [13]
-<images/memory_map.pdf, id=488, 963.6pt x 542.025pt>
+[11 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/proce
+ss.pdf>] [12 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/ima
+ges/thread1.pdf>] [13 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/
+latex/images/thread2.pdf>]
+<images/memory_map.pdf, id=485, 963.6pt x 542.025pt>
 File: images/memory_map.pdf Graphic file (type pdf)
 
 <use images/memory_map.pdf>
-Package pdftex.def Info: images/memory_map.pdf used on input line 65.
+Package pdftex.def Info: images/memory_map.pdf used on input line 61.
 (pdftex.def)             Requested size: 240.89941pt x 135.5059pt.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- <images/us-ks.pdf, id=489, 963.6pt x 542.025pt>
+ <images/us-ks.pdf, id=486, 963.6pt x 542.025pt>
 File: images/us-ks.pdf Graphic file (type pdf)
 
 <use images/us-ks.pdf>
-Package pdftex.def Info: images/us-ks.pdf used on input line 77.
+Package pdftex.def Info: images/us-ks.pdf used on input line 73.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 77--78
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 73--74
  [][] 
  []
 
 [14] [15 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-memory_map.pdf>] <images/user-space-1.pdf, id=512, 963.6pt x 542.025pt>
+memory_map.pdf>] <images/user-space-1.pdf, id=509, 963.6pt x 542.025pt>
 File: images/user-space-1.pdf Graphic file (type pdf)
 
 <use images/user-space-1.pdf>
-Package pdftex.def Info: images/user-space-1.pdf used on input line 89.
+Package pdftex.def Info: images/user-space-1.pdf used on input line 85.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 89--90
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 85--86
  [][] 
  []
 
-<images/user-space-2.pdf, id=513, 963.6pt x 542.025pt>
+[16 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/us-ks
+.pdf>] <images/user-space-2.pdf, id=518, 963.6pt x 542.025pt>
 File: images/user-space-2.pdf Graphic file (type pdf)
 
 <use images/user-space-2.pdf>
-Package pdftex.def Info: images/user-space-2.pdf used on input line 95.
+Package pdftex.def Info: images/user-space-2.pdf used on input line 91.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 95--96
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 91--92
  [][] 
  []
 
 File: images/us-ks.pdf Graphic file (type pdf)
 <use images/us-ks.pdf>
-Package pdftex.def Info: images/us-ks.pdf used on input line 107.
+Package pdftex.def Info: images/us-ks.pdf used on input line 103.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 107--108
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 103--104
  [][] 
  []
 
-[16 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/us-ks
-.pdf>] [17 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/image
-s/user-space-1.pdf>] <images/kernel-space-1.pdf, id=532, 963.6pt x 542.025pt>
+[17 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/user-
+space-1.pdf>] [18 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/late
+x/images/user-space-2.pdf>]
+<images/kernel-space-1.pdf, id=540, 963.6pt x 542.025pt>
 File: images/kernel-space-1.pdf Graphic file (type pdf)
 
 <use images/kernel-space-1.pdf>
-Package pdftex.def Info: images/kernel-space-1.pdf used on input line 121.
+Package pdftex.def Info: images/kernel-space-1.pdf used on input line 117.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 121--122
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 117--118
  [][] 
  []
 
-<images/kernel-space-2.pdf, id=533, 963.6pt x 542.025pt>
+<images/kernel-space-2.pdf, id=541, 963.6pt x 542.025pt>
 File: images/kernel-space-2.pdf Graphic file (type pdf)
 
 <use images/kernel-space-2.pdf>
-Package pdftex.def Info: images/kernel-space-2.pdf used on input line 128.
+Package pdftex.def Info: images/kernel-space-2.pdf used on input line 124.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 128--129
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 124--125
  [][] 
  []
 
-[18 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/user-
-space-2.pdf>] [19] [20 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc
-/latex/images/kernel-space-1.pdf>] [21 <C:/Users/sushrut/Documents/git_co/remot
-e-driver-dev/doc/latex/images/kernel-space-2.pdf>]
-<images/OS-arch.pdf, id=567, 963.6pt x 542.025pt>
+[19] [20 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
+kernel-space-1.pdf>] [21 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/d
+oc/latex/images/kernel-space-2.pdf>]
+<images/OS-arch.pdf, id=564, 963.6pt x 542.025pt>
 File: images/OS-arch.pdf Graphic file (type pdf)
  <use images/OS-arch.pdf>
-Package pdftex.def Info: images/OS-arch.pdf used on input line 139.
+Package pdftex.def Info: images/OS-arch.pdf used on input line 135.
 (pdftex.def)             Requested size: 529.98164pt x 298.11467pt.
 
-Overfull \hbox (60.22665pt too wide) in paragraph at lines 139--140
+Overfull \hbox (60.22665pt too wide) in paragraph at lines 135--136
  [][] 
  []
 
 [22
 
  <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OS-arch.
-pdf>] <images/virtualization.pdf, id=639, 963.6pt x 542.025pt>
+pdf>] <images/virtualization.pdf, id=636, 963.6pt x 542.025pt>
 File: images/virtualization.pdf Graphic file (type pdf)
 
 <use images/virtualization.pdf>
-Package pdftex.def Info: images/virtualization.pdf used on input line 160.
+Package pdftex.def Info: images/virtualization.pdf used on input line 156.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
  [23] [24]
-<images/type1.pdf, id=661, 963.6pt x 542.025pt>
+<images/type1.pdf, id=658, 963.6pt x 542.025pt>
 File: images/type1.pdf Graphic file (type pdf)
  <use images/type1.pdf>
-Package pdftex.def Info: images/type1.pdf used on input line 170.
+Package pdftex.def Info: images/type1.pdf used on input line 166.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
  [25 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/virt
 ualization.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/
@@ -591,20 +598,20 @@ images/type1.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/type1.pdf): PDF inclusion: multiple pdfs with page group i
 ncluded in a single page
->] <images/type2.pdf, id=676, 963.6pt x 542.025pt>
+>] <images/type2.pdf, id=673, 963.6pt x 542.025pt>
 File: images/type2.pdf Graphic file (type pdf)
  <use images/type2.pdf>
-Package pdftex.def Info: images/type2.pdf used on input line 179.
+Package pdftex.def Info: images/type2.pdf used on input line 175.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
 
-<images/xen-split-fs.pdf, id=682, 963.6pt x 542.025pt>
+<images/xen-split-fs.pdf, id=679, 963.6pt x 542.025pt>
 File: images/xen-split-fs.pdf Graphic file (type pdf)
 
 <use images/xen-split-fs.pdf>
-Package pdftex.def Info: images/xen-split-fs.pdf used on input line 193.
+Package pdftex.def Info: images/xen-split-fs.pdf used on input line 189.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 193--194
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 189--190
  [][] 
  []
 
@@ -613,13 +620,13 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 193--194
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-<images/xen.pdf, id=692, 963.6pt x 542.025pt>
+<images/xen.pdf, id=689, 963.6pt x 542.025pt>
 File: images/xen.pdf Graphic file (type pdf)
  <use images/xen.pdf>
-Package pdftex.def Info: images/xen.pdf used on input line 202.
+Package pdftex.def Info: images/xen.pdf used on input line 198.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 202--203
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 198--199
  [][] 
  []
 
@@ -629,14 +636,14 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [28 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/xen-s
 plit-fs.pdf>] [29 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/late
-x/images/xen.pdf>] <images/IObuffer.pdf, id=720, 963.6pt x 542.025pt>
+x/images/xen.pdf>] <images/IObuffer.pdf, id=717, 963.6pt x 542.025pt>
 File: images/IObuffer.pdf Graphic file (type pdf)
 
 <use images/IObuffer.pdf>
-Package pdftex.def Info: images/IObuffer.pdf used on input line 221.
+Package pdftex.def Info: images/IObuffer.pdf used on input line 217.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 221--222
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 217--218
  [][] 
  []
 
@@ -654,19 +661,19 @@ Missing character: There is no ˜ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
- <images/IObuffer2.pdf, id=731, 963.6pt x 542.025pt>
+ <images/IObuffer2.pdf, id=728, 963.6pt x 542.025pt>
 File: images/IObuffer2.pdf Graphic file (type pdf)
 
 <use images/IObuffer2.pdf>
-Package pdftex.def Info: images/IObuffer2.pdf used on input line 240.
+Package pdftex.def Info: images/IObuffer2.pdf used on input line 236.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 240--241
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 236--237
  [][] 
  []
 
-[31]) [32 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images
-/IObuffer2.pdf>]
+) [31] [32 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/image
+s/IObuffer2.pdf>]
 Chapter 3.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/systemi
@@ -677,210 +684,214 @@ Underfull \hbox (badness 10000) in paragraph at lines 3--5
 
 [33
 
-] [34] [35] <images/IDDRoverview.pdf, id=768, 963.6pt x 542.025pt>
+] [34] <images/IDDRoverview.pdf, id=758, 963.6pt x 542.025pt>
 File: images/IDDRoverview.pdf Graphic file (type pdf)
 
 <use images/IDDRoverview.pdf>
-Package pdftex.def Info: images/IDDRoverview.pdf used on input line 23.
+Package pdftex.def Info: images/IDDRoverview.pdf used on input line 21.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 23--24
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 21--22
  [][] 
  []
 
-[36 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRo
-verview.pdf>] [37] <images/IDDRcomponents.pdf, id=784, 963.6pt x 542.025pt>
+[35] [36 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
+IDDRoverview.pdf>] <images/IDDRcomponents.pdf, id=777, 963.6pt x 542.025pt>
 File: images/IDDRcomponents.pdf Graphic file (type pdf)
 
 <use images/IDDRcomponents.pdf>
-Package pdftex.def Info: images/IDDRcomponents.pdf used on input line 34.
+Package pdftex.def Info: images/IDDRcomponents.pdf used on input line 31.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 34--35
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 31--32
  [][] 
  []
 
-[38 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRc
-omponents.pdf>] <images/component1.pdf, id=794, 963.6pt x 542.025pt>
+[37 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRc
+omponents.pdf>] <images/component1.pdf, id=787, 963.6pt x 542.025pt>
 File: images/component1.pdf Graphic file (type pdf)
 
 <use images/component1.pdf>
-Package pdftex.def Info: images/component1.pdf used on input line 48.
+Package pdftex.def Info: images/component1.pdf used on input line 45.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 48--49
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 45--46
  [][] 
  []
 
-<images/component2.pdf, id=795, 963.6pt x 542.025pt>
+<images/component2.pdf, id=788, 963.6pt x 542.025pt>
 File: images/component2.pdf Graphic file (type pdf)
 
 <use images/component2.pdf>
-Package pdftex.def Info: images/component2.pdf used on input line 54.
+Package pdftex.def Info: images/component2.pdf used on input line 51.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 54--55
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 51--52
  [][] 
  []
 
-[39]
+[38] [39 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
+component1.pdf>]
 File: images/component1.pdf Graphic file (type pdf)
  <use images/component1.pdf>
-Package pdftex.def Info: images/component1.pdf used on input line 65.
+Package pdftex.def Info: images/component1.pdf used on input line 62.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 65--66
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 62--63
+ [][] 
+ []
+
+<images/OSoverview.pdf, id=802, 963.6pt x 542.025pt>
+File: images/OSoverview.pdf Graphic file (type pdf)
+
+<use images/OSoverview.pdf>
+Package pdftex.def Info: images/OSoverview.pdf used on input line 70.
+(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
+
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 70--71
+ [][] 
+ []
+
+File: images/IDDRoverview.pdf Graphic file (type pdf)
+<use images/IDDRoverview.pdf>
+Package pdftex.def Info: images/IDDRoverview.pdf used on input line 77.
+(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
+
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 77--78
  [][] 
  []
 
 [40 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/compo
-nent1.pdf>] [41 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/
-images/component2.pdf>] <images/OSoverview.pdf, id=817, 963.6pt x 542.025pt>
-File: images/OSoverview.pdf Graphic file (type pdf)
-
-<use images/OSoverview.pdf>
-Package pdftex.def Info: images/OSoverview.pdf used on input line 74.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 74--75
- [][] 
- []
-
-File: images/IDDRoverview.pdf Graphic file (type pdf)
-<use images/IDDRoverview.pdf>
-Package pdftex.def Info: images/IDDRoverview.pdf used on input line 81.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 81--82
- [][] 
- []
-
-<images/IDDRcrash1.pdf, id=822, 963.6pt x 542.025pt>
+nent2.pdf>] <images/IDDRcrash1.pdf, id=815, 963.6pt x 542.025pt>
 File: images/IDDRcrash1.pdf Graphic file (type pdf)
 
 <use images/IDDRcrash1.pdf>
-Package pdftex.def Info: images/IDDRcrash1.pdf used on input line 95.
+Package pdftex.def Info: images/IDDRcrash1.pdf used on input line 91.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 95--96
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 91--92
  [][] 
  []
 
-<images/IDDRcrash2.pdf, id=823, 963.6pt x 542.025pt>
+<images/IDDRcrash2.pdf, id=816, 963.6pt x 542.025pt>
 File: images/IDDRcrash2.pdf Graphic file (type pdf)
 
 <use images/IDDRcrash2.pdf>
-Package pdftex.def Info: images/IDDRcrash2.pdf used on input line 101.
+Package pdftex.def Info: images/IDDRcrash2.pdf used on input line 97.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 101--102
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 97--98
  [][] 
  []
 
-[42] [43 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-OSoverview.pdf>] [44]) [45 <C:/Users/sushrut/Documents/git_co/remote-driver-dev
-/doc/latex/images/IDDRcrash1.pdf>] [46 <C:/Users/sushrut/Documents/git_co/remot
+[41] [42 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
+OSoverview.pdf>]) [43] [44 <C:/Users/sushrut/Documents/git_co/remote-driver-dev
+/doc/latex/images/IDDRcrash1.pdf>] [45 <C:/Users/sushrut/Documents/git_co/remot
 e-driver-dev/doc/latex/images/IDDRcrash2.pdf>]
 Chapter 4.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/impleme
-ntation.tex [47
+ntation.tex [46
 
-] [48] <images/impl_overview.pdf, id=866, 963.6pt x 542.025pt>
+] <images/impl_overview.pdf, id=854, 963.6pt x 542.025pt>
 File: images/impl_overview.pdf Graphic file (type pdf)
 
 <use images/impl_overview.pdf>
-Package pdftex.def Info: images/impl_overview.pdf used on input line 28.
+Package pdftex.def Info: images/impl_overview.pdf used on input line 27.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 28--29
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 27--28
  [][] 
  []
 
-[49 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/impl_
-overview.pdf>] [50] [51]
-Overfull \hbox (15.81715pt too wide) in paragraph at lines 74--75
+[47] [48 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
+impl_overview.pdf>] [49] [50]
+Overfull \hbox (15.81715pt too wide) in paragraph at lines 73--74
 []\OT1/cmr/m/n/12 Back end driver maps for-eign frames us-ing \OT1/cmtt/m/n/12 
 gnttab[]set[]map[]op \OT1/cmr/m/n/12 and flags \OT1/cmtt/m/n/12 GNTMAP[]host[]m
 ap\OT1/cmr/m/n/12 . 
  []
 
-[52]
-Overfull \hbox (52.9792pt too wide) in paragraph at lines 77--78
+
+Overfull \hbox (52.9792pt too wide) in paragraph at lines 76--77
 []\OT1/cmr/m/n/12 Front end driver re-moves for-eign ac-cess to the frames us-i
 ng func-tion \OT1/cmtt/m/n/12 gnttab[]end[]foreign[]access\OT1/cmr/m/n/12 .
  []
 
-[53] [54]
+[51] [52] [53]
 
-LaTeX Warning: Citation `galvin' on page 55 undefined on input line 130.
+LaTeX Warning: Citation `galvin' on page 54 undefined on input line 129.
 
-[55] [56] [57] [58] [59] [60] [61] [62]
-Overfull \hbox (25.23872pt too wide) in paragraph at lines 241--245
+[54] [55] [56] [57] [58] [59] [60]
+Overfull \hbox (25.23872pt too wide) in paragraph at lines 240--243
 \OT1/cmr/m/n/12 the re-sponse is en-queued, de-pend-ing upon the sta-tus of the
  re-mote thread-\OT1/cmtt/m/n/12 read[]response[]thread\OT1/cmr/m/n/12 ,
  []
 
-[63])
+) [61]
 Chapter 5.
 
-(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/related
-work.tex [64
-
-]) [65]
-Chapter 6.
-
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Evaluat
-ion.tex [66
+ion.tex [62
 
-] [67] [68] [69]
-<images/iddrvsxen-ramdisk-rdwr.pdf, id=1020, 361.35pt x 216.81pt>
+] [63] [64] [65]
+<images/iddrvsxen-ramdisk-rdwr.pdf, id=996, 361.35pt x 216.81pt>
 File: images/iddrvsxen-ramdisk-rdwr.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-ramdisk-rdwr.pdf>
-Package pdftex.def Info: images/iddrvsxen-ramdisk-rdwr.pdf used on input line 5
-4.
+Package pdftex.def Info: images/iddrvsxen-ramdisk-rdwr.pdf used on input line 6
+7.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-<images/iddrvsxen-loop-rd.pdf, id=1021, 361.35pt x 216.81pt>
+<images/iddrvsxen-loop-rd.pdf, id=997, 361.35pt x 216.81pt>
 File: images/iddrvsxen-loop-rd.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-loop-rd.pdf>
-Package pdftex.def Info: images/iddrvsxen-loop-rd.pdf used on input line 60.
+Package pdftex.def Info: images/iddrvsxen-loop-rd.pdf used on input line 73.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
- [70 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/iddr
-vsxen-ramdisk-rdwr.pdf>] [71 <C:/Users/sushrut/Documents/git_co/remote-driver-d
-ev/doc/latex/images/iddrvsxen-loop-rd.pdf>]
-<images/threadvsspin.pdf, id=1050, 361.35pt x 216.81pt>
+ [66] [67 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images
+/iddrvsxen-ramdisk-rdwr.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-d
+ev/doc/latex/images/iddrvsxen-loop-rd.pdf
+
+pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
+dev/doc/latex/images/iddrvsxen-loop-rd.pdf): PDF inclusion: multiple pdfs with 
+page group included in a single page
+>] <images/threadvsspin.pdf, id=1025, 361.35pt x 216.81pt>
 File: images/threadvsspin.pdf Graphic file (type pdf)
 
 <use images/threadvsspin.pdf>
-Package pdftex.def Info: images/threadvsspin.pdf used on input line 75.
+Package pdftex.def Info: images/threadvsspin.pdf used on input line 88.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
- [72 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/thre
-advsspin.pdf>])
+ [68]) [69 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/image
+s/threadvsspin.pdf>]
+Chapter 6.
+
+(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/related
+work.tex [70
+
+]) [71]
 Chapter 7.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/conclus
-ion.tex [73
-
-] [74])
+ion.tex)
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.bbl
-[75] [76
+[72
 
-] [77] [78] [79]
+] [73
+
+] [74] [75] [76]
 Missing character: There is no Ã in font cmr12!
 Missing character: There is no © in font cmr12!
- [80] [81])
+ [77] [78])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 251.
- [82]
+ [79]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 251.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 251.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 251.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 71BD42E4E69DC2E256F244573A6DC920;3033.
+(rerunfilecheck)             Checksum: 62E2D02BFC1E212EBA8DE639577A7839;2957.
 
 
 LaTeX Warning: There were undefined references.
@@ -890,13 +901,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9837 strings out of 493921
- 146000 string characters out of 3144869
- 257555 words of memory out of 3000000
- 12720 multiletter control sequences out of 15000+200000
+ 9833 strings out of 493921
+ 145954 string characters out of 3144869
+ 258553 words of memory out of 3000000
+ 12719 multiletter control sequences out of 15000+200000
  9368 words of font info for 33 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,8n,39p,1188b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,8n,39p,1188b,446s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/P
@@ -907,9 +918,9 @@ iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files 
 (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files (x
 86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (95 pages, 1979043 bytes).
+Output written on thesis.pdf (92 pages, 1978016 bytes).
 PDF statistics:
- 1213 PDF objects out of 1440 (max. 8388607)
- 271 named destinations out of 1000 (max. 500000)
- 514 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1197 PDF objects out of 1200 (max. 8388607)
+ 268 named destinations out of 1000 (max. 500000)
+ 506 words of extra memory for PDF output out of 10000 (max. 10000000)
 

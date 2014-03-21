@@ -1,9 +1,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model}}{3}{figure.1.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Program's memory map}}{10}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Single threaded process}}{11}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Multithreaded process}}{12}{figure.2.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Program's memory map}}{11}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Single threaded process}}{12}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Multithreaded process}}{13}{figure.2.3}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Physical memory}}{15}{figure.2.4}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces User space}}{16}{figure.2.5}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces User space: Word processor hits a bug}}{17}{figure.2.6}
@@ -21,19 +21,19 @@
 \contentsline {figure}{\numberline {2.18}{\ignorespaces Ring I/O buffer}}{32}{figure.2.18}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Overview}}{36}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces System Components}}{38}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Conceptual design of driver domain}}{40}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Back end and front end drivers}}{41}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module}}{42}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Tightly coupled System}}{43}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces System with kernel and isolated device driver}}{44}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Device driver crash}}{45}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces High Availability}}{46}{figure.3.9}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System Components}}{37}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Conceptual design of driver domain}}{39}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Back end and front end drivers}}{40}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module}}{41}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Tightly coupled System}}{42}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces System with kernel and isolated device driver}}{43}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Device driver crash}}{44}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces High Availability}}{45}{figure.3.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview}}{49}{figure.4.1}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview}}{48}{figure.4.1}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver}}{67}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver}}{67}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel}}{69}{figure.5.3}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces IDDR vs Xen split driver}}{70}{figure.6.1}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces IDDR vs Xen split driver}}{71}{figure.6.2}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel}}{72}{figure.6.3}
 \addvspace {10\p@ }

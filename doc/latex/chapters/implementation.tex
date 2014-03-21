@@ -19,7 +19,6 @@ The IDDR system is implemented with Linux kernel 3.5.0 and Xen hypervisor 4.2.1.
 \end{center}
 
 As we observe from the table, the block device driver is unchanged, small number of changes were made to the Linux kernel and the Xen hypervisor. However, we maintain the application compatibility.
-\pagebreak
 
 \section{Implementation}
 
@@ -241,7 +240,6 @@ Pages from shared memory are mapped and inserted into the \texttt{bio} structure
 Irrespective of the success or failure of the execution of \texttt{bio} request, the back end driver makes a response, which could be understood by the frontend. Like explained in subsection~\ref{subsec:createbio}, \texttt{bi\_end\_io} function pointer is a pointer to a callback function. Once bio request is completed, function pointed by \texttt{bi\_end\_io} gets called. We create a new response in this callback function.
 \\
 In this callback function we complete the \texttt{bio} request with function \texttt{bio\_put}. After that the result gets copied into a newly allocated response structure. The response is enqueued to response queue using \texttt{RING\_GET\_RESPONSE} and \texttt{RING\_PUSH\_RESPONSES\_AND\_CHECK\_NOTIFY}. Once the response is enqueued, depending upon the status of the remote thread-\texttt{read\_response\_thread}, a interrupt signal is sent to the application domain.
-\pagebreak
 
 % \bibliography{references}
 \ifbool{toShowBibliography}{\bibliography{references}}{}
