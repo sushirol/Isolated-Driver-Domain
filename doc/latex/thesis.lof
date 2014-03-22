@@ -1,39 +1,33 @@
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model}}{3}{figure.1.1}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model\relax }}{3}{figure.caption.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Program's memory map}}{11}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Single threaded process}}{12}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Multithreaded process}}{13}{figure.2.3}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Physical memory}}{15}{figure.2.4}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces User space}}{16}{figure.2.5}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces User space: Word processor hits a bug}}{17}{figure.2.6}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces User space : Word processor crashes and system is still intact}}{18}{figure.2.7}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Kernel space}}{19}{figure.2.8}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Kernel space}}{20}{figure.2.9}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Kernel space}}{21}{figure.2.10}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Operating System Architecture}}{22}{figure.2.11}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Virtualization}}{25}{figure.2.12}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces Type 1 hypervisor}}{25}{figure.2.13}
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Type 2 hypervisor}}{26}{figure.2.14}
-\contentsline {figure}{\numberline {2.15}{\ignorespaces Xen split device driver}}{28}{figure.2.15}
-\contentsline {figure}{\numberline {2.16}{\ignorespaces Xen}}{29}{figure.2.16}
-\contentsline {figure}{\numberline {2.17}{\ignorespaces Ring I/O buffer}}{30}{figure.2.17}
-\contentsline {figure}{\numberline {2.18}{\ignorespaces Ring I/O buffer}}{32}{figure.2.18}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Thread\relax }}{10}{figure.caption.8}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Split view of a kernel\relax }}{13}{figure.caption.9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Physical memory\relax }}{16}{figure.caption.14}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces User level memory protection\relax }}{17}{figure.caption.15}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Kernel level memory protection\relax }}{18}{figure.caption.16}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Comparision of a non-virtualized system and a virtualized system\relax }}{19}{figure.caption.17}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Type 1 hypervisor\relax }}{21}{figure.caption.18}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Type 2 hypervisor\relax }}{22}{figure.caption.19}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Xen split device driver\relax }}{24}{figure.caption.20}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Xen\relax }}{25}{figure.caption.21}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{26}{figure.caption.22}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{27}{figure.caption.23}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview}}{36}{figure.3.1}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces System Components}}{37}{figure.3.2}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Conceptual design of driver domain}}{39}{figure.3.3}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Back end and front end drivers}}{40}{figure.3.4}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module}}{41}{figure.3.5}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Tightly coupled System}}{42}{figure.3.6}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces System with kernel and isolated device driver}}{43}{figure.3.7}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Device driver crash}}{44}{figure.3.8}
-\contentsline {figure}{\numberline {3.9}{\ignorespaces High Availability}}{45}{figure.3.9}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Overview\relax }}{31}{figure.caption.24}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces System Components\relax }}{32}{figure.caption.25}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Conceptual design of driver domain\relax }}{34}{figure.caption.26}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Back end and front end drivers\relax }}{35}{figure.caption.27}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module\relax }}{36}{figure.caption.28}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Tightly coupled System\relax }}{37}{figure.caption.29}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces System with kernel and isolated device driver\relax }}{38}{figure.caption.30}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Device driver crash\relax }}{39}{figure.caption.31}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces High Availability\relax }}{40}{figure.caption.32}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview}}{48}{figure.4.1}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview\relax }}{43}{figure.caption.33}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver}}{67}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver}}{67}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel}}{69}{figure.5.3}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.35}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.36}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel\relax }}{64}{figure.caption.37}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

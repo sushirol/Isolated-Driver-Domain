@@ -79,6 +79,11 @@ Andy Chou, Junfeng Yang, Benjamin Chelf, Seth Hallem, and Dawson Engler.
 \newblock In {\em Proceedings of the Eighteenth ACM Symposium on Operating
   Systems Principles}, SOSP '01, pages 73--88, New York, NY, USA, 2001. ACM.
 
+\bibitem{Corbet:2005:LDD:1209083}
+Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman.
+\newblock {\em Linux Device Drivers, 3rd Edition}.
+\newblock O'Reilly Media, Inc., 2005.
+
 \bibitem{Creasy:1981:OVT:1664853.1664863}
 R.~J. Creasy.
 \newblock The origin of the vm/370 time-sharing system.
