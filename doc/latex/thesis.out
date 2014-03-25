@@ -17,16 +17,16 @@
 \BOOKMARK [2][-]{subsection.2.4.2}{Xen Hypervisor}{section.2.4}% 17
 \BOOKMARK [0][-]{chapter.3}{System Introduction}{}% 18
 \BOOKMARK [1][-]{section.3.1}{Design Goal}{chapter.3}% 19
-\BOOKMARK [2][-]{subsection.3.1.1}{Performance improvement}{section.3.1}% 20
-\BOOKMARK [1][-]{section.3.2}{Isolated Device Driver properties}{chapter.3}% 21
-\BOOKMARK [2][-]{subsection.3.2.1}{Strong isolation}{section.3.2}% 22
-\BOOKMARK [2][-]{subsection.3.2.2}{Compatibility and transparency}{section.3.2}% 23
-\BOOKMARK [1][-]{section.3.3}{System overview}{chapter.3}% 24
-\BOOKMARK [1][-]{section.3.4}{System components}{chapter.3}% 25
-\BOOKMARK [2][-]{subsection.3.4.1}{Front end driver}{section.3.4}% 26
-\BOOKMARK [2][-]{subsection.3.4.2}{Back end driver}{section.3.4}% 27
-\BOOKMARK [2][-]{subsection.3.4.3}{Communication module}{section.3.4}% 28
-\BOOKMARK [1][-]{section.3.5}{System design}{chapter.3}% 29
+\BOOKMARK [1][-]{section.3.2}{Isolated Device Driver properties}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.3}{System overview}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.4}{System components}{chapter.3}% 22
+\BOOKMARK [2][-]{subsection.3.4.1}{Front end driver}{section.3.4}% 23
+\BOOKMARK [2][-]{subsection.3.4.2}{Back end driver}{section.3.4}% 24
+\BOOKMARK [2][-]{subsection.3.4.3}{Communication module}{section.3.4}% 25
+\BOOKMARK [1][-]{section.3.5}{System design}{chapter.3}% 26
+\BOOKMARK [2][-]{subsection.3.5.1}{Communication module}{section.3.5}% 27
+\BOOKMARK [2][-]{subsection.3.5.2}{Frontend driver}{section.3.5}% 28
+\BOOKMARK [2][-]{subsection.3.5.3}{Backend driver}{section.3.5}% 29
 \BOOKMARK [0][-]{chapter.4}{System Design and Implementation}{}% 30
 \BOOKMARK [1][-]{section.4.1}{Implementation Overview}{chapter.4}% 31
 \BOOKMARK [1][-]{section.4.2}{Implementation}{chapter.4}% 32
