@@ -212,4 +212,13 @@ The notification is not sent for production of each request and response. A doma
 \caption{Ring I/O buffer}
 \label{fig:Ring buffer}
 \end{figure}
+
+\subsubsection*{Shared pages}
+\label{subsec:sharedpages}
+\subsubsubsection*{Grant Table} 
+Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring frames between the domains. It is an interface for granting foreign access to machine frames and sharing memory between underprivileged domains provided by the Xen hypervisor. In Xen, each domain has a respective grant table data structure, which is shared with the Xen hypervisor. The grant table data structure is used by Xen to verify the access permission other domains have on the page allocated by a domain~\cite{granttable}.
+
+\subsubsubsection*{Grant References}
+Grant references are the entries in a grant table. A grant reference entry has every detail about the shared page. The Xen hypervisor virtualizes the physical memory, it is difficult to know the correct machine address of a frame for a domain. The biggest difficulty in sharing the memory between domains is knowing its correct machine address. A grant reference removes the dependency on the real machine address of the shared page. Hence, a grant entry makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462, granttable} 
+
 \ifbool{toShowBibliography}{\bibliography{references}}{}

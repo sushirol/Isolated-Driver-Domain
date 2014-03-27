@@ -73,7 +73,13 @@ In a Linux system, the device driver provides an interface to accept requests fr
 \end{figure}
 
 \subsection{Communication module}
-The communication module is the communication channel between the \textit{frontend driver} and the \textit{backend driver}. Unlike the \textit{backend driver} and the \textit{frontend driver}, the communication module is not a separate physical entity or a kernel module. It exists in the \textit{frontend driver} and the \textit{backend driver}. The communication channel is logically divided into three parts. The responsibility of the first part is to share the requests and responses between the driver domain and the application domain. The responsibility of the second part is to share the data of read/write requests/responses. The responsibility of the third part is to notify the domain upon the occurrence of a particular event. 
+\label{sub:communicationmodule}
+The communication module is the communication channel between the \textit{frontend driver} and the \textit{backend driver}. Unlike the \textit{backend driver} and the \textit{frontend driver}, the communication module is not a separate physical entity or a kernel module. It exists in the \textit{frontend driver} and the \textit{backend driver}. The communication channel is logically divided into three parts. 
+\begin{enumerate} 
+\item The responsibility of the first part is to share the requests and responses between the driver domain and the application domain.
+\item The responsibility of the second part is to share the data of read/write requests/responses.
+\item The responsibility of the third part is to notify the domain upon the occurrence of a particular event. 
+\end{enumerate}
 
 Figure~\ref{fig:communication} illustrates the role of the communication model. 
 \begin{figure}[!ht]

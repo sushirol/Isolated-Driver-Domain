@@ -82,13 +82,25 @@ In the setup, domain 0 is an application domain, and domain U is a driver domain
 \\[3mm]
 For loop device a similar setup is used where we create a loop device in a driver domain, and insert the backend driver in the driver domain. The front end driver is inserted in domain 0. For SATA disk, we passthrough SATA disk to driver domain, so that the driver domain can directly access the SATA disk. 
 \subsubsection*{Comparision}
-Figure~\ref{fig:threadvsspin} compares the performance of the base IDDR and the new IDDR with random reads-writes on a ramdisk. The figure shows that the new IDDR system implementation with spinlock performs better than the base IDDR implementation. 
+Figure~\ref{fig:threadvsspinram} compares the performance of the base IDDR and the new IDDR with random reads-writes on a ramdisk. The figure shows that the new IDDR system implementation with spinlock performs better than the base IDDR implementation. 
 \begin{figure}[!ht]
 \centering
-\includegraphics[scale=1]{threadvsspin}
-\caption{IDDR with Spinlock vs IDDR with event channel}
-\label{fig:threadvsspin}
+\includegraphics[scale=1]{threadvsspinram}
+\caption{IDDR with Spinlock vs IDDR with event channel (ramdisk)}
+\label{fig:threadvsspinram}
 \end{figure}
+
+
+
+\subsubsection*{Comparision}
+Figure~\ref{fig:threadvsspinloop} compares the performance of the base IDDR and the new IDDR with random reads on a loop device. The figure shows that the new IDDR system implementation with spinlock performs better than the base IDDR implementation. 
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=1]{threadvsspinloop}
+\caption{IDDR with Spinlock vs IDDR with event channel (loop device)}
+\label{fig:threadvsspinloop}
+\end{figure}
+
 
 % ref
 \ifbool{toShowBibliography}{\bibliography{references}}{}

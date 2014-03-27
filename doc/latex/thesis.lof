@@ -14,17 +14,18 @@
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{26}{figure.caption.22}
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{27}{figure.caption.23}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of modern OS\relax }}{31}{figure.caption.27}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the base IDDR system\relax }}{32}{figure.caption.28}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{33}{figure.caption.29}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of frontend and backend driver\relax }}{35}{figure.caption.30}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module\relax }}{36}{figure.caption.31}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Spinlock based new IDDR system\relax }}{40}{figure.caption.38}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of modern OS\relax }}{32}{figure.caption.27}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the base IDDR system\relax }}{33}{figure.caption.28}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{34}{figure.caption.29}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of frontend and backend driver\relax }}{36}{figure.caption.30}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module\relax }}{37}{figure.caption.31}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Spinlock based new IDDR system\relax }}{41}{figure.caption.38}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview\relax }}{43}{figure.caption.39}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{44}{figure.caption.41}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.41}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.42}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel\relax }}{64}{figure.caption.43}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.56}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.57}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (ramdisk)\relax }}{64}{figure.caption.58}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (loop device)\relax }}{65}{figure.caption.59}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
