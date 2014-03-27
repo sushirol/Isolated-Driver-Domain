@@ -23,9 +23,9 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{44}{figure.caption.41}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.56}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver\relax }}{62}{figure.caption.57}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (ramdisk)\relax }}{64}{figure.caption.58}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (loop device)\relax }}{65}{figure.caption.59}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces IDDR vs Xen split driver\relax }}{63}{figure.caption.56}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces IDDR vs Xen split driver\relax }}{63}{figure.caption.57}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (ramdisk)\relax }}{65}{figure.caption.58}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces IDDR with Spinlock vs IDDR with event channel (loop device)\relax }}{66}{figure.caption.59}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

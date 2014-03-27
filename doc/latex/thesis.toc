@@ -63,11 +63,10 @@
 \contentsline {subsection}{\numberline {4.2.3}Driver domain}{54}{subsection.4.2.3}
 \contentsline {chapter}{\numberline {5}Evaluation}{57}{chapter.5}
 \contentsline {section}{\numberline {5.1}Goals}{57}{section.5.1}
-\contentsline {section}{\numberline {5.2}Methodology}{58}{section.5.2}
-\contentsline {section}{\numberline {5.3}Xen split driver vs IDDR}{59}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Experimental setup}{60}{subsection.5.3.1}
-\contentsline {section}{\numberline {5.4}IDDR performance improvement}{63}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Experimental setup}{63}{subsection.5.4.1}
-\contentsline {chapter}{\numberline {6}Related Work}{66}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusion and Future Work}{68}{chapter.7}
-\contentsline {section}{\numberline {7.1}Contributions}{68}{section.7.1}
+\contentsline {section}{\numberline {5.2}Methodology}{59}{section.5.2}
+\contentsline {section}{\numberline {5.3}Xen split driver vs IDDR}{60}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Experimental setup}{61}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}IDDR performance improvement}{64}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Experimental setup}{64}{subsection.5.4.1}
+\contentsline {chapter}{\numberline {6}Related Work}{67}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusion}{69}{chapter.7}
