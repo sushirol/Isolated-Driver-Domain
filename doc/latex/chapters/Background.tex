@@ -1,10 +1,10 @@
-This section gives a background on operating system concepts such as Processes, threads, Memory protection, Virtualization and Hypervisor.
+This section gives a background on operating system concepts such as Processes, Threads, Memory Protection, Virtualization and Hypervisor.
 \section{Processes and threads}
-\paragraph{Process:} Process is a program in execution or an abstraction of a running program. Process can be called as the most central concept in an operating system~\cite{Galvin}.
+\paragraph{Process:} Process is a program in execution or an abstraction of a running program. Process can be considered as the most central concept in an operating system~\cite{Galvin}.
 
-\paragraph{Threads:} Each process has an address space. A process has either single or multiple threads of control in that same address space. Threads run as if they were separate processes although they share the address space~\cite{Galvin}.
+\paragraph{Threads:} Each process has an address space. A process has either single or multiple threads of control in that same address space. Threads run as if they were separate processes, although they share the address space~\cite{Galvin}.
 \\
-Thread is also called as a light-weight process. The implementation of threads and processes differ in each operating system, but in most cases, thread is contained inside a process. Multiple threads can exist within the same process and share resources such as code, and data segment, while different processes do not share these resources. If a process has multiple threads then it can perform more than one task at a time.
+A thread is also called a light-weight process. The implementation of threads and processes differ in each operating system, but in most cases, a thread is contained inside a process. Multiple threads can exist within the same process and share resources such as code and data segment, while different processes do not share these resources. If a process has multiple threads then it can perform more than one task at a time.
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -22,61 +22,63 @@ Thread is also called as a light-weight process. The implementation of threads a
 \end{figure}
 
 \subsection{Context Switch}
-Multithreading is implemented by time division multiplexing on a single processor. In time division multiplexing, the processor switches between different threads. The switch between threads is called as the context switch. The context switch makes the user feel that the threads or tasks are running concurrently. However, on a multi-processor system, threads can run truly concurrently, with every processor or core executing a separate thread simultaneously. 
+Multithreading is implemented by time division multiplexing on a single processor. In time division multiplexing, the processor switches between different threads. The switch between threads is called the context switch. The context switch makes the user feel that the threads or tasks are running concurrently. However, on a multi-processor system, threads can run truly concurrently, with every processor executing a separate thread simultaneously. 
 \\
-In a context switch the state of a process is stored and restored, so that the execution can be resumed from the same point at a later time. The state of the process is also called as a context. The context is determined by the processor and the operating system. Context switching makes it possible for multiple processes or threads to share a single processor. Usually context switches are computationally intensive. Switching between two process requires good amount of computation and time, to save and load registers, memory maps, and updating various tables~\cite{Galvin} .
+In a context switch the state of a process is stored and restored, so that the execution can be resumed from the same point at a later time. The state of the process is also called a context. The context is determined by the processor and the operating system. Context switching makes it possible for multiple processes or threads to share a single processor. Usually context switches are computationally intensive. Switching between two process requires good amount of computation and time, by saving and loading registers, maping the memory, and updating various tables~\cite{Galvin} .
 
 \subsection{Spinlocks}
-Spinlock is one of the locking mechanisms designed to work in a multi-processing environment. Spinlock causes a thread trying to acquire the lock to spin in case of unavailability of it. Spinlocks are similar to the semaphores, except that when a process finds the lock closed by another process, it spins around continuously till it obtains the lock. Spinning is implemented by executing an instruction in a loop~\cite{Bovet:2005:ULK:1077084}.
+Spinlock is one of the locking mechanisms designed to work in a multi-processing environment. Spinlock causes a thread that is trying to acquire the lock to spin in case of unavailability of it. Spinlocks are similar to the semaphores, except that when a process finds the lock closed by another process, it spins around continuously until it obtains the lock. Spinning is implemented by executing an instruction in a loop~\cite{Bovet:2005:ULK:1077084}.
 \\[3mm]
-In a uniprocessor environment, the waiting process keeps spinning for the lock. However, the other process holding the lock might not have a chance to release it, because of which spin lock could deteriorate the performance in a uniprocessor environment. In a multi-processor environment, spinlocks can be more efficient. On the other hand, a context switch takes a significant amount of time. In a multi-processor environment, it is more efficient for each process to keep its own CPU and spin while waiting for the resource~\cite{Bovet:2005:ULK:1077084}. As a spinlock avoid overhead of re-scheduling and context switching, it can be more efficient if threads are likely to be blocked for a short period. For same reason, spinlocks are often used inside operating system kernels.
+In a uniprocessor environment, the waiting process keeps spinning for the lock. As the other process holding the lock might not have a chance to release it, the spinlock could deteriorate the performance in a uniprocessor environment. Howerver, in a multi-processor environment spinlocks can be more efficient. 
+\\[3mm] 
+In uniprocessor and multiprocessor environment, a context switch takes a significant amount of time. In a multi-processor environment, it is more efficient for each process to keep its own CPU and spin while waiting for the resource~\cite{Bovet:2005:ULK:1077084}. As a spinlock avoids the overhead of re-scheduling and context switching, spinning for a short time can be more efficient than a context switch. For the same reason, spinlocks are often used inside operating system kernels.
 \\[3mm]
-\textbf{Adaptive Spinning} is a spinlock optimization technique. In the adaptive spinning technique, the duration of the spin is determined by policy decisions based on the rate of success and failure of recent spin attempts on the same lock. Adaptive spinning helps thread to avoid spinning in futile conditions.
+\textbf{Adaptive Spinning} is a spinlock optimization technique. In the adaptive spinning technique, the duration of the spin is determined by policy decisions based on the rate of success and failure of recent spin attempts on the same lock. Adaptive spinning helps threads to avoid spinning in futile conditions.
 
 \section{Device driver}
 \label{sec:device driver}
-A device driver is a program that provides a software interface to a particular hardware device. It enables the operating system and other programs to access the hardware functions. Device drivers are hardware dependent and operating system specific. When a program invokes a routine in the driver, the driver issues commands to the device. After execution, the device sends data back to the driver. The driver may invoke routines in the original calling program after recieving the data. The Linux distinguishes between three fundamental device types: Character device, Block device and Network interface. Each kernel module usually implements one of these types.
-\subsection{Block device driver}
+A device driver is a program that provides a software interface to a particular hardware device. It enables the operating system and other programs to access the hardware functions. Device drivers are hardware dependent and operating system specific. When a program invokes a routine in the driver, the driver issues commands to the device. After execution, the device sends data back to the driver. The driver may invoke routines in the original calling program after recieving the data. The Linux distinguishes between three fundamental device types: character device, block device and network interface. Each kernel module usually implements one of these types.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5 ]{kernel}
 \caption{Split view of a kernel}
 \label{fig:kernel}
 \end{figure}
-\paragraph{Character devices:} A character device can be accessed as a stream of bytes. A character driver implements this behavior of the character device . A character driver usually implements at least the open, close, read, and write system calls. The text console (/dev/console) and the serial ports (/dev/ttyS0) are examples of character devices.
+\paragraph{Character devices:} A character device can be accessed as a stream of bytes. A character driver implements this behavior of the character device. A character driver usually implements at least the open, close, read, and write system calls. The text console (/dev/console) and the serial ports (/dev/ttyS0) are examples of character devices.
 
-\paragraph{Network interfaces:} Network interface is a device that is able to exchange data with other hosts. Usually, a network interface is a hardware device, but it can be a software device like the loopback interface. 
+\paragraph{Network interfaces:} A network interface is a device that is able to exchange data with other hosts. Usually, a network interface is a hardware device, but it can be a software device like the loopback interface. 
 
-\paragraph{Block devices:} A block device is a device that can host a filesystem. Block devices are accessed by filesystem nodes in the /dev directory.  In most unix implementation, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write a block device the transfer of any number of bytes at a time. As a result, block and char devices differ only in the way data is managed internally by the kernel, and thus block drivers have a completely different interface to the kernel than char drivers. Examples of a block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
+\paragraph{Block devices:} A block device is a device that can host a filesystem. Block devices are accessed by filesystem nodes in the /dev directory. In most unix implementations, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write any number of bytes on a block device. As a result, block and char devices differ only in the way data is managed internally by the kernel, and thus block drivers have a completely different interface than char drivers. Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
 
-\subsection*{Request processing in a block device driver}
+\subsection{Block device driver}
+\subsubsection*{Request processing in a block device driver}
 \label{subsec:request queue}
-The core of every block driver is its request function. The request function is called whenever the driver needs to process reads, writes, or other operations on the device. The request function does not need to actually complete all of the requests on the queue before it returns. However, it ensures that all the requests are eventually processed by the driver. The block device driver request method accepts a parameter, a pointer to the request queue. Every device has a separate request queue. A spinlock is needed as part of the queue creation process. A request function of the device is associated with the request queue in its creation process. The kernel hold the spinlock, whenever the request function is called. As a result, the request function runs in an atomic context.
+The core of every block driver is its request function. The request function is called whenever the driver needs to process reads, writes, or other operations on the device. The request function does not need to actually complete all of the requests on the queue before it returns. However, it ensures that all the requests are eventually processed by the driver. The block device driver request method accepts a parameter which acts as a pointer to the request queue. Every device has a separate request queue. A spinlock is needed as part of the request queue creation process. A request function of the device is associated with the request queue in its creation process. The kernel holds the spinlock whenever the request function is called. As a result, the request function runs in an atomic context.
 \\[3mm]
 Each request structure represents one block I/O request, however, it might be formed through a merger of several independent requests at a higher level.
 The kernel may join multiple requests that involve adjacent sectors on the disk, but it never combines read and write operations within a single request structure. A request structure is implemented as a linked list of bio structures. The bio structure is a low-level description of a portion of a block I/O request~\cite{Corbet:2005:LDD:1209083}.
 
-\paragraph{The bio structure}
-The kernel describes a read or write operation of a block device in the form of a bio structure. The bio structure has a everything that a block device driver needs to execute the request, without referencing to the user space process that caused the request to be initiated. After creation, the bio structure is handed to the block I/O code. The block I/O code merges the bio structure into an existing request structure otherwise it creates a new request~\cite{Corbet:2005:LDD:1209083}. 
+\subsubsection*{The bio structure}
+The kernel describes a read or write operation of a block device in the form of a bio structure. The bio structure has a everything that a block device driver needs to execute the request, without reffering to the user space process that caused the request to be initiated. After creation, the bio structure is handed to the block I/O code. The block I/O code merges the bio structure into an existing request structure, otherwise it creates a new request~\cite{Corbet:2005:LDD:1209083}. 
 
 \section{Memory protection}
-The memory protection mechanism of computer systems control the access to objects. The main goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that each shared resource is used only in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage. However, memory protection systems only provide the mechanisms for enforcing policies and ensuring reliable systems. It is up to the administrators, programmers and users to implement those mechanisms~\cite{Galvin, Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level} and subsection~\ref{subsec:kernel level} explain the policies implemented at kernel level and user level. 
+The memory protection mechanism of a computer system controls the access to objects. The main goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that each shared resource is used only in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage. However, memory protection systems only provide the mechanisms for enforcing policies and ensuring reliable systems. It is up to the administrators, programmers and users to implement those mechanisms~\cite{Galvin, Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level} and subsection~\ref{subsec:kernel level} explain the policies implemented at kernel level and user level. 
 
 \subsection{User level}
 \label{subsec:user level}
-Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved for user processes. The upper \texttt{Virtual Memory size - X Gb}  is reserved for kernel. This upper \texttt{VM-X Gb} is restricted to \texttt{CPL 0} only. The kernel puts its private data structures in the upper memory and always accesses them at the same virtual address. 
+Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved for user processes. The upper \texttt{Virtual Memory size - X Gb} is reserved for the kernel. This upper \texttt{VM-X Gb} is restricted to \texttt{CPL 0} only. The kernel puts its private data structures in the upper memory and always accesses them at the same virtual address. 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.25 ]{memory_map}
 \caption{Physical memory}
 \label{fig:memmap}
 \end{figure}
-At user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entry. If a process tries to access virtual address which is out of \texttt{base + bound} address, then error is reported by the operating system, otherwise physical address \texttt{base + virtual address} is returned. This allows multiple processes to be in memory with protection. Since address translation provides protection, a process cannot access to the address outside its address space.
+At the user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entry. If a process tries to access virtual address that is outside the \texttt{base + bound} address, then an error is reported by the operating system, otherwise the physical address \texttt{base + virtual address} is returned. This allows multiple processes to be run in the memory with protection. Since address translation provides protection, a process canot access the address outside its address space.
 \\[3mm]
 Consider an example in Figure~\ref{fig:User space}.
 \begin{enumerate}
 \item The system is running 3 different processes in a user space.
-\item One of the process hits a bug and tries to corrupt the memory out of the address space.
+\item One of the processes hits a bug and tries to corrupt the memory outside the address space.
 \item Access to the address is restricted by the memory protection mechanism.
 \begin{figure}[!ht]
     \centering
@@ -95,12 +97,12 @@ Consider an example in Figure~\ref{fig:User space}.
 
 \subsection{kernel level}
 \label{subsec:kernel level}
-Kernel reserves upper \texttt{Virtual memory size - X Gb} of virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two regions. First region contains page table references to every page in the system. It is used to do translation of address from physical to virtual when kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of kernel memory is used by the memory allocator, the allocated memory is mapped by kernel modules. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at \texttt{CPL 0} can access the kernel memory, and hence a kernel component can access, and potentially, corrupt the kernel data structures. 
+Kernel reserves upper \texttt{Virtual memory size - X Gb} of virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two regions. First region contains page table references to every page in the system. It is used to do translations of addresses from physical to virtual when the kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of the kernel memory is used by the memory allocator, the allocated memory is mapped by kernel modules. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at \texttt{CPL 0} can access the kernel memory, hence a kernel component can access, and potentially, corrupt the kernel data structures. 
 \\[3mm]
 Consider an example shown in the Figure~\ref{fig:Kernel space}.
 \begin{enumerate}
-\item The system runs 3 different processes in the user space and has different kernel components running in kernel space.
-\item The network driver hits a bug, and corrupts a kernel data structure. The corruption might lead to a system crash.
+\item The system runs 3 different processes in the user space and has different kernel components running in the kernel space.
+\item The network driver hits a bug, and corrupts the kernel data structure. The corruption might lead to a system crash.
 \end{enumerate}
 \begin{figure}[!ht]
     \centering
@@ -117,9 +119,9 @@ Consider an example shown in the Figure~\ref{fig:Kernel space}.
 \end{figure}
 
 \section{Virtualization}
-Virtualization, is the act of creating a virtual version of hardware platform, storage device, or computer network resources etc. In an operating system virtualization, the software allows a hardware to run multiple operating system images at the same time.
+Virtualization is the act of creating a virtual version of a hardware platform, storage device, or computer network resource etc. In an operating system virtualization, the software allows a hardware to run multiple operating system images at the same time.
 \\[3mm]
-Virtualization has the capability to share the underlying hardware resources and still provide isolated environment to each operating system. In virtualization, each operating system runs independently from the other on its own virtual processors. Because of this isolation the failures in an operating system are contained. Virtualization is implemented in many different ways. It can be implemented either with or without hardware support. Also operating system might require some changes in order to run in a virtualized environment~\cite{Drepper:2008:CV:1348583.1348591}. It has been shown that virtualization can be utilized to provide better security and robustness for operating systems~\cite{Fraser04safehardware, LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
+Virtualization has the capability to share the underlying hardware resources and still provide an isolated environment to each operating system. In virtualization, each operating system runs independently from the other on its own virtual processors. Because of this isolation the failures in an operating system are contained. Virtualization is implemented in many different ways. It can be implemented either with or without hardware support. Also operating systems might require some changes in order to run in a virtualized environment~\cite{Drepper:2008:CV:1348583.1348591}. It has been shown that virtualization can be utilized to provide better security and robustness for operating systems~\cite{Fraser04safehardware, LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -137,34 +139,32 @@ Virtualization has the capability to share the underlying hardware resources and
 \end{figure}
 
 \subsection{Hypervisor}
-Hypervisor is a piece of computer software, firmware or hardware that creates and runs virtual machines. Operating system virtualization is achieved by inserting a hypervisor between the guest operating system and the underlying hardware. Most of the literature presents hypervisor synonymous to a virtual machine monitor (VMM). While, VMM is a software layer specifically responsible for virtualizing a given architecture, and a hypervisor is an operating system with a VMM. The operating system may be a general purpose one, such as Linux, or it may be developed specifically for the purpose of running virtual machines~\cite{Agesen:2010:EXV:1899928.1899930}.
+Hypervisor is a piece of computer software, firmware or hardware that creates and runs virtual machines. Operating system virtualization is achieved by inserting a hypervisor between the guest operating system and the underlying hardware. Most of the literature presents hypervisor synonymous to a virtual machine monitor (VMM). While, VMM is a software layer specifically responsible for virtualizing a given architecture, a hypervisor is an operating system with a VMM. The operating system may be a general purpose one, such as Linux, or it may be developed specifically for the purpose of running virtual machines~\cite{Agesen:2010:EXV:1899928.1899930}.
 \\[3mm]
-A computer on which a hypervisor is running one or more virtual machines, is defined as a host machine. Each virtual machine is called a guest machine. The hypervisor presents the guest operating systems with a virtual operating platform and manages the execution of the guest operating systems. Multiple instances of a variety of operating systems may share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{Barham:2003:XAV:1165389.945462, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity07kvm}, VMware ESX~\cite{Agesen:2010:EXV:1899928.1899930},and VirtualBox~\cite{citeulike:3149886}.
+A computer on which a hypervisor is running one or more virtual machines is defined as a host machine. Each virtual machine is called a guest machine. The hypervisor presents the guest operating systems with a virtual operating platform and manages the execution of the guest operating systems. Multiple instances of a variety of operating systems share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{Barham:2003:XAV:1165389.945462, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity07kvm}, VMware ESX~\cite{Agesen:2010:EXV:1899928.1899930} and VirtualBox~\cite{citeulike:3149886}.
 \\[3mm]
 There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
-\begin{description}
-\item Type 1 hypervisors are also called as native hypervisors or bare metal hypervisors. Type 1 hypervisor runs directly on the host's hardware to control the hardware and to manage guest operating systems. A guest operating-system, thus, runs on another level above the hypervisor. Type 1 hypervisor represents the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{Barham:2003:XAV:1165389.945462}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
-\end{description}
+\begin{itemize}
+\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. A guest operating-system, thus, runs on another level above the hypervisor. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{Barham:2003:XAV:1165389.945462}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.35]{type1}
 \caption{Type 1 hypervisor}
 \label{Type 1 hypervisor}
 \end{figure}
-\begin{description}
-\item Type 2 hypervisors are also called as hosted hypervisors. Type 2 hypervisor runs within a conventional operating-system environment. Type 2 hypervisor runs at a distinct second software level whereas, guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, citeulike:3149886}.
-\end{description}
+\item Type 2 hypervisors are also called hosted hypervisors. Type 2 hypervisors run within a conventional operating-system environment. Type 2 hypervisors run at a distinct second software level, whereas guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, citeulike:3149886}.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.4]{type2}
 \caption{Type 2 hypervisor}
 \label{fig:Type 2 hypervisor}
 \end{figure}
+\end{itemize}
 
 \subsection{Xen Hypervisor}
-Xen~\cite{Barham:2003:XAV:1165389.945462} is a widely known Type 1 hypervisor that allows execution of virtual machines in guest domains~\cite{King_operatingsystem}. Figure~\ref{fig:Type 2 hypervisor} represents a diagram showing the different layers of a Type 1 hypervisor system. The hypervisor itself forms the lowest layer, which consists of the hypervisor kernel and the Virtual Machine Monitors. The kernel has direct access to the hardware and is responsible for resource allocation, resource scheduling and resource sharing. A hypervisor is a layer responsible for virtualizing and providing resources to a given operating system.
+Xen~\cite{Barham:2003:XAV:1165389.945462} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{King_operatingsystem}. Figure~\ref{fig:Type 2 hypervisor} represents a diagram showing the different layers of a Type 1 hypervisor system. The hypervisor itself forms the lowest layer, which consists of the hypervisor kernel and the virtual machine monitors. The kernel has direct access to the hardware and is responsible for resource allocation, resource scheduling and resource sharing. A hypervisor is a layer responsible for virtualizing and providing resources to a given operating system.
 \\[3mm]
-The purpose of a hypervisor is to allow guests to be run. Xen runs guests in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Other unprivileged domains are called as domain U. Xen hypervisor does not include device drivers. Device management is included in privileged domain \texttt{domain 0}. \texttt{Domain 0} uses the device drivers which are present in its guest kernel implementation. However, \texttt{domain U} accesses devices using a split device driver architecture. In the split device architecture a front end driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
+The purpose of a hypervisor is to allow guest operating systems to be run. Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Other unprivileged domains are called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. However, \texttt{domain U} accesses devices using a split device driver architecture. In the split device driver architecture a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
 \\
 Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} guest writes a data on the physical device. First, it travels through the file system as it would normally. However, at the end of the stack the normal block device driver does not exist. Instead, a simple piece of code called the frontend puts the data into the shared memory. The other half of the split device driver called the backend, running in the \texttt{domain 0} guest, reads the data from the buffer, sends it way down to the real device driver. The data is written on actual physical device. In conclusion, split device driver can be explained as a way to move data from the \texttt{domain U} guests to the \texttt{domain 0} guest, usually using ring buffers in shared memory~\cite{Chisnall:2007:DGX:1407351}.
 \begin{figure}[!h]
