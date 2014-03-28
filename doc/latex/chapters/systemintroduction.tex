@@ -1,24 +1,24 @@
 \section{Design Goal}\label{sec:goals}
-The goal of the IDDR system is to provide full isolation between a device driver and the monolithic kernel, and at the same time avoid modifications to the device driver code. The goal of the thesis is to minimize the performance penalty because of the communication between the domains. In the thesis, we explore opportunities to minimize the overhead of the communication module in the IDDR system.
+The goal of the IDDR system is to provide full isolation between a device driver and the monolithic kernel and at the same time avoid modifications to the device driver code. The goal of the thesis is to minimize the performance penalty because of the communication between the domains. In the thesis, we explore opportunities to minimize the overhead of the communication module in the IDDR system.
 
-\subsection*{Performance improvement}
-The IDDR system is a re-implementation of the Xen's isolated driver domain. Even though the IDDR system provides better robustness for the operating system, it deteriorates the performance. The reasons for the performance deterioration can be due to the introduction of hypervisor, data copy overhead or overhead of communication between the domains. 
+\subsection*{Performance Improvement}
+The IDDR system is a re-implementation of the Xen's isolated driver domain. Even though the IDDR system provides better robustness for the operating system, it deteriorates the performance. The reasons for the performance deterioration is due to the introduction of hypervisor, data copy overhead or overhead of communication between the domains. 
 
-\paragraph{Hypervisor layer: } The IDDR system uses Xen hypervisor as a virtualization platform. Xen hypervisor is a Type 1 hypervisor. Type 1 hypervisor runs directly on the host's hardware. It runs between the operating system and the hardware. In Xen, the hypervisor runs in ring 0, while guest OS runs in ring 1 and applications run in ring 3. For hardware access, the guest OS has to go through the hypervisor, which degrades the performance of the system
+\paragraph{Hypervisor Layer: } The IDDR system uses Xen hypervisor as a virtualization platform. Xen hypervisor is a Type 1 hypervisor. A type 1 hypervisor runs directly on the host's hardware. It runs between the operating system and the hardware. In Xen, the hypervisor runs in ring 0, while guest OS runs in ring 1 and applications run in ring 3. For hardware access, the guest OS has to go through the hypervisor, which degrades the performance of the system
 
-\paragraph{Copy overhead: } For data intensive operations such as read and write, the IDDR system transfers data between the hardware and the driver domain. It also transfers the same data between the driver domain and the application domain. The extra copy from the driver domain to the application domain is also one of the reasons for the performance degradation of the system. 
+\paragraph{Copy Overhead: } For data intensive operations such as read and write, the IDDR system transfers data between the hardware and the driver domain. It also transfers the same data between the driver domain and the application domain. The extra copy from the driver domain to the application domain is also one of the reasons for the performance degradation of the system. 
 
-\paragraph{Communication channel overhead: } The IDDR system runs a device driver in a separate domain called the driver domain. The domain executing user applications and the driver domain communicate with each other in order to send requests and get responses from the device driver. The communication between domains add an overhead to the system performance. Our goal is to minimize the overhead during communication between the driver domain and the application domain.
+\paragraph{Communication Channel Overhead: } The IDDR system runs a device driver in a separate domain called the driver domain. The application domain and the driver domain communicate with each other in order to send requests and get responses from the device driver. The communication between domains add an overhead to the system performance. Our goal is to minimize the overhead during communication between the driver domain and the application domain.
 
-\section{Isolated Device Driver properties}
+\section{Isolated Device Driver Properties}
 \label{sec:properties}
-The section covers the properties of the base IDDR system. As we are explore the opportunities to improve the performance of the base IDDR system, it is necessary that these properties are not compromised.
+This section covers the properties of the base IDDR system. As we are explore the opportunities to improve the performance of the base IDDR system, it is necessary that these properties are not compromised.
 
 \subsection*{Strong isolation}
-One of the main properties of the IDDR system is strong isolation. The IDDR system adds an extra layer of isolation in the design which provides fault isolation between kernel and the device driver. The strong isolation also adds the ability to manage device drivers independently, thus, increasing the availability of the system during maintenance of a device driver.
+One of the main properties of the IDDR system is strong isolation. The IDDR system adds an extra layer of isolation in the design which provides fault isolation between the kernel and the device driver. The strong isolation also adds the ability to manage device drivers independently, thus, increasing the availability of the system during maintenance of a device driver.
 
-\subsection*{Compatibility and transparency} 
-The extension of existing OS structure usually results in a large number of broken applications. For example, in the microkernel architecture the functional units of an OS were divided into discrete parts in order to achieve the isolation between the kernel components. As a result, the APIs visible to applications were changed~\cite{Heiser06arevirtualmachine}, which broke the large number of applications. In order to provide compatibility with applications, many microkernel architectures provided an emulation layer~\cite{Heiser06arevirtualmachine} for the OSes. The IDDR system maintains compatibility between existing device drivers and applications.
+\subsection*{Compatibility and Transparency} 
+The extension of existing OS structures usually results in a large number of broken applications. As a specific example, in the microkernel architecture the functional units of an OS were divided into discrete parts in order to achieve the isolation between the kernel components. As a result, the APIs visible to applications were changed~\cite{Heiser06arevirtualmachine}, which broke the large number of applications. In order to provide compatibility with applications, many microkernel architectures provided an emulation layer~\cite{Heiser06arevirtualmachine} for the OSes. The IDDR system maintains compatibility between existing device drivers and applications.
 
 \section{System overview}\label{overview}
 
@@ -36,7 +36,8 @@ Figure~\ref{fig:monolithic} shows the architectural overview of the modern opera
 \caption{Architectural overview of the base IDDR system}
 \label{fig:base IDDR system overview}
 \end{figure}
-The Figure~\ref{fig:base IDDR system} shows that the IDDR system partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Multiple domains run on a same hardware with the help of a VMM. User applications or kernel components access the hardware through the device driver domain.
+\\[3mm]
+The Figure~\ref{fig:base IDDR system overview} shows that the IDDR system partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Multiple domains run on a same hardware with the help of a VMM. User applications or kernel components access the hardware through the device driver domain.
 \\[3mm]
 As the section~\ref{sec:goals} describe the goal of the IDDR system is to provide the isolation between the device driver and the kernel. However a device driver is dependent on the kernel components such as a scheduler and memory management unit. In order to remove the dependency, the device driver runs closely with another instance of a kernel. Even though the dependency is removed, it is not possible to run multiple kernels over the common hardware without a virtual machine monitor. Thus, a VMM is introduced in the design to run multiple kernels on a common hardware. 
 
