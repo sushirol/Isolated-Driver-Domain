@@ -10,11 +10,10 @@
 \contentsline {subsection}{\numberline {2.1.1}Context Switch}{10}{subsection.2.1.1}
 \contentsline {subsection}{\numberline {2.1.2}Spinlocks}{11}{subsection.2.1.2}
 \contentsline {section}{\numberline {2.2}Device driver}{12}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Block device driver}{13}{subsection.2.2.1}
-\contentsline {paragraph}{Character devices:}{13}{section*.10}
+\contentsline {paragraph}{Character devices:}{12}{section*.10}
 \contentsline {paragraph}{Network interfaces:}{13}{section*.11}
-\contentsline {paragraph}{Block devices:}{14}{section*.12}
-\contentsline {paragraph}{The bio structure}{15}{section*.13}
+\contentsline {paragraph}{Block devices:}{13}{section*.12}
+\contentsline {subsection}{\numberline {2.2.1}Block device driver}{14}{subsection.2.2.1}
 \contentsline {section}{\numberline {2.3}Memory protection}{15}{section.2.3}
 \contentsline {subsection}{\numberline {2.3.1}User level}{16}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}kernel level}{17}{subsection.2.3.2}
@@ -23,9 +22,9 @@
 \contentsline {subsection}{\numberline {2.4.2}Xen Hypervisor}{21}{subsection.2.4.2}
 \contentsline {chapter}{\numberline {3}System Introduction}{29}{chapter.3}
 \contentsline {section}{\numberline {3.1}Design Goal}{29}{section.3.1}
-\contentsline {paragraph}{Hypervisor layer: }{30}{section*.24}
-\contentsline {paragraph}{Copy overhead: }{30}{section*.25}
-\contentsline {paragraph}{Communication channel overhead: }{30}{section*.26}
+\contentsline {paragraph}{Hypervisor layer: }{30}{section*.23}
+\contentsline {paragraph}{Copy overhead: }{30}{section*.24}
+\contentsline {paragraph}{Communication channel overhead: }{30}{section*.25}
 \contentsline {section}{\numberline {3.2}Isolated Device Driver properties}{31}{section.3.2}
 \contentsline {section}{\numberline {3.3}System overview}{32}{section.3.3}
 \contentsline {section}{\numberline {3.4}System components}{34}{section.3.4}
@@ -34,32 +33,32 @@
 \contentsline {subsection}{\numberline {3.4.3}Communication module}{36}{subsection.3.4.3}
 \contentsline {section}{\numberline {3.5}System design}{37}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Communication module}{37}{subsection.3.5.1}
-\contentsline {paragraph}{Base IDDR system design}{38}{section*.32}
-\contentsline {paragraph}{Spinlock based IDDR system}{38}{section*.33}
+\contentsline {paragraph}{Base IDDR system design}{38}{section*.31}
+\contentsline {paragraph}{Spinlock based IDDR system}{38}{section*.32}
 \contentsline {subsection}{\numberline {3.5.2}Frontend driver}{39}{subsection.3.5.2}
-\contentsline {paragraph}{base IDDR system design}{39}{section*.34}
-\contentsline {paragraph}{Spinlock based IDDR system}{39}{section*.35}
+\contentsline {paragraph}{base IDDR system design}{39}{section*.33}
+\contentsline {paragraph}{Spinlock based IDDR system}{39}{section*.34}
 \contentsline {subsection}{\numberline {3.5.3}Backend driver}{40}{subsection.3.5.3}
-\contentsline {paragraph}{Base IDDR system design}{40}{section*.36}
-\contentsline {paragraph}{Spinlock based IDDR system}{40}{section*.37}
+\contentsline {paragraph}{Base IDDR system design}{40}{section*.35}
+\contentsline {paragraph}{Spinlock based IDDR system}{40}{section*.36}
 \contentsline {chapter}{\numberline {4}System Design and Implementation}{42}{chapter.4}
 \contentsline {section}{\numberline {4.1}Implementation Overview}{42}{section.4.1}
 \contentsline {section}{\numberline {4.2}Implementation}{44}{section.4.2}
 \contentsline {subsection}{\numberline {4.2.1}Communication component}{44}{subsection.4.2.1}
-\contentsline {paragraph}{Shared request and response queue}{45}{section*.42}
-\contentsline {paragraph}{Shared memory for read/write data}{46}{section*.43}
-\contentsline {paragraph}{Event notification}{46}{section*.44}
-\contentsline {paragraph}{Shared request and response queue}{47}{section*.45}
-\contentsline {paragraph}{Shared memory for read/write data}{47}{section*.46}
-\contentsline {paragraph}{Threads and event notification}{48}{section*.47}
+\contentsline {paragraph}{Shared request and response queue}{45}{section*.41}
+\contentsline {paragraph}{Shared memory for read/write data}{46}{section*.42}
+\contentsline {paragraph}{Event notification}{46}{section*.43}
+\contentsline {paragraph}{Shared request and response queue}{47}{section*.44}
+\contentsline {paragraph}{Shared memory for read/write data}{47}{section*.45}
+\contentsline {paragraph}{Threads and event notification}{48}{section*.46}
 \contentsline {subsection}{\numberline {4.2.2}Application domain}{50}{subsection.4.2.2}
-\contentsline {paragraph}{Initialization}{51}{section*.48}
-\contentsline {paragraph}{Dequeue and submit request}{52}{section*.49}
-\contentsline {paragraph}{End request}{52}{section*.50}
-\contentsline {paragraph}{Initialization}{53}{section*.51}
-\contentsline {paragraph}{Dequeue and submit request}{53}{section*.52}
-\contentsline {paragraph}{Spinning the main thread}{54}{section*.53}
-\contentsline {paragraph}{End request}{54}{section*.54}
+\contentsline {paragraph}{Initialization}{51}{section*.47}
+\contentsline {paragraph}{Dequeue and submit request}{52}{section*.48}
+\contentsline {paragraph}{End request}{52}{section*.49}
+\contentsline {paragraph}{Initialization}{53}{section*.50}
+\contentsline {paragraph}{Dequeue and submit request}{53}{section*.51}
+\contentsline {paragraph}{Spinning the main thread}{54}{section*.52}
+\contentsline {paragraph}{End request}{54}{section*.53}
 \contentsline {subsection}{\numberline {4.2.3}Driver domain}{54}{subsection.4.2.3}
 \contentsline {chapter}{\numberline {5}Evaluation}{57}{chapter.5}
 \contentsline {section}{\numberline {5.1}Goals}{57}{section.5.1}
