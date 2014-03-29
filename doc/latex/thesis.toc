@@ -22,17 +22,17 @@
 \contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{22}{subsection.2.6.2}
 \contentsline {chapter}{\numberline {3}System Introduction}{30}{chapter.3}
 \contentsline {section}{\numberline {3.1}Design Goal}{30}{section.3.1}
-\contentsline {paragraph}{Hypervisor layer: }{31}{section*.23}
-\contentsline {paragraph}{Copy overhead: }{31}{section*.24}
-\contentsline {paragraph}{Communication channel overhead: }{31}{section*.25}
-\contentsline {section}{\numberline {3.2}Isolated Device Driver properties}{32}{section.3.2}
+\contentsline {paragraph}{Hypervisor Layer: }{31}{section*.23}
+\contentsline {paragraph}{Copy Overhead: }{31}{section*.24}
+\contentsline {paragraph}{Communication Channel Overhead: }{31}{section*.25}
+\contentsline {section}{\numberline {3.2}Isolated Device Driver Properties}{32}{section.3.2}
 \contentsline {section}{\numberline {3.3}System overview}{33}{section.3.3}
 \contentsline {section}{\numberline {3.4}System components}{35}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Front end driver}{35}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.1}Front end driver}{36}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Back end driver}{36}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}Communication module}{37}{subsection.3.4.3}
 \contentsline {section}{\numberline {3.5}System design}{38}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Communication module}{38}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3.5.1}Communication module}{39}{subsection.3.5.1}
 \contentsline {paragraph}{Base IDDR system design}{39}{section*.31}
 \contentsline {paragraph}{Spinlock based IDDR system}{39}{section*.32}
 \contentsline {subsection}{\numberline {3.5.2}Frontend driver}{40}{subsection.3.5.2}
