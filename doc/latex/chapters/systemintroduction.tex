@@ -23,6 +23,7 @@ The extension of existing OS structures usually results in a large number of bro
 \section{System overview}\label{overview}
 
 Figure~\ref{fig:monolithic} shows the architectural overview of the modern operating system with a monolithic kernel and the architectural overview of the IDDR system is presented in Figure~\ref{fig:base IDDR system overview}.
+\\[3mm]
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{OSoverview}
@@ -36,7 +37,6 @@ Figure~\ref{fig:monolithic} shows the architectural overview of the modern opera
 \caption{Architectural overview of the base IDDR system}
 \label{fig:base IDDR system overview}
 \end{figure}
-\\[3mm]
 The Figure~\ref{fig:base IDDR system overview} shows that the IDDR system partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called as the \textit{application domain}. The device driver which needs to be isolated from the kernel, executes in the separate domain called as the \textit{driver domain}. Multiple domains run on a same hardware with the help of a VMM. User applications or kernel components access the hardware through the device driver domain.
 \\[3mm]
 As the section~\ref{sec:goals} describe the goal of the IDDR system is to provide the isolation between the device driver and the kernel. However a device driver is dependent on the kernel components such as a scheduler and memory management unit. In order to remove the dependency, the device driver runs closely with another instance of a kernel. Even though the dependency is removed, it is not possible to run multiple kernels over the common hardware without a virtual machine monitor. Thus, a VMM is introduced in the design to run multiple kernels on a common hardware. 
