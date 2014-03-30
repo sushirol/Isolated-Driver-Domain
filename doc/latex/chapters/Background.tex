@@ -50,7 +50,7 @@ A device driver is a program that provides a software interface to a particular 
 
 \paragraph{Block Devices:} A block device is a device that can host a filesystem. Block devices are accessed by filesystem nodes in the /dev directory. In most unix implementations, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write any number of bytes on a block device. As a result, block and char devices differ only in the way data is managed internally by the kernel, and thus block drivers have a completely different interface than char drivers. Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
 
-\subsection{Block Device Driver}
+\subsection*{Block Device Driver}
 \subsubsection*{Request processing in a block device driver}
 \label{subsec:request queue}
 The core of every block driver is its request function. The request function is called whenever the driver needs to process reads, writes, or other operations on the device. The request function does not need to actually complete all of the requests on the queue before it returns. However, it ensures that all the requests are eventually processed by the driver. The block device driver request method accepts a parameter which acts as a pointer to the request queue. Every device has a separate request queue. A spinlock is needed as part of the request queue creation process. A request function of the device is associated with the request queue in its creation process. The kernel holds the spinlock whenever the request function is called. As a result, the request function runs in an atomic context.

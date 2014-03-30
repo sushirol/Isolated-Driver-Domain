@@ -48,12 +48,12 @@ For the performance tests, we format the block device with the ext2 file system,
 \section{The Xen Split Device Driver vs The Base IDDR System}
 As per our first goal of evaluation mentioned in Section~\ref{sec:goals}, we compare the base IDDR with the Xen split device driver. In this comparison, we show that the performance of the base IDDR system matches the Xen's isolated driver domain. This verifies the baseline performance of the IDDR system.
 
-\subsection{Experimental Setup}
+\subsection*{Experimental Setup}
 
-\subsubsection*{The Xen Split Device Driver}
+\subsubsection*{Xen Split Device Driver}
 We create a ramdisk in the domain 0. The guest domain (domain U) is configured such that the ramdisk uses a split device driver and it is available in the guest domain. We do a similar setup for the loop device and the SATA disk. For example, in case of loop device, we create a loop device in domain 0 and then configure the guest domain to use the loop device as a disk. In case of SATA disk, we configure the guest domain to use SATA disk as a secondary disk. We format and mount the disk in the guest domain with the ext2 file system. Sysbench benchmark is run on the mounted partition as explained in section~\ref{sec:goals}.
 
-\subsubsection*{The Base IDDR System}
+\subsubsection*{Base IDDR System}
 In a Xen hypervisor, the domain 0 always runs as a PV guest and in our setup we run the domain U as a HVM guest.
 \\[3mm] 
 In Xen, paravirtualized guest is a guest which is aware of the VMM and require special ported kernel to run efficiently without emulation or virtual emulated hardware. Paravirtualization does not require virtualization extensions from the host CPU. 
@@ -80,7 +80,7 @@ Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} shows the performance of random reads-wr
 \label{fig:iddrvsxen-loop-rd}
 \end{figure}
 
-\section{The Base IDDR System vs The New IDDR System}
+\section{Base IDDR System vs New IDDR System}
 We measure and compare the performance of the base IDDR system with the new IDDR system. We run the fileIO sysbench benchmark with random reads, random writes and mixed random reads-writes. 
 \subsection*{Experimental Setup}
 In the base IDDR system and the new IDDR system, the domain 0 is an application domain, and a domain U is the driver domain. A ramdisk is created in the driver domain. The backend driver is inserted in the driver domain and the frontend driver is inserted in the application domain. The disk is formatted and mounted with ext2 file system in the application domain. Sysbench benchmark is run on the mounted partition. 
@@ -91,13 +91,13 @@ Figure~\ref{fig:threadvsspinram} compares the performance of the base IDDR and t
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=1]{threadvsspinram}
-\caption{The base IDDR system vs the new IDDR system (ramdisk)}
+\caption{The base IDDR system vs The new IDDR system (ramdisk)}
 \label{fig:threadvsspinram}
 \end{figure}
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=1]{threadvsspinloop}
-\caption{The base IDDR system vs the new IDDR system (loop device)}
+\caption{The base IDDR system vs The new IDDR system (loop device)}
 \label{fig:threadvsspinloop}
 \end{figure}
 

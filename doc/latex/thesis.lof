@@ -14,18 +14,18 @@
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{26}{figure.caption.21}
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{28}{figure.caption.22}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of modern OS\relax }}{33}{figure.caption.26}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of a modern OS\relax }}{33}{figure.caption.26}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the base IDDR system\relax }}{34}{figure.caption.27}
 \contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{35}{figure.caption.28}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of frontend and backend driver\relax }}{37}{figure.caption.29}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication module\relax }}{38}{figure.caption.30}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of the frontend and the backend driver\relax }}{37}{figure.caption.29}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication Module\relax }}{38}{figure.caption.30}
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Spinlock based new IDDR system\relax }}{42}{figure.caption.37}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{45}{figure.caption.40}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces The base IDDR system vs The Xen split device driver (ramdisk)\relax }}{64}{figure.caption.55}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces The base IDDR system vs The Xen split device driver (loop device)\relax }}{64}{figure.caption.56}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The base IDDR system vs the new IDDR system (ramdisk)\relax }}{66}{figure.caption.57}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The base IDDR system vs the new IDDR system (loop device)\relax }}{66}{figure.caption.58}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces The base IDDR system vs The new IDDR system (ramdisk)\relax }}{66}{figure.caption.57}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces The base IDDR system vs The new IDDR system (loop device)\relax }}{66}{figure.caption.58}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
