@@ -63,9 +63,8 @@
 \contentsline {chapter}{\numberline {5}Evaluation}{58}{chapter.5}
 \contentsline {section}{\numberline {5.1}Goals}{58}{section.5.1}
 \contentsline {section}{\numberline {5.2}Methodology}{60}{section.5.2}
-\contentsline {section}{\numberline {5.3}Xen split driver vs IDDR}{61}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Experimental setup}{62}{subsection.5.3.1}
-\contentsline {section}{\numberline {5.4}IDDR performance improvement}{65}{section.5.4}
-\contentsline {subsection}{\numberline {5.4.1}Experimental setup}{65}{subsection.5.4.1}
-\contentsline {chapter}{\numberline {6}Related Work}{68}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusion}{70}{chapter.7}
+\contentsline {section}{\numberline {5.3}The Xen Split Device Driver vs The Base IDDR System}{61}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Experimental Setup}{61}{subsection.5.3.1}
+\contentsline {section}{\numberline {5.4}The Base IDDR System vs The New IDDR System}{63}{section.5.4}
+\contentsline {chapter}{\numberline {6}Related Work}{67}{chapter.6}
+\contentsline {chapter}{\numberline {7}Conclusion}{69}{chapter.7}
