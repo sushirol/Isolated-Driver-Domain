@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  30 MAR 2014 16:40
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  31 MAR 2014 13:19
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -619,13 +619,13 @@ Virtualization.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/Virtualization.pdf): PDF inclusion: multiple pdfs with pag
 e group included in a single page
->] <images/type2.pdf, id=630, 963.6pt x 542.025pt>
+>] <images/type2.pdf, id=629, 963.6pt x 542.025pt>
 File: images/type2.pdf Graphic file (type pdf)
  <use images/type2.pdf>
 Package pdftex.def Info: images/type2.pdf used on input line 159.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
 
-<images/xen-split-fs.pdf, id=636, 963.6pt x 542.025pt>
+<images/xen-split-fs.pdf, id=635, 963.6pt x 542.025pt>
 File: images/xen-split-fs.pdf Graphic file (type pdf)
 
 <use images/xen-split-fs.pdf>
@@ -636,7 +636,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 173--174
  [][] 
  []
 
-<images/xen.pdf, id=637, 963.6pt x 542.025pt>
+<images/xen.pdf, id=636, 963.6pt x 542.025pt>
 File: images/xen.pdf Graphic file (type pdf)
  <use images/xen.pdf>
 Package pdftex.def Info: images/xen.pdf used on input line 181.
@@ -656,7 +656,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [23] [24 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-xen-split-fs.pdf>] <images/IObuffer.pdf, id=675, 963.6pt x 542.025pt>
+xen-split-fs.pdf>] <images/IObuffer.pdf, id=672, 963.6pt x 542.025pt>
 File: images/IObuffer.pdf Graphic file (type pdf)
 
 <use images/IObuffer.pdf>
@@ -669,7 +669,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 198--199
 
 [25 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/xen.p
 df>] [26 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-IObuffer.pdf>] <images/IObuffer2.pdf, id=693, 963.6pt x 542.025pt>
+IObuffer.pdf>] <images/IObuffer2.pdf, id=690, 963.6pt x 542.025pt>
 File: images/IObuffer2.pdf Graphic file (type pdf)
 
 <use images/IObuffer2.pdf>
@@ -688,7 +688,7 @@ Chapter 3.
 ntroduction.tex [30
 
 ] [31] [32]
-<images/OSoverview.pdf, id=740, 963.6pt x 542.025pt>
+<images/OSoverview.pdf, id=737, 963.6pt x 542.025pt>
 File: images/OSoverview.pdf Graphic file (type pdf)
 
 <use images/OSoverview.pdf>
@@ -699,7 +699,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 29--30
  [][] 
  []
 
-<images/baseIDDRsystemoverview.pdf, id=741, 963.6pt x 542.025pt>
+<images/baseIDDRsystemoverview.pdf, id=738, 963.6pt x 542.025pt>
 File: images/baseIDDRsystemoverview.pdf Graphic file (type pdf)
 
 <use images/baseIDDRsystemoverview.pdf>
@@ -714,7 +714,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 36--37
 [33 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OSove
 rview.pdf>] [34 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/
 images/baseIDDRsystemoverview.pdf>]
-<images/IDDRcomponents.pdf, id=763, 963.6pt x 542.025pt>
+<images/IDDRcomponents.pdf, id=760, 963.6pt x 542.025pt>
 File: images/IDDRcomponents.pdf Graphic file (type pdf)
 
 <use images/IDDRcomponents.pdf>
@@ -726,7 +726,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 48--49
  []
 
 [35 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRc
-omponents.pdf>] <images/component1.pdf, id=774, 963.6pt x 542.025pt>
+omponents.pdf>] <images/component1.pdf, id=771, 963.6pt x 542.025pt>
 File: images/component1.pdf Graphic file (type pdf)
 
 <use images/component1.pdf>
@@ -737,7 +737,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 63--64
 [][] 
  []
 
-<images/component2.pdf, id=775, 963.6pt x 542.025pt>
+<images/component2.pdf, id=772, 963.6pt x 542.025pt>
 File: images/component2.pdf Graphic file (type pdf)
 
 <use images/component2.pdf>
@@ -755,7 +755,7 @@ images/component2.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/component2.pdf): PDF inclusion: multiple pdfs with page gr
 oup included in a single page
->] <images/communicationmodule.pdf, id=794, 963.6pt x 542.025pt>
+>] <images/communicationmodule.pdf, id=791, 963.6pt x 542.025pt>
 File: images/communicationmodule.pdf Graphic file (type pdf)
 
 <use images/communicationmodule.pdf>
@@ -768,7 +768,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 88--89
 
 [38 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/commu
 nicationmodule.pdf>] [39] [40]
-<images/IDDRdesign.pdf, id=821, 963.6pt x 542.025pt>
+<images/IDDRdesign.pdf, id=818, 963.6pt x 542.025pt>
 File: images/IDDRdesign.pdf Graphic file (type pdf)
 
 <use images/IDDRdesign.pdf>
@@ -787,11 +787,7 @@ Chapter 4.
 ntation.tex [43
 
 ] [44]
-
-LaTeX Warning: Reference `impl_overview_new' on page 45 undefined on input line
- 48.
-
-<images/impl_overview_new.pdf, id=846, 963.6pt x 542.025pt>
+<images/impl_overview_new.pdf, id=844, 963.6pt x 542.025pt>
 File: images/impl_overview_new.pdf Graphic file (type pdf)
 
 <use images/impl_overview_new.pdf>
@@ -803,18 +799,15 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 52--53
  []
 
 [45 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/impl_
-overview_new.pdf>] [46] [47] [48]
-
-LaTeX Warning: Citation `galvin' on page 49 undefined on input line 105.
-
-[49] [50] [51] [52] [53] [54] [55] [56]) [57]
+overview_new.pdf>] [46] [47] [48] [49] [50] [51] [52] [53] [54] [55] [56])
+[57]
 Chapter 5.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Evaluat
 ion.tex [58
 
 ] [59] [60] [61] [62]
-<images/iddrvsxen-ramdisk-rdwr.pdf, id=988, 361.35pt x 216.81pt>
+<images/iddrvsxen-ramdisk-rdwr.pdf, id=987, 361.35pt x 216.81pt>
 File: images/iddrvsxen-ramdisk-rdwr.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-ramdisk-rdwr.pdf>
@@ -822,7 +815,7 @@ Package pdftex.def Info: images/iddrvsxen-ramdisk-rdwr.pdf used on input line 7
 2.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-<images/iddrvsxen-loop-rd.pdf, id=989, 361.35pt x 216.81pt>
+<images/iddrvsxen-loop-rd.pdf, id=988, 361.35pt x 216.81pt>
 File: images/iddrvsxen-loop-rd.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-loop-rd.pdf>
@@ -839,14 +832,14 @@ sxen-ramdisk-rdwr.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/iddrvsxen-loop-rd.pdf): PDF inclusion: multiple pdfs with 
 page group included in a single page
->] <images/threadvsspinram.pdf, id=1018, 361.35pt x 216.81pt>
+>] <images/threadvsspinram.pdf, id=1017, 361.35pt x 216.81pt>
 File: images/threadvsspinram.pdf Graphic file (type pdf)
 
 <use images/threadvsspinram.pdf>
 Package pdftex.def Info: images/threadvsspinram.pdf used on input line 93.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-<images/threadvsspinloop.pdf, id=1019, 361.35pt x 216.81pt>
+<images/threadvsspinloop.pdf, id=1018, 361.35pt x 216.81pt>
 File: images/threadvsspinloop.pdf Graphic file (type pdf)
 
 <use images/threadvsspinloop.pdf>
@@ -873,14 +866,15 @@ ion.tex)
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.bbl
 [69
 
-] [70
+]
+Missing character: There is no â in font cmr12!
+Missing character: There is no € in font cmr12!
+Missing character: There is no “ in font cmr12!
+ [70
 
-] [71] [72] [73]
-Missing character: There is no Ã in font cmr12!
-Missing character: There is no © in font cmr12!
- [74] [75])
+] [71] [72] [73])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 246.
- [76]
+ [74]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 246.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
@@ -890,17 +884,14 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: C9B60E6626B882E71874E4A600AB645A;2638.
 
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10932 strings out of 493921
- 166332 string characters out of 3144869
- 276258 words of memory out of 3000000
- 13795 multiletter control sequences out of 15000+200000
+ 10903 strings out of 493921
+ 165466 string characters out of 3144869
+ 275588 words of memory out of 3000000
+ 13781 multiletter control sequences out of 15000+200000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,10n,39p,1099b,554s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -913,9 +904,9 @@ ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files
  (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (86 pages, 2112075 bytes).
+Output written on thesis.pdf (84 pages, 2105809 bytes).
 PDF statistics:
- 1205 PDF objects out of 1440 (max. 8388607)
- 281 named destinations out of 1000 (max. 500000)
+ 1184 PDF objects out of 1200 (max. 8388607)
+ 266 named destinations out of 1000 (max. 500000)
  474 words of extra memory for PDF output out of 10000 (max. 10000000)
 

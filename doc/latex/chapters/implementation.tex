@@ -45,7 +45,7 @@ The IDDR system implementation did not require any changes to the device driver 
 
 \section{Implementation}
 
-Figure~\ref{impl_overview_new} shows the implementation overview of the new IDDR system.
+Figure~\ref{fig:Implementation overview} shows the implementation overview of the new IDDR system.
 
 \begin{figure}[!ht]
 \centering
@@ -102,7 +102,7 @@ The new IDDR system uses event channel to wake the read request thread sleeping 
 \item Read response thread in the application domain: 
 In the new IDDR system we create a kernel thread \textit{read response thread} during an initialization stage of the communication module in the application domain. The thread spins to check if responses are available in the shared response queue. If a response is available, it reads the response from the shared response queue. However, if a response is not available in the shared response queue, after spinning for some time the thread goes into a sleep state. We maintain the status of the thread as \texttt{SLEEPING} or \texttt{RUNNING} in the shared data structure. We use the atomic variables to save the state of the thread avoiding race conditions. 
 \\[3mm]
-Obviously, a thread shouldn't sleep unless it is assured that somebody else, somewhere, will wake it up. The code doing the waking up job must also be able to identify the thread to be able to do its job. We use a linux data structure called \texttt{wait queue} to find the sleeping thread. Wait queue is a list of threads, all waiting for a specific event\cite{galvin, Bovet:2005:ULK:1077084}. We initialize the wait queue for read response thread during an initialization stage of communication module in the application domain. The read response thread sleeps on the wait queue, waiting for a flag denoting the availability of the response to be set. The communication module in the driver domain checks the status of the read response thread after pushing responses on the shared response queue. If the status is \texttt{SLEEPING} then it sends a software interrupt through the event channel.
+Obviously, a thread shouldn't sleep unless it is assured that somebody else, somewhere, will wake it up. The code doing the waking up job must also be able to identify the thread to be able to do its job. We use a linux data structure called \texttt{wait queue} to find the sleeping thread. Wait queue is a list of threads, all waiting for a specific event\cite{Galvin, Bovet:2005:ULK:1077084}. We initialize the wait queue for read response thread during an initialization stage of communication module in the application domain. The read response thread sleeps on the wait queue, waiting for a flag denoting the availability of the response to be set. The communication module in the driver domain checks the status of the read response thread after pushing responses on the shared response queue. If the status is \texttt{SLEEPING} then it sends a software interrupt through the event channel.
 \\[3mm]
 Similar to the base IDDR system, we create a new event channel in the initialization stage of the communication module in the application domain. We attach an interrupt handler routine for the event channel in the application domain. In the interrupt handler, the communication module wakes up the read response thread if sleeping. 
 

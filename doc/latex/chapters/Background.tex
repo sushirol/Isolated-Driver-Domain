@@ -142,18 +142,18 @@ Virtualization has the capability to share the underlying hardware resources and
 \subsection{Hypervisor}
 Hypervisor is a piece of computer software, firmware or hardware that creates and runs virtual machines. Operating system virtualization is achieved by inserting a hypervisor between the guest operating system and the underlying hardware. Most of the literature presents hypervisor synonymous to a virtual machine monitor (VMM). While, VMM is a software layer specifically responsible for virtualizing a given architecture, a hypervisor is an operating system with a VMM. The operating system may be a general purpose one, such as Linux, or it may be developed specifically for the purpose of running virtual machines~\cite{Agesen:2010:EXV:1899928.1899930}.
 \\[3mm]
-A computer on which a hypervisor is running one or more virtual machines is defined as a host machine. Each virtual machine is called a guest machine. The hypervisor presents the guest operating systems with a virtual operating platform and manages the execution of the guest operating systems. Multiple instances of a variety of operating systems share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{Barham:2003:XAV:1165389.945462, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity07kvm}, VMware ESX~\cite{Agesen:2010:EXV:1899928.1899930} and VirtualBox~\cite{citeulike:3149886}.
+A computer on which a hypervisor is running one or more virtual machines is defined as a host machine. Each virtual machine is called a guest machine. The hypervisor presents the guest operating systems with a virtual operating platform and manages the execution of the guest operating systems. Multiple instances of a variety of operating systems share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{barham2003xen, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity2007kvm}, VMware ESX~\cite{Agesen:2010:EXV:1899928.1899930} and VirtualBox~\cite{camargos2008virtualization}.
 \\[3mm]
 There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
 \begin{itemize}
-\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. A guest operating-system, thus, runs on another level above the hypervisor. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{Barham:2003:XAV:1165389.945462}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
+\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. A guest operating-system, thus, runs on another level above the hypervisor. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{barham2003xen}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.35]{type1}
 \caption{Type 1 hypervisor}
 \label{Type 1 hypervisor}
 \end{figure}
-\item Type 2 hypervisors are also called hosted hypervisors. Type 2 hypervisors run within a conventional operating-system environment. Type 2 hypervisors run at a distinct second software level, whereas guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, citeulike:3149886}.
+\item Type 2 hypervisors are also called hosted hypervisors. Type 2 hypervisors run within a conventional operating-system environment. Type 2 hypervisors run at a distinct second software level, whereas guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, camargos2008virtualization}.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.4]{type2}
@@ -163,7 +163,7 @@ There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
 \end{itemize}
 
 \subsection{Xen Hypervisor}
-Xen~\cite{Barham:2003:XAV:1165389.945462} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{King_operatingsystem}. Figure~\ref{fig:Type 2 hypervisor} represents a diagram showing the different layers of a Type 1 hypervisor system. The hypervisor itself forms the lowest layer, which consists of the hypervisor kernel and the virtual machine monitors. The kernel has direct access to the hardware and is responsible for resource allocation, resource scheduling and resource sharing. A hypervisor is a layer responsible for virtualizing and providing resources to a given operating system.
+Xen~\cite{barham2003xen} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{king2003operating}. Figure~\ref{fig:Type 2 hypervisor} represents a diagram showing the different layers of a Type 1 hypervisor system. The hypervisor itself forms the lowest layer, which consists of the hypervisor kernel and the virtual machine monitors. The kernel has direct access to the hardware and is responsible for resource allocation, resource scheduling and resource sharing. A hypervisor is a layer responsible for virtualizing and providing resources to a given operating system.
 \\[3mm]
 The purpose of a hypervisor is to allow guest operating systems to be run. Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Other unprivileged domains are called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. However, \texttt{domain U} accesses devices using a split device driver architecture. In the split device driver architecture a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
 \\[3mm]
@@ -183,7 +183,7 @@ Xen provides an inter-domain memory sharing API accessed through the guest kerne
 \label{xen}
 \end{figure}
 \\[3mm]
-In Xen's isolated driver domain implementation, Xen uses shared I/O ring buffers and event channel~\cite{Barham:2003:XAV:1165389.945462, Nikolaev:2013:VOS:2517349.2522719, Ruslan}.
+In Xen's isolated driver domain implementation, Xen uses shared I/O ring buffers and event channel~\cite{barham2003xen, Nikolaev:2013:VOS:2517349.2522719}.
 
 \subsubsection*{Hypercalls and Events}
 Hypercalls and event channels are the two mechanisms that exist for interactions between the Xen hypervisor and domains. A hypercall is a software trap from a domain to the Xen hypervisor, just as a syscall is a software trap from an application to the kernel~\cite{hypercall}. Domains use the hypercalls to request privileged operations like updating pagetables. 
@@ -223,6 +223,6 @@ The notification is not sent for production of each request and response. A doma
 Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring frames between the domains. It is an interface for granting foreign access to machine frames and sharing memory between underprivileged domains provided by the Xen hypervisor. In Xen, each domain has a respective grant table data structure, which is shared with the Xen hypervisor. The grant table data structure is used by Xen to verify the access permission other domains have on the page allocated by a domain~\cite{granttable}.
 
 \subsubsection*{Grant References}
-Grant references are the entries in a grant table. A grant reference entry has every detail about the shared page. The Xen hypervisor virtualizes the physical memory, it is difficult to know the correct machine address of a frame for a domain. The biggest difficulty in sharing the memory between domains is knowing its correct machine address. A grant reference removes the dependency on the real machine address of the shared page. Hence, a grant entry makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, Barham:2003:XAV:945445.945462, granttable} 
+Grant references are the entries in a grant table. A grant reference entry has every detail about the shared page. The Xen hypervisor virtualizes the physical memory, it is difficult to know the correct machine address of a frame for a domain. The biggest difficulty in sharing the memory between domains is knowing its correct machine address. A grant reference removes the dependency on the real machine address of the shared page. Hence, a grant entry makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, barham2003xen, granttable} 
 
 \ifbool{toShowBibliography}{\bibliography{references}}{}

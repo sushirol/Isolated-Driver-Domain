@@ -1,38 +1,20 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-Case mismatch error between cite keys galvin and Galvin
----line 211 of file thesis.aux
- : \citation{galvin
- :                 }
-I'm skipping whatever remains of this command
 The style file: plain.bst
 Database file #1: references.bib
 Warning--entry type for "driverdomain" isn't style-file defined
---line 6 of file references.bib
-You're missing a field name---line 7 of file references.bib
- :  
- :  %%   Date-Added = {2012-12-15 22:18:30 +0000},
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
+--line 1 of file references.bib
 Warning--entry type for "coveritykernel" isn't style-file defined
---line 13 of file references.bib
+--line 6 of file references.bib
 Warning--entry type for "sysbench" isn't style-file defined
---line 17 of file references.bib
-Repeated entry---line 423 of file references.bib
- : @inproceedings{Goldberg:1973:AVM:800122.803950
- :                                               ,
-I'm skipping whatever remains of this entry
-I was expecting a `,' or a `}'---line 478 of file references.bib
- : 
- : @webpage{hypercall,
-(Error may have been on previous line)
-I'm skipping whatever remains of this entry
+--line 11 of file references.bib
 Warning--entry type for "hypercall" isn't style-file defined
---line 478 of file references.bib
+--line 16 of file references.bib
 Warning--entry type for "granttable" isn't style-file defined
---line 483 of file references.bib
+--line 21 of file references.bib
 Warning--to sort, need author or key in coveritykernel
 Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
-(There were 4 error messages)
+Warning--can't use both volume and number fields in LeVasseur04UnmodifiedDriverReuse
+(There were 11 warnings)
