@@ -1,5 +1,5 @@
 filename="results.txt"
-cpuname="cpu.txt"
+cpufile="cpu.txt"
 touch $cpuname
 touch $filename
 req=0
