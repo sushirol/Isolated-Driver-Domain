@@ -48,7 +48,7 @@ Anton Burtsev, Kiran Srinivasan, Prashanth Radhakrishnan, Lakshmi~N.
 \bibitem{camargos2008virtualization}
 F~Camargos, G~Girard, and B~Ligneris.
 \newblock Virtualization of linux servers.
-\newblock {\em Proc. Linux Syposium}, pages 63--76, 2008.
+\newblock pages 63--76, Ottawa, Ontario, Canada, 2008.
 
 \bibitem{Chisnall:2007:DGX:1407351}
 David Chisnall.
@@ -68,14 +68,14 @@ Peter~J Denning.
 \bibitem{Drepper:2008:CV:1348583.1348591}
 Ulrich Drepper.
 \newblock The cost of virtualization.
-\newblock {\em Queue}, 6(1):28--35, 2008.
+\newblock {\em ACM Queue}, 6(1):28--35, 2008.
 
 \bibitem{Fraser04safehardware}
 Keir Fraser, Steven Hand, Rolf Neugebauer, Ian Pratt, Andrew Warfield, and Mark
   Williamson.
-\newblock Safe hardware access with the xen virtual machine monitor.
+\newblock Safe hardware access with the {X}en virtual machine monitor.
 \newblock In {\em 1st Workshop on Operating System and Architectural Support
-  for the on demand IT InfraStructure (OASIS)}, 2004.
+  for the on-demand IT InfraStructure (OASIS)}, 2004.
 
 \bibitem{Goldberg:1973:AVM:800122.803950}
 R.~P. Goldberg.
@@ -133,7 +133,7 @@ Daniel~A Menasc{\'e}.
 
 \bibitem{Menon:2006:ONV:1267359.1267361}
 Aravind Menon, Alan~L. Cox, and Willy Zwaenepoel.
-\newblock Optimizing network virtualization in xen.
+\newblock Optimizing network virtualization in {X}en.
 \newblock In {\em Proceedings of the Annual Conference on USENIX '06 Annual
   Technical Conference}, pages 2--2, Boston, MA, USA, 2006.
 

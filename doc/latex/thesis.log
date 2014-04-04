@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  31 MAR 2014 18:52
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  4 APR 2014 13:59
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -856,45 +856,55 @@ age group included in a single page
 Chapter 6.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/related
-work.tex [67
+work.tex
 
-]) [68]
+LaTeX Warning: Reference `robustness' on page 67 undefined on input line 3.
+
+
+LaTeX Warning: Reference `interdomain' on page 67 undefined on input line 3.
+
+) [67
+
+]
 Chapter 7.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/conclus
 ion.tex)
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.bbl
-[69
+[68
 
 ]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no “ in font cmr12!
- [70
+ [69
 
-] [71] [72] [73])
+] [70] [71] [72])
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 246.
- [74]
+ [73]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 246.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 246.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 246.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: C9B60E6626B882E71874E4A600AB645A;2638.
+(rerunfilecheck)             Checksum: 0825C3E249AF82996DDAEA751AFE7A70;2635.
+
+
+LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 10903 strings out of 493921
- 165466 string characters out of 3144869
- 275588 words of memory out of 3000000
- 13781 multiletter control sequences out of 15000+200000
+ 10904 strings out of 493921
+ 165484 string characters out of 3144869
+ 275590 words of memory out of 3000000
+ 13783 multiletter control sequences out of 15000+200000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 37i,10n,39p,1099b,554s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 37i,10n,39p,1104b,554s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C
 :/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
@@ -904,9 +914,9 @@ ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files
  (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (84 pages, 2105335 bytes).
+Output written on thesis.pdf (83 pages, 2102593 bytes).
 PDF statistics:
- 1184 PDF objects out of 1200 (max. 8388607)
- 266 named destinations out of 1000 (max. 500000)
+ 1175 PDF objects out of 1200 (max. 8388607)
+ 265 named destinations out of 1000 (max. 500000)
  474 words of extra memory for PDF output out of 10000 (max. 10000000)
 

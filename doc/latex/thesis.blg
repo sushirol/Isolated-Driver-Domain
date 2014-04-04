@@ -16,5 +16,6 @@ Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
+Warning--empty booktitle in camargos2008virtualization
 Warning--can't use both volume and number fields in LeVasseur04UnmodifiedDriverReuse
-(There were 11 warnings)
+(There were 12 warnings)

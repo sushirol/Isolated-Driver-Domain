@@ -29,7 +29,7 @@
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}% 29
 \BOOKMARK [1][-]{section.4.1}{Implementation Overview}{chapter.4}% 30
 \BOOKMARK [1][-]{section.4.2}{Implementation}{chapter.4}% 31
-\BOOKMARK [2][-]{subsection.4.2.1}{Communication Component}{section.4.2}% 32
+\BOOKMARK [2][-]{subsection.4.2.1}{Communication Module}{section.4.2}% 32
 \BOOKMARK [2][-]{subsection.4.2.2}{Application Domain}{section.4.2}% 33
 \BOOKMARK [2][-]{subsection.4.2.3}{Driver Domain}{section.4.2}% 34
 \BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 35

@@ -32,32 +32,32 @@
 \contentsline {subsection}{\numberline {3.4.3}Communication Module}{37}{subsection.3.4.3}
 \contentsline {section}{\numberline {3.5}System Design}{38}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Communication Module}{39}{subsection.3.5.1}
-\contentsline {paragraph}{Base IDDR System Design}{39}{section*.31}
-\contentsline {paragraph}{Spinlock Based IDDR System}{39}{section*.32}
+\contentsline {paragraph}{Base IDDR System Design:}{39}{section*.31}
+\contentsline {paragraph}{Spinlock Based IDDR System:}{39}{section*.32}
 \contentsline {subsection}{\numberline {3.5.2}Frontend Driver}{40}{subsection.3.5.2}
-\contentsline {paragraph}{Base IDDR System Design}{40}{section*.33}
-\contentsline {paragraph}{New IDDR System Design}{40}{section*.34}
+\contentsline {paragraph}{Base IDDR System Design:}{40}{section*.33}
+\contentsline {paragraph}{New IDDR System Design:}{40}{section*.34}
 \contentsline {subsection}{\numberline {3.5.3}Backend Driver}{41}{subsection.3.5.3}
-\contentsline {paragraph}{Base IDDR System Design}{41}{section*.35}
-\contentsline {paragraph}{New IDDR system Design}{41}{section*.36}
+\contentsline {paragraph}{Base IDDR System Design:}{41}{section*.35}
+\contentsline {paragraph}{New IDDR system Design:}{41}{section*.36}
 \contentsline {chapter}{\numberline {4}Implementation}{43}{chapter.4}
 \contentsline {section}{\numberline {4.1}Implementation Overview}{43}{section.4.1}
 \contentsline {section}{\numberline {4.2}Implementation}{45}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Communication Component}{45}{subsection.4.2.1}
-\contentsline {paragraph}{Shared Request and Response Queue}{46}{section*.41}
-\contentsline {paragraph}{Shared Memory for Read/Write Data}{47}{section*.42}
-\contentsline {paragraph}{Event Notification}{47}{section*.43}
-\contentsline {paragraph}{Shared Request and Response Queue}{48}{section*.44}
-\contentsline {paragraph}{Shared Memory for Read/Write Data}{48}{section*.45}
-\contentsline {paragraph}{Threads and Event Notification}{49}{section*.46}
+\contentsline {subsection}{\numberline {4.2.1}Communication Module}{45}{subsection.4.2.1}
+\contentsline {paragraph}{Shared Request and Response Queue:}{46}{section*.41}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{47}{section*.42}
+\contentsline {paragraph}{Event Notification:}{47}{section*.43}
+\contentsline {paragraph}{Shared Request and Response Queue:}{48}{section*.44}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{48}{section*.45}
+\contentsline {paragraph}{Threads and Event Notification:}{49}{section*.46}
 \contentsline {subsection}{\numberline {4.2.2}Application Domain}{51}{subsection.4.2.2}
-\contentsline {paragraph}{Initialization}{52}{section*.47}
-\contentsline {paragraph}{Dequeue and Submit Request}{53}{section*.48}
-\contentsline {paragraph}{End Request}{53}{section*.49}
-\contentsline {paragraph}{Initialization}{54}{section*.50}
-\contentsline {paragraph}{Dequeue and Submit Request}{54}{section*.51}
-\contentsline {paragraph}{Spinning The Main Thread}{55}{section*.52}
-\contentsline {paragraph}{End Request}{55}{section*.53}
+\contentsline {paragraph}{Initialization}{53}{section*.47}
+\contentsline {paragraph}{Dequeue and Submit Request:}{53}{section*.48}
+\contentsline {paragraph}{End Request:}{53}{section*.49}
+\contentsline {paragraph}{Initialization:}{54}{section*.50}
+\contentsline {paragraph}{Dequeue and Submit Request:}{55}{section*.51}
+\contentsline {paragraph}{Spinning The Main Thread:}{55}{section*.52}
+\contentsline {paragraph}{End Request:}{55}{section*.53}
 \contentsline {subsection}{\numberline {4.2.3}Driver Domain}{55}{subsection.4.2.3}
 \contentsline {chapter}{\numberline {5}Evaluation}{58}{chapter.5}
 \contentsline {section}{\numberline {5.1}Goals}{58}{section.5.1}
@@ -65,4 +65,4 @@
 \contentsline {section}{\numberline {5.3}The Xen Split Device Driver vs The Base IDDR System}{61}{section.5.3}
 \contentsline {section}{\numberline {5.4}Base IDDR System vs New IDDR System}{63}{section.5.4}
 \contentsline {chapter}{\numberline {6}Related Work}{67}{chapter.6}
-\contentsline {chapter}{\numberline {7}Conclusion}{69}{chapter.7}
+\contentsline {chapter}{\numberline {7}Conclusion}{68}{chapter.7}
