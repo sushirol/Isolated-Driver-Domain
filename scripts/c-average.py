@@ -13,7 +13,7 @@ for i in range(1, 11):
 for i in range(0, 10):
     fList.append(open(filenameList[i],"r"))
 
-f_av = open(filename + '-av.txt',"w")
+f_av = open(filename + '-av.data',"w")
 
 for j in range(0,10):
     temp = 0
@@ -23,6 +23,8 @@ for j in range(0,10):
     a.append(temp)
 
 for i in range(0, 10):
+    f_av.write(`i+1`)
+    f_av.write(" ")
     f_av.write(`a[i]`)
     f_av.write("\n")
     print a[i]
