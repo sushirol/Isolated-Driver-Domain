@@ -5,3 +5,4 @@ cut -d " " -f 1 $NAME.tmp > $NAME.xls
 rm $NAME.tmp
 grep "total time:" $1 | sed 's/^ *//' > $NAME.tmp
 cut -d " " -f 28 $NAME.tmp > $NAME.time
+rm $NAME.tmp
