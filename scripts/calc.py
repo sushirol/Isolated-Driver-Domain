@@ -16,7 +16,7 @@ for i in range (0,10):
     line = stat_fd.readlines()
     out_fd = open(outputList[i],"w")
 
-    for x in range(0, 9):
+    for x in range(0, 10):
         field_l_1 = line[(x*3)+1].split()
         field_l_2 = line[(x*3)+2].split()
         cpu_l_1 = float(field_l_1[1]) + float(field_l_1[2]) + float(field_l_1[3]) + float(field_l_1[4])
