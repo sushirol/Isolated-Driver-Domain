@@ -23,9 +23,10 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{45}{figure.caption.40}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The base IDDR system vs The Xen split device driver (ramdisk)\relax }}{64}{figure.caption.55}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The base IDDR system vs The Xen split device driver (loop device)\relax }}{64}{figure.caption.56}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The base IDDR system vs The new IDDR system (ramdisk)\relax }}{66}{figure.caption.57}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The base IDDR system vs The new IDDR system (loop device)\relax }}{66}{figure.caption.58}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Base IDDR system vs Xen split driver\relax }}{64}{figure.caption.55}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{66}{figure.caption.57}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{67}{figure.caption.58}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Sequential reads and writes on a Ramdisk\relax }}{69}{figure.caption.62}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sequential reads and writes on a Loop device\relax }}{70}{figure.caption.63}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

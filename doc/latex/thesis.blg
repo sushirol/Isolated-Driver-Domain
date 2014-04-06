@@ -2,15 +2,16 @@ This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
 The style file: plain.bst
 Database file #1: references.bib
 Warning--entry type for "driverdomain" isn't style-file defined
---line 1 of file references.bib
+--line 58 of file references.bib
 Warning--entry type for "coveritykernel" isn't style-file defined
---line 6 of file references.bib
+--line 63 of file references.bib
 Warning--entry type for "sysbench" isn't style-file defined
---line 11 of file references.bib
+--line 68 of file references.bib
 Warning--entry type for "hypercall" isn't style-file defined
---line 16 of file references.bib
+--line 73 of file references.bib
 Warning--entry type for "granttable" isn't style-file defined
---line 21 of file references.bib
+--line 78 of file references.bib
+Warning--I didn't find a database entry for "coverity"
 Warning--to sort, need author or key in coveritykernel
 Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
@@ -18,4 +19,4 @@ Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
 Warning--empty booktitle in camargos2008virtualization
 Warning--can't use both volume and number fields in LeVasseur04UnmodifiedDriverReuse
-(There were 12 warnings)
+(There were 13 warnings)

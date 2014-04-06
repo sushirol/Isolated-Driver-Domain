@@ -20,10 +20,23 @@
 {Xen's Isolated Driver Domain}.
 \newblock \url{http://wiki.xen.org/wiki/Driver_Domain}.
 
+\bibitem{Accetta+:usenix86}
+Mike Accetta, Robert Baron, William Bolosky, David Golub, Richard Rashid,
+  Avadis Tevanian, and Michael Young.
+\newblock Mach: A new kernel foundation for {UNIX} development.
+\newblock In {\em Proceedings of the 1986 Summer USENIX Conference}, pages
+  93--112, 1986.
+
 \bibitem{Agesen:2010:EXV:1899928.1899930}
 Ole Agesen, Alex Garthwaite, Jeffrey Sheldon, and Pratap Subrahmanyam.
 \newblock The evolution of an x86 virtual machine monitors.
 \newblock {\em ACM SIGOPS Operating Systems Review}, 44(4):3--18, 2010.
+
+\bibitem{armand1991give}
+Fran{\c{c}}ois Armand.
+\newblock Give a process to your drivers.
+\newblock In {\em Proceedings of the EurOpen Autumn 1991 Conference}, pages
+  16--20. Budapest, 1991.
 
 \bibitem{barham2003xen}
 Paul Barham, Boris Dragovic, Keir Fraser, Steven Hand, Tim Harris, Alex Ho,
@@ -36,6 +49,12 @@ Paul Barham, Boris Dragovic, Keir Fraser, Steven Hand, Tim Harris, Alex Ho,
 Daniel Bovet and Marco Cesati.
 \newblock {\em Understanding The Linux Kernel}.
 \newblock Oreilly \& Associates Inc, 3rd edition, 2005.
+
+\bibitem{Boyd-Wickizer+:atc2010}
+Silas Boyd-Wickizer and Nickolai Zeldovich.
+\newblock Tolerating malicious device drivers in {Linux}.
+\newblock In {\em Proceedings of the 2010 USENIX Annual Technical Conference},
+  ATC'10, pages 117--130, Boston, MA, USA, 2010.
 
 \bibitem{Burtsev:2009:FFI:1855807.1855832}
 Anton Burtsev, Kiran Srinivasan, Prashanth Radhakrishnan, Lakshmi~N.
@@ -77,6 +96,14 @@ Keir Fraser, Steven Hand, Rolf Neugebauer, Ian Pratt, Andrew Warfield, and Mark
 \newblock In {\em 1st Workshop on Operating System and Architectural Support
   for the on-demand IT InfraStructure (OASIS)}, 2004.
 
+\bibitem{Ganapathy:2008:DIM:1346281.1346303}
+Vinod Ganapathy, Matthew~J. Renzelmann, Arini Balakrishnan, Michael~M. Swift,
+  and Somesh Jha.
+\newblock The design and implementation of microdrivers.
+\newblock In {\em Proceedings of the 13th International Conference on
+  Architectural Support for Programming Languages and Operating Systems},
+  ASPLOS XIII, pages 168--178, Seattle, WA, USA, 2008.
+
 \bibitem{Goldberg:1973:AVM:800122.803950}
 R.~P. Goldberg.
 \newblock Architecture of virtual machines.
@@ -101,6 +128,13 @@ Steven Hand, Andrew Warfield, Keir Fraser, Evangelos Kotsovinos, and Daniel~J
 \newblock In {\em the 10th Workshop on Hot Topics in Operating Systems}, Santa
   Fe, NM, 2005.
 
+\bibitem{Heiser+:acm10}
+Gernot Heiser and Ben Leslie.
+\newblock {The OKL4 Microvisor: Convergence Point of Microkernels and
+  Hypervisors}.
+\newblock In {\em Proceedings of the 1st ACM Asia-Pacific Workshop on Systems},
+  APSys'10, pages 19--24, New Delhi, India, 2010.
+
 \bibitem{king2003operating}
 Samuel~T King, George~W Dunlap, and Peter~M Chen.
 \newblock Operating system support for virtual machines.
@@ -112,6 +146,14 @@ Avi Kivity, Yaniv Kamay, Dor Laor, Uri Lublin, and Anthony Liguori.
 \newblock {KVM}: the linux virtual machine monitor.
 \newblock In {\em Proceedings of the Linux Symposium}, volume~1, pages
   225--230, 2007.
+
+\bibitem{Leslie+:jcst2005}
+Ben Leslie, Peter Chubb, Nicholas Fitzroy-Dale, Stefan G¨otz, Charles Gray,
+  Luke Macpherson, Daniel Potts, Yueting~(Rita) Shen, Kevin Elphinstone, and
+  Gernot Heiser.
+\newblock Userlevel device drivers: Achieved performance.
+\newblock {\em Journal of Computer Science and Technology}, 20(5):654--–664,
+  September 2005.
 
 \bibitem{LeVasseur04UnmodifiedDriverReuse}
 Joshua LeVasseur, Volkmar Uhlig, Jan Stoess, and Stefan G{\"o}tz.
@@ -125,6 +167,12 @@ Chuanpeng Li, Chen Ding, and Kai Shen.
 \newblock Quantifying the cost of context switch.
 \newblock In {\em Proceedings of the 2007 Workshop on Experimental Computer
   Science}, San Diego, CA, USA, 2007.
+
+\bibitem{Liedtke+:sosp95}
+J.~Liedtke.
+\newblock On micro-kernel construction.
+\newblock In {\em Proceedings of the 15th ACM Symposium on Operating Systems
+  Principles}, SOSP'95, pages 237--250, Copper Mountain, CO, USA, 1995.
 
 \bibitem{Menascé05virtualization:concepts}
 Daniel~A Menasc{\'e}.
@@ -166,6 +214,17 @@ Jeremy Sugerman, Ganesh Venkitachalam, and Beng-Hong Lim.
   machine monitor.
 \newblock In {\em USENIX Annual Technical Conference, General Track}, pages
   1--14, Boston, MA, USA, 2001.
+
+\bibitem{swift2005improving}
+Michael~M Swift, Brian~N Bershad, and Henry~M Levy.
+\newblock Improving the reliability of commodity operating systems.
+\newblock {\em ACM Transactions on Computer Systems (TOCS)}, 23(1):77--110,
+  2005.
+
+\bibitem{tanenbaum2006can}
+Andrew~S Tanenbaum, Jorrit~N Herder, and Herbert Bos.
+\newblock Can we make operating systems reliable and secure?
+\newblock {\em Computer}, 39(5):44--51, 2006.
 
 \bibitem{Zhang:2007:XHI:1516124.1516138}
 Xiaolan Zhang, Suzanne McIntosh, Pankaj Rohatgi, and John~Linwood Griffin.

@@ -67,18 +67,25 @@ We insert a ramdisk and the base IDDR system's frontend module in the domain 0. 
 Similar setup is used for a loop device and a SATA disk.
 \subsubsection*{Comparison}
 Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} shows the performance of random reads-writes on a ramdisk, and Figure~\ref{fig:iddrvsxen-loop-rd} shows the performance of random reads on a loop device. Both systems provide roughly similar performance. The figures show that the performance of the IDDR matches the performance of the Xen's isolated driver domain. Therefore, our implementation of the Xen's isolated driver domain provides suitable baseline for the performance improvement.
+
+
 \begin{figure}[!ht]
-\centering
-\includegraphics[scale=1]{iddrvsxen-ramdisk-rdwr}
-\caption{The base IDDR system vs The Xen split device driver (ramdisk)}
-\label{fig:iddrvsxen-ramdisk-rdwr}
+%\centering
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{iddrvsxen-ramdisk-rdwr}
+  \caption{Ramdisk}
+  \label{fig:iddrvsxen-ramdisk-rdwr}
+  \end{subfigure}
+  \hspace{50mm}
+  %\hfill
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{iddrvsxen-loop-rd}
+  \caption{Loop device}
+  \label{fig:iddrvsxen-loop-rd}
+  \end{subfigure}\\
+\caption{Base IDDR system vs Xen split driver}\label{fig:seqloopdisk}
 \end{figure}
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=1]{iddrvsxen-loop-rd}
-\caption{The base IDDR system vs The Xen split device driver (loop device)}
-\label{fig:iddrvsxen-loop-rd}
-\end{figure}
+
 
 \section{Base IDDR System vs New IDDR System}
 We measure and compare the performance of the base IDDR system with the new IDDR system. We run the fileIO sysbench benchmark with random reads, random writes and mixed random reads-writes. 
@@ -86,20 +93,135 @@ We measure and compare the performance of the base IDDR system with the new IDDR
 In the base IDDR system and the new IDDR system, the domain 0 is an application domain, and a domain U is the driver domain. A ramdisk is created in the driver domain. The backend driver is inserted in the driver domain and the frontend driver is inserted in the application domain. The disk is formatted and mounted with ext2 file system in the application domain. Sysbench benchmark is run on the mounted partition. 
 \\[3mm]
 For loop device a similar setup is used, we create a loop device in a driver domain, and insert the backend driver in the driver domain. The frontend driver is inserted in the application domain. For a SATA disk, we pass-through the SATA disk to the driver domain, so that the driver domain can directly access the SATA disk. 
-\subsubsection*{Comparison}
-Figure~\ref{fig:threadvsspinram} compares the performance of the base IDDR and the new IDDR with random reads-writes on a ramdisk. Figure~\ref{fig:threadvsspinloop} compares the performance of the base IDDR and the new IDDR with random reads on a loop device. Both figures show that the new IDDR system implementation with spinlock performs better than the base IDDR implementation. 
+
+\subsubsection*{Random reads and writes}
+\paragraph{Comparison:}
+Figure~\ref{fig:rndramdisk} compares the performance of the base IDDR and the new IDDR with random reads-writes on ramdisk. Figure~\ref{fig:rndloopdisk} compares the performance of the base IDDR and the new IDDR with random reads and writes on a loop device. 
+\\[3mm]
+The Figure~\ref{subfig:rndrd-ramdisk} and Figure~\ref{subfig:rndrd-loopdisk} shows that the new IDDR system performs better when data is read from the device randomly.  
+\\[3mm]
+The Figure~\ref{subfig:rndwr-ramdisk} and Figure~\ref{subfig:rndwr-loopisk} compare the performance of the device when data is written randomly on the device. The graph shows that initially the new IDDR system performs better than the base IDDR system, but as number of sysbench threads increases, the throughput of the new IDDR system decrease.
+\\[3mm] 
+Similarly, since the Figure~\ref{subfig:rndrw-ramdisk} and Figure~\ref{subfig:rndrw-loopdisk} compares the mix random read and write performance. Since throughput of the system is low when data is written, most of the time is spent in writing the data. And performance of the system is dominated by the writes. Both graphs show that the graph curve in case of mix random reads and writes is similar to random writes. 
+
 \begin{figure}[!ht]
-\centering
-\includegraphics[scale=1]{threadvsspinram}
-\caption{The base IDDR system vs The new IDDR system (ramdisk)}
-\label{fig:threadvsspinram}
+% \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{rndrd-ramdisk}
+  \caption{Random reads}
+  \label{subfig:rndrd-ramdisk}
+  \end{subfigure}
+  \hspace{50mm}
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{rndwr-ramdisk}
+  \caption{Random writes}
+  \label{subfig:rndwr-ramdisk}
+  \end{subfigure}\\*
+  \hspace{150mm}
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[scale=.7]{rndrw-ramdisk}
+  \caption{Random reads writes}
+  \label{subfig:rndrw-ramdisk}
+  \end{subfigure}
+  \caption{Random reads and writes on a Ramdisk}\label{fig:rndramdisk}
 \end{figure}
+
 \begin{figure}[!ht]
-\centering
-\includegraphics[scale=1]{threadvsspinloop}
-\caption{The base IDDR system vs The new IDDR system (loop device)}
-\label{fig:threadvsspinloop}
+%\centering
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{rndrd-loopdisk}
+  \caption{Random reads}
+  \label{subfig:rndrd-loopdisk}
+  \end{subfigure}
+  \hspace{50mm}
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{rndwr-loopdisk}
+  \caption{Random writes}
+  \label{subfig:rndwr-loopdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[scale=.7]{rndrw-loopdisk}
+  \caption{Random reads writes}
+  \label{subfig:rndrw-loopdisk}
+  \end{subfigure}
+\caption{Random reads and writes on a Loop device}\label{fig:rndloopdisk}
 \end{figure}
+
+\paragraph{Observation:}
+In the base IDDR system, initially the throughput increases and then it remains constant. When the no of sysbench threads are less, the work overload is less and hence the throughout is low. However, as workload incrrease, the thoughput also increase and after certain value, it remains constant. 
+\\[3mm]
+In the new IDDR system, initially the throughput increases as the number of sysbench threads increases. But in new IDDR system, the read response and read request thread continuously spin in case of heavy workload, and hence require dedicated CPU per thread. The base IDDR system does not require the dedicated CPU to spin a thread. This is the reason why the throughput of new IDDR system doesnt remain constant with heavy workload.  
+
+\paragraph{Sequential reads and writes:}
+\paragraph{Comparison:}
+Figure~\ref{fig:seqramdisk} compares the performance of the base IDDR and the new IDDR when data is read and written sequentially on a ramdisk. Figure~\ref{fig:seqloopdisk} compares the performance of the base IDDR and the new IDDR when data is read and written sequentially on a loop device.
+\\[3mm]
+The Figure~\ref{subfig:seqrd-ramdisk} and Figure~\ref{subfig:seqrd-loopdisk} compares the throughput, when the device is read sequencially. The graphs show that the new IDDR system performs better then the base IDDR system when the workload is not heavy. As the workload increases, the performance of the new IDDR system decreases drastically. WHY ???? ADD A REASON //TODO
+\\[3mm]
+The Figure~\ref{subfig:seqwr-ramdisk} and Figure~\ref{subfig:seqwr-loopdisk} compares the throughput of the base and new IDDR system, when the data is written on the device sequencially. The figure shows that the new IDDR systems performs better than the base IDDR system. However, the throughput improvement drops significantly as number of sysbench threads increases.
+\\[3mm]
+The Figure~\ref{subfig:seqrewr-ramdisk} and Figure~\ref{subfig:seqrewr-loopdisk} compares the throughput of the base and new IDDR system, when mixed read and writes are fired on the device sequencially. As the writing takes more time, the output is dominated by the throughput performance of the write requests. Hence, the curve is similar to the Figure~\ref{subfig:seqwr-ramdisk} and Figure~\ref{subfig:seqwr-ramdisk}. 
+
+\begin{figure}[!ht]
+% \centering
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{seqrd-ramdisk}
+  \caption{Reads}
+  \label{subfig:seqrd-ramdisk}
+  \end{subfigure}
+  \hspace{50mm}
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{seqwr-ramdisk}
+  \caption{Writes}
+  \label{subfig:seqwr-ramdisk}
+  \end{subfigure}\\*
+  \hspace{150mm}
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[scale=.7]{seqrewr-ramdisk}
+  \caption{Mix reads and writes}
+  \label{subfig:seqrewr-ramdisk}
+  \end{subfigure}
+  \caption{Sequential reads and writes on a Ramdisk}\label{fig:seqramdisk}
+\end{figure}
+
+\begin{figure}[!ht]
+%\centering
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{seqrd-loopdisk}
+  \caption{Reads}
+  \label{subfig:seqrd-loopdisk}
+  \end{subfigure}
+  \hspace{50mm}
+  \begin{subfigure}[b]{0.2\textwidth}
+  \includegraphics[scale=.7]{seqwr-loopdisk}
+  \caption{Writes}
+  \label{subfig:seqwr-loopdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{0.3\textwidth}
+  \includegraphics[scale=.7]{seqrewr-loopdisk}
+  \caption{Mix reads and writes}
+  \label{subfig:seqrewe-loopdisk}
+  \end{subfigure}
+\caption{Sequential reads and writes on a Loop device}\label{fig:seqloopdisk}
+\end{figure}
+
+
+\paragraph{Observation:}
+
+
+
+% \begin{figure}[!ht]
+% \centering
+% \includegraphics[scale=1]{threadvsspinram}
+% \caption{The base IDDR system vs The new IDDR system (ramdisk)}
+% \label{fig:threadvsspinram}
+% \end{figure}
+% \begin{figure}[!ht]
+% \centering
+% \includegraphics[scale=1]{threadvsspinloop}
+% \caption{The base IDDR system vs The new IDDR system (loop device)}
+% \label{fig:threadvsspinloop}
+% \end{figure}
 
 
 % ref

@@ -1,3 +1,60 @@
+@string{ ProceedingsOf = "Proceedings of the"}
+@string{ OSDI = {USENIX Symposium on Operating Systems Design \& Implementation}}
+@string{ OSDI1996 = ProceedingsOf # " 2th " # OSDI }
+@string{ OSDI2000 = ProceedingsOf # " 4th " # OSDI }
+@string{ OSDI2002 = ProceedingsOf # " 5th " # OSDI }
+@string{ OSDI2004 = ProceedingsOf # " 6th " # OSDI }
+@string{ OSDI2006 = ProceedingsOf # " 7th " # OSDI }
+@string{ OSDI2008 = ProceedingsOf # " 8th " # OSDI }
+@string{ OSDI2010 = ProceedingsOf # " 9th " # OSDI }
+@string{ OSDI2012 = ProceedingsOf # " 10th " # OSDI }
+
+@string{ SOSP = "ACM Symposium on Operating Systems Principles"}
+@string{ SOSP1991 = ProceedingsOf # " 13th " # SOSP }
+@string{ SOSP1993 = ProceedingsOf # " 14th " # SOSP }
+@string{ SOSP1995 = ProceedingsOf # " 15th " # SOSP }
+@string{ SOSP1997 = ProceedingsOf # " 16th " # SOSP }
+@string{ SOSP2001 = ProceedingsOf # " 18th " # SOSP }
+@string{ SOSP2003 = ProceedingsOf # " 19th " # SOSP }
+@string{ SOSP2009 = ProceedingsOf # " 22nd " # SOSP }
+@string{ SOSP2011 = ProceedingsOf # " 23rd " # SOSP }
+@string{ SOSP2013 = ProceedingsOf # " 24th " # SOSP }
+
+@string{ ATC = "USENIX Annual Technical Conference"}
+@string{ ATC2008 = ProceedingsOf # " 2008 " # ATC }
+@string{ ATC2009 = ProceedingsOf # " 2009 " # ATC }
+@string{ ATC2010 = ProceedingsOf # " 2010 " # ATC }
+@string{ ATC2011 = ProceedingsOf # " 2011 " # ATC }
+@string{ ATC2012 = ProceedingsOf # " 2012 " # ATC }
+
+@string{ HOTOS = "Workshop on Hot Topics in Operating Systems"}
+@string{ HOTOS03 = ProceedingsOf # " 9th " # HOTOS }
+@string{ HOTOS05 = ProceedingsOf # " 10th " # HOTOS }
+
+@string{ VEE = "ACM SIGPLAN/SIGOPS International Conference on Virtual Execution Environments" }
+@string{ VEE05 = ProceedingsOf # " 1st " # VEE }
+@string{ VEE11 = ProceedingsOf # " 7th " # VEE }
+
+@string{ ASPLOS = "International Conference on Architectural Support for Programming Languages and Operating Systems"}
+@string{ ASPLOS2006 = ProceedingsOf # " 12th " # ASPLOS }
+@string{ ASPLOS2013 = ProceedingsOf # " 18th " # ASPLOS }
+
+@string{ OSR = "SIGOPS Operating Systems Review" }
+
+@string{ ATEC = "USENIX Annual Technical Conference" }
+@string{ ATEC96 = ProceedingsOf # " 1996 " # ATEC }
+@string{ ATEC03 = ProceedingsOf # " 2003 " # ATEC }
+@string{ ATEC05 = ProceedingsOf # " 2005 " # ATEC }
+
+@string{ APSYS = "ACM Asia-Pacific Workshop on Systems" }
+@string{ APSYS10 = ProceedingsOf # " 1st " # APSYS }
+@string{ APSYS13 = ProceedingsOf # " 4th " # APSYS }
+
+@string{ LISA = "USENIX conference on Large Installation System Administration" }
+@string{ LISA03 = ProceedingsOf # " 17th " # LISA }
+@string{ LISA06 = ProceedingsOf # " 20th " # LISA }
+
+
 @webpage{driverdomain,
     Howpublished = {\url{http://wiki.xen.org/wiki/Driver_Domain}}, 
     Title = {{Xen's Isolated Driver Domain}}
@@ -264,3 +321,107 @@
   pages={225--230},
   year={2007}
 }
+
+@article{tanenbaum2006can,
+  title={Can we make operating systems reliable and secure?},
+  author={Tanenbaum, Andrew S and Herder, Jorrit N and Bos, Herbert},
+  journal={Computer},
+  volume={39},
+  number={5},
+  pages={44--51},
+  year={2006},
+}
+
+@article{swift2005improving,
+  title={Improving the reliability of commodity operating systems},
+  author={Swift, Michael M and Bershad, Brian N and Levy, Henry M},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={23},
+  number={1},
+  pages={77--110},
+  year={2005},
+}
+
+@inproceedings{Ganapathy:2008:DIM:1346281.1346303,
+ author = {Ganapathy, Vinod and Renzelmann, Matthew J. and Balakrishnan, Arini and Swift, Michael M. and Jha, Somesh},
+ title = {The Design and Implementation of Microdrivers},
+ booktitle = {Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems},
+ series = {ASPLOS XIII},
+ year = {2008},
+ pages = {168--178},
+ address = {Seattle, WA, USA},
+} 
+
+@inproceedings{Boyd-Wickizer+:atc2010,
+ author = {Boyd-Wickizer, Silas and Zeldovich, Nickolai},
+ title = {Tolerating malicious device drivers in {Linux}},
+ booktitle = ATC2010,
+ series = {ATC'10},
+ year = {2010},
+ address = {Boston, MA, USA},
+ pages = {117--130},
+ numpages = {1},
+ url = {http://dl.acm.org/citation.cfm?id=1855840.1855849},
+ acmid = {1855849},
+}
+
+@inproceedings{armand1991give,
+  title={Give a process to your drivers},
+  author={Armand, Fran{\c{c}}ois},
+  booktitle={Proceedings of the EurOpen Autumn 1991 Conference},
+  pages={16--20},
+  year={1991},
+  organization={Budapest}
+}
+
+@article{Leslie+:jcst2005,
+    author = {Ben Leslie and Peter Chubb and Nicholas Fitzroy-Dale and Stefan G¨otz 
+       and Charles Gray and Luke Macpherson and Daniel Potts and Yueting (Rita) Shen
+           and Kevin Elphinstone and Gernot Heiser},
+    title = {Userlevel device drivers: Achieved performance},
+    journal = {Journal of Computer Science and Technology},
+    volume = 20,
+    number = 5,
+    pages = {654-–664}, 
+    month = sep,
+    year = 2005
+}
+
+@inproceedings{Accetta+:usenix86,
+    author = {Mike Accetta and Robert Baron and William Bolosky and David Golub and Richard Rashid and Avadis Tevanian and Michael Young},
+    title = {Mach: A New Kernel Foundation for {UNIX} Development},
+    booktitle = {Proceedings of the 1986 Summer USENIX Conference},
+    year = {1986},
+    pages = {93--112}
+}
+
+@inproceedings{Liedtke+:sosp95,
+ author = {Liedtke, J.},
+ title = {On micro-kernel construction},
+ booktitle = SOSP1995,
+ series = {SOSP'95},
+ year = {1995},
+ isbn = {0-89791-715-4},
+ address = {Copper Mountain, CO, USA},
+ pages = {237--250},
+ numpages = {14},
+ url = {http://doi.acm.org/10.1145/224056.224075},
+ doi = {10.1145/224056.224075},
+ acmid = {224075}
+}
+
+@inproceedings{Heiser+:acm10,
+ author = {Heiser, Gernot and Leslie, Ben},
+ title = {{The OKL4 Microvisor: Convergence Point of Microkernels and Hypervisors}},
+ booktitle = APSYS10,
+ series = {APSys'10},
+ year = {2010},
+ isbn = {978-1-4503-0195-4},
+ address = {New Delhi, India},
+ pages = {19--24},
+ numpages = {6},
+ url = {http://doi.acm.org/10.1145/1851276.1851282},
+ doi = {10.1145/1851276.1851282},
+ acmid = {1851282},
+ keywords = {embedded systems, hypervisors, microkernels, real-time systems, virtual machines},
+} 
