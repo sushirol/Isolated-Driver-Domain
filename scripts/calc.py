@@ -1,12 +1,14 @@
 #!/usr/bin/env python
+
 import sys
 fn = sys.argv[1]
 filenameList = []
 outputList = []
 timeList = []
+
 for i in range(1, 11):
-    filenameList.append(fn + '-' + `i` + '.txt')
-    outputList.append('cpu-' + fn + '-' + `i` + '.cpu')
+    filenameList.append(fn + '-' + `i` + '.cpu')
+    outputList.append('cpu-' + fn + '-' + `i` + '.cal')
     timeList.append(fn + '-' + `i` + '.time')
 
 #print filenameList
@@ -19,7 +21,7 @@ for i in range (0,10):
     time_line = time_fd.readlines()
     out_fd = open(outputList[i],"w")
 
-    for x in range(0, 10):
+    for x in range(0, 13):
         timex = `time_line[x]`
         timex = timex[:-4]
         timex = timex[1:]
