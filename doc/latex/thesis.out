@@ -35,7 +35,7 @@
 \BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 35
 \BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}% 36
 \BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}% 37
-\BOOKMARK [1][-]{section.5.3}{The Xen Split Device Driver vs The Base IDDR System}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.3}{Xen Split Device Driver vs Base IDDR System}{chapter.5}% 38
 \BOOKMARK [1][-]{section.5.4}{Base IDDR System vs New IDDR System}{chapter.5}% 39
 \BOOKMARK [0][-]{chapter.6}{Related Work}{}% 40
 \BOOKMARK [1][-]{section.6.1}{Reliability of the System}{chapter.6}% 41
