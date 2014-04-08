@@ -45,6 +45,13 @@ Paul Barham, Boris Dragovic, Keir Fraser, Steven Hand, Tim Harris, Alex Ho,
 \newblock In {\em Proceedings of the Nineteenth ACM Symposium on Operating
   Systems Principles}, pages 164--177, Bolton Landing, NY, USA, 2003.
 
+\bibitem{Belay+:osdi12}
+Adam Belay, Andrea Bittau, Ali Mashtizadeh, David Terei, David Mazi\`{e}res,
+  and Christos Kozyrakis.
+\newblock {Dune: Safe User-level Access to Privileged CPU Features}.
+\newblock In {\em Proceedings of the 10th USENIX Symposium on Operating Systems
+  Design \& Implementation}, OSDI'12, pages 335--348, Hollywood, CA, USA, 2012.
+
 \bibitem{Bovet:2005:ULK:1077084}
 Daniel Bovet and Marco Cesati.
 \newblock {\em Understanding The Linux Kernel}.

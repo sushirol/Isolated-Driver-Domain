@@ -72,6 +72,6 @@
 \contentsline {chapter}{\numberline {6}Related Work}{72}{chapter.6}
 \contentsline {section}{\numberline {6.1}Reliability of the System}{73}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Driver Protection Approches}{73}{subsection.6.1.1}
-\contentsline {paragraph}{kernel based:}{75}{section*.65}
+\contentsline {subsection}{\numberline {6.1.2}Other Approches}{75}{subsection.6.1.2}
 \contentsline {section}{\numberline {6.2}Inter-domain Communication}{76}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{77}{chapter.7}
+\contentsline {chapter}{\numberline {7}Conclusion}{78}{chapter.7}
