@@ -126,15 +126,17 @@
 } 
 
 @inproceedings{LeVasseur04UnmodifiedDriverReuse,
-  title={Unmodified Device Driver Reuse and Improved System Dependability via Virtual Machines.},
-  author={LeVasseur, Joshua and Uhlig, Volkmar and Stoess, Jan and G{\"o}tz, Stefan},
-  booktitle={OSDI},
-  pages={17--30},
-  volume={4},
-  number={19},
-  year={2004},
-  address = {University of Karlsruhe, Germany},
-}
+ author = {LeVasseur, Joshua and Uhlig, Volkmar and Stoess, Jan and G\"{o}tz, Stefan},
+ title = {Unmodified device driver reuse and improved system dependability via virtual machines},
+ booktitle = OSDI2004,
+ series = {OSDI'04},
+ year = {2004},
+ address = {San Francisco, CA, USA},
+ pages = {17--30},
+ numpages = {1},
+ url = {http://dl.acm.org/citation.cfm?id=1251254.1251256},
+ acmid = {1251256},
+} 
 
 @article{denning1970virtual,
   title={Virtual memory},
@@ -148,14 +150,16 @@
 
 
 @inproceedings{barham2003xen,
- author = {Barham, Paul and Dragovic, Boris and Fraser, Keir and Hand, Steven and Harris, Tim and Ho, Alex and Neugebauer, Rolf and Pratt, Ian and Warfield, Andrew},
- title = {Xen and the Art of Virtualization},
- booktitle = {Proceedings of the Nineteenth ACM Symposium on Operating Systems Principles},
+ author = {Barham, Paul and Dragovic, Boris and Fraser, Keir and et al.},
+ title = {{Xen} and the art of virtualization},
+ booktitle = SOSP2003,
+ series = {SOSP'03},
  year = {2003},
- location = {Bolton Landing, NY, USA},
+ isbn = {1-58113-757-5},
  pages = {164--177},
  address = {Bolton Landing, NY, USA},
-} 
+ @doi = {10.1145/945445.945462},
+ }
 
 @inproceedings{Graham:1971:PPP:1478873.1478928,
  author = {Graham, G. Scott and Denning, Peter J.},
@@ -180,11 +184,17 @@
 
 @inproceedings{Riley:2008:GPK:1433006.1433008,
  author = {Riley, Ryan and Jiang, Xuxian and Xu, Dongyan},
- title = {Guest-Transparent Prevention of Kernel Rootkits with {VMM}-Based Memory Shadowing},
- booktitle = {Recent Advances in Intrusion Detection},
+ title = {Guest-Transparent Prevention of Kernel Rootkits with VMM-Based Memory Shadowing},
+ booktitle = {Proceedings of the 11th international symposium on Recent Advances in Intrusion Detection},
+ series = {RAID'08},
  year = {2008},
- pages = {1--20},
+ isbn = {978-3-540-87402-7},
  address = {Cambridge, MA, USA},
+ pages = {1--20},
+ numpages = {20},
+ url = {http://dx.doi.org/10.1007/978-3-540-87403-4_1},
+ doi = {10.1007/978-3-540-87403-4_1},
+ acmid = {1433008},
 } 
 
 @article{Habib:2008:VK:1344209.1344217,
@@ -194,44 +204,59 @@
  volume = {2008},
  number = {166},
  year = {2008},
- articleno = {8},
- address = {Houston, TX},
-} 
+ issn = {1075-3583},
+ pages = {8},
+ address = {Seattle, WA, USA},
+}
 
 @article{Agesen:2010:EXV:1899928.1899930,
- author = {Agesen, Ole and Garthwaite, Alex and Sheldon, Jeffrey and Subrahmanyam, Pratap},
- title = {The evolution of an x86 virtual machine monitors},
- journal = {ACM SIGOPS Operating Systems Review},
- volume = {44},
- number = {4},
- year = {2010},
- pages = {3--18},
-} 
+  author = {Agesen, Ole and Garthwaite, Alex and Sheldon, Jeffrey and Subrahmanyam, Pratap},
+  title = {The evolution of an x86 virtual machine monitor},
+  journal = {SIGOPS Oper. Syst. Rev.},
+  issue_date = {December 2010},
+  volume = {44},
+  number = {4},
+  month = dec,
+  year = {2010},
+  issn = {0163-5980},
+  pages = {3--18},
+  numpages = {16},
+  url = {http://doi.acm.org/10.1145/1899928.1899930},
+  doi = {10.1145/1899928.1899930},
+  acmid = {1899930},
+  address = {New York, NY, USA},
+  keywords = {MMU, SVM, TLB, VT, dynamic binary translation, nested paging, vSMP, virtual machine monitor, virtualization, x86},
+}
 
 @inproceedings{camargos2008virtualization,
-  title={Virtualization of Linux servers},
-  author={Camargos, F and Girard, G and Ligneris, B},
-  journal={{L}inux Symposium},
-  pages={63--76},
-  year={2008},
-  address = {Ottawa, Ontario, Canada},
+ author = {Camargos, Fernando L. and Girard, Gabriel and Ligneris, Benoit D.},
+ booktitle = {2008 Ottawa Linux Symsposium},
+ title = {{Virtualization of Linux servers: a comparative study}},
+ journal={{L}inux Symposium},
+ pages={63--76},
+ year={2008},
+ address = {Ottawa, Ontario, Canada},
 }
 
 @inproceedings{Sugerman:2001:VID:647055.715774,
  author = {Sugerman, Jeremy and Venkitachalam, Ganesh and Lim, Beng-Hong},
- title = {Virtualizing I/O Devices on VMware Workstation's Hosted Virtual Machine Monitor},
- booktitle = {USENIX Annual Technical Conference, General Track},
+ title = {{Virtualizing {I/O} Devices on {VMware} {Workstation}'s Hosted Virtual Machine Monitor}},
+ booktitle = {Proceedings of the General Track: 2002 USENIX Annual Technical Conference},
+ journal = {ACM Transactions on Computer Systems},
  year = {2001},
  pages = {1--14},
+ volume = {15},
  address = {Boston, MA, USA},
 } 
 
 @inproceedings{king2003operating,
-  title={Operating System Support for Virtual Machines.},
-  author={King, Samuel T and Dunlap, George W and Chen, Peter M},
-  booktitle={USENIX Annual Technical Conference, General Track},
-  pages={71--84},
-  year={2003}
+ author = {King, Samuel T. and Dunlap, George W. and Chen, Peter M.},
+ title = {Operating system support for virtual machines},
+ booktitle = ATEC03,
+ series = {ATEC'03},
+ year = {2003},
+ pages = {71--84},
+ address = {San Antonio, TX, USA}
 }
 
 @inproceedings{Nikolaev:2013:VOS:2517349.2522719,
@@ -249,7 +274,7 @@
  booktitle = {Proceedings of the Annual Conference on USENIX '06 Annual Technical Conference},
  year = {2006},
  pages = {2--2},
- address = {Boston, MA, USA},
+ address = {Boston, MA, USA}, 
 } 
 
 @article{Mogul:1991:ECS:106973.106982,
@@ -281,18 +306,23 @@
 }
 
 @inproceedings{hand2005virtual,
-  title={Are virtual machine monitors microkernels done right?},
-  author={Hand, Steven and Warfield, Andrew and Fraser, Keir and Kotsovinos, Evangelos and Magenheimer, Daniel J},
-  booktitle={the 10th Workshop on Hot Topics in Operating Systems},
-  year={2005},
-  address={Santa Fe, NM},
+  author = {Hand, Steven and Warfield, Andrew and Fraser, Keir and Kotsovinos, Evangelos and Magenheimer, Dan},
+  title = {Are virtual machine monitors microkernels done right?},
+  booktitle = HOTOS05,
+  series = {HOTOS'05},
+  year = {2005},
+  address = {Santa Fe, NM},
+  numpages = {5},
+  url = {http://dl.acm.org/citation.cfm?id=1251123.1251124},
+  acmid = {1251124}
 }
 
 @inproceedings{Fraser04safehardware,
-    author = {Fraser, Keir and Hand, Steven and Neugebauer, Rolf and Pratt, Ian and Warfield, Andrew and Williamson, Mark},
-    title = {Safe hardware access with the {X}en virtual machine monitor},
-    booktitle = {1st Workshop on Operating System and Architectural Support for the on-demand IT InfraStructure (OASIS)},
-    year = {2004}
+  author = {Fraser, Keir and Hand, Steven and Neugebauer, Rolf and Pratt, Ian and Warfield, Andrew and Williamson, Mark},
+  title = {Safe hardware access with the {X}en virtual machine monitor},
+  booktitle = {Proceedings of the 1st Workshop on Operating System and Architectural Support for the on-demand IT InfraStructure},
+  series = {OASIS'04},
+  year = {2004}
 }
 
 @inproceedings{Zhang:2007:XHI:1516124.1516138,
@@ -307,7 +337,8 @@
 @inproceedings{Burtsev:2009:FFI:1855807.1855832,
  author = {Burtsev, Anton and Srinivasan, Kiran and Radhakrishnan, Prashanth and Bairavasundaram, Lakshmi N. and Voruganti, Kaladhar and Goodson, Garth R.},
  title = {Fido: Fast Inter-virtual-machine Communication for Enterprise Appliances},
- booktitle = {Proceedings of the 2009 Conference on USENIX Annual Technical Conference},
+ booktitle = ATC2009,
+ series = {ATC'09},
  year = {2009},
  pages = {25--25},
  address = {San Diego, CA, USA},
@@ -316,7 +347,7 @@
 @inproceedings{kivity2007kvm,
   title={{KVM}: the Linux virtual machine monitor},
   author={Kivity, Avi and Kamay, Yaniv and Laor, Dor and Lublin, Uri and Liguori, Anthony},
-  booktitle={Proceedings of the Linux Symposium},
+  booktitle = {OLS '07: The 2007 Ottawa Linux Symposium},
   volume={1},
   pages={225--230},
   year={2007}
@@ -345,7 +376,7 @@
 @inproceedings{Ganapathy:2008:DIM:1346281.1346303,
  author = {Ganapathy, Vinod and Renzelmann, Matthew J. and Balakrishnan, Arini and Swift, Michael M. and Jha, Somesh},
  title = {The Design and Implementation of Microdrivers},
- booktitle = {Proceedings of the 13th International Conference on Architectural Support for Programming Languages and Operating Systems},
+ booktitle = ASPLOS2013,
  series = {ASPLOS XIII},
  year = {2008},
  pages = {168--178},
@@ -361,8 +392,6 @@
  address = {Boston, MA, USA},
  pages = {117--130},
  numpages = {1},
- url = {http://dl.acm.org/citation.cfm?id=1855840.1855849},
- acmid = {1855849},
 }
 
 @inproceedings{armand1991give,
@@ -375,24 +404,22 @@
 }
 
 @article{Leslie+:jcst2005,
-    author = {Ben Leslie and Peter Chubb and Nicholas Fitzroy-Dale and Stefan G¨otz 
-       and Charles Gray and Luke Macpherson and Daniel Potts and Yueting (Rita) Shen
-           and Kevin Elphinstone and Gernot Heiser},
-    title = {Userlevel device drivers: Achieved performance},
-    journal = {Journal of Computer Science and Technology},
-    volume = 20,
-    number = 5,
-    pages = {654-–664}, 
-    month = sep,
-    year = 2005
+  author = {Ben Leslie and Peter Chubb and Nicholas Fitzroy-Dale and Stefan {G¨otz} and Charles Gray and Luke Macpherson and Daniel Potts and Yueting (Rita) Shen and Kevin Elphinstone and Gernot Heiser},
+  title = {Userlevel device drivers: Achieved performance},
+  journal = {Journal of Computer Science and Technology},
+  volume = 20,
+  number = 5,
+  pages = {654-–664}, 
+  month = sep,
+  year = 2005
 }
 
 @inproceedings{Accetta+:usenix86,
-    author = {Mike Accetta and Robert Baron and William Bolosky and David Golub and Richard Rashid and Avadis Tevanian and Michael Young},
-    title = {Mach: A New Kernel Foundation for {UNIX} Development},
-    booktitle = {Proceedings of the 1986 Summer USENIX Conference},
-    year = {1986},
-    pages = {93--112}
+  author = {Mike Accetta and Robert Baron and William Bolosky and David Golub and Richard Rashid and Avadis Tevanian and Michael Young},
+  title = {Mach: A New Kernel Foundation for {UNIX} Development},
+  booktitle = {Proceedings of the 1986 Summer USENIX Conference},
+  year = {1986},
+  pages = {93--112}
 }
 
 @inproceedings{Liedtke+:sosp95,

@@ -133,19 +133,14 @@ Sushrut Shirole
 (ABSTRACT)
 \\[10mm]
 \end{center}
-In majority of today's operating system architectures, a device driver is tightly coupled with the kernel components. In such system, a malicious or faulty device driver often lead to a system failure, thereby reducing the reliability of the system. Even though majority of the operating systems provide a protection mechanism at user level, they dont provide the same level of protection between kernel components. Isolated Driver Domain is a conceptual framework presented by Xen, which takes the advantage of the protection between the domains and isolates the device driver and the operating system kernel in separate domains. The Isolated Device Driver (IDDR) implements the framework. Unfortunately, the isolated driver domain solution incur performance overhead. 
+In most of today's operating system architectures, a device driver is tightly coupled with the kernel components. In such systems, a malicious or faulty device driver often leads to a system failure, thereby reducing the reliability of the system. Even though a majority of the operating systems provide a protection mechanism at the user level, they do not provide the same level of protection between kernel components. The Isolated Driver Domain is a conceptual framework presented by Xen, which takes advantage of the protection present between the domains and it isolates the device driver and the operating system kernel in separate domains. The Isolated Device Driver (IDDR) implements this framework. Unfortunately, the isolated driver domain solution incurs performance overhead. 
 \\[3mm]
-Even after many advances in virtualization technologies, current inter-domain communication techniques have significant performance overheads. In this thesis, we identify and propose the solution for the performance improvement in the inter-domain communication and we implement it on the top of the IDDR system. 
+Even after many advances in virtualization technologies, current inter-domain communication techniques have significant performance overheads. In this thesis, we propose a solution for performance improvement in inter-domain communication. We implement the proposed solution in the IDDR system. 
 \\[3mm]
-To evaluate the performance improvement, we implement the prototype based on the block device driver. We isolate and run the block device driver in the separate domain than the Linux kernel. Our prototype retains the compatibility with the current applications and kernel components. Our solution outperforms Xen's isolated driver domain in most of the scenarios. In other scenarios, its performance matches that of Xen's isolated driver domain. 
+To evaluate the performance improvement, we implement the prototype based on the block device driver. We isolate and run the block device driver in a separate domain than the Linux kernel. Our prototype retains the compatibility with current applications and kernel components. Our solution outperforms Xen's isolated driver domain in most scenarios. In other scenarios, its performance matches that of Xen's isolated driver domain. 
 \vfill
 
-% GRANT INFORMATION
-
 \pagebreak
-
-% Dedication and Acknowledgments are both optional
-% \chapter*{Dedication}
 
 \chapter*{Acknowledgments}
 \input{chapters/Acknowledgments.tex}
@@ -201,7 +196,6 @@ To evaluate the performance improvement, we implement the prototype based on the
 
 \input{chapters/conclusion.tex}
 
-
 %%%%%%%%%%%%%%%%
 % Do tables like this:
 
@@ -231,20 +225,7 @@ To evaluate the performance improvement, we implement the prototype based on the
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\chapter*{Bibliography}
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
-
-% \appendix
-
-% In LaTeX, each appendix is a "chapter"
-% \chapter{Program Source}
-
 \end{document}
-
-
-%
-%
-
-

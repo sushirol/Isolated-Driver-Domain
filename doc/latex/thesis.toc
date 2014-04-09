@@ -64,14 +64,11 @@
 \contentsline {section}{\numberline {5.2}Methodology}{60}{section.5.2}
 \contentsline {section}{\numberline {5.3}Xen Split Device Driver vs Base IDDR System}{61}{section.5.3}
 \contentsline {section}{\numberline {5.4}Base IDDR System vs New IDDR System}{64}{section.5.4}
-\contentsline {paragraph}{Comparison:}{65}{section*.56}
-\contentsline {paragraph}{Observation:}{66}{section*.57}
-\contentsline {paragraph}{Sequential reads and writes:}{68}{section*.60}
-\contentsline {paragraph}{Comparison:}{68}{section*.61}
-\contentsline {paragraph}{Observation:}{69}{section*.64}
-\contentsline {chapter}{\numberline {6}Related Work}{72}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability of the System}{73}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approches}{73}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Other Approches}{75}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Inter-domain Communication}{76}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{78}{chapter.7}
+\contentsline {paragraph}{Comparison :}{65}{section*.56}
+\contentsline {paragraph}{Observation :}{66}{section*.57}
+\contentsline {chapter}{\numberline {6}Related Work}{69}{chapter.6}
+\contentsline {section}{\numberline {6.1}Reliability of the System}{70}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{70}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Other Approaches}{72}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Inter-domain Communication}{73}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{75}{chapter.7}
