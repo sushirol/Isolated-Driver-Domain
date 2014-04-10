@@ -1,74 +1,74 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Problem Statement}{2}{section.1.1}
-\contentsline {section}{\numberline {1.2}Proposed Solution}{5}{section.1.2}
-\contentsline {section}{\numberline {1.3}Core Contributions}{7}{section.1.3}
-\contentsline {section}{\numberline {1.4}Organization}{7}{section.1.4}
-\contentsline {chapter}{\numberline {2}Background}{9}{chapter.2}
-\contentsline {section}{\numberline {2.1}Processes and Threads}{9}{section.2.1}
-\contentsline {paragraph}{Process:}{9}{section*.6}
-\contentsline {paragraph}{Threads:}{9}{section*.7}
-\contentsline {section}{\numberline {2.2}Context Switch}{10}{section.2.2}
-\contentsline {section}{\numberline {2.3}Spinlocks}{11}{section.2.3}
-\contentsline {section}{\numberline {2.4}Device Driver}{12}{section.2.4}
-\contentsline {paragraph}{Character devices:}{12}{section*.10}
-\contentsline {paragraph}{Network Interfaces:}{13}{section*.11}
-\contentsline {paragraph}{Block Devices:}{13}{section*.12}
-\contentsline {section}{\numberline {2.5}Memory Protection}{15}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}User Level}{16}{subsection.2.5.1}
-\contentsline {subsection}{\numberline {2.5.2}Kernel Level}{17}{subsection.2.5.2}
-\contentsline {section}{\numberline {2.6}Virtualization}{18}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}Hypervisor}{19}{subsection.2.6.1}
-\contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{22}{subsection.2.6.2}
-\contentsline {chapter}{\numberline {3}System Introduction}{30}{chapter.3}
-\contentsline {section}{\numberline {3.1}Design Goal}{30}{section.3.1}
-\contentsline {paragraph}{Hypervisor Layer: }{31}{section*.23}
-\contentsline {paragraph}{Copy Overhead: }{31}{section*.24}
-\contentsline {paragraph}{Communication Channel Overhead: }{31}{section*.25}
-\contentsline {section}{\numberline {3.2}Isolated Device Driver Properties}{32}{section.3.2}
-\contentsline {section}{\numberline {3.3}System Overview}{33}{section.3.3}
-\contentsline {section}{\numberline {3.4}System Components}{35}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}Frontend Driver}{36}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Backend Driver}{36}{subsection.3.4.2}
-\contentsline {subsection}{\numberline {3.4.3}Communication Module}{37}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}System Design}{38}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Communication Module}{39}{subsection.3.5.1}
-\contentsline {paragraph}{Base IDDR System Design:}{39}{section*.31}
-\contentsline {paragraph}{Spinlock Based IDDR System:}{39}{section*.32}
-\contentsline {subsection}{\numberline {3.5.2}Frontend Driver}{40}{subsection.3.5.2}
-\contentsline {paragraph}{Base IDDR System Design:}{40}{section*.33}
-\contentsline {paragraph}{New IDDR System Design:}{40}{section*.34}
-\contentsline {subsection}{\numberline {3.5.3}Backend Driver}{41}{subsection.3.5.3}
-\contentsline {paragraph}{Base IDDR System Design:}{41}{section*.35}
-\contentsline {paragraph}{New IDDR system Design:}{41}{section*.36}
-\contentsline {chapter}{\numberline {4}Implementation}{43}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Overview}{43}{section.4.1}
-\contentsline {section}{\numberline {4.2}Implementation}{45}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Communication Module}{45}{subsection.4.2.1}
-\contentsline {paragraph}{Shared Request and Response Queue:}{46}{section*.41}
-\contentsline {paragraph}{Shared Memory for Read/Write Data:}{47}{section*.42}
-\contentsline {paragraph}{Event Notification:}{47}{section*.43}
-\contentsline {paragraph}{Shared Request and Response Queue:}{48}{section*.44}
-\contentsline {paragraph}{Shared Memory for Read/Write Data:}{48}{section*.45}
-\contentsline {paragraph}{Threads and Event Notification:}{49}{section*.46}
-\contentsline {subsection}{\numberline {4.2.2}Application Domain}{51}{subsection.4.2.2}
-\contentsline {paragraph}{Initialization}{53}{section*.47}
-\contentsline {paragraph}{Dequeue and Submit Request:}{53}{section*.48}
-\contentsline {paragraph}{End Request:}{53}{section*.49}
-\contentsline {paragraph}{Initialization:}{54}{section*.50}
-\contentsline {paragraph}{Dequeue and Submit Request:}{55}{section*.51}
-\contentsline {paragraph}{Spinning The Main Thread:}{55}{section*.52}
-\contentsline {paragraph}{End Request:}{55}{section*.53}
-\contentsline {subsection}{\numberline {4.2.3}Driver Domain}{55}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Evaluation}{58}{chapter.5}
-\contentsline {section}{\numberline {5.1}Goals}{58}{section.5.1}
-\contentsline {section}{\numberline {5.2}Methodology}{60}{section.5.2}
-\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs Base IDDR System}{61}{section.5.3}
-\contentsline {section}{\numberline {5.4}Base IDDR System vs New IDDR System}{64}{section.5.4}
-\contentsline {paragraph}{Comparison :}{65}{section*.56}
-\contentsline {paragraph}{Observation :}{66}{section*.57}
-\contentsline {chapter}{\numberline {6}Related Work}{69}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability of the System}{70}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{70}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Other Approaches}{72}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Inter-domain Communication}{73}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{75}{chapter.7}
+\contentsline {section}{\numberline {1.2}Proposed Solution}{4}{section.1.2}
+\contentsline {section}{\numberline {1.3}Core Contributions}{5}{section.1.3}
+\contentsline {section}{\numberline {1.4}Organization}{6}{section.1.4}
+\contentsline {chapter}{\numberline {2}Background}{7}{chapter.2}
+\contentsline {section}{\numberline {2.1}Processes and Threads}{7}{section.2.1}
+\contentsline {paragraph}{Process:}{7}{section*.6}
+\contentsline {paragraph}{Threads:}{7}{section*.7}
+\contentsline {section}{\numberline {2.2}Context Switch}{8}{section.2.2}
+\contentsline {section}{\numberline {2.3}Spinlocks}{9}{section.2.3}
+\contentsline {section}{\numberline {2.4}Device Driver}{10}{section.2.4}
+\contentsline {paragraph}{Character devices:}{10}{section*.10}
+\contentsline {paragraph}{Network Interfaces:}{11}{section*.11}
+\contentsline {paragraph}{Block Devices:}{11}{section*.12}
+\contentsline {section}{\numberline {2.5}Memory Protection}{13}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}User Level}{14}{subsection.2.5.1}
+\contentsline {subsection}{\numberline {2.5.2}Kernel Level}{15}{subsection.2.5.2}
+\contentsline {section}{\numberline {2.6}Virtualization}{16}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Hypervisor}{17}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{20}{subsection.2.6.2}
+\contentsline {chapter}{\numberline {3}System Introduction}{28}{chapter.3}
+\contentsline {section}{\numberline {3.1}Design Goal}{28}{section.3.1}
+\contentsline {paragraph}{Hypervisor Layer: }{29}{section*.23}
+\contentsline {paragraph}{Copy Overhead: }{29}{section*.24}
+\contentsline {paragraph}{Communication Channel Overhead: }{29}{section*.25}
+\contentsline {section}{\numberline {3.2}Isolated Device Driver Properties}{30}{section.3.2}
+\contentsline {section}{\numberline {3.3}System Overview}{31}{section.3.3}
+\contentsline {section}{\numberline {3.4}System Components}{33}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Frontend Driver}{34}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Backend Driver}{34}{subsection.3.4.2}
+\contentsline {subsection}{\numberline {3.4.3}Communication Module}{35}{subsection.3.4.3}
+\contentsline {section}{\numberline {3.5}System Design}{36}{section.3.5}
+\contentsline {subsection}{\numberline {3.5.1}Communication Module}{37}{subsection.3.5.1}
+\contentsline {paragraph}{Base IDDR System Design:}{37}{section*.31}
+\contentsline {paragraph}{Spinlock Based IDDR System:}{37}{section*.32}
+\contentsline {subsection}{\numberline {3.5.2}Frontend Driver}{38}{subsection.3.5.2}
+\contentsline {paragraph}{Base IDDR System Design:}{38}{section*.33}
+\contentsline {paragraph}{New IDDR System Design:}{38}{section*.34}
+\contentsline {subsection}{\numberline {3.5.3}Backend Driver}{39}{subsection.3.5.3}
+\contentsline {paragraph}{Base IDDR System Design:}{39}{section*.35}
+\contentsline {paragraph}{New IDDR system Design:}{39}{section*.36}
+\contentsline {chapter}{\numberline {4}Implementation}{41}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Overview}{41}{section.4.1}
+\contentsline {section}{\numberline {4.2}Implementation}{43}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Communication Module}{43}{subsection.4.2.1}
+\contentsline {paragraph}{Shared Request and Response Queue:}{44}{section*.41}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{45}{section*.42}
+\contentsline {paragraph}{Event Notification:}{45}{section*.43}
+\contentsline {paragraph}{Shared Request and Response Queue:}{46}{section*.44}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{46}{section*.45}
+\contentsline {paragraph}{Threads and Event Notification:}{47}{section*.46}
+\contentsline {subsection}{\numberline {4.2.2}Application Domain}{49}{subsection.4.2.2}
+\contentsline {paragraph}{Initialization}{51}{section*.47}
+\contentsline {paragraph}{Dequeue and Submit Request:}{51}{section*.48}
+\contentsline {paragraph}{End Request:}{51}{section*.49}
+\contentsline {paragraph}{Initialization:}{52}{section*.50}
+\contentsline {paragraph}{Dequeue and Submit Request:}{53}{section*.51}
+\contentsline {paragraph}{Spinning The Main Thread:}{53}{section*.52}
+\contentsline {paragraph}{End Request:}{53}{section*.53}
+\contentsline {subsection}{\numberline {4.2.3}Driver Domain}{53}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Evaluation}{56}{chapter.5}
+\contentsline {section}{\numberline {5.1}Goals}{56}{section.5.1}
+\contentsline {section}{\numberline {5.2}Methodology}{58}{section.5.2}
+\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs Base IDDR System}{59}{section.5.3}
+\contentsline {section}{\numberline {5.4}Base IDDR System vs New IDDR System}{62}{section.5.4}
+\contentsline {paragraph}{Comparison :}{63}{section*.56}
+\contentsline {paragraph}{Observation :}{64}{section*.57}
+\contentsline {chapter}{\numberline {6}Related Work}{67}{chapter.6}
+\contentsline {section}{\numberline {6.1}Reliability of the System}{68}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{68}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Other Approaches}{70}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Inter-domain Communication}{71}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{73}{chapter.7}
