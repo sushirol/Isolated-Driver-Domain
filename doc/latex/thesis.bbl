@@ -217,6 +217,13 @@ Abraham Silberschatz, Peter~Baer Galvin, and Greg Gagne.
 \newblock {\em Operating System Concepts}.
 \newblock Wiley Publishing, 8th edition, 2008.
 
+\bibitem{Soares+:osdi10}
+Livio Soares and Michael Stumm.
+\newblock {FlexSC}: flexible system call scheduling with exception-less system
+  calls.
+\newblock In {\em Proceedings of the 9th USENIX Symposium on Operating Systems
+  Design \& Implementation}, OSDI'10, pages 1--8, Vancouver, BC, Canada, 2010.
+
 \bibitem{Sugerman:2001:VID:647055.715774}
 Jeremy Sugerman, Ganesh Venkitachalam, and Beng-Hong Lim.
 \newblock {Virtualizing {I/O} Devices on {VMware} {Workstation}'s Hosted
