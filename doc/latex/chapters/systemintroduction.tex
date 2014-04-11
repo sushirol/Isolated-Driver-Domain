@@ -2,9 +2,7 @@
 The goal of the IDDR system is to provide full isolation between a device driver and the monolithic kernel and at the same time avoid modifications to the device driver code. The goal of the thesis is to minimize the performance penalty because of the communication between the domains. In the thesis, we explore opportunities to minimize the overhead of the communication module in the IDDR system.
 
 \subsection*{Performance Improvement}
-The IDDR system is a re-implementation of the Xen's isolated driver domain. Even though the IDDR system provides better robustness for the operating system, it deteriorates the performance. The reasons for the performance deterioration is due to the introduction of hypervisor, data copy overhead or overhead of communication between the domains. 
-
-\paragraph{Hypervisor Layer: } The IDDR system uses Xen hypervisor as a virtualization platform. Xen hypervisor is a Type 1 hypervisor. A type 1 hypervisor runs directly on the host's hardware. It runs between the operating system and the hardware. In Xen, the hypervisor runs in ring 0, while guest OS runs in ring 1 and applications run in ring 3. For hardware access, the guest OS has to go through the hypervisor, which degrades the performance of the system
+The IDDR system is a re-implementation of the Xen's isolated driver domain. Even though the IDDR system provides better robustness for the operating system, it deteriorates the performance. The reasons for the performance deterioration is due to data copy overhead and overhead of communication between the domains. 
 
 \paragraph{Copy Overhead: } For data intensive operations such as read and write, the IDDR system transfers data between the hardware and the driver domain. It also transfers the same data between the driver domain and the application domain. The extra copy from the driver domain to the application domain is also one of the reasons for the performance degradation of the system. 
 
