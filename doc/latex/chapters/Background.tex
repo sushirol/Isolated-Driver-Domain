@@ -1,10 +1,10 @@
-This section gives a background on operating system concepts such as Processes, Threads, Memory Protection, Virtualization and Hypervisor.
+This section provides a background on operating system terminologies such as Processes, Threads, Memory Protection, Virtualization and Hypervisors.
 \section{Processes and Threads}
-\paragraph{Process:} Process is a program in execution or an abstraction of a running program. Process can be considered as the most central concept in an operating system~\cite{Galvin}.
+\paragraph{Process:} A process can be viewed as a program in execution as an abstraction of a processor. Each process has its own address space.~\cite{Galvin}.
 
-\paragraph{Threads:} Each process has an address space. A process has either single or multiple threads of control in that same address space. Threads run as if they were separate processes, although they share the address space~\cite{Galvin}.
-\\
-A thread is also called a light-weight process. The implementation of threads and processes differ in each operating system, but in most cases, a thread is contained inside a process. Multiple threads can exist within the same process and share resources such as code and data segment, while different processes do not share these resources. If a process has multiple threads then it can perform more than one task at a time.
+\paragraph{Threads:} A process has either a single or multiple threads sharing its address space. Each thread represents a separate flow of control~\cite{Galvin}.
+\\[3mm]
+A thread is also called a light-weight process. The implementation of threads and processes differs between operating systems. Multiple threads can exist within the same process and share resources such as code and data segments, whereas different processes do not share such resources. 
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -22,33 +22,31 @@ A thread is also called a light-weight process. The implementation of threads an
 \end{figure}
 
 \section{Context Switch}
-Multithreading is implemented by time division multiplexing on a single processor. In time division multiplexing, the processor switches between different threads. The switch between threads is called the context switch. The context switch makes the user feel that the threads or tasks are running concurrently. However, on a multi-processor system, threads can run truly concurrently, with every processor executing a separate thread simultaneously. 
-\\
-In a context switch the state of a process is stored and restored, so that the execution can be resumed from the same point at a later time. The state of the process is also called a context. The context is determined by the processor and the operating system. Context switching makes it possible for multiple processes or threads to share a single processor. Usually context switches are computationally intensive. Switching between two process requires good amount of computation and time, by saving and loading registers, maping the memory, and updating various tables~\cite{Galvin} .
+Multiple threads typically employs time division multiplexing when sharing a single processor. In time division multiplexing, the processor switches between executing threads, interleaving their execution. Switching between threads is called a context switch. Continuous context switching creates the impression for the user that threads and processes are running concurrently. On multi-processor systems, threads can run simultaneously on multiple processors, each of which may perform time division multiplexing. 
+\\[3mm]
+Suring a context switch the state of a process is saved, so that its execution can be resumed from the same point at a later time. The state is determined by the processor and the operating system ~\cite{Galvin}. The cost of context switch can be divided into direct and indirect cost. The direct cost is the time required to save and restore processor registers, execute the scheduler code, flush TLB entries and flush pipeline. The indirect cost is the time spent due to processor pollution~\cite{Soares+:osdi10, Li:2007:QCC:1281700.1281702}.
 
 \section{Spinlocks}
-Spinlock is one of the locking mechanisms designed to work in a multi-processing environment. Spinlock causes a thread that is trying to acquire the lock to spin in case of unavailability of it. Spinlocks are similar to the semaphores, except that when a process finds the lock closed by another process, it spins around continuously until it obtains the lock. Spinning is implemented by executing an instruction in a loop~\cite{Bovet:2005:ULK:1077084}.
-\\[3mm]
-In a uniprocessor environment, the waiting process keeps spinning for the lock. As the other process holding the lock might not have a chance to release it, the spinlock could deteriorate the performance in a uniprocessor environment. Howerver, in a multi-processor environment spinlocks can be more efficient. 
+In uniprocessor and multiprocessor environment, a context switch takes a significant amount of time. In a multi-processor environment, it is more efficient for each process to keep its own CPU and spin while waiting for a resource~\cite{Bovet:2005:ULK:1077084}.
 \\[3mm] 
-In uniprocessor and multiprocessor environment, a context switch takes a significant amount of time. In a multi-processor environment, it is more efficient for each process to keep its own CPU and spin while waiting for the resource~\cite{Bovet:2005:ULK:1077084}. As a spinlock avoids the overhead of re-scheduling and context switching, spinning for a short time can be more efficient than a context switch. For the same reason, spinlocks are often used inside operating system kernels.
+A spinlock is a locking mechanism designed to work in a multi-processing environment. A spinlock causes a thread that is trying to acquire lock to spin if the lock is not available~\cite{Bovet:2005:ULK:1077084}.
 \\[3mm]
-\textbf{Adaptive Spinning} is a spinlock optimization technique. In the adaptive spinning technique, the duration of the spin is determined by policy decisions based on the rate of success and failure of recent spin attempts on the same lock. Adaptive spinning helps threads to avoid spinning in futile conditions.
+\textbf{Adaptive Spinning} is a spinlock optimization technique. In the adaptive spinning technique, the duration of spinning is determined by algorithm based on the rate of successes and failures of recent spinning attempts to acquire the lock. Adaptive spinning helps threads to avoid spinning in unnecessary conditions.
 
 \section{Device Driver}
 \label{sec:device driver}
-A device driver is a program that provides a software interface to a particular hardware device. It enables the operating system and other programs to access the hardware functions. Device drivers are hardware dependent and operating system specific. When a program invokes a routine in the driver, the driver issues commands to the device. After execution, the device sends data back to the driver. The driver may invoke routines in the original calling program after recieving the data. The Linux distinguishes between three fundamental device types: character device, block device and network interface. Each kernel module usually implements one of these types.
+A device driver is a program that provides a software interface to a particular hardware device. It enables the operating system and other programs to access its hardware functions. Device drivers are hardware dependent and operating system specific. For a system call requested by a user program, a driver issues commands to the device. After execution, the device sends data back to the driver. The driver may invoke routines in the original calling program after receiving the data. The Linux kernel distinguishes between three device types: character devices, block devices and network interfaces. 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5 ]{kernel}
 \caption{Split view of a kernel}
 \label{fig:kernel}
 \end{figure}
-\paragraph{Character devices:} A character device can be accessed as a stream of bytes. A character driver implements this behavior of the character device. A character driver usually implements at least the open, close, read, and write system calls. The text console (/dev/console) and the serial ports (/dev/ttyS0) are examples of character devices.
+\paragraph{Character devices:} A character device can be accessed as a stream of bytes. A character driver usually implements at least the open, close, read, and write functions. The text console (/dev/console) and the serial ports (/dev/ttyS0) are examples of character devices.
 
 \paragraph{Network Interfaces:} A network interface is a device that is able to exchange data with other hosts. Usually, a network interface is a hardware device, but it can be a software device like the loopback interface. 
 
-\paragraph{Block Devices:} A block device is a device that can host a filesystem. Block devices are accessed by filesystem nodes in the /dev directory. In most unix implementations, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write any number of bytes on a block device. As a result, block and char devices differ only in the way data is managed internally by the kernel, and thus block drivers have a completely different interface than char drivers. Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
+\paragraph{Block Devices:} Unlike character devices, block devices are accessed as blocks of data. In most unix implementations, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write any number of bytes on a block device. As a result, block and char devices differ only in the way data is managed internally by the kernel. Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
 
 \subsection*{Block Device Driver}
 \subsubsection*{Request processing in a block device driver}
@@ -62,11 +60,11 @@ The kernel may join multiple requests that involve adjacent sectors on the disk,
 The kernel describes a read or write operation of a block device in the form of a bio structure. The bio structure has a everything that a block device driver needs to execute the request, without reffering to the user space process that caused the request to be initiated. After creation, the bio structure is handed to the block I/O code. The block I/O code merges the bio structure into an existing request structure, otherwise it creates a new request~\cite{Corbet:2005:LDD:1209083}. 
 
 \section{Memory Protection}
-The memory protection mechanism of a computer system controls the access to objects. The main goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that each shared resource is used only in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage. However, memory protection systems only provide the mechanisms for enforcing policies and ensuring reliable systems. It is up to the administrators, programmers and users to implement those mechanisms~\cite{Galvin, Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level} and subsection~\ref{subsec:kernel level} explain the policies implemented at kernel level and user level. 
+The memory protection mechanism of a computer system controls access to resources. The goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that a resource is used in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage~\cite{Galvin, Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level} and subsection~\ref{subsec:kernel level} explain the policies implemented at kernel level and user level. 
 
 \subsection{User Level}
 \label{subsec:user level}
-Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved for user processes. The upper \texttt{Virtual Memory size - X Gb} is reserved for the kernel. This upper \texttt{VM-X Gb} is restricted to \texttt{CPL 0} only. The kernel puts its private data structures in the upper memory and always accesses them at the same virtual address. 
+Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved for user processes. The upper \texttt{Virtual Memory size - X Gb} is reserved for the kernel. The kernel puts its private data structures in the upper memory and always accesses them at the same virtual address. 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.25 ]{memory_map}
@@ -74,7 +72,7 @@ Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved
 \label{fig:memmap}
 \end{figure}
 \\[3mm]
-At the user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entry. If a process tries to access virtual address that is outside the \texttt{base + bound} address, then an error is reported by the operating system, otherwise the physical address \texttt{base + virtual address} is returned. This allows multiple processes to be run in the memory with protection. Since address translation provides protection, a process canot access the address outside its address space.
+At the user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entries. If a process tries to access virtual address that is outside the \texttt{base + bound} address, then an error is reported by the operating system, otherwise the physical address \texttt{base + virtual address} is returned. This allows multiple processes to be run in the memory with protection. Since address translation provides protection, a process can not access addresses outside its address space.
 \\[3mm]
 Consider an example in Figure~\ref{fig:User space}.
 \begin{enumerate}
