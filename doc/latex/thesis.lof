@@ -1,31 +1,30 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model\relax }}{3}{figure.caption.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Thread\relax }}{10}{figure.caption.8}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Split view of a kernel\relax }}{13}{figure.caption.9}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Physical memory\relax }}{16}{figure.caption.13}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces User level memory protection\relax }}{17}{figure.caption.14}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Kernel level memory protection\relax }}{19}{figure.caption.15}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces Comparision of a non-virtualized system and a virtualized system\relax }}{20}{figure.caption.16}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Type 1 hypervisor\relax }}{21}{figure.caption.17}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Type 2 hypervisor\relax }}{22}{figure.caption.18}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Xen split device driver\relax }}{24}{figure.caption.19}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Xen\relax }}{25}{figure.caption.20}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{26}{figure.caption.21}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{28}{figure.caption.22}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Thread\relax }}{8}{figure.caption.8}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Split view of a kernel\relax }}{10}{figure.caption.9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Physical memory\relax }}{13}{figure.caption.13}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces User level memory protection\relax }}{15}{figure.caption.14}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Kernel level memory protection\relax }}{16}{figure.caption.15}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Comparision of a non-virtualized system and a virtualized system\relax }}{17}{figure.caption.16}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Type 1 hypervisor\relax }}{18}{figure.caption.17}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Type 2 hypervisor\relax }}{19}{figure.caption.18}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Xen split device driver\relax }}{21}{figure.caption.19}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Xen\relax }}{22}{figure.caption.20}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{23}{figure.caption.21}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{25}{figure.caption.22}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of a modern OS\relax }}{33}{figure.caption.26}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the base IDDR system\relax }}{34}{figure.caption.27}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{35}{figure.caption.28}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of the frontend and the backend driver\relax }}{37}{figure.caption.29}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication Module\relax }}{38}{figure.caption.30}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Spinlock based new IDDR system\relax }}{42}{figure.caption.37}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of a modern OS\relax }}{30}{figure.caption.25}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the base IDDR system\relax }}{31}{figure.caption.26}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{32}{figure.caption.27}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Role of the frontend and the backend driver\relax }}{33}{figure.caption.28}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Communication Module\relax }}{35}{figure.caption.29}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Spinlock based new IDDR system\relax }}{39}{figure.caption.36}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{45}{figure.caption.40}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the new IDDR system\relax }}{42}{figure.caption.39}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces The base IDDR system vs The Xen split device driver (ramdisk)\relax }}{64}{figure.caption.55}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces The base IDDR system vs The Xen split device driver (loop device)\relax }}{64}{figure.caption.56}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces The base IDDR system vs The new IDDR system (ramdisk)\relax }}{66}{figure.caption.57}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces The base IDDR system vs The new IDDR system (loop device)\relax }}{66}{figure.caption.58}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Base IDDR system vs Xen split driver\relax }}{61}{figure.caption.54}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{64}{figure.caption.57}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{65}{figure.caption.58}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

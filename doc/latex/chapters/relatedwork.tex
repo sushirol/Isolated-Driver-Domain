@@ -1,73 +1,50 @@
-% VirtuOS~\cite{Nikolaev:2013:VOS:2517349.2522719} is a library level solution that allows processes to directly communicate with domain. 
+This chapter briefly discusses work closely related to the IDDR System. Our work is divided into two parts: 
+\begin{enumerate}
+\item Implementation of the isolated driver domain which improves the reliability of the system 
+\item Performance improvement of inter-domain communication in the isolated driver domain 
+\end{enumerate}
+This chapter is divided into two sections. Section~\ref{sec:robustness} discusses work on improving the reliability of a system and Section~\ref{sec:interdomain} discusses work which concentrates on improving inter-domain communication.
+\\[3mm]
 
-This chapter briefly discusses about the work closely related to the IDDR System. Since our work is divided into two parts: 1. Implementation of the Driver Domain to improve the robustness of the system 2. Performance improvement of the inter-domain communication, this chapter is divided into two section. Section~\ref{robustness} discusses the work which improves the robustness of the system and Section~\ref{interdomain} discusses the different work which concentrates on improving the inter-domain communication.
-% \\[3mm]
+\section{Reliability of the System}
+\label{sec:robustness}
+The goal of the baseline implementation of the IDDR system is to increase the reliability of an operating system. In this section we describe research in the operating systems area which focuses on increasing the reliability of a system.
 
-% \section{Robustness of The System}
+\subsection{Driver Protection Approaches}
+A faulty device driver causes a significant number of failures in the Linux kernel~\cite{tanenbaum2006can, coveritykernel}. In the past, research in areas, such as hardware based driver isolation, language based driver isolation and user level device drivers, has contributed towards isolating device drivers, hence increasing the reliability of a system.
+\\[3mm]
+Numerous implementations run device drivers in the user mode. Even though user mode device drivers allow user level programming and a good fault isolation between components, they suffer from poor performance~\cite{armand1991give} and also require re-writing of the existing device drivers. The user mode device drivers also lack compatibility~\cite{Leslie+:jcst2005}. Microdrivers~\cite{Ganapathy:2008:DIM:1346281.1346303} extend the user mode device driver research and split a device driver into two parts. In Microdrivers, performance critical operations of the device driver run in the kernel and the rest of the driver code runs in a user mode process. Microdrivers deliver good performance and compatibility.
+\\[3mm]
+Apart from user mode device driver, some approaches use hardware based driver isolation to achieve the isolation between components. Nooks is one example of such approaches. Nooks~\cite{swift2005improving} maintains the monolithic kernel structure, and focuses on making device drivers less vulnerable. It creates a lightweight protection domain around each device driver. The domain is created by wrapping a layer of protective software around a device driver. The wrapper layer monitors all interactions between the driver and the kernel, and protects the kernel from a faulty device driver. Nooks requires device drivers to be modified as their interaction with the kernel changes. 
+\\[3mm]
+SUD~\cite{Boyd-Wickizer+:atc2010} runs unmodified Linux device drivers in the user space. It uses the emulated IOMMU hardware to run a device driver in the user space. Running device drivers in a user space safely isolates a system from a malicious device driver. 
+\\[3mm]
+Dune~\cite{Belay+:osdi12} is a system that provides an application direct and safe access to the hardware features, such as page tables, tagged TLBs and ring protection. It uses virtualized hardware to isolate applications from each other. Dune delivers hardware interrupts directly to applications in order to improve the signal delivery performance. However, Dune does not isolate device drivers from each other.
 
-% \subsection{Driver Protection Approches}
+\subsubsection*{Virtualization Based Approaches}
+The IDDR system isolates a device driver from a Linux kernel using Xen VMM. Research work, which uses virtualization techniques to isolate the kernel components is related more closely to our work.
+\\[3mm]
+Xen isolated driver domain~\cite{Fraser04safehardware} is a device driver isolation architecture presented by Xen. The isolated device driver allows unmodified device drivers to be run in a separate domain and shared across operating system instances. Isolated driver domain protects individual operating systems, from driver failure. The base IDDR system is the re-implementation of Xen isolated driver domain. 
+\\[3mm]
+LeVesseur et. al.~\cite{LeVasseur04UnmodifiedDriverReuse} presents a virtualization based system to reuse unmodified device drivers. It also improves system reliability. In this approach, an unmodified device driver is run with a kernel in a separate virtual machine. The main goal of this system is to reuse the device driver across different operating systems. However, the system isolates faults caused by a device driver by running a device driver in separate virtual machine.
+\\[3mm]
+VirtuOS~\cite{Nikolaev:2013:VOS:2517349.2522719} is a library level solution that allows processes to directly communicate with a domain. VirtuOS exploits
+virtualization to isolate the components of existing OS kernels in separate virtual machines. These virtual machines directly serve system calls from
+user processes.
 
-% Because most kernel failures are caused by faulty device drivers, there is a particular focus on making them safer and isolating them from other system components. 
+\subsection{Other Approaches}
+\subsubsection*{Kernel Based Approach}
+In this approach, systems provide a better fault containment by disintegrating the kernel functionality as system components. Microkernels are examples of such approaches. They provide fault containment by providing an isolation between the system components. In the microkernels such as Mach~\cite{Accetta+:usenix86} and L4~\cite{Liedtke+:sosp95}, only essential functionalities like memory management, interprocess communication, scheduling and low level device drivers are implemented in the kernel. Remaining system components, like file system and process management are implemented as user processes.
+\\[3mm]
+Some of the recent work also uses the similarity in the abstraction provided by the hypervisor and microkernel. Microvisor~\cite{Heiser+:acm10} is a kernel that satisfies the combined objectives of microkernels and hypervisors, and provides an abstraction of a virtual machine, where a guest OS schedules activities on one or more VCPUs.
 
-% 1 Nooks - introduced
-% hardware protection domains inside a monolithic kernel to isolate device drivers from each
-% other and from the remaining kernel. Such isolation protects against buggy drivers that
-% may perform illegal memory accesses. Nooks demonstrated how to restructure an existing
-% kernel’s interaction with its drivers to facilitate the use of intrakernel protection domains,
-% and explored the trade-off between benefits due to isolation and costs imposed by the domain
-% crossings this approach requires. This approach requires drivers to be adapted to the new
-% mechanism, as their interaction with the OS kernel changes. Switching to and from protection domains requires page table switches, along with corresponding TLB flushes, which if done
-% frequently may affect the performance of some applications
+\section{Inter-domain Communication}
+\label{sec:interdomain}
+In the past numerous work on inter domain communication mechanisms was presented. In Xen VMM, a domain communicates with the privileged domain through the split device driver mechanism~\cite{Fraser04safehardware}. In a way, the split device driver mechanism is a restricted inter domain communication path. The Xen split driver faces the performance issues becuase of the overhead of numerous context switches in form of event channel interrupts. It also incurs an overhead due to an extra data copy and page flipping~\cite{Zhang:2007:XHI:1516124.1516138}. 
+\\[3mm]
+In order to overcome the page flipping performance overhead, Xen hypervisor also provides a UNIX domain socket like interface called XenSocket~\cite{Zhang:2007:XHI:1516124.1516138}. XenSocket provides a high throughput inter-domain communication. It replaces the page flipping design of the split driver. However, XenSocket needs an existing socket interface APIs to be changed. 
+\\[3mm]
+Fido~\cite{Burtsev:2009:FFI:1855807.1855832} is a shared memory based inter domain communication mechanism. Fido implements the fast inter-domain communication mechanism by reducing data copies in the Xen hypervisor. In contrast, the IDDR system improves the inter domain communication mechanism of Split device drivers by avoiding the context switches. Also, Fido removes overhead with zero copy by sacrificing the security and protections guarantees.
+\\[3mm]
 
-% 2. Microdrivers - 
-% 3. SUD 
-
-% split drivers into parts running inside the kernel and parts running as
-% user processes. In microdrivers, hardware-specific and performance critical code remains in
-% the kernel whereas the remaining code is moved to user space to provide better isolation.
-% Additionally, code running in user space can be written in a higher-level language [80].
-% Mainstream OS have provided support for writing device drivers that execute in user mode
-% for some time, but these facilities have not been widely used because the added context
-% switches made it difficult to achieve good performance [63]. Some systems provide the
-% ability to run unchanged kernel components such as out-of-box Linux drivers in user mode.
-% DD/OS [64] provides this ability by creating a virtual machine built as a user-level task
-% running on top of L4, whereas SUD [21] provides such an environment inside ordinary Linux
-% user processes. Xen Driver Domains [85] use a mechanism with comparable protection
-% properties by running unchanged drivers in specialized guest OS. The Qubes OS [8] adopted
-% the Xen hypervisor and Xen Driver Domains to enhance security by running separate virtual
-% machines for drivers and applications. The Qubes OS supports a storage domain, a network
-% domain and application virtual machine
-
-% \subsubsection*{Virtualization Based Approches}
-
-% Xen driver domain : 
-
-% La vasseur - 
-
-
-% \subsection*{Other Approches}
-% 1. kernel based  :
-
-% Microkernel Mach - A new kernel foundation for UNIX development
-% Microkernel L4 - On micro-kernel construction 
-% Both, architecture in which only essential functionality such as task scheduling and message-based interprocess communication is implemented inside the kernel, whereas most other system components, including device drivers, are implemented in separate user processes.
-
-
-% Microvisors : Recently, microkernels have been used in lieu of hypervisors. Microvisors expose abstractions typical to hypervisors such as VCPUs, memory address space containers, and communication channels to run virtual machines with guest OS on top of a microkernel. [The OKL4 Microvisor: Convergence Point of Microkernels and Hypervisors]
-
-
-% Dune uses hardware-assisted VMs to isolate applications from each other. Nested paging allows applications to switch their page tables efficiently. Process context switches benefit from TLB tagging available for hardware-assisted VMs. Dune also improves signal delivery latencies by delivering hardware interrupts directly to user processes. However, Dune still uses a monolithic kernel which does not isolate device drivers from each other. Additionally, applications may have to use more expensive hypercalls in lieu of system calls to access OS services. [Dune: Safe User-level Access to Privileged CPU Features.]
-
-
-
-
-% \section{Inter-domain Communication}
-% In the past numerous  work on inter domain communication mechanisms was presented. Xen split drivers is one of the inter domain communication approach of Xen hypervisor~\cite{Fraser04safehardware}. The xen split drivers has overhead becuase of numerous context switches in form of event channel interrupts. It also incurs an overhead due to data copy, page flipping~\cite{Zhang:2007:XHI:1516124.1516138}. Xen hypervisor also provides a UNIX domain socket like interface for high throughput interdomain communication on the same system called XenSocket~\cite{Zhang:2007:XHI:1516124.1516138}. XenSocket replaces the page flipping design of the split driver. However, XenSocket needs an existing socket interface APIs to be changed. 
-% \\[3mm]
-% Fido~\cite{Burtsev:2009:FFI:1855807.1855832} is a shared memory based inter domain communication mechanism. Fido implements the fast interdomain communication mechanism by reducing data copies in Xen hypervisor. In contrast our system improves the inter domain communication mechanism of Split device drivers by avoiding the context switches.
-% \\[3mm]
-
-% The Fido system [25] optimizes Xen’s interdomain communication facilities
-% by allowing read-only data mappings to enable zero-copy communication. Fido amortizes
-% costs but users need to sacrifice some security and protections guarantees.
 \ifbool{toShowBibliography}{\bibliography{references}}{}

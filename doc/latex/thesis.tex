@@ -80,7 +80,7 @@
 
 % TITLE
 {\Large 
-Performance Improvement of the Driver Domain.
+Performance Optimization for Isolated Driver Domains.
 }
 
 \vfill
@@ -108,7 +108,7 @@ Dr. Kirk Cameron\\
 
 \vfill
 
-Dec 12, 2013 \\
+Apr 15, 2014 \\
 Blacksburg, Virginia
 
 \vfill
@@ -127,27 +127,20 @@ Copyright 2013, Sushrut Shirole
 {\large 
 Device driver isolation using virtual machines.
 }
-\\[10mm]
+\\[8mm]
 Sushrut Shirole
-\\[10mm]
+\\[8mm]
 (ABSTRACT)
+\\[10mm]
 \end{center}
-In majority of today's operating system architectures, kernel is tightly coupled with the device drivers. In such cases, failure in critical components can lead to system failure.
-A malicious or faulty device driver can make the system unstable, thereby reducing the robustness. Unlike user processes, a simple restart of the device driver is not possible. In such circumstances a complete system reboot is necessary for complete recovery. In a virtualized environment or infrastructure where multiple operating systems execute over a common hardware platform, cannot afford to reboot the entire hardware due to a malfunctioning of a third party device driver. 
-\\[3mm] 
-The solution we implement exploits the virtualization to isolate the device drivers from the kernel. In this implementation, a device driver serves the user process by running in a separate virtual machine and hence is isolated from kernel. This proposed solution increases the robustness of the system, benefiting all critical systems.
+In most of today's operating system architectures, a device driver is tightly coupled with the kernel components. In such systems, a malicious or faulty device driver often leads to a system failure, thereby reducing the reliability of the system. Even though a majority of the operating systems provide a protection mechanism at the user level, they do not provide the same level of protection between kernel components. The Isolated Driver Domain is a conceptual framework presented by Xen, which takes advantage of the protection present between the domains and it isolates the device driver and the operating system kernel in separate domains. The Isolated Device Driver (IDDR) implements this framework. Unfortunately, the isolated driver domain solution incurs performance overhead. 
 \\[3mm]
-To support the proposed solution, we implemented a prototype based on linux kernel and Xen hypervisor. In this prototype we create an independent device driver domain for Block device driver. Our prototype demonstrate that a block device driver can be run in a separate domain. 
+Even after many advances in virtualization technologies, current inter-domain communication techniques have significant performance overheads. In this thesis, we propose a solution for performance improvement in inter-domain communication. We implement the proposed solution in the IDDR system. 
 \\[3mm]
-We isolate device drivers from the kernel with two different approaches and compare both the results. In first approach, we implement the device driver isolation using an interrupt-based inter-domain signaling facility provided by xen hypervisor called event channels. In second approach, we implement the solution, using spinning threads. In second approach user application puts the request in request queue asynchronously and independent driver domain spins over the request queue to check if a new request is available. Event channel is an interrupt-based inter-domain mechanism and it involves immediate context switch, however, spinning doesn't involve immediate context switch and hence can give different results than event channel mechanism. 
+To evaluate the performance improvement, we implement the prototype based on the block device driver. We isolate and run the block device driver in a separate domain than the Linux kernel. Our prototype retains the compatibility with current applications and kernel components. Our solution outperforms Xen's isolated driver domain in most scenarios. In other scenarios, its performance matches that of Xen's isolated driver domain. 
 \vfill
 
-% GRANT INFORMATION
-
 \pagebreak
-
-% Dedication and Acknowledgments are both optional
-% \chapter*{Dedication}
 
 \chapter*{Acknowledgments}
 \input{chapters/Acknowledgments.tex}
@@ -203,7 +196,6 @@ We isolate device drivers from the kernel with two different approaches and comp
 
 \input{chapters/conclusion.tex}
 
-
 %%%%%%%%%%%%%%%%
 % Do tables like this:
 
@@ -233,20 +225,7 @@ We isolate device drivers from the kernel with two different approaches and comp
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\chapter*{Bibliography}
 \nocite{*}
 \bibliographystyle{plain}
 \bibliography{references}
-
-% \appendix
-
-% In LaTeX, each appendix is a "chapter"
-% \chapter{Program Source}
-
 \end{document}
-
-
-%
-%
-
-

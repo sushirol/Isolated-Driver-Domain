@@ -66,7 +66,7 @@ As Section~\ref{sub:communicationmodule} describes, the role of the communicatio
 \paragraph{Shared Request and Response Queue:}
 In order to implement the first role of the communication module, we use the ring buffer mechanism provided by Xen. The ring buffer is a shared I/O ring explained in section~\ref{subsec:io rings}. The part of the ring buffer which shares requests is called the \textit{shared request queue}, and the part of the ring buffer which shares responses is called the \textit{shared response queue}. We divide the ring buffer into the front ring and the back ring. The IDDR system uses the front ring as the shared request queue and the back ring as the shared response queue. 
 \\[3mm]
-The IDDR system allocates the ring buffer in the initialization stage of the communication module and initializes the ring buffer as the front ring in the application domain. Whenever the frontend driver recieves a request from an application in the application domain, the frontend driver removes the request from the device driver queue and submits it to the communication module. The communication module checks for a free space in the shared request queue, and if available, it allocates the space for the new request. After batching sufficient requests together, the communication module pushes all requests to the shared request queue.
+The IDDR system allocates the ring buffer in the initialization stage of the communication module and initializes the ring buffer as the front ring in the application domain. Whenever the frontend driver receives a request from an application in the application domain, the frontend driver removes the request from the device driver queue and submits it to the communication module. The communication module checks for a free space in the shared request queue, and if available, it allocates the space for the new request. After batching sufficient requests together, the communication module pushes all requests to the shared request queue.
 
 \paragraph{Shared Memory for Read/Write Data:}
 The ring buffer cannot hold the data of read responses and write requests. We use the ring buffer only to share requests and responses. In order to share actual data we use shared pages. 
@@ -143,7 +143,7 @@ During the initialization, the frontend driver creates a separate interface for 
 The frontend driver removes the request submitted to the driver interface and converts the request into a request structure, which is understood by the backend driver. The new request structure points to the shared memory allocated for the read/write data by the communication module. The frontend driver then forwards the newly created request to the communication module, which also shares the request with the backend driver.
 
 \paragraph{End Request:}
-We maintain a shadow table of all requests which were recieved in the device driver queue. The shadow table is a table which contains an entry of all the requests received. We implement the shadow table as a circular array of the requests. We maintain an ID for each request. The backend driver copies this ID into the corresponding response. The ID is used for mapping the response to the request in the shadow table. When a response is read by the communication module, it forwards the response to the frontend driver. The frontend driver searches the corresponding request in the shadow table, and ends it. 
+We maintain a shadow table of all requests which were received in the device driver queue. The shadow table is a table which contains an entry of all the requests received. We implement the shadow table as a circular array of the requests. We maintain an ID for each request. The backend driver copies this ID into the corresponding response. The ID is used for mapping the response to the request in the shadow table. When a response is read by the communication module, it forwards the response to the frontend driver. The frontend driver searches the corresponding request in the shadow table, and ends it. 
 
 \subsubsection*{New IDDR System}
 The core responsibility of the frontend driver in the new IDDR system is to:
@@ -151,7 +151,7 @@ The core responsibility of the frontend driver in the new IDDR system is to:
 \item Provide an interface for each block device
 \item Accept a request from the upper layer
 \item Create a corresponding new request which can be understood by the driver domain
-\item Spin for a short time while waiting for the reponse
+\item Spin for a short time while waiting for the response
 \item End the request
 \end{enumerate}
 
@@ -167,13 +167,13 @@ Implementation details of the frontend driver is split into 4 stages:
 Similar to the base IDDR system, during the initialization process the frontend driver creates an interface for each block device.
 
 \paragraph{Dequeue and Submit Request:}
-Similar to the base IDDR system, the frontend driver removes the request submitted to the driver interface and converts it into the request structure with a data pointer pointing to the shared memory. The frontend driver then forwards the newly created request to th communication module, which also shares the request with the backend driver.
+Similar to the base IDDR system, the frontend driver removes the request submitted to the driver interface and converts it into the request structure with a data pointer pointing to the shared memory. The frontend driver then forwards the newly created request to the communication module, which also shares the request with the backend driver.
 
 \paragraph{Spinning The Main Thread:}
 In the new IDDR system, to avoid the intra-domain context switch between the read response thread and the main frontend driver thread, the main frontend driver thread spins for a short time and checks the availability of a response. If the response is available then the frontend driver main thread reads the response and proceeds to end the request. Otherwise it continues to remove the request from the device driver queue.
 
 \paragraph{End Request:}
-Similar to the base IDDR system, we maintain a shadow table of all requests recieved in the frontend driver request queue. The shadow table is used for ending the corresponding request of the read response. 
+Similar to the base IDDR system, we maintain a shadow table of all requests received in the frontend driver request queue. The shadow table is used for ending the corresponding request of the read response. 
 
 \subsection{Driver Domain}
 The IDDR system runs a block device driver in the driver domain. Like explained in Section~\ref{subsec:backend}, a piece of code called the backend driver runs in the driver domain, which accepts requests from the application domain and forwards requests to the device driver. Upon receiving a response from the device driver, the backend driver sends back the response to the communication module.
