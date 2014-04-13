@@ -1,0 +1,47 @@
+#!/bin/sh
+# This is a shell script that will run a series of xdd tests to insure that things are still working
+# This test will write a single file by issuing 32 sequential 4K requests. 
+./xdd -op write -targets 1 s1.1 -reqsize 4 -numreqs 32 -seek save s1.1.seq.100w.0r
+
+# This test will operate on file s1.1 with 75% reads and 25% writes
+./xdd  -targets 1 s1.1 -reqsize 4 -numreqs 32 -rwratio 75 -seek save s1.1.seq.75r.25w
+
+# This test will operate on file s1.1 with 50% reads and 50% writes
+./xdd -targets 1 s1.1 -reqsize 4 -numreqs 32 -rwratio 50 -seek save s1.1.seq.50r.50w
+
+
+# This test will operate on file s1.1 with 25% reads and 75% writes
+./xdd -targets 1 s1.1 -reqsize 4 -numreqs 32 -rwratio 25 -seek save s1.1.seq.25r.75w
+
+
+# This test will operate on file s1.1 with 100% reads and 0% writes
+./xdd -op read -targets 1 s1.1 -reqsize 4 -numreqs 32 -seek save s1.1.seq.100r.0w 
+./xdd -op read -targets 1 s1.1 -reqsize 4 -numreqs 32 -seek save s1.1.seq.100r.0w -dio
+
+# This test will write a single large file by issuing 256 sequential 1MB requests. 
+#./xdd -op write -targets 1 s1.1M -reqsize 1024 -numreqs 256 -seek save s1.1M.seq.100w.0r
+
+# This test will operate on file s1.1 with 100% reads and 0% writes
+./xdd -op read -targets 1 s1.1M -reqsize 1 -numreqs 32 -seek save s1.1.rand.100r.0w -seek random -seek range 256000
+
+
+# This test will operate on file s1.1 with 100% reads and 0% writes
+./xdd -op read -targets 1 s1.1M -reqsize 4 -mbytes 10
+
+# This test will operate on file s1.1 with 100% reads and 0% writes five passes reporting information on each pass
+./xdd -op read -targets 1 s1.1M -reqsize 4 -mbytes 10 -passes 5
+
+# This test will operate on file s1.1 with 100% reads and 0% writes five passes reporting information on each pass
+./xdd -op read -targets 1 s1.1M -reqsize 4 -mbytes 10 -passes 5 -verbose
+
+# This test will operate on file s1.1 with 100% reads and 0% writes five passes reporting information on each pass using Direct I/O
+./xdd -op read -targets 1 s1.1M -reqsize 4 -mbytes 10 -passes 5 -verbose -dio -seek save s1.1M.seq.100r.0w.q1
+
+# This test will operate on file s1.1 with 100% reads and 0% writes five passes reporting information on each pass using Direct I/O with a queuedepth of 4
+./xdd -op read -targets 1 s1.1M -reqsize 4 -mbytes 10 -passes 5 -verbose -dio -seek save s1.1M.seq.100r.0w.q4 -queuedepth 4
+
+
+
+
+
+

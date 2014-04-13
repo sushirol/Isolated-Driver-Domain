@@ -1,0 +1,46 @@
+#===========================================================================================================================================
+XDD_EXE="xdd.linux"
+MPSTAT_EXE="mpstat"
+
+OPERATION="-op read"
+
+# THIS IS WHERE IO WILL HAPPEN
+TARGET_DEVS="/dev/ramd"
+TARGET_COUNT=1
+
+#TARGET_DEVS="/dev/ramd /dev/ramd /dev/ramd"
+#TARGET_COUNT=3
+
+QDEPTH=32
+
+# Data pattern...
+#DATA_PATTERN=" -datapattern [random | sequenced] "
+DATA_PATTERN=" -datapattern random"
+
+# File/Block sizes....
+#BLOCK_SIZES="4096 8192 16384 32768 65536 262144 1048576"
+BLOCK_SIZES="4096"
+
+FILE_SIZE_TYPE="-mbytes"
+#FILE_SIZE_TYPE="-kbytes"
+FILE_SIZE="1024"
+
+# Direct io
+#DIRECT_IO=""
+DIRECT_IO="-dio"
+
+# verbose
+VERBOSE="-verbose"
+
+#PASSES
+PASS_COUNT=8
+
+# DELAY BETWEEN RUNS IN SECS
+PASS_DELAY=2
+
+#timestamp
+TS=""
+
+MLOG_DIR="/tmp/xddlogs"
+#===========================================================================================================================================
+
