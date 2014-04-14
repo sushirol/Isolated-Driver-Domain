@@ -1,6 +1,6 @@
 In this thesis we presented the Isolated Device Driver (IDDR) system. The IDDR system is an operating system which provides isolation between a device driver and the Linux kernel components by running the device driver in the driver domain. The IDDR system is a re-implementation of the Xen's isolated driver domain.
 \\[3mm]
-In Xen's isolated driver domain, a domain communicates with a device driver running in the priviledged domain through a split device driver mechanism. The split device driver follows an interrupt based approach. We replaced the interrupt based approach with the spinlock based approach. The spinlock based approach avoids the unwanted domain rescheduling for every software interrupt. The IDDR system trades of CPU cycles for the benefit of the performance.
+In Xen's isolated driver domain, a domain communicates with a device driver running in the priviledged domain through a split device driver mechanism. The split device driver follows an interrupt based approach. We replaced the interrupt based approach with the spinning based approach. The spinning based approach avoids the unwanted domain rescheduling for every software interrupt. The IDDR system trades of CPU cycles for the benefit of the performance.
 \\[3mm]
 We tested the IDDR system with different block devices, and the experimental evaluation has shown that the IDDR system performs better by compromizing the CPU utilization. 
 \\[3mm]

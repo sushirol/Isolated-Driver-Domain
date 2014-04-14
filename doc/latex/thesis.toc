@@ -13,11 +13,11 @@
 \contentsline {paragraph}{Character devices:}{11}{section*.10}
 \contentsline {paragraph}{Network Interfaces:}{11}{section*.11}
 \contentsline {paragraph}{Block Devices:}{11}{section*.12}
-\contentsline {section}{\numberline {2.5}Memory Protection}{13}{section.2.5}
+\contentsline {section}{\numberline {2.5}Memory Protection}{12}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}User Level}{13}{subsection.2.5.1}
 \contentsline {subsection}{\numberline {2.5.2}Kernel Level}{14}{subsection.2.5.2}
-\contentsline {section}{\numberline {2.6}Virtualization}{16}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}Hypervisor}{17}{subsection.2.6.1}
+\contentsline {section}{\numberline {2.6}Virtualization}{15}{section.2.6}
+\contentsline {subsection}{\numberline {2.6.1}Hypervisor}{16}{subsection.2.6.1}
 \contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{19}{subsection.2.6.2}
 \contentsline {chapter}{\numberline {3}System Introduction}{27}{chapter.3}
 \contentsline {section}{\numberline {3.1}Design Goal}{27}{section.3.1}
@@ -32,7 +32,7 @@
 \contentsline {section}{\numberline {3.5}System Design}{34}{section.3.5}
 \contentsline {subsection}{\numberline {3.5.1}Communication Module}{35}{subsection.3.5.1}
 \contentsline {paragraph}{Base IDDR System Design:}{35}{section*.30}
-\contentsline {paragraph}{Spinlock Based IDDR System:}{36}{section*.31}
+\contentsline {paragraph}{Spinning Based IDDR System:}{36}{section*.31}
 \contentsline {subsection}{\numberline {3.5.2}Frontend Driver}{36}{subsection.3.5.2}
 \contentsline {paragraph}{Base IDDR System Design:}{36}{section*.32}
 \contentsline {paragraph}{New IDDR System Design:}{37}{section*.33}

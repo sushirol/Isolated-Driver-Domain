@@ -98,7 +98,7 @@ The following section describes the design of the base IDDR system and the new I
 \label{par:base IDDR communication}
 In the base IDDR system, the frontend driver submits requests to the communication module. The communication module copies data of the write requests in a shared memory. The communication module is responsible for the allocation and de-allocation of the shared memory. Once the sufficient number of requests are submitted by the frontend driver, the communication channel shares the requests with the backend driver. It notifies the backend driver that requests are available in a shared request queue.
 
-\paragraph{Spinlock Based IDDR System:}
+\paragraph{Spinning Based IDDR System:}
 \label{par:spin IDDR communication}
 As Section~\ref{par:base IDDR communication} describes, in the base IDDR system, the communication module notifies the backend driver about the avaiability of reqesuts in the shared queue. A software interrupt is sent to the domain as a notification. Each software interrupt which is sent for the availability of requests, causes the hypervisor to schedule the driver domain. Similarly, a software interrupt, which notifies the availability of responses, causes the hypervisor to schedule the application domain. The scheduling of the driver domain and the application domain might result in a context swtich. 
 \\[3mm]
@@ -111,7 +111,7 @@ In the IDDR system, the frontend driver provides an interface to accept requests
 \paragraph{New IDDR System Design:}
 As explained in Section~\ref{par:spin IDDR communication}, we introduce an intermediate thread to read responses from the shared queue. The intermediate thread spins for responses. Upon availability of a response, the thread reads the response and ends the corresponding request. If the corresponding request is a read request, then the thread reads the shared data too. However, there still exists an intra-domain context switch between the frontend driver's main thread and the intermediate thread. The main thread is responsible for reading the requests from the frontend driver request queue, and flushing them to the communication channel. The main thread context switches to the intermediate thread, which spins for the responses. 
 \\[3mm]
-To avoid the intra-domain context switch, we introduce a spinlock in the frontend driver. In the frontend driver, the main thread spins for responses for a short time. If a response is available, then similar to intermediate thread, the main thread reads shared data and the response and ends the corresponding request. However, in case of unavailability of a response, the main thread proceeds to read the new requests from the frontend driver request queue and the intermediate thread checks for the responses.  
+To avoid the intra-domain context switch, we spin the main frontend thread for a short time waiting for responses. If a response is available, then similar to intermediate thread, the main thread reads shared data and the response and ends the corresponding request. However, in case of unavailability of a response, the main thread proceeds to read the new requests from the frontend driver request queue and the intermediate thread checks for the responses.  
 
 \subsection{Backend Driver}
 \paragraph{Base IDDR System Design:}
@@ -122,7 +122,7 @@ As explained in Section~\ref{par:spin IDDR communication}, we introduce an inter
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRdesign}
-\caption{Spinlock based new IDDR system}
+\caption{Spinning based new IDDR system}
 \label{fig:new IDDR system}
 \end{figure}
 

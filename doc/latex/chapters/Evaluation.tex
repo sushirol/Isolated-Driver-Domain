@@ -8,7 +8,7 @@ We use the \texttt{Linux kernel 3.5.0} for implementation of application domain 
   \label{tab:config}
   System Parameter & Configuration \\
   \hline
-  Processor & 1 X Quad-code AMD Opteron(tm) Processor 2380, 2.49 Ghz \\
+  Processor & 2 X Quad-core AMD Opteron(tm) Processor 2380, 2.49 Ghz \\
   Number of cores & 4 per processor \\
   Hyperthreading & OFF \\
   %Turbo boost & ?? \\
@@ -27,15 +27,15 @@ The goals of the IDDR system evaluation are:
 \begin{enumerate}
 \item \textbf{Comparison  of Xen's isolated driver domain with the base IDDR system:}
 \\[3mm]
-The goal of this thesis is to explore the performance improvement opportunity in the Xen's isolated driver domain and implement it. However, the source code for the isolated driver domain is not available in the open source Xen hypervisor. As a result, we re-implemented the isolated driver domain. We refer to the re-implementation as the base Isolated Device Driver (IDDR) system. We implemented the spinlock based communication channel over the base IDDR system. We call it as the new IDDR system.
+The goal of this thesis is to explore the performance improvement opportunity in the Xen's isolated driver domain and implement it. However, the source code for the isolated driver domain is not available in the open source Xen hypervisor. As a result, we re-implemented the isolated driver domain. We refer to the re-implementation as the base Isolated Device Driver (IDDR) system. We implemented the spinning based communication channel over the base IDDR system. We call it as the new IDDR system.
 \\[3mm]
-In order to prove the performance improvement of the new IDDR system over the base IDDR system and the Xen's isolated driver domain, it is necessary to compare the performance of the Xen's isolated driver domain with the base IDDR system. The Xen's isolated driver domain follows split device driver architecture. Since the split device driver architecture has gone over decade for the performance testing, the performance Comparison with it would prove the solid baseline code of the IDDR system. 
+In order to prove the performance improvement of the new IDDR system over the base IDDR system and the Xen's isolated driver domain, it is necessary to compare the performance of the Xen's isolated driver domain with the base IDDR system. The Xen's isolated driver domain follows split device driver architecture. Since the split device driver architecture has gone over decade for the performance testing, the performance comparison with it would prove the solid baseline code of the IDDR system. 
 \\[3mm]
 We achieve this evaluation goal by comparing the performance of the base IDDR system with the Xen split device driver. The Comparison  shows that the performance of the IDDR system matches the performance of the Xen's isolated driver domain. Hence, proves that our implementation provides a suitable baseline for the performance improvement.
 
 \item \textbf{An evaluation of performance improvement:}
 \\[3mm] 
-The second goal of the evaluation is to prove that the spinlock based communication channel improves the performance of the inter-domain communication and hence the IDDR system.
+The second goal of the evaluation is to prove that the spinning based communication channel improves the performance of the inter-domain communication and hence the IDDR system.
 \\[3mm]
 We achieve this evaluation goal by comparing the performance of the base IDDR system with the new IDDR system. The Comparison  shows that the new IDDR system performs better than the base IDDR system and the Xen's isolated driver domain.
 \end{enumerate}

@@ -40,7 +40,7 @@ Some of the recent work also uses the similarity in the abstraction provided by 
 
 \section{Inter-domain Communication}
 \label{sec:interdomain}
-In the past numerous work on inter domain communication mechanisms was presented. In Xen VMM, a domain communicates with the privileged domain through the split device driver mechanism~\cite{Fraser04safehardware}. In a way, the split device driver mechanism is a restricted inter domain communication path. The Xen split driver faces the performance issues becuase of the overhead of numerous context switches in form of event channel interrupts. It also incurs an overhead due to an extra data copy and page flipping~\cite{Zhang:2007:XHI:1516124.1516138}. 
+In the past numerous work on inter domain communication mechanisms was presented. In Xen VMM, a domain communicates with the privileged domain through the split device driver mechanism~\cite{Fraser04safehardware}. In a way, the split device driver mechanism is a restricted inter domain communication path. The Xen split driver faces the performance issues because of the overhead of numerous context switches in form of virtual interrupts. It also incurs an overhead due to extra data copy and page flipping~\cite{Zhang:2007:XHI:1516124.1516138}. 
 \\[3mm]
 In order to overcome the page flipping performance overhead, Xen hypervisor also provides a UNIX domain socket like interface called XenSocket~\cite{Zhang:2007:XHI:1516124.1516138}. XenSocket provides a high throughput inter-domain communication. It replaces the page flipping design of the split driver. However, XenSocket needs an existing socket interface APIs to be changed. 
 \\[3mm]
