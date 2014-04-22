@@ -1,4 +1,4 @@
-This section provides a background on operating system terminologies such as Processes, Threads, Memory Protection, Virtualization and Hypervisors.
+This section provides background on operating system terminologies such as Processes, Threads, Memory Protection, Virtualization and Hypervisors.
 \section{Processes and Threads}
 \paragraph{Process:} A process can be viewed as a program in execution as an abstraction of a processor. Each process has its own address space.~\cite{Galvin}.
 
@@ -72,21 +72,21 @@ Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved
 \\[3mm]
 At the user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entries. If a process tries to access virtual address that is outside the \texttt{base + bound} address, then an error is reported by the operating system, otherwise the physical address \texttt{base + virtual address} is returned. This allows multiple processes to be run in the memory with protection. Since address translation provides protection, a process can not access addresses outside its address space.
 \\[3mm]
-Consider an example in Figure~\ref{fig:User space}.
+Consider the example shown in Figure~\ref{fig:User space}.
 \begin{enumerate}
-\item The system is running 3 different processes in a user space.
-\item One of the processes hits a bug and tries to corrupt the memory outside the address space.
-\item Access to the address is restricted by the memory protection mechanism.
+\item This system is running 3 different user processes
+\item One of the processes encounters a bug and tries to access a memory address outside its address space
+\item Access to the address is restricted by the memory protection mechanism
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
 	\includegraphics[scale=.25]{user-space-1}
-	\caption{A process hits a bug}
+	\caption{A process encounters a bug}
     \end{subfigure}
 	\hfill
     \begin{subfigure}[b]{0.49\textwidth}
 	\includegraphics[scale=.25]{user-space-2}
-	\caption{Intact system}
+	\caption{Other user processes are not affected}
     \end{subfigure}
     \caption{User level memory protection}\label{fig:User space}
 \end{figure}
@@ -94,7 +94,9 @@ Consider an example in Figure~\ref{fig:User space}.
 
 \subsection{Kernel Level}
 \label{subsec:kernel level}
-Kernel reserves upper \texttt{Virtual memory size - X Gb} of virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two regions. First region contains page table references to every page in the system. It is used to do translations of addresses from physical to virtual when the kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of the kernel memory is used by the memory allocator, the allocated memory is mapped by kernel modules. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at \texttt{CPL 0} can access the kernel memory, hence a kernel component can access, and potentially, corrupt the kernel data structures. 
+This sections explains the memory management at kernel level. 
+\\[3mm]
+In a Linux kernel physical memory is divided into blocks called as page frames and virtual memory is divided into pages. Linux kernel uses a data structure called page table to store the virtual memory to physical memory mapping information. Kernel reserves upper virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two parts. The first part contains references in a page table to every page in the system. It is used to do translations of addresses from physical to virtual when the kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of the kernel memory is used by the memory allocator, the allocated memory is mapped by kernel modules. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at \texttt{CPL 0} can access the kernel memory, hence a kernel component can access, and potentially, corrupt the kernel data structures. 
 \\[3mm]
 Consider an example shown in the Figure~\ref{fig:Kernel space}.
 \begin{enumerate}
@@ -142,28 +144,30 @@ A computer on which a hypervisor is running one or more virtual machines is defi
 \\[3mm]
 There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
 \begin{itemize}
-\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. A guest operating-system, thus, runs on another level above the hypervisor. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{barham2003xen}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
+\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{barham2003xen}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.35]{type1}
-\caption{Type 1 hypervisor}
+\caption{Type 1 hypervisors}
 \label{Type 1 hypervisor}
 \end{figure}
-\item Type 2 hypervisors are also called hosted hypervisors. Type 2 hypervisors run within a conventional operating-system environment. Type 2 hypervisors run at a distinct second software level, whereas guest operating systems run at the third level above hardware. VMware Workstation and VirtualBox are some of the examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, camargos2008virtualization}.
+\item Type 2 hypervisors are also called hosted hypervisors. Type 2 hypervisors run within a conventional operating-system environment. VMware Workstation and VirtualBox are some examples of Type 2 hypervisors~\cite{Sugerman:2001:VID:647055.715774, camargos2008virtualization}.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.4]{type2}
-\caption{Type 2 hypervisor}
+\caption{Type 2 hypervisors}
 \label{fig:Type 2 hypervisor}
 \end{figure}
 \end{itemize}
 
 \subsection{Xen Hypervisor}
-Xen~\cite{barham2003xen} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{king2003operating}. Figure~\ref{fig:Type 2 hypervisor} represents a diagram showing the different layers of a Type 1 hypervisor system. The hypervisor itself forms the lowest layer, which consists of the hypervisor kernel and the virtual machine monitors. The kernel has direct access to the hardware and is responsible for resource allocation, resource scheduling and resource sharing. A hypervisor is a layer responsible for virtualizing and providing resources to a given operating system.
+Xen~\cite{barham2003xen} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{king2003operating}. 
 \\[3mm]
-The purpose of a hypervisor is to allow guest operating systems to be run. Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Other unprivileged domains are called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. However, \texttt{domain U} accesses devices using a split device driver architecture. In the split device driver architecture a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
+Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Unprivileged domain is called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. However, the other domains access devices using a split device driver architecture, in which a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
 \\[3mm]
-Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} guest writes data on the physical device. First, it travels through the file system as it would normally. However, at the end of the stack the normal block device driver does not exist. Instead, a simple piece of code called the frontend puts the data into the shared memory. The other half of the split device driver called the backend, running in the \texttt{domain 0} guest, reads the data from the buffer and sends it way down to the real device driver. The data is written on the actual physical device. In conclusion, split device driver can be explained as a way to move data from the \texttt{domain U} guests to the \texttt{domain 0} guest, usually using ring buffers in shared memory~\cite{Chisnall:2007:DGX:1407351}.
+Xen provides an inter-domain memory sharing API accessed through the guest kernel extensions and an interrupt-based inter-domain signaling facility called event channels to implement the efficient inter-domain communication. Split drivers use memory sharing APIs to implement I/O device ring buffers to exchange data across domains.
+\\[3mm]
+Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} guest writes data on a physical device. First, write request is sent to the file system. After that the frontend driver puts the data into memory which is shared between \texttt{domain 0} and \texttt{domain U}. The other half of the split device driver called the backend, running in the \texttt{domain 0} guest, reads the data from the buffer and sends it to the real device driver. The data is then written to the actual physical device~\cite{Chisnall:2007:DGX:1407351}.
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=.50]{xen-split-fs}
@@ -171,7 +175,6 @@ Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} 
 \label{xen-split2}
 \end{figure}
 \\[3mm]
-Xen provides an inter-domain memory sharing API accessed through the guest kernel extensions and an interrupt-based inter-domain signaling facility called event channels to implement the efficient inter-domain communication. Split drivers use memory sharing APIs to implement I/O device ring buffers to exchange data across domains.
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=.50]{xen}
@@ -179,12 +182,11 @@ Xen provides an inter-domain memory sharing API accessed through the guest kerne
 \label{xen}
 \end{figure}
 \\[3mm]
-In Xen's isolated driver domain implementation, Xen uses shared I/O ring buffers and event channel~\cite{barham2003xen, Nikolaev:2013:VOS:2517349.2522719}.
 
 \subsubsection*{Hypercalls and Events}
-Hypercalls and event channels are the two mechanisms that exist for interactions between the Xen hypervisor and domains. A hypercall is a software trap from a domain to the Xen hypervisor, just as a syscall is a software trap from an application to the kernel~\cite{hypercall}. Domains use the hypercalls to request privileged operations like updating pagetables. 
+Hypercalls and event channels are the two mechanisms that exist for interactions between the Xen hypervisor and domains. A hypercall is a software trap from a domain to the Xen hypervisor, just as a syscall is a software trap from an application to the kernel~\cite{hypercall}. Domains use hypercalls to request privileged operations like updating pagetables. 
 \\[3mm]
-An event channel is to the Xen hypervisor as a hardware interrupt is to the operating system. An event channel is used for sending asynchronous notifications between domains. Event notifications are implemented by updating a bitmap. After scheduling pending events from an event queue, the event callback handler is called to take appropriate action. The callback handler is responsible for resetting the bitmap of pending events, and responding to the notifications in an appropriate manner. A domain may explicitly defer event handling by setting a Xen readable software flag: this is analogous to disabling interrupts on a real processor. Event notifications can be compared to traditional UNIX signals acting to flag a particular type of occurrence. For example, events are used to indicate that new data has been received over the network, or used to notify that the a virtual disk request has completed. 
+An event channel is to the Xen hypervisor as a signal is to an operating system. An event channel is used for sending asynchronous notifications between domains. Event notifications are implemented by updating a bitmap. After scheduling pending events from an event queue, the event callback handler is called to take appropriate action. The callback handler is responsible for resetting the bitmap of pending events and responding to the notifications in an appropriate manner. A domain may explicitly defer event handling by setting a Xen readable software flag: this is analogous to disabling interrupts on a real processor. Event notifications can be compared to traditional UNIX signals acting to flag a particular type of occurrence. For example, events are used to indicate that new data has been received over the network, or used to notify that a virtual disk request has completed. 
 
 \subsubsection*{Data Transfer: I/O Rings}
 \label{subsec:io rings}
