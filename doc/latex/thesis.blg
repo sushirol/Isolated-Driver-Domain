@@ -1,4 +1,5 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: thesis.aux
 The style file: plain.bst
 Database file #1: references.bib
 Warning--entry type for "driverdomain" isn't style-file defined
@@ -16,4 +17,45 @@ Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
+You've used 42 entries,
+            2118 wiz_defined-function locations,
+            860 strings with 15342 characters,
+and the built_in function-call counts, 16029 in all, are:
+= -- 1618
+> -- 698
+< -- 24
++ -- 283
+- -- 236
+* -- 1057
+:= -- 2456
+add.period$ -- 122
+call.type$ -- 42
+change.case$ -- 244
+chr.to.int$ -- 0
+cite$ -- 47
+duplicate$ -- 687
+empty$ -- 1309
+format.name$ -- 236
+if$ -- 3540
+int.to.chr$ -- 0
+int.to.str$ -- 42
+missing$ -- 41
+newline$ -- 208
+num.names$ -- 74
+pop$ -- 315
+preamble$ -- 1
+purify$ -- 202
+quote$ -- 0
+skip$ -- 512
+stack$ -- 0
+substring$ -- 956
+swap$ -- 215
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 160
+warning$ -- 5
+while$ -- 154
+width$ -- 44
+write$ -- 477
 (There were 10 warnings)
