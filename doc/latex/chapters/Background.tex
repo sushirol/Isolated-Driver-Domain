@@ -1,15 +1,24 @@
-This section provides background on operating system terminologies such as Processes, Threads, Memory Protection, Virtualization and Hypervisors.
-\section{Processes and Threads}
-\paragraph{Process:} A process can be viewed as a program in execution as an abstraction of a processor. Each process has its own address space.~\cite{Galvin}.
+This section provides background on operating system terminology such
+as processes, threads, memory protection, virtualization and hypervisors.
 
-\paragraph{Threads:} A process has either a single or multiple threads sharing its address space. Each thread represents a separate flow of control~\cite{Galvin}.
-\\[3mm]
-A thread is also called a light-weight process. The implementation of threads and processes differs between operating systems. Multiple threads can exist within the same process and share resources such as code and data segments, whereas different processes do not share such resources. 
+\section{Processes and Threads}
+\paragraph{Process:} A process can be viewed both as a program in execution
+and as an abstraction of a processor. Each process has its own address
+space.~\cite{Galvin}.
+
+\paragraph{Threads:} A process has either a single or multiple threads
+sharing its address space. Each thread represents a separate flow of
+control~\cite{Galvin}.
+
+A thread is also called a light-weight process. The implementation of
+threads and processes differs between operating systems. A process's 
+threads share resources such as code and data segments, whereas 
+different processes do not share such resources.
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
 	\includegraphics[scale=.25]{thread1}
-	\caption{Single threaded process}
+	\caption{Single-threaded process}
 	\label{fig:thread1}
     \end{subfigure}
 	\hfill
@@ -22,56 +31,155 @@ A thread is also called a light-weight process. The implementation of threads an
 \end{figure}
 
 \section{Context Switch}
-Multiple threads typically employs time division multiplexing when sharing a single processor. In time division multiplexing, the processor switches between executing threads, interleaving their execution. Switching between threads is called a context switch. Continuous context switching creates the impression for the user that threads and processes are running concurrently. On multi-processor systems, threads can run simultaneously on multiple processors, each of which may perform time division multiplexing. 
-\\[3mm]
-Suring a context switch the state of a process is saved, so that its execution can be resumed from the same point at a later time. The state is determined by the processor and the operating system ~\cite{Galvin}. The cost of context switch can be divided into direct and indirect cost. The direct cost is the time required to save and restore processor registers, execute the scheduler code, flush TLB entries and flush pipeline. The indirect cost is the time spent due to processor pollution~\cite{Soares+:osdi10, Li:2007:QCC:1281700.1281702}.
+Multiple threads typically employ time division multiplexing when sharing
+a single processor.  In time division multiplexing, the processor switches
+between executing threads, interleaving their execution. The process of 
+switching between threads is called a context switch. Continuous context switching
+creates the impression for the user that threads and processes are
+running concurrently. On multiprocessor systems, threads can also run
+simultaneously on multiple processors, each of which may perform time
+division multiplexing.
+
+During a context switch the state of a thread is saved so that its
+execution can be resumed from the same point at a later time. The
+composition of the saved state is determined by the processor and the operating system
+~\cite{Galvin}. The costs of context switches can be divided into direct and
+indirect costs. The direct cost is the time required to save and restore
+processor registers, execute the scheduler code, flush TLB entries and
+to flush the processor pipeline. Indirect costs include subsequent cache miss 
+penalties that are due to processor 
+pollution~\cite{Soares+:osdi10, Li:2007:QCC:1281700.1281702}.
 
 \section{Spinlocks}
-In uniprocessor and multiprocessor environment, a context switch takes a significant amount of time. In a multi-processor environment, it is more efficient for each process to keep its own CPU and spin while waiting for a resource~\cite{Bovet:2005:ULK:1077084}.
-\\[3mm] 
-A spinlock is a locking mechanism designed to work in a multi-processing environment. A spinlock causes a thread that is trying to acquire lock to spin if the lock is not available~\cite{Bovet:2005:ULK:1077084}.
-\\[3mm]
-\textbf{Adaptive Spinning} is a spinlock optimization technique. In the adaptive spinning technique, the duration of spinning is determined by algorithm based on the rate of successes and failures of recent spinning attempts to acquire the lock. Adaptive spinning helps threads to avoid spinning in unnecessary conditions.
+In uniprocessor and multiprocessor environments, a context switch takes a
+significant amount of time.  In a multi-processor environment, it may be more
+efficient for each process to keep its own CPU and spin while waiting
+for a resource.
+
+A spinlock is a locking mechanism designed to work in a multiprocessor
+environment. A spinlock causes a thread that is trying to acquire lock
+to spin if the lock is not immediately available~\cite{Bovet:2005:ULK:1077084}.
+
+\textbf{Adaptive Spinning} is a spinlock optimization technique. 
+After unsuccessfully spinning for a set threshold amount of time, a thread
+will block as for regular locks.
+In the adaptive spinning technique, the spinning threshold is determined by
+an algorithm based on the rate of successes and failures of recent spinning
+attempts to acquire the lock.  Adaptive spinning helps threads to avoid
+spinning in conditions where it would not be beneficial.
 
 \section{Device Driver}
 \label{sec:device driver}
-A device driver is a program that provides a software interface to a particular hardware device. It enables the operating system and other programs to access its hardware functions. Device drivers are hardware dependent and operating system specific. For a system call requested by a user program, a driver issues commands to the device. After execution, the device sends data back to the driver. The driver may invoke routines in the original calling program after receiving the data. The Linux kernel distinguishes between three device types: character devices, block devices and network interfaces. 
+
+A device driver is a program that provides a software interface to a
+particular hardware device. It enables the operating system and other
+programs to access its hardware functions. Device drivers are hardware
+dependent and operating system specific.  A driver issues commands to 
+a device in response to system calls requested by user programs.
+After executing these commands,
+the device sends data back to the driver. The driver informs the caller by 
+invoking callback routines after receiving the data. The Linux
+kernel distinguishes between three device types: character devices,
+block devices, and network interfaces.
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5 ]{kernel}
 \caption{Split view of a kernel}
 \label{fig:kernel}
 \end{figure}
-\paragraph{Character devices:} A character device can be accessed as a stream of bytes. A character driver usually implements at least the open, close, read, and write functions. The text console (/dev/console) and the serial ports (/dev/ttyS0) are examples of character devices.
 
-\paragraph{Network Interfaces:} A network interface is a device that is able to exchange data with other hosts. Usually, a network interface is a hardware device, but it can be a software device like the loopback interface. 
+\paragraph{Character devices:} A character device can be accessed as
+a stream of bytes. A character driver usually implements at least the
+open, close, read, and write functions. The text console (/dev/console)
+and the serial ports (/dev/ttyS0) are examples of character devices.
 
-\paragraph{Block Devices:} Unlike character devices, block devices are accessed as blocks of data. In most unix implementations, a block device can only handle I/O operations that transfer one or more whole blocks. Linux, instead, allows the application to read and write any number of bytes on a block device. As a result, block and char devices differ only in the way data is managed internally by the kernel. Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
+\paragraph{Network Interfaces:} A network interface is a device that
+is able to exchange data with other hosts. Usually, a network interface
+is a hardware device, but it can be a software device such as the loopback
+interface.
+
+\paragraph{Block Devices:} Unlike character devices, block devices
+are accessed as blocks of data. Whereas most Unix implementations
+support only I/O operations that involve entire blocks,
+Linux also allows applications to read and write individual bytes within
+a block. As a result, in Linux, block and char devices
+differ only in the way data is managed internally by the kernel. 
+Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
 
 \subsection*{Block Device Driver}
 \subsubsection*{Request processing in a block device driver}
+
 \label{subsec:request queue}
-A block device driver maintains a request queue to store read, write requests. In order to initialize a request queue, a spinlock and a request function pointer is required. Request function is considered as a central part of the block device driver. Requests are added to the request queue when a request is made by higher level code in the Linux kernel, such as File systems. A block device driver calls its request function after receiving a new request. The request function removes all requests from the head of the request queue and sends them to the block device for execution. The Linux kernel acquires a spinlock before execution of the request function and releases it after completing execution. As a result, a request function runs in an atomic context~\cite{Corbet:2005:LDD:1209083}.
-\\[3mm]
-A request is a linked list of \textbf{bio structures}. A bio structure contains all the information required to execute a read and write operation on a block device. The block I/O code receives the bio structure from the higher level code in the Linux kernel. The block I/O code adds the received bio structure into existing request~\cite{Corbet:2005:LDD:1209083}.
-\\[3mm]
-Each bio structure in a request describes the low level block I/O request. If possible, the Linux kernel merges several independent requests to form one block I/O request. Usually the kernel combines multiple requests if they requires access to the adjacent sectors on the disk. However, it never combines a read and write request together.
+A block device driver maintains a request queue to store read and write
+requests. In order to initialize a request queue, a spinlock and a
+request function pointer is required.  The request function forms
+the central part of the block device driver. Requests are added to
+the request queue when a request is made by higher level code in the
+Linux kernel, such as a file system. A block device driver's
+request function is called after receiving a new request. The request function
+must remove all requests from the head of the request queue and send
+them to the block device for execution. The Linux kernel acquires a
+spinlock before calling the request function and releases it after
+returning. As a result, a request function runs in a mutually 
+exclusive context~\cite{Corbet:2005:LDD:1209083}.
+
+A request is a linked list of \texttt{struct bio} objects. The \texttt{bio} 
+structure contains all the information required to execute a read or write
+operation on a block device. The block I/O code receives the bio
+structure from the higher level code in the Linux kernel. The
+block I/O code may add the received bio structure to an existing
+request~\cite{Corbet:2005:LDD:1209083}, if any, or it must create
+a new request.
+
+Each bio structure in a request describes the low level block I/O
+request. If possible, the Linux kernel merges several independent
+requests to form one block I/O request. Usually the kernel combines
+multiple requests if they require access to adjacent sectors on
+the disk. However, it never combines read and write requests.
 
 \section{Memory Protection}
-The memory protection mechanism of a computer system controls access to resources. The goal of memory protection is to prevent malicious misuse of the system by users or programs. Memory protection also ensures that a resource is used in accordance with the system policies. In addition, it also helps to ensure that errant programs cause minimal damage~\cite{Galvin, Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level} and subsection~\ref{subsec:kernel level} explain the policies implemented at kernel level and user level. 
+
+The memory protection mechanism of a computer system controls
+access to resources. The goal of memory protection is to prevent
+malicious misuse of the system by users or programs. Memory
+protection also ensures that a resource is used in accordance
+with the system policies. In addition, it also helps to
+ensure that errant programs cause minimal damage~\cite{Galvin,
+Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level}
+and subsection~\ref{subsec:kernel level} explain the policies implemented
+at kernel level and user level.
 
 \subsection{User Level}
 \label{subsec:user level}
-Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is reserved for user processes. The upper \texttt{Virtual Memory size - X Gb} is reserved for the kernel. The kernel puts its private data structures in the upper memory and always accesses them at the same virtual address. 
+%
+% ............. CONTINUE HERE
+%
+
+Typically in a monolithic kernel, the lowest \texttt{X Gb} of memory is
+reserved for user processes. The upper \texttt{Virtual Memory size - X Gb}
+is reserved for the kernel. The kernel puts its private data structures
+in the upper memory and always accesses them at the same virtual address.
+
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.25 ]{memory_map}
 \caption{Physical memory}
 \label{fig:memmap}
 \end{figure}
-\\[3mm]
-At the user space, each application runs as a separate process. Each process is associated with an address space and believes that it owns the entire memory, starting with the virtual address 0. However, a translation table translates every memory reference by these processes from virtual to physical addresses. The translation table maintains \texttt{$<$base, bound$>$} entries. If a process tries to access virtual address that is outside the \texttt{base + bound} address, then an error is reported by the operating system, otherwise the physical address \texttt{base + virtual address} is returned. This allows multiple processes to be run in the memory with protection. Since address translation provides protection, a process can not access addresses outside its address space.
-\\[3mm]
+
+At the user space, each application runs as a separate process. Each
+process is associated with an address space and believes that it owns the
+entire memory, starting with the virtual address 0. However, a translation
+table translates every memory reference by these processes from virtual
+to physical addresses. The translation table maintains \texttt{$<$base,
+bound$>$} entries. If a process tries to access virtual address that
+is outside the \texttt{base + bound} address, then an error is reported
+by the operating system, otherwise the physical address \texttt{base +
+virtual address} is returned. This allows multiple processes to be run in
+the memory with protection. Since address translation provides protection,
+a process can not access addresses outside its address space.
+
 Consider the example shown in Figure~\ref{fig:User space}.
 \begin{enumerate}
 \item This system is running 3 different user processes
