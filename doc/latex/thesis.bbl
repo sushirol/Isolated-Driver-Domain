@@ -204,6 +204,11 @@ Ruslan Nikolaev and Godmar Back.
 \newblock In {\em Proceedings of the Twenty-Fourth ACM Symposium on Operating
   Systems Principles}, pages 116--132, Farminton, PA, USA, 2013.
 
+\bibitem{Popek:1974:FRV:361011.361073}
+Gerald~J. Popek and Robert~P. Goldberg.
+\newblock Formal requirements for virtualizable third generation architectures.
+\newblock {\em Commun. ACM}, 17(7):412--421, 1974.
+
 \bibitem{Riley:2008:GPK:1433006.1433008}
 Ryan Riley, Xuxian Jiang, and Dongyan Xu.
 \newblock Guest-transparent prevention of kernel rootkits with vmm-based memory
