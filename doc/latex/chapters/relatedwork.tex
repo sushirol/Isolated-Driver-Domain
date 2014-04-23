@@ -24,7 +24,7 @@ Dune~\cite{Belay+:osdi12} is a system that provides an application direct and sa
 \subsubsection*{Virtualization Based Approaches}
 The IDDR system isolates a device driver from a Linux kernel using Xen VMM. Research work, which uses virtualization techniques to isolate the kernel components is related more closely to our work.
 \\[3mm]
-Xen isolated driver domain~\cite{Fraser04safehardware} is a device driver isolation architecture presented by Xen. The isolated device driver allows unmodified device drivers to be run in a separate domain and shared across operating system instances. Isolated driver domain protects individual operating systems, from driver failure. The base IDDR system is the re-implementation of Xen isolated driver domain. 
+Xen isolated driver domain~\cite{Fraser04safehardware} is a device driver isolation architecture presented by Xen. The isolated device driver allows unmodified device drivers to be run in a separate domain and shared across operating system instances. Isolated driver domain protects individual operating systems, from driver failure. Interrupt based IDDR system is the re-implementation of Xen isolated driver domain. 
 \\[3mm]
 LeVesseur et. al.~\cite{LeVasseur04UnmodifiedDriverReuse} presents a virtualization based system to reuse unmodified device drivers. It also improves system reliability. In this approach, an unmodified device driver is run with a kernel in a separate virtual machine. The main goal of this system is to reuse the device driver across different operating systems. However, the system isolates faults caused by a device driver by running a device driver in separate virtual machine.
 \\[3mm]

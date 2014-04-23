@@ -1,22 +1,22 @@
 \section{Design Goal}\label{sec:goals}
-The goal of the IDDR system is to provide full isolation between a device driver and the monolithic kernel and at the same time avoid modifications to the device driver code. The goal of the thesis is to minimize the performance penalty because of the communication between the domains. In the thesis, we explore opportunities to minimize the overhead of the communication module in the IDDR system.
+The goal of the isolated driver domains is to provide strong isolation between a device driver and a monolithic kernel and at the same time to avoid modifications to the device driver code. The goal of the thesis is to reduce the performance penalty due to the communication between the domains. 
 
 \subsection*{Performance Improvement}
-The IDDR system is a re-implementation of the Xen's isolated driver domain. Even though the IDDR system provides better robustness for the operating system, it deteriorates the performance. The reasons for the performance deterioration is due to data copy overhead and overhead of communication between the domains. 
+The IDDR system is a re-implementation of isolated driver domains proposed by Fraser et. al. Even though IDDR system provides better robustness for the operating system, it suffers from performance overheads. The main reasons for the lower performance are the data copying overhead and the inter-domain communication overhead. 
 
-\paragraph{Copy Overhead: } For data intensive operations such as read and write, the IDDR system transfers data between the hardware and the driver domain. It also transfers the same data between the driver domain and the application domain. The extra copy from the driver domain to the application domain is also one of the reasons for the performance degradation of the system. 
+\paragraph{Copying Overhead: } For write operation, a Linux system copies data from user space to kernel space and then from kernel space to the physical device. However, isolated driver domains system copies data from guest OS user space to guest OS kernel space, it then copies it to shared memory segment and from shared memory segment to the physical device. The extra copying of data in to the shared memory segment lowers the performance of the system. 
 
-\paragraph{Communication Channel Overhead: } The IDDR system runs a device driver in a separate domain called the driver domain. The application domain and the driver domain communicate with each other in order to send requests and get responses from the device driver. The communication between domains add an overhead to the system performance. Our goal is to minimize the overhead during communication between the driver domain and the application domain.
+\paragraph{Communication Channel Overhead: } The application domain and the driver domain sends virtual interrupts when requests and responses are shared between both the domains. These virtual interrupts cause rescheduling of a domain in order to deliver the interrupts. Rescheduling of a domain can cause a context switch at an hypervisor level which adds an overhead to the system performance. Our goal is to reduce the overhead during communication between the driver domain and the application domain.
 
 \section{Isolated Device Driver Properties}
 \label{sec:properties}
-This section covers the properties of the base IDDR system. As we are explore the opportunities to improve the performance of the base IDDR system, it is necessary that these properties are not compromised.
+This section covers the properties of the isolated driver domains. As we explore the opportunities to improve the performance of the isolated driver domains, it is necessary that these properties are not compromised.
 
 \subsection*{Strong Isolation}
-One of the main properties of the IDDR system is strong isolation. The IDDR system adds an extra layer of isolation in the design which provides fault isolation between the kernel and the device driver. The strong isolation also adds the ability to manage device drivers independently, thus, increasing the availability of the system during maintenance of a device driver.
+One of the main properties of the IDDR system is strong isolation. The isolated driver domains adds an extra layer of isolation in the design which provides fault isolation between the kernel and the device driver. It ensures that a bug within a device driver does not affect other kernel components.
 
 \subsection*{Compatibility and Transparency} 
-The extension of existing OS structures usually results in a large number of broken applications. As a specific example, in the microkernel architecture the functional units of an OS were divided into discrete parts in order to achieve the isolation between the kernel components. As a result, the APIs visible to applications were changed~\cite{hand2005virtual}, which broke the large number of applications. In order to provide compatibility with applications, many microkernel architectures provided an emulation layer~\cite{hand2005virtual} for the OSes. The IDDR system maintains compatibility between existing device drivers and applications.
+The extension of existing OS structures usually results in a large number of broken applications. Usually such extensions change the APIs visible to applications and breaks compatibility with the existing applications. The isolated driver domains does not change APIs visible to applications and device driver code and hence existing device drivers and applications are compatible with the new architecture.
 
 \section{System Overview}\label{overview}
 
@@ -32,10 +32,10 @@ Figure~\ref{fig:monolithic} presents the architectural overview of the modern op
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{baseIDDRsystemoverview}
-\caption{Architectural overview of the base IDDR system}
+\caption{Architectural overview of the interrupt based IDDR system}
 \label{fig:base IDDR system overview}
 \end{figure}
-The Figure~\ref{fig:base IDDR system overview} shows that the IDDR system partitions an existing kernel into multiple independent components. The user applications and Linux kernel run in a domain called the \textit{application domain}. The device driver, which needs to be isolated from the kernel, executes in the separate domain called the \textit{driver domain}. Multiple domains run on the same hardware with the help of a VMM. User applications or kernel components access the hardware through the driver domain.
+The Figure~\ref{fig:base IDDR system overview} shows that IDDR system partitions an existing kernel into multiple independent components. User applications and Linux kernel run in a domain called the \textit{application domain}. A device driver, which needs to be isolated from a kernel, executes in the separate domain called the \textit{driver domain}. Multiple domains run on the same hardware with the help of a VMM. User applications or kernel components access the hardware through the driver domain.
 \\[3mm]
 As Section~\ref{sec:goals} describes, the goal of the IDDR system is to provide the isolation between the device driver and the kernel. However, a device driver is dependent on the kernel components such as a scheduler and memory management unit. In order to remove the dependency, the device driver runs closely with another instance of a kernel. Even though the dependency is removed, it is not possible to run multiple kernels over the common hardware without a virtual machine monitor. Thus, a VMM is introduced into the design to run multiple kernels on a common hardware. 
 
@@ -90,22 +90,22 @@ Figure~\ref{fig:communication} illustrates the role of the communication model.
 
 \section{System Design}\label{design}
 
-The following section describes the design of the base IDDR system and the new IDDR system. 
+The following section describes the design of interrupt based IDDR system and spinning based IDDR system. 
 
 \subsection{Communication Module}
 
-\paragraph{Base IDDR System Design:}
+\paragraph{Interrupt based IDDR System:}
 \label{par:base IDDR communication}
 In the base IDDR system, the frontend driver submits requests to the communication module. The communication module copies data of the write requests in a shared memory. The communication module is responsible for the allocation and de-allocation of the shared memory. Once the sufficient number of requests are submitted by the frontend driver, the communication channel shares the requests with the backend driver. It notifies the backend driver that requests are available in a shared request queue.
 
 \paragraph{Spinning Based IDDR System:}
 \label{par:spin IDDR communication}
-As Section~\ref{par:base IDDR communication} describes, in the base IDDR system, the communication module notifies the backend driver about the avaiability of reqesuts in the shared queue. A software interrupt is sent to the domain as a notification. Each software interrupt which is sent for the availability of requests, causes the hypervisor to schedule the driver domain. Similarly, a software interrupt, which notifies the availability of responses, causes the hypervisor to schedule the application domain. The scheduling of the driver domain and the application domain might result in a context swtich. 
+As Section~\ref{par:base IDDR communication} describes, in the interrupt based IDDR system, the communication module notifies the backend driver about the avaiability of reqesuts in the shared queue. A software interrupt is sent to the domain as a notification. Each software interrupt which is sent for the availability of requests, causes the hypervisor to schedule the driver domain. Similarly, a software interrupt, which notifies the availability of responses, causes the hypervisor to schedule the application domain. The scheduling of the driver domain and the application domain might result in a context swtich. 
 \\[3mm]
 In order to avoid the context switch, we run an intermediate thread in the frontend driver and an intermediate thread in the backend driver. Both these threads spin for the availability of requests and responses in the shared queue. The intermediate threads delegate the responsibility of the notifications from the communication module to the frontend driver and backend driver. 
 
 \subsection{Frontend Driver}
-\paragraph{Base IDDR System Design:}
+\paragraph{Interrupt based IDDR System Design:}
 In the IDDR system, the frontend driver provides an interface to accept requests from a user application on behalf of the device driver. As explained in Section~\ref{subsec:request queue}, each block device driver has a separate request queue to accept requests from a user application. Similar to the block device drivers, the frontend driver also creates an individualized request queue for each device to accept requests from a user application. If sufficient requests are received, the frontend driver flushes the requests to the communication channel. The frontend driver receives a software interrupt upon availability of responses in the shared queue. The frontend driver handles the software interrupt by reading data from the shared memory and ending the request in case of a read operation. Otherwise it ends the request without accessing the shared memory.
 
 \paragraph{New IDDR System Design:}
@@ -114,15 +114,15 @@ As explained in Section~\ref{par:spin IDDR communication}, we introduce an inter
 To avoid the intra-domain context switch, we spin the main frontend thread for a short time waiting for responses. If a response is available, then similar to intermediate thread, the main thread reads shared data and the response and ends the corresponding request. However, in case of unavailability of a response, the main thread proceeds to read the new requests from the frontend driver request queue and the intermediate thread checks for the responses.  
 
 \subsection{Backend Driver}
-\paragraph{Base IDDR System Design:}
-In the base IDDR system, the backend driver receives a software interrupt from the frontend driver. In the software interrupt handler, the backend driver forwards requests to the device driver. Upon completion of requests, the backend driver reads responses and puts them in the shared queue. It also copies read operation data to the shared memory. 
+\paragraph{Interrupt based IDDR System Design:}
+In the interRUPT based IDDR system, the backend driver receives a software interrupt from the frontend driver. In the software interrupt handler, the backend driver forwards requests to the device driver. Upon completion of requests, the backend driver reads responses and puts them in the shared queue. It also copies read operation data to the shared memory. 
 
-\paragraph{New IDDR system Design:}
+\paragraph{Spinning based IDDR system Design:}
 As explained in Section~\ref{par:spin IDDR communication}, we introduce an intermediate thread to read requests from the shared memory. The intermediate thread spins for requests and upon availability of a request, it forwards the request to the device driver for execution. The backend driver reads the response from the device driver and shares it in the shared queue.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRdesign}
-\caption{Spinning based new IDDR system}
+\caption{Spinning based IDDR system}
 \label{fig:new IDDR system}
 \end{figure}
 
