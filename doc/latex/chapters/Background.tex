@@ -4,7 +4,7 @@ as processes, threads, memory protection, virtualization and hypervisors.
 \section{Processes and Threads}
 \paragraph{Process:} A process can be viewed both as a program in execution
 and as an abstraction of a processor. Each process has its own address
-space.~\cite{Galvin}.
+space~\cite{Galvin}.
 
 \paragraph{Threads:} A process has either a single or multiple threads
 sharing its address space. Each thread represents a separate flow of
@@ -178,7 +178,7 @@ is outside the \texttt{base + bound} address, then an error is reported
 by the operating system, otherwise the physical address \texttt{base +
 virtual address} is returned. This allows multiple processes to be run in
 the memory with protection. Since address translation provides protection,
-a process can not access addresses outside its address space.
+a process cannot access addresses outside its address space.
 
 Consider the example shown in Figure~\ref{fig:User space}.
 \begin{enumerate}
@@ -202,14 +202,14 @@ Consider the example shown in Figure~\ref{fig:User space}.
 
 \subsection{Kernel Level}
 \label{subsec:kernel level}
-This sections explains the memory management at kernel level. 
-\\[3mm]
-In a Linux kernel physical memory is divided into blocks called as page frames and virtual memory is divided into pages. Linux kernel uses a data structure called page table to store the virtual memory to physical memory mapping information. Kernel reserves upper virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. This reserved region is divided into two parts. The first part contains references in a page table to every page in the system. It is used to do translations of addresses from physical to virtual when the kernel code is executed. The core of the kernel and all the pages allocated by page allocator lies in this region. The other region of the kernel memory is used by the memory allocator, the allocated memory is mapped by kernel modules. Since an operating system maps physical addresses directly, kernel components do not have memory protection similar to that of the user space. At kernel level any code running at \texttt{CPL 0} can access the kernel memory, hence a kernel component can access, and potentially, corrupt the kernel data structures. 
-\\[3mm]
-Consider an example shown in the Figure~\ref{fig:Kernel space}.
+This sections explains how memory is managed at kernel level. 
+
+In a Linux kernel, virtual memory is divided into pages and physical memory is divided into blocks called as page frames. Linux kernel uses a data structure called page table to store virtual memory to physical memory mapping information. Kernel reserves upper virtual memory for its internal use. The page table entries of this region are marked as protected so that pages are not visible or modifiable in the user mode. However, at kernel level any code running at priviledged level can access the kernel memory. Hence a kernel component can access, and potentially, corrupt any kernel data structures.
+
+Consider the example shown in Figure~\ref{fig:Kernel space}
 \begin{enumerate}
-\item The system runs 3 different processes in the user space and has different kernel components running in the kernel space.
-\item The network driver hits a bug, and corrupts the kernel data structure. The corruption might lead to a system crash.
+\item The system runs 3 different processes in the user space and has different kernel components running in kernel space.
+\item The network driver hits a bug, and corrupts kernel data structures. The corruption might lead to a system crash.
 \end{enumerate}
 \begin{figure}[!ht]
     \centering
@@ -226,9 +226,10 @@ Consider an example shown in the Figure~\ref{fig:Kernel space}.
 \end{figure}
 
 \section{Virtualization}
-Virtualization is the act of creating a virtual version of a hardware platform, storage device, or computer network resource etc. In an operating system virtualization, the software allows a hardware to run multiple operating system images at the same time.
-\\[3mm]
-Virtualization has the capability to share the underlying hardware resources and still provide an isolated environment to each operating system. In virtualization, each operating system runs independently from the other on its own virtual processors. Because of this isolation the failures in an operating system are contained. Virtualization is implemented in many different ways. It can be implemented either with or without hardware support. Also operating systems might require some changes in order to run in a virtualized environment~\cite{Drepper:2008:CV:1348583.1348591}. It has been shown that virtualization can be utilized to provide better security and robustness for operating systems~\cite{Fraser04safehardware, LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
+
+Virtualization is the act of creating an abstraction of the hardware of a single machine into several different execution environments. Such abstraction creates the illusion that each separate execution environment is running its own private machine~\cite{Galvin}. 
+
+Virtualization provides the capability to share the underlying hardware resources and still provide an isolated environment to each operating system. Because of this isolation, any failures in an operating system can be contained. Virtualization can be implemented in many different ways, either with or without hardware support. Operating systems might require some changes in order to run in a virtualized environment~\cite{Drepper:2008:CV:1348583.1348591}. It has been shown that virtualization can be utilized to provide better security and robustness for operating systems~\cite{Fraser04safehardware, LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.49\textwidth}
@@ -245,14 +246,14 @@ Virtualization has the capability to share the underlying hardware resources and
     \caption{Comparision of a non-virtualized system and a virtualized system}\label{fig:Kernel space}
 \end{figure}
 
-\subsection{Hypervisor}
-Hypervisor is a piece of computer software, firmware or hardware that creates and runs virtual machines. Operating system virtualization is achieved by inserting a hypervisor between the guest operating system and the underlying hardware. Most of the literature presents hypervisor synonymous to a virtual machine monitor (VMM). While, VMM is a software layer specifically responsible for virtualizing a given architecture, a hypervisor is an operating system with a VMM. The operating system may be a general purpose one, such as Linux, or it may be developed specifically for the purpose of running virtual machines~\cite{Agesen:2010:EXV:1899928.1899930}.
-\\[3mm]
-A computer on which a hypervisor is running one or more virtual machines is defined as a host machine. Each virtual machine is called a guest machine. The hypervisor presents the guest operating systems with a virtual operating platform and manages the execution of the guest operating systems. Multiple instances of a variety of operating systems share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{barham2003xen, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity2007kvm}, VMware ESX~\cite{Agesen:2010:EXV:1899928.1899930} and VirtualBox~\cite{camargos2008virtualization}.
-\\[3mm]
-There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
+\subsection{Hypervisors}
+A hypervisor is a piece of computer software, firmware, or hardware that creates and runs virtual machines. Operating system virtualization is achieved by inserting a VMM between the guest operating system and the underlying hardware. Most of the literature treats VMM and hypervisors synonymously. However, whereas a VMM is a software layer specifically responsible for virtualizing a given architecture, a hypervisor is an operating system that manages VMM. This operating system may be a general purpose one, such as Linux, or it may be developed specifically for the purpose of running virtual machines~\cite{Agesen:2010:EXV:1899928.1899930}.
+
+A computer on which a hypervisor is running one or more virtual machines is defined as a host machine. Each virtual machine is called a guest machine. Multiple instances of a variety of operating systems share the virtualized hardware resources. Among widely known hypervisors are Xen~\cite{barham2003xen, Chisnall:2007:DGX:1407351}, KVM~\cite{Habib:2008:VK:1344209.1344217, kivity2007kvm}, VMware ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and VirtualBox~\cite{camargos2008virtualization}.
+
+There are two types of hypervisors~\cite{Popek:1974:FRV:361011.361073}
 \begin{itemize}
-\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware to control the hardware and to manage guest operating systems. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{barham2003xen}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
+\item Type 1 hypervisors are also called native hypervisors or bare metal hypervisors. Type 1 hypervisors run directly on the host's hardware and manage guest operating systems. Type 1 hypervisors represent the classic implementation of virtual-machine architectures such as SIMMON, and CP/CMS. Modern equivalents include Oracle VM Server for SPARC, Oracle VM Server, the Xen hypervisor~\cite{barham2003xen}, VMware ESX/ESXi~\cite{Agesen:2010:EXV:1899928.1899930} and Microsoft Hyper-V.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.35]{type1}
@@ -269,53 +270,49 @@ There are two types of hypervisors~\cite{Goldberg:1973:AVM:800122.803950}
 \end{itemize}
 
 \subsection{Xen Hypervisor}
-Xen~\cite{barham2003xen} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{king2003operating}. 
-\\[3mm]
-Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Unprivileged domain is called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. However, the other domains access devices using a split device driver architecture, in which a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
-\\[3mm]
-Xen provides an inter-domain memory sharing API accessed through the guest kernel extensions and an interrupt-based inter-domain signaling facility called event channels to implement the efficient inter-domain communication. Split drivers use memory sharing APIs to implement I/O device ring buffers to exchange data across domains.
-\\[3mm]
-Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} guest writes data on a physical device. First, write request is sent to the file system. After that the frontend driver puts the data into memory which is shared between \texttt{domain 0} and \texttt{domain U}. The other half of the split device driver called the backend, running in the \texttt{domain 0} guest, reads the data from the buffer and sends it to the real device driver. The data is then written to the actual physical device~\cite{Chisnall:2007:DGX:1407351}.
+Xen~\cite{barham2003xen} is a widely known Type 1 hypervisor that allows the execution of virtual machines in guest domains~\cite{king2003operating}. Xen runs guest operating systems in environments known as domains. \texttt{Domain 0} is the first guest to run, and has elevated privileges. Xen loads a \texttt{domain 0} guest kernel during boot. Unprivileged domain is called \texttt{domain U}. The Xen hypervisor does not include device drivers. Device management is included in privileged \texttt{domain 0}. \texttt{Domain 0} uses the device drivers present in the guest operating system. The other domains access devices using a split device driver architecture, in which a frontend driver in a guest domain communicates with a backend driver in \texttt{domain 0}.
+
+Figure~\ref{xen-split2} shows how an application running in a \texttt{domain U} guest writes data on a physical device. Xen provides an inter-domain memory sharing API accessed through the guest kernel extensions and an interrupt-based inter-domain signaling facility called event channels to implement the efficient inter-domain communication. Split device driver model uses memory sharing APIs to implement I/O device ring buffers to exchange requests and responses across domains and use event channels to send virtual interrupt when requests and responses are shared. 
+
+Consider the example shown in Figure~\ref{xen-split2}. First, write request is sent to the file system. After that the frontend driver puts the data into memory which is shared between \texttt{domain 0} and \texttt{domain U}. The other half of the split device driver called the backend, running in the \texttt{domain 0} guest, reads the data from the buffer and sends it to the real device driver. The data is then written to the actual physical device~\cite{Chisnall:2007:DGX:1407351}.
+
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=.50]{xen-split-fs}
 \caption{Xen split device driver}
 \label{xen-split2}
 \end{figure}
-\\[3mm]
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=.50]{xen}
 \caption{Xen}
 \label{xen}
 \end{figure}
-\\[3mm]
 
 \subsubsection*{Hypercalls and Events}
 Hypercalls and event channels are the two mechanisms that exist for interactions between the Xen hypervisor and domains. A hypercall is a software trap from a domain to the Xen hypervisor, just as a syscall is a software trap from an application to the kernel~\cite{hypercall}. Domains use hypercalls to request privileged operations like updating pagetables. 
-\\[3mm]
+
 An event channel is to the Xen hypervisor as a signal is to an operating system. An event channel is used for sending asynchronous notifications between domains. Event notifications are implemented by updating a bitmap. After scheduling pending events from an event queue, the event callback handler is called to take appropriate action. The callback handler is responsible for resetting the bitmap of pending events and responding to the notifications in an appropriate manner. A domain may explicitly defer event handling by setting a Xen readable software flag: this is analogous to disabling interrupts on a real processor. Event notifications can be compared to traditional UNIX signals acting to flag a particular type of occurrence. For example, events are used to indicate that new data has been received over the network, or used to notify that a virtual disk request has completed. 
 
 \subsubsection*{Data Transfer: I/O Rings}
 \label{subsec:io rings}
-Hypervisor introduces an additional layer between guest OS and I/O devices. Xen provides a data transfer mechanism that allows data to move vertically through the system with minimum overhead. 
+Hypervisors introduce an additional layer between a guest OS and I/O devices. Xen provides a data transfer mechanism that allows data to move vertically through the system with minimum overhead. 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IObuffer}
 \caption{Ring I/O buffer}
 \label{fig:Ring buffer}
 \end{figure}
-\\[3mm]
-Figure~\ref{fig:Ring buffer} shows the structure of an I/O descriptor ring. An I/O descriptor ring is a circular queue of descriptors allocated by a domain. These descriptors do not contain I/O data. However, I/O data buffers are allocated separately by the guest OS and is indirectly referenced by these I/O descriptors. Access to an I/O ring is based around two pairs of producer-consumer pointers.
+
+Figure~\ref{fig:Ring buffer} shows the structure of an I/O descriptor ring. An I/O descriptor ring is a circular queue of descriptors allocated by a domain. These descriptors do not contain I/O data. I/O data buffers are allocated separately by the guest OS and are indirectly referenced by these I/O descriptors. Access to an I/O ring is based on two pairs of producer-consumer pointers.
 \begin{enumerate}
-\item Request producer pointer: A domain places requests on a ring by advancing a request producer pointer. 
-\item Request consumer pointer: The Xen hypervisor removes requests pointed by a request producer pointer. These requests are removed by advancing a request consumer pointer.
-\item Response producer pointer: The Xen hypervisor places responses on a ring by advancing a response producer pointer. 
-\item Response consumer pointer: A domain removes responses pointed by a request producer pointer. These responses are removed by advancing a response consumer pointer.
+\item Request producer pointer: A producer domain places requests on a ring by advancing the request producer pointer. 
+\item Request consumer pointer: A consumer domain removes these requests by advancing the request consumer pointer.
+\item Response producer pointer: A Consumer domain places responses on a ring by advancing the response producer pointer. 
+\item Response consumer pointer: A producer domain removes these responses by advancing the response consumer pointer.
 \end{enumerate} 
-The requests are not required to be processed in a specific order. I/O rings are generic to support different device paradigms. For example, a set of \texttt{requests} can provide buffers for read data of virtual disks; subsequent \texttt{responses} then signal the arrival of data into these buffers. 
-\\[3mm]
-The notification is not sent for production of each request and response. A domain can en-queue multiple requests and responses before notifying the other domain. This allows each domain to trade-off between latency and throughput.
+
+Notifications are not sent for each individual request and response. A domain can enqueue multiple requests and responses before notifying the other domain. This allows each domain to tradeoff between latency and throughput.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IObuffer2}
@@ -326,9 +323,10 @@ The notification is not sent for production of each request and response. A doma
 \subsection*{Shared Pages}
 \label{subsec:sharedpages}
 \subsubsection*{Grant Table} 
-Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring frames between the domains. It is an interface for granting foreign access to machine frames and sharing memory between underprivileged domains provided by the Xen hypervisor. In Xen, each domain has a respective grant table data structure, which is shared with the Xen hypervisor. The grant table data structure is used by Xen to verify the access permission other domains have on the page allocated by a domain~\cite{granttable}.
+Grant tables are a mechanism provided by the Xen hypervisor for sharing and transferring memory between the domains. It is an interface for granting foreign access to machine frames and sharing memory between unprivileged domains. Each domain has its own grant table data structure, which is maintained by the Xen hypervisor. The grant table data structure is used to verify the access permissions other domains have to pages allocated by a domain~\cite{granttable}.
 
 \subsubsection*{Grant References}
-Grant references are the entries in a grant table. A grant reference entry has every detail about the shared page. The Xen hypervisor virtualizes the physical memory, it is difficult to know the correct machine address of a frame for a domain. The biggest difficulty in sharing the memory between domains is knowing its correct machine address. A grant reference removes the dependency on the real machine address of the shared page. Hence, a grant entry makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, barham2003xen, granttable} 
+Grant table entries are referred to as grant references. A grant reference entry contains all necessary details about a shared page. 
 
+The Xen hypervisor virtualizes the physical memory. In Xen hypervisor, a domain requires the machine address of a frame in order to share a memory with other domain. It is not possible to know the machine address of a frame for a domain. A grant reference removes the dependency on the real machine address in order to share a page and makes it possible to share the memory between domains.\cite{Chisnall:2007:DGX:1407351, barham2003xen, granttable} 
 \ifbool{toShowBibliography}{\bibliography{references}}{}
