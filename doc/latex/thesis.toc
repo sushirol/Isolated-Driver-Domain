@@ -17,7 +17,7 @@
 \contentsline {subsection}{\numberline {2.5.1}User Level}{13}{subsection.2.5.1}
 \contentsline {subsection}{\numberline {2.5.2}Kernel Level}{14}{subsection.2.5.2}
 \contentsline {section}{\numberline {2.6}Virtualization}{16}{section.2.6}
-\contentsline {subsection}{\numberline {2.6.1}Hypervisors}{17}{subsection.2.6.1}
+\contentsline {subsection}{\numberline {2.6.1}Role of hypervisor}{17}{subsection.2.6.1}
 \contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{19}{subsection.2.6.2}
 \contentsline {chapter}{\numberline {3}System Introduction}{25}{chapter.3}
 \contentsline {section}{\numberline {3.1}Design Goal}{25}{section.3.1}
@@ -66,8 +66,8 @@
 \contentsline {paragraph}{Comparison :}{61}{section*.55}
 \contentsline {paragraph}{Observation :}{61}{section*.56}
 \contentsline {chapter}{\numberline {6}Related Work}{65}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability of the System}{66}{section.6.1}
+\contentsline {section}{\numberline {6.1}Reliability}{66}{section.6.1}
 \contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{66}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Other Approaches}{68}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Inter-domain Communication}{69}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{71}{chapter.7}
+\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{68}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Interdomain Communication}{68}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{70}{chapter.7}
