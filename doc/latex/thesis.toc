@@ -18,49 +18,44 @@
 \contentsline {subsection}{\numberline {2.6.1}Role of hypervisor}{16}{subsection.2.6.1}
 \contentsline {subsection}{\numberline {2.6.2}Xen Hypervisor}{18}{subsection.2.6.2}
 \contentsline {chapter}{\numberline {3}System Introduction}{25}{chapter.3}
-\contentsline {section}{\numberline {3.1}Design Goal}{25}{section.3.1}
-\contentsline {paragraph}{Copying Overhead: }{26}{section*.23}
-\contentsline {paragraph}{Communication Channel Overhead: }{26}{section*.24}
-\contentsline {section}{\numberline {3.2}Isolated Device Driver Properties}{26}{section.3.2}
-\contentsline {section}{\numberline {3.3}System Overview}{27}{section.3.3}
+\contentsline {section}{\numberline {3.1}System Overview}{25}{section.3.1}
+\contentsline {section}{\numberline {3.2}Design Goals}{26}{section.3.2}
+\contentsline {paragraph}{Copying Overhead: }{27}{section*.25}
+\contentsline {paragraph}{Communication Channel Overhead: }{28}{section*.26}
+\contentsline {section}{\numberline {3.3}Design Properties}{28}{section.3.3}
 \contentsline {section}{\numberline {3.4}System Components}{29}{section.3.4}
 \contentsline {subsection}{\numberline {3.4.1}Frontend Driver}{29}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Backend Driver}{31}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}Communication Module}{32}{subsection.3.4.3}
-\contentsline {section}{\numberline {3.5}System Design}{32}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}Communication Module}{32}{subsection.3.5.1}
-\contentsline {paragraph}{Interrupt based IDDR System:}{32}{section*.30}
-\contentsline {paragraph}{Spinning Based IDDR System:}{33}{section*.31}
-\contentsline {subsection}{\numberline {3.5.2}Frontend Driver}{34}{subsection.3.5.2}
-\contentsline {paragraph}{Interrupt based IDDR System Design:}{34}{section*.32}
-\contentsline {paragraph}{IDDR System Design:}{35}{section*.33}
-\contentsline {chapter}{\numberline {4}Implementation}{36}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementation Overview}{36}{section.4.1}
-\contentsline {section}{\numberline {4.2}Implementation}{37}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Communication Module}{37}{subsection.4.2.1}
-\contentsline {paragraph}{Shared Request and Response Queue:}{38}{section*.37}
-\contentsline {paragraph}{Shared Memory for Read/Write Data:}{39}{section*.38}
-\contentsline {paragraph}{Event Notification:}{39}{section*.39}
-\contentsline {paragraph}{Shared Request and Response Queue:}{40}{section*.40}
-\contentsline {paragraph}{Shared Memory for Read/Write Data:}{40}{section*.41}
-\contentsline {paragraph}{Threads and Event Notification:}{40}{section*.42}
-\contentsline {subsection}{\numberline {4.2.2}Application Domain}{43}{subsection.4.2.2}
-\contentsline {paragraph}{Initialization}{44}{section*.43}
-\contentsline {paragraph}{Dequeue and Submit Request:}{44}{section*.44}
-\contentsline {paragraph}{End Request:}{45}{section*.45}
-\contentsline {paragraph}{Initialization:}{46}{section*.46}
-\contentsline {paragraph}{Dequeue and Submit Request:}{46}{section*.47}
-\contentsline {subsection}{\numberline {4.2.3}Driver Domain}{46}{subsection.4.2.3}
-\contentsline {chapter}{\numberline {5}Evaluation}{48}{chapter.5}
-\contentsline {section}{\numberline {5.1}Goals}{48}{section.5.1}
-\contentsline {section}{\numberline {5.2}Methodology}{51}{section.5.2}
-\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs interrupt based IDDR System}{52}{section.5.3}
-\contentsline {section}{\numberline {5.4}Interrupt Based IDDR System vs Spinning Based IDDR System}{55}{section.5.4}
-\contentsline {paragraph}{Comparison :}{56}{section*.50}
-\contentsline {paragraph}{Observation :}{56}{section*.51}
-\contentsline {chapter}{\numberline {6}Related Work}{60}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability}{61}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{61}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{63}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Interdomain Communication}{63}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{65}{chapter.7}
+\contentsline {paragraph}{Interrupt based IDDR System:}{33}{section*.31}
+\contentsline {paragraph}{Spinning based IDDR System:}{34}{section*.32}
+\contentsline {chapter}{\numberline {4}Implementation}{35}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementation Overview}{35}{section.4.1}
+\contentsline {section}{\numberline {4.2}Implementation}{36}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Communication Module}{36}{subsection.4.2.1}
+\contentsline {paragraph}{Shared Request and Response Queue:}{37}{section*.35}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{38}{section*.36}
+\contentsline {paragraph}{Event Notification:}{38}{section*.37}
+\contentsline {paragraph}{Shared Request and Response Queue:}{39}{section*.38}
+\contentsline {paragraph}{Shared Memory for Read/Write Data:}{39}{section*.39}
+\contentsline {paragraph}{Threads and Event Notification:}{39}{section*.40}
+\contentsline {subsection}{\numberline {4.2.2}Application Domain}{42}{subsection.4.2.2}
+\contentsline {paragraph}{Initialization}{43}{section*.41}
+\contentsline {paragraph}{Dequeue and Submit Request:}{43}{section*.42}
+\contentsline {paragraph}{End Request:}{44}{section*.43}
+\contentsline {paragraph}{Initialization:}{45}{section*.44}
+\contentsline {paragraph}{Dequeue and Submit Request:}{45}{section*.45}
+\contentsline {subsection}{\numberline {4.2.3}Driver Domain}{45}{subsection.4.2.3}
+\contentsline {chapter}{\numberline {5}Evaluation}{47}{chapter.5}
+\contentsline {section}{\numberline {5.1}Goals}{47}{section.5.1}
+\contentsline {section}{\numberline {5.2}Methodology}{50}{section.5.2}
+\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs interrupt based IDDR System}{51}{section.5.3}
+\contentsline {section}{\numberline {5.4}Interrupt Based IDDR System vs Spinning Based IDDR System}{54}{section.5.4}
+\contentsline {paragraph}{Comparison :}{55}{section*.48}
+\contentsline {paragraph}{Observation :}{55}{section*.49}
+\contentsline {chapter}{\numberline {6}Related Work}{59}{chapter.6}
+\contentsline {section}{\numberline {6.1}Reliability}{60}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{60}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{62}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Interdomain Communication}{62}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{64}{chapter.7}
