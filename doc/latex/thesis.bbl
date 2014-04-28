@@ -200,9 +200,9 @@ Jeffrey~C. Mogul and Anita Borg.
 
 \bibitem{Nikolaev:2013:VOS:2517349.2522719}
 Ruslan Nikolaev and Godmar Back.
-\newblock Virtuos: An operating system with kernel virtualization.
-\newblock In {\em Proceedings of the Twenty-Fourth ACM Symposium on Operating
-  Systems Principles}, pages 116--132, Farminton, PA, USA, 2013.
+\newblock {VirtuOS}: An operating system with kernel virtualization.
+\newblock In {\em Proceedings of the 24th ACM Symposium on Operating Systems
+  Principles}, SOSP'13, pages 116--132, Farminton, PA, USA, 2013.
 
 \bibitem{Popek:1974:FRV:361011.361073}
 Gerald~J. Popek and Robert~P. Goldberg.

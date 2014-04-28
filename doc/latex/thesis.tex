@@ -133,11 +133,32 @@ Sushrut Shirole
 (ABSTRACT)
 \\[10mm]
 \end{center}
-In most of today's operating system architectures, a device driver is tightly coupled with the kernel components. In such systems, a malicious or faulty device driver often leads to a system failure, thereby reducing the reliability of the system. Even though a majority of the operating systems provide a protection mechanism at the user level, they do not provide the same level of protection between kernel components. The Isolated Driver Domain is a conceptual framework presented by Xen, which takes advantage of the protection present between the domains and it isolates the device driver and the operating system kernel in separate domains. The Isolated Device Driver (IDDR) implements this framework. Unfortunately, the isolated driver domain solution incurs performance overhead. 
-\\[3mm]
-Even after many advances in virtualization technologies, current inter-domain communication techniques have significant performance overheads. In this thesis, we propose a solution for performance improvement in inter-domain communication. We implement the proposed solution in the IDDR system. 
-\\[3mm]
-To evaluate the performance improvement, we implement the prototype based on the block device driver. We isolate and run the block device driver in a separate domain than the Linux kernel. Our prototype retains the compatibility with current applications and kernel components. Our solution outperforms Xen's isolated driver domain in most scenarios. In other scenarios, its performance matches that of Xen's isolated driver domain. 
+In most of today's operating system architectures, device drivers are
+tightly coupled with other kernel components. In such systems, a fault
+caused by a malicious or faulty device driver often leads to complete 
+system failure, thereby reducing
+the overall reliability of the system. Even though a majority of the operating
+systems provide protection mechanisms at the user level, they do not
+provide the same level of protection for kernel components.  
+Using virtualization, device drivers can be executed in separate,
+isolated virtual machines, called driver domains.  Such domains
+provide the same level of isolation to device drivers as operating
+systems provide to user level applications~\cite{Fraser04safehardware}.
+Domain-based isolation has the advantage that it is compatible
+with existing drivers and transparent to the kernel.
+
+However, domain-based isolation incurs significant performance overhead
+due to the necessary interdomain communication.
+This thesis investigates techniques for reducing this overhead.
+The key idea is to replace the interrupt-based notification
+between domains with a spinning-based approach, thus trading
+CPU capacity for increased throughput.
+
+We implemented a prototype, called the Isolated Device Driver system (IDDR),
+which includes front-end and back-end drivers and a communication module.
+We evaluated the impact of our optimizations for a variety of block devices.
+Our results show that our solution matches or outperforms Xen's isolated 
+driver domain in most scenarios we considered.
 \vfill
 
 \pagebreak
