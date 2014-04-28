@@ -94,7 +94,7 @@ Application domain is the domain running user applications and the Linux kernel.
 \\[3mm]
 In the IDDR system implementation, a block device runs separately in the driver domain. When a user process sends a request to a file system, the file system needs to forward the request to the driver domain. Like explained in Section~\ref{subsec:frontend}, in the IDDR system, a piece of code called the frontend driver forwards the request to the driver domain running the block device driver. 
 
-\subsubsection*{Base IDDR System}
+\subsubsection*{Interrupt based IDDR System}
 The core responsibility of the frontend driver in interrupt based IDDR system is to:
 \begin{enumerate}
 \item Provide an interface which appears as a block device to the upper layer in the stack
@@ -119,7 +119,7 @@ The frontend driver removes the request submitted to the driver interface and co
 \paragraph{End Request:}
 We maintain a shadow table of all requests which were received in the device driver queue. The shadow table is a table which contains an entry of all the requests received. We implement the shadow table as a circular array of the requests. We maintain an ID for each request. The backend driver copies this ID into the corresponding response. The ID is used for mapping the response to the request in the shadow table. When a response is read by the communication module, it forwards the response to the frontend driver. The frontend driver searches the corresponding request in the shadow table, and ends it. 
 
-\subsubsection*{New IDDR System}
+\subsubsection*{Spinning Based IDDR System}
 The core responsibility of the frontend driver in spinning based IDDR system is to:
 \begin{enumerate}
 \item Provide an interface for each block device
