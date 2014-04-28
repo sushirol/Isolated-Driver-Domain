@@ -1,47 +1,28 @@
-This chapter describes the specific implementation details of interrupt based IDDR system and spinning based IDDR system.
+This chapter describes specific implementation details of IDDR system.
 
 \section{Implementation Overview} 
-We implemented the IDDR system with Linux kernel 3.5.0 and Xen hypervisor 4.2.1. In this implementation, we isolate the block device driver from the Linux kernel. The application domain and the driver domain run the same Linux kernel in the IDDR system. The Table~\ref{tab:base} and Table~\ref{tab:new} summarize our implementation efforts of interrupt based IDDR system and spinning based IDDR system respectively.
+We implemented the IDDR system in the Linux 3.5.0 kernel and Xen 4.2.1. The application domain and the driver domain run the same kernel binary. Table~\ref{tab:base} summarize our implementation efforts in terms of number of lines of code.
 
 \begin{table}
-\caption{Interrupt based IDDR system implementation efforts.}
+\caption{Implementation efforts in terms of number of lines of code.}
 \begin{center}
-\begin{tabular}{ll}
+\begin{tabular}{lll}
   \hline
   \label{tab:base}
-  Component & Number of Lines \\
+  Component & Interrupt based IDDR & Spinning based IDDR \\
   \hline
-  Linux Kernel & 6 \\
-  Xen & 252 \\
-  Front-end Driver & 611 \\
-  Back-end Driver & 692 \\
+  Linux Kernel & 6 & 6\\
+  Xen & 252 & 252\\
+  Front-end Driver & 611 & 712\\
+  Back-end Driver & 692 & 752\\
   \hline 
-  Total & 1561\\
+  Total & 1561 & 1722\\
   \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-\begin{table}
-\caption{Spinning based IDDR system implementation efforts.}
-\begin{center}
-\begin{tabular}{ll}
-  \hline
-  \label{tab:new}
-  Component & Number of Lines \\
-  \hline
-  Linux Kernel & 6 \\
-  Xen & 252 \\
-  Front-end Driver & 712 \\
-  Back-end Driver & 752 \\
-  \hline 
-  Total & 1722\\
-  \hline
-\end{tabular}
-\end{center}
-\end{table}
-
-The IDDR system implementation did not require any changes to the device driver code. However, we did make a small number of changes to the Xen and Linux kernel to implement a hypercall.
+The IDDR system implementation did not require any changes to the device driver code. However, we did make a small number of changes to the Xen and Linux kernel.
 
 \section{Implementation}
 
@@ -55,38 +36,31 @@ Figure~\ref{fig:Implementation overview} shows the implementation overview of sp
 \end{figure}
 
 \subsection{Communication Module}
-The most important component in the IDDR system implementation is the communication module. This section describes the implementation details of the communication module of interrupt based IDDR system and spinning based IDDR system. 
+This section describes the implementation details of the communication module of interrupt based IDDR system and spinning based IDDR system. 
+
 \subsubsection*{Interrupt based IDDR system}
 As Section~\ref{sub:communicationmodule} describes, the role of the communication module in interrupt based IDDR system is to:
 \begin{enumerate} 
 \item Share requests and responses between the driver domain and the application domain
-\item Share data of read/write requests/responses
+\item Share the data associated with read/write requests/responses
 \item Notify the domain upon the availability of requests and responses 
 \end{enumerate}
 \paragraph{Shared Request and Response Queue:}
-In order to implement the first role of the communication module, we use the ring buffer mechanism provided by Xen. The ring buffer is a shared I/O ring explained in section~\ref{subsec:io rings}. The part of the ring buffer which shares requests is called the \textit{shared request queue}, and the part of the ring buffer which shares responses is called the \textit{shared response queue}. We divide the ring buffer into the front ring and the back ring. The IDDR system uses the front ring as the shared request queue and the back ring as the shared response queue. 
-\\[3mm]
-The IDDR system allocates the ring buffer in the initialization stage of the communication module and initializes the ring buffer as the front ring in the application domain. Whenever the frontend driver receives a request from an application in the application domain, the frontend driver removes the request from the device driver queue and submits it to the communication module. The communication module checks for a free space in the shared request queue, and if available, it allocates the space for the new request. After batching sufficient requests together, the communication module pushes all requests to the shared request queue.
+In order to implement the first role of the communication module, we use the ring buffer mechanism provided by Xen. A ring buffer is a shared I/O ring, which is explained in Section~\ref{subsec:io rings}. We divide the ring buffer into the front ring and the back ring. The IDDR system uses the front ring as the shared request queue and the back ring as the shared response queue. The front ring shares requests and is called as \textit{shared request queue}. The back ring shares responses and is called as \textit{shared response queue}. 
+
+The IDDR system allocates the ring buffer in the initialization stage of the communication module and initializes the ring buffer in the application domain. Whenever the frontend driver receives a request from an application in the application domain, the frontend driver removes the request from the device driver queue and submits it to the communication module. The communication module checks for a free space in the shared request queue, and if available, it allocates the space for the new request. After batching requests together, the communication module pushes all requests to the shared request queue.
 
 \paragraph{Shared Memory for Read/Write Data:}
-The ring buffer cannot hold the data of read responses and write requests. We use the ring buffer only to share requests and responses. In order to share actual data we use shared pages. 
-\\[3mm]
+We use the ring buffer only to share requests and responses. In order to share data associated with read/write requests/responses we use shared pages. 
+
 As explained in Section~\ref{subsec:sharedpages}, a grant table is used for sharing memory between domains. We use a grant table to share memory between the application domain and the driver domain.
-\\[3mm]
-The frontend driver removes the request from the device driver queue in the application domain, and forwards it to the communication module. The communication module allocates shared memory required to read the data from the backend driver, or to write the data to backend. The communication module then grants access to the driver domain. As the driver domain now has access to the shared memory, the backend driver can access the data from the shared memory.
 
 \paragraph{Event Notification:}
-An event channel is a mechanism provided by Xen hypervisor for event notification. The communication module in interrupt based IDDR system uses event channel to send notifications between the domains to notify the availability of requests and responses in the shared request queue and the shared response queue. 
-\\[3mm]
 We create a new event channel in the initialization stage of the communication module in the application domain and connect to the same event channel in the initialization stage of the communication module in the driver domain. We attach an interrupt handle routine for the event channel in both the application and driver domain. The interrupt handler routine in the application domain reads responses from the shared response queue and forwards them to the frontend driver. The interrupt handler routine in the driver domain reads requests from the shared request queue and forwards them to the backend driver.
 
-\subsubsection*{New IDDR System}
-As Section~\ref{sub:communicationmodule} describes, the role of the communication module in spinning based IDDR system is to:
-\begin{enumerate} 
-\item Share requests and responses between the driver domain and the application domain
-\item Share the data of read/write requests/responses
-\item Wake up the read request thread and the read response thread
-\end{enumerate}
+\subsubsection*{Spinning Based IDDR System}
+This section describes the communication module in 3 parts:
+
 \paragraph{Shared Request and Response Queue:}
 Similar to interrupt based IDDR system, the communication module uses a ring buffer as the shared request and response queue. 
 
@@ -100,7 +74,7 @@ The spinning based IDDR system uses an event channel to wake the read request th
 
 \begin{itemize}
 \item \textbf{Read response thread in the application domain:} 
-In spinning based IDDR system we create a kernel thread during an initialization stage of the communication module in the application domain. This new kernel thread is called the \textit{read response thread}. The \textit{read response thread} spins to check if responses are available in the shared response queue. If a response is available, it reads the response from the shared response queue. However, if a response is not available in the shared response queue, after spinning for some time the thread goes into a sleep state. We maintain the status of the thread as \texttt{SLEEPING} or \texttt{RUNNING} in the shared data structure. We use an atomic variable to save the state of the thread, avoiding race conditions. 
+In spinning based IDDR system we create a kernel thread called the \textit{read response thread} during an initialization stage of the communication module in the application domain. The \textit{read response thread} spins to check if responses are available in the shared response queue. If a response is available, it reads the response from the shared response queue. However, if a response is not available in the shared response queue, after spinning for some time the thread goes into a sleep state. We maintain the status of the thread as \texttt{SLEEPING} or \texttt{RUNNING} in the shared data structure. We use an atomic variable to save the state of the thread, avoiding race conditions. 
 \\[3mm]
 Obviously, a thread shouldn't sleep unless it is assured that somebody else, somewhere, will wake it up. The code doing the waking up must also be able to identify the thread to be able to do its job. We use a Linux data structure called \texttt{wait queue} to find the sleeping thread. Wait queue is a list of threads, all waiting for a specific event\cite{Galvin, Bovet:2005:ULK:1077084}. We initialize the wait queue for the read response thread during an initialization stage of the communication module in the application domain. The read response thread sleeps in the wait queue, waiting for a flag denoting the availability of the response to be set. The communication module in the driver domain checks the status of the read response thread after pushing responses on the shared response queue. If the status is \texttt{SLEEPING} then it sends a software interrupt through the event channel.
 \\[3mm]
@@ -159,8 +133,6 @@ Implementation details of the frontend driver is split into 4 stages:
 \begin{enumerate}
 \item Initialization
 \item Submit request to the communication module
-\item Spinning the main thread
-\item End request
 \end{enumerate}
 
 \paragraph{Initialization:}
@@ -168,12 +140,6 @@ Similar to interrupt based IDDR system, during the initialization process the fr
 
 \paragraph{Dequeue and Submit Request:}
 Similar to interrupt based IDDR system, the frontend driver removes the request submitted to the driver interface and converts it into the request structure with a data pointer pointing to the shared memory. The frontend driver then forwards the newly created request to the communication module, which also shares the request with the backend driver.
-
-\paragraph{Spinning The Main Thread:}
-In spinning based IDDR system, to avoid the intra-domain context switch between the read response thread and the main frontend driver thread, the main frontend driver thread spins for a short time and checks the availability of a response. If the response is available then the frontend driver main thread reads the response and proceeds to end the request. Otherwise it continues to remove the request from the device driver queue.
-
-\paragraph{End Request:}
-Similar to interrupt based IDDR system, we maintain a shadow table of all requests received in the frontend driver request queue. The shadow table is used for ending the corresponding request of the read response. 
 
 \subsection{Driver Domain}
 The IDDR system runs a block device driver in the driver domain. Like explained in Section~\ref{subsec:backend}, a piece of code called the backend driver runs in the driver domain, which accepts requests from the application domain and forwards requests to the device driver. Upon receiving a response from the device driver, the backend driver sends back the response to the communication module.

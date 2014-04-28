@@ -35,12 +35,12 @@ Figure~\ref{fig:monolithic} presents the architectural overview of the modern op
 \caption{Architectural overview of the interrupt based IDDR system}
 \label{fig:base IDDR system overview}
 \end{figure}
-The Figure~\ref{fig:base IDDR system overview} shows that IDDR system partitions an existing kernel into multiple independent components. User applications and Linux kernel run in a domain called the \textit{application domain}. A device driver, which needs to be isolated from a kernel, executes in the separate domain called the \textit{driver domain}. Multiple domains run on the same hardware with the help of a VMM. User applications or kernel components access the hardware through the driver domain.
+The Figure~\ref{fig:base IDDR system overview} shows that IDDR system partitions an existing kernel into multiple independent components. User applications and the Linux kernel run in a domain called the \textit{application domain}. A device driver, which needs to be isolated from a kernel, executes in the separate domain called the \textit{driver domain}. Multiple domains run on the same hardware with the help of a VMM. User applications or kernel components access the hardware through the driver domain.
 \\[3mm]
-As Section~\ref{sec:goals} describes, the goal of the IDDR system is to provide the isolation between the device driver and the kernel. However, a device driver is dependent on the kernel components such as a scheduler and memory management unit. In order to remove the dependency, the device driver runs closely with another instance of a kernel. Even though the dependency is removed, it is not possible to run multiple kernels over the common hardware without a virtual machine monitor. Thus, a VMM is introduced into the design to run multiple kernels on a common hardware. 
+The goal of the IDDR system is to provide isolation between the device driver and the kernel. However, a device driver depends on kernel component such as a scheduler. Hence we run the device driver with an instance of a kernel and introduce a VMM into the design to run multiple kernels on a common hardware. 
 
 \section{System Components}\label{components}
-The section describes the 3 main components of the design - frontend driver, backend driver and communication module.
+The section describes the 3 main components of the design - frontend driver, backend driver, and communication module.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRcomponents}
@@ -50,11 +50,16 @@ The section describes the 3 main components of the design - frontend driver, bac
 
 \subsection{Frontend Driver}
 \label{subsec:frontend}
-As mentioned earlier in Section~\ref{sec:properties}, transparency and compatibility are the properties of the IDDR system, which requires us to avoid any changes to the kernel, as well as the device driver. In the IDDR system, the device driver runs in the driver domain and user applications run in the application domain. Without making any changes to the kernel or applications, it is not possible for applications to send requests to the driver in the driver domain, as user applications do not know about the isolated device driver. The IDDR system runs a piece of a code called the \textit{frontend driver} in an application domain. The \textit{frontend driver} acts as a substitute for the device driver. The main functionality of the \textit{frontend driver} is to accept requests from user applications, process the requests, enqueue the requests for the driver domain and notify the driver domain. The \textit{frontend driver} reads and processes the responses received from the driver domain and ends corresponding requests.
+The IDDR system runs a piece of a code called the \textit{frontend driver} in an application domain. The \textit{frontend driver} acts as a substitute for the actual device driver. The main purpose of the \textit{frontend driver} is to accept requests from user applications, process the requests, enqueue the requests for the driver domain and notify the driver domain. The \textit{frontend driver} reads and processes the responses received from the driver domain and ends corresponding requests.
+
+In a Linux system, user applications send requests to the actual device driver running in the same domain. However, in the IDDR system the actual device driver runs in a separate domain and the frontend driver helps user applications to forward requests to this actual device driver. Without the frontend device driver, we would have had to change existing applications in order to send requests to the actual device driver running in the driver domain. Hence, with introduction of the frontend driver we achieve the transperency goal.
 
 \subsection{Backend Driver}
 \label{subsec:backend}
-In a Linux system, the device driver provides an interface to accept requests from user applications. However, the device driver is not capable of accepting the requests from applications running in a different domain. It cannot send responses back to the application domain without making any changes to the device driver code. In order to avoid making any changes to the device driver or the kernel, a piece of code called the \textit{backend driver} runs in the driver domain. The responsibility of the \textit{backend driver} is to accept requests from the application domain and forward them to the device driver. The \textit{backend driver} sends the responses and notifies the application domain after receiving the responses from the device driver.
+The IDDR system runs a piece of a code called the \textit{backend driver} runs in the driver domain. The responsibility of the \textit{backend driver} is to accept requests from the application domain and forward them to the actual device driver. The \textit{backend driver} sends the responses and notifies the application domain after receiving the responses from the device driver.
+
+In a Linux system, the actual device driver sends responses back to user applications running in the same domain. However, in the IDDR system, the backend driver sends responses to the frontend driver. Without the backend device driver, we would have had to change existing device drivers in order to send responses to user applications running in the application domain. Hence, with introduction of the backend driver we achieve the compatibility goal.
+
 \begin{figure}[!ht]
     \centering
     \begin{subfigure}[b]{0.45\textwidth}
@@ -68,19 +73,19 @@ In a Linux system, the device driver provides an interface to accept requests fr
 	\caption{Backend and frontend driver}
 	\label{fig:backendfrontend}
     \end{subfigure}
-    \caption{Role of the frontend and the backend driver}\label{fig:fault tolerence}
+    \caption{Role of the frontend and the backend drivers}\label{fig:fault tolerence}
 \end{figure}
 
 \subsection{Communication Module}
 \label{sub:communicationmodule}
-The communication module is the communication channel between the \textit{frontend driver} and the \textit{backend driver}. Unlike the \textit{backend driver} and the \textit{frontend driver}, the communication module is not a separate physical entity or a kernel module. It exists in the \textit{frontend driver} and the \textit{backend driver}. The communication channel is logically divided into three parts. 
+The communication module provides a communication channel between the \textit{frontend driver} and the \textit{backend driver}. The communication channel is logically divided into three parts. The responsibility of the communication module is to
 \begin{enumerate} 
-\item The responsibility of the first part is to share the requests and responses between the driver domain and the application domain.
-\item The responsibility of the second part is to share the data of read/write requests/responses.
-\item The responsibility of the third part is to notify the domain upon the occurrence of a particular event. 
+\item share the requests and responses between the driver domain and the application domain.
+\item share the data of read/write requests/responses.
+\item notify the domain upon the occurrence of a particular event. 
 \end{enumerate}
 
-Figure~\ref{fig:communication} illustrates the role of the communication model. 
+Figure~\ref{fig:communication} provides the overview of the communication model. 
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{communicationmodule}
@@ -96,29 +101,21 @@ The following section describes the design of interrupt based IDDR system and sp
 
 \paragraph{Interrupt based IDDR System:}
 \label{par:base IDDR communication}
-In the base IDDR system, the frontend driver submits requests to the communication module. The communication module copies data of the write requests in a shared memory. The communication module is responsible for the allocation and de-allocation of the shared memory. Once the sufficient number of requests are submitted by the frontend driver, the communication channel shares the requests with the backend driver. It notifies the backend driver that requests are available in a shared request queue.
+In interrupt based IDDR system, the frontend driver submits requests to the communication module. The communication module copies data of the write requests in a shared memory. The communication module is responsible for the allocation and de-allocation of the shared memory page. Once a sufficient number of requests is submitted by the frontend driver, the communication channel shares the requests with the backend driver. It notifies the backend driver that requests are available in a shared request queue.
 
 \paragraph{Spinning Based IDDR System:}
 \label{par:spin IDDR communication}
-As Section~\ref{par:base IDDR communication} describes, in the interrupt based IDDR system, the communication module notifies the backend driver about the avaiability of reqesuts in the shared queue. A software interrupt is sent to the domain as a notification. Each software interrupt which is sent for the availability of requests, causes the hypervisor to schedule the driver domain. Similarly, a software interrupt, which notifies the availability of responses, causes the hypervisor to schedule the application domain. The scheduling of the driver domain and the application domain might result in a context swtich. 
-\\[3mm]
-In order to avoid the context switch, we run an intermediate thread in the frontend driver and an intermediate thread in the backend driver. Both these threads spin for the availability of requests and responses in the shared queue. The intermediate threads delegate the responsibility of the notifications from the communication module to the frontend driver and backend driver. 
+In the interrupt based IDDR system, by default a software interrupt is sent to the domain as a notification. Each such software interrupt causes the hypervisor to schedule the driver domain. Similarly, software interrupts which notify the availability of responses, causes the hypervisor to schedule the application domain. The scheduling of the driver domain and the application domain might result in a context switch. 
+
+In order to avoid these context switches, we run an intermediate thread in the frontend driver and an intermediate thread in the backend driver. Both threads spin for the availability of requests and responses in the shared queue. The intermediate threads delegate the responsibility of the notifications from the frontend driver and backend driver to the communication module. 
 
 \subsection{Frontend Driver}
 \paragraph{Interrupt based IDDR System Design:}
-In the IDDR system, the frontend driver provides an interface to accept requests from a user application on behalf of the device driver. As explained in Section~\ref{subsec:request queue}, each block device driver has a separate request queue to accept requests from a user application. Similar to the block device drivers, the frontend driver also creates an individualized request queue for each device to accept requests from a user application. If sufficient requests are received, the frontend driver flushes the requests to the communication channel. The frontend driver receives a software interrupt upon availability of responses in the shared queue. The frontend driver handles the software interrupt by reading data from the shared memory and ending the request in case of a read operation. Otherwise it ends the request without accessing the shared memory.
+In the IDDR system, the frontend driver provides an interface to accept requests from a user application on behalf of the device driver. As explained in Section~\ref{subsec:request queue}, each block device driver has a separate request queue to accept requests from a user application. Similar to block device drivers, the frontend driver also creates an individual request queue for a device to accept requests from user applications. The frontend driver flushes the requests to the communication channel. The frontend driver receives a software interrupt upon the availability of responses in the shared queue. The frontend driver handles the software interrupt by reading data from the shared memory in case of read operation and sends a completion notification to a user application. Otherwise it sends a completion notification to a user application.
 
-\paragraph{New IDDR System Design:}
-As explained in Section~\ref{par:spin IDDR communication}, we introduce an intermediate thread to read responses from the shared queue. The intermediate thread spins for responses. Upon availability of a response, the thread reads the response and ends the corresponding request. If the corresponding request is a read request, then the thread reads the shared data too. However, there still exists an intra-domain context switch between the frontend driver's main thread and the intermediate thread. The main thread is responsible for reading the requests from the frontend driver request queue, and flushing them to the communication channel. The main thread context switches to the intermediate thread, which spins for the responses. 
-\\[3mm]
-To avoid the intra-domain context switch, we spin the main frontend thread for a short time waiting for responses. If a response is available, then similar to intermediate thread, the main thread reads shared data and the response and ends the corresponding request. However, in case of unavailability of a response, the main thread proceeds to read the new requests from the frontend driver request queue and the intermediate thread checks for the responses.  
+\paragraph{IDDR System Design:}
+As explained in Section~\ref{par:spin IDDR communication}, we introduce an intermediate thread to read responses from the shared queue. The intermediate thread spins for responses. Upon availability of a response, the thread reads the response and sends a complition notification to a user application. If the corresponding request is a read request, then the thread reads the shared data too.
 
-\subsection{Backend Driver}
-\paragraph{Interrupt based IDDR System Design:}
-In the interRUPT based IDDR system, the backend driver receives a software interrupt from the frontend driver. In the software interrupt handler, the backend driver forwards requests to the device driver. Upon completion of requests, the backend driver reads responses and puts them in the shared queue. It also copies read operation data to the shared memory. 
-
-\paragraph{Spinning based IDDR system Design:}
-As explained in Section~\ref{par:spin IDDR communication}, we introduce an intermediate thread to read requests from the shared memory. The intermediate thread spins for requests and upon availability of a request, it forwards the request to the device driver for execution. The backend driver reads the response from the device driver and shares it in the shared queue.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRdesign}
