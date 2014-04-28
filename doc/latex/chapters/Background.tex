@@ -146,12 +146,7 @@ malicious misuse of the system by users or programs. Memory
 protection also ensures that a resource is used in accordance
 with the system policies. In addition, it also helps to
 ensure that errant programs cause minimal damage~\cite{Galvin,
-Graham:1971:PPP:1478873.1478928}. Subsection~\ref{subsec:user level}
-and subsection~\ref{subsec:kernel level} explain the policies implemented
-at kernel level and user level.
-
-\subsection{User Level}
-\label{subsec:user level}
+Graham:1971:PPP:1478873.1478928}.
 
 \begin{figure}[!ht]
 \centering
@@ -160,17 +155,8 @@ at kernel level and user level.
 \label{fig:memmap}
 \end{figure}
 
-At the user space, applications typically run as separate processes. Each
-process is associated with an address space, which creates the illusion that it owns the
-entire memory, starting with virtual address 0. A translation
-table translates every memory reference by a process from virtual
-to physical addresses. The translation table maintains \texttt{$<$base,
-bound$>$} entries. If a process tries to access a virtual address that
-is outside the \texttt{base + bound} address, then an error is reported
-by the operating system, otherwise the physical address \texttt{base +
-virtual address} is returned. This allows multiple processes to be run in
-the memory with protection. Since address translation provides protection,
-a process cannot access addresses outside its address space.
+In a Linux kernel, virtual memory is divided into pages and physical memory 
+is divided into blocks called as page frames. 
 
 On x86-based systems, the kernel resides in the upper portion of a user 
 application's address space.  The application has access to \texttt{X Gb} 
@@ -179,6 +165,17 @@ the upper \texttt{Virtual Memory size - X Gb} are reserved
 for the kernel.  The kernel region is shared between all address
 spaces, allowing the kernel to access its private data structures
 using the same virtual address in all processes.
+
+At the user space, applications typically run as separate processes. Each
+process is associated with an address space, which creates the illusion that it owns the
+entire memory, starting with virtual address 0 and hence the process can not access pages 
+of other user process.
+
+Linux kernel uses a data structure called page table to store virtual 
+memory to physical memory mapping information. The page table entries of the upper region 
+which is reserved for kernel are marked as protected so that pages are not accessible in user mode. 
+However, any code running at priviledged level can access the kernel memory. Hence a kernel component can access, 
+and potentially, corrupt any kernel data structures.
 
 Consider the example shown in Figure~\ref{fig:User space}.
 \begin{enumerate}
@@ -199,22 +196,6 @@ Consider the example shown in Figure~\ref{fig:User space}.
     \caption{User level memory protection}\label{fig:User space}
 \end{figure}
 \end{enumerate}
-
-\subsection{Kernel Level}
-\label{subsec:kernel level}
-This sections explains how memory is managed at the kernel level. 
-
-Virtual memory is divided into pages and physical
-memory is divided into blocks called as page frames. The Linux kernel uses
-a data structure called a page table to store virtual memory to physical
-memory mapping information. 
-% already said?
-The kernel reserves upper virtual memory for its internal use. 
-The page table entries of this region are marked
-as protected so that pages are not accessible to applications in user mode.
-However, at kernel level any code running at privileged level
-can access the kernel memory.  Hence a kernel component can access,
-and potentially, corrupt any kernel data structures.
 
 Consider the example shown in Figure~\ref{fig:Kernel space}
 \begin{enumerate}
