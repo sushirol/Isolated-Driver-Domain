@@ -1,5 +1,6 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-White space in argument---line 267 of file thesis.aux
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: thesis.aux
+White space in argument---line 250 of file thesis.aux
  : \citation{are
  :               microkernels ... done right 2papers}
 I'm skipping whatever remains of this command
@@ -20,4 +21,45 @@ Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
+You've used 43 entries,
+            2118 wiz_defined-function locations,
+            869 strings with 15532 characters,
+and the built_in function-call counts, 16362 in all, are:
+= -- 1653
+> -- 711
+< -- 24
++ -- 288
+- -- 240
+* -- 1083
+:= -- 2511
+add.period$ -- 125
+call.type$ -- 43
+change.case$ -- 249
+chr.to.int$ -- 0
+cite$ -- 48
+duplicate$ -- 698
+empty$ -- 1336
+format.name$ -- 240
+if$ -- 3608
+int.to.chr$ -- 0
+int.to.str$ -- 43
+missing$ -- 42
+newline$ -- 213
+num.names$ -- 76
+pop$ -- 318
+preamble$ -- 1
+purify$ -- 206
+quote$ -- 0
+skip$ -- 520
+stack$ -- 0
+substring$ -- 986
+swap$ -- 216
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 164
+warning$ -- 5
+while$ -- 158
+width$ -- 45
+write$ -- 488
 (There was 1 error message)
