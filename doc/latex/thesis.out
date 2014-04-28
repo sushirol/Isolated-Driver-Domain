@@ -21,11 +21,10 @@
 \BOOKMARK [2][-]{subsection.3.4.2}{Backend Driver}{section.3.4}
 \BOOKMARK [2][-]{subsection.3.4.3}{Communication Module}{section.3.4}
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}
-\BOOKMARK [1][-]{section.4.1}{Implementation Overview}{chapter.4}
-\BOOKMARK [1][-]{section.4.2}{Implementation}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.2.1}{Communication Module}{section.4.2}
-\BOOKMARK [2][-]{subsection.4.2.2}{Application Domain}{section.4.2}
-\BOOKMARK [2][-]{subsection.4.2.3}{Driver Domain}{section.4.2}
+\BOOKMARK [1][-]{section.4.1}{Overview}{chapter.4}
+\BOOKMARK [1][-]{section.4.2}{Communication Module}{chapter.4}
+\BOOKMARK [1][-]{section.4.3}{Application Domain}{chapter.4}
+\BOOKMARK [1][-]{section.4.4}{Driver Domain}{chapter.4}
 \BOOKMARK [0][-]{chapter.5}{Evaluation}{}
 \BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}
 \BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}
