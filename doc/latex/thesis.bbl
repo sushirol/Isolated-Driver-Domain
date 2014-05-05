@@ -9,15 +9,15 @@
 \newblock \url{http://sysbench.sourceforge.net/}.
 
 \bibitem{granttable}
-{Xen hypervisor: Grant Table}.
+{Xen hypervisor: Grant Tables}.
 \newblock \url{http://xenbits.xen.org/docs/4.2-testing/misc/grant-tables.txt}.
 
 \bibitem{hypercall}
-{Xen hypervisor: Hypercall}.
+{Xen hypervisor: Hypercalls}.
 \newblock \url{http://wiki.xen.org/wiki/Hypercall}.
 
 \bibitem{driverdomain}
-{Xen's Isolated Driver Domain}.
+{Xen's Isolated Driver Domains}.
 \newblock \url{http://wiki.xen.org/wiki/Driver_Domain}.
 
 \bibitem{Accetta+:usenix86}
@@ -73,7 +73,7 @@ Anton Burtsev, Kiran Srinivasan, Prashanth Radhakrishnan, Lakshmi~N.
 \bibitem{camargos2008virtualization}
 Fernando~L. Camargos, Gabriel Girard, and Benoit~D. Ligneris.
 \newblock {Virtualization of Linux servers: a comparative study}.
-\newblock In {\em 2008 Ottawa Linux Symsposium}, pages 63--76, Ottawa, Ontario,
+\newblock In {\em 2008 Ottawa Linux Symposium}, pages 63--76, Ottawa, Ontario,
   Canada, 2008.
 
 \bibitem{Chisnall:2007:DGX:1407351}
@@ -120,8 +120,8 @@ R.~P. Goldberg.
 \bibitem{Graham:1971:PPP:1478873.1478928}
 G.~Scott Graham and Peter~J. Denning.
 \newblock Protection: Principles and practice.
-\newblock In {\em Proceedings of the May 16-18, 1972, Spring Joint Computer
-  Conference}, pages 417--429, Atlantic City, NJ, USA, 1972.
+\newblock In {\em Proceedings of the Spring Joint Computer Conference}, pages
+  417--429, Atlantic City, NJ, USA, 1972.
 
 \bibitem{Habib:2008:VK:1344209.1344217}
 Irfan Habib.
@@ -146,11 +146,11 @@ Gernot Heiser and Ben Leslie.
 Samuel~T. King, George~W. Dunlap, and Peter~M. Chen.
 \newblock Operating system support for virtual machines.
 \newblock In {\em Proceedings of the 2003 USENIX Annual Technical Conference},
-  ATEC'03, pages 71--84, San Antonio, TX, USA, 2003.
+  ATC'03, pages 71--84, San Antonio, TX, USA, 2003.
 
 \bibitem{kivity2007kvm}
 Avi Kivity, Yaniv Kamay, Dor Laor, Uri Lublin, and Anthony Liguori.
-\newblock {KVM}: the linux virtual machine monitor.
+\newblock {KVM}: the {Linux} virtual machine monitor.
 \newblock In {\em OLS '07: The 2007 Ottawa Linux Symposium}, volume~1, pages
   225--230, 2007.
 
@@ -211,8 +211,8 @@ Gerald~J. Popek and Robert~P. Goldberg.
 
 \bibitem{Riley:2008:GPK:1433006.1433008}
 Ryan Riley, Xuxian Jiang, and Dongyan Xu.
-\newblock Guest-transparent prevention of kernel rootkits with vmm-based memory
-  shadowing.
+\newblock Guest-transparent prevention of kernel rootkits with {VMM}-based
+  memory shadowing.
 \newblock In {\em Proceedings of the 11th international symposium on Recent
   Advances in Intrusion Detection}, RAID'08, pages 1--20, Cambridge, MA, USA,
   2008.
@@ -233,8 +233,8 @@ Livio Soares and Michael Stumm.
 Jeremy Sugerman, Ganesh Venkitachalam, and Beng-Hong Lim.
 \newblock {Virtualizing {I/O} Devices on {VMware} {Workstation}'s Hosted
   Virtual Machine Monitor}.
-\newblock In {\em Proceedings of the General Track: 2002 USENIX Annual
-  Technical Conference}, volume~15, pages 1--14, Boston, MA, USA, 2001.
+\newblock In {\em Proceedings of the 2002 USENIX Annual Technical Conference},
+  ATC'02, pages 1--14, Boston, MA, USA, 2001.
 
 \bibitem{swift2005improving}
 Michael~M Swift, Brian~N Bershad, and Henry~M Levy.

@@ -43,6 +43,7 @@
 
 @string{ ATEC = "USENIX Annual Technical Conference" }
 @string{ ATEC96 = ProceedingsOf # " 1996 " # ATEC }
+@string{ ATEC02 = ProceedingsOf # " 2002 " # ATEC }
 @string{ ATEC03 = ProceedingsOf # " 2003 " # ATEC }
 @string{ ATEC05 = ProceedingsOf # " 2005 " # ATEC }
 
@@ -55,29 +56,29 @@
 @string{ LISA06 = ProceedingsOf # " 20th " # LISA }
 
 
-@webpage{driverdomain,
-    Howpublished = {\url{http://wiki.xen.org/wiki/Driver_Domain}}, 
-    Title = {{Xen's Isolated Driver Domain}}
+@misc{driverdomain,
+    title = {{Xen's Isolated Driver Domains}},
+    note = "\url{http://wiki.xen.org/wiki/Driver_Domain}",
 }
 
-@webpage{coveritykernel,
-    Howpublished = {\url{http://www.coverity.com/library/pdf/coverity_linuxsecurity.pdf}}, 
+@misc{coveritykernel,
+    note = "\url{http://www.coverity.com/library/pdf/coverity_linuxsecurity.pdf}", 
     Title = {{Coverity's Analysis of the Linux kernel}}
 }
 
-@webpage{sysbench,
-    Howpublished = {\url{http://sysbench.sourceforge.net/}}, 
+@misc{sysbench,
+    note = "\url{http://sysbench.sourceforge.net/}", 
     Title = {{SysBench 0.4.12 – A System Performance Benchmark}}
 }
 
-@webpage{hypercall,
-    Howpublished = {\url{http://wiki.xen.org/wiki/Hypercall}}, 
-    Title = {{Xen hypervisor: Hypercall}}
+@misc{hypercall,
+    Howpublished = "\url{http://wiki.xen.org/wiki/Hypercall}", 
+    Title = {{Xen hypervisor: Hypercalls}}
 }
 
-@webpage{granttable,
-    Howpublished = {\url{http://xenbits.xen.org/docs/4.2-testing/misc/grant-tables.txt}}, 
-    Title = {{Xen hypervisor: Grant Table}}
+@misc{granttable,
+    note = "\url{http://xenbits.xen.org/docs/4.2-testing/misc/grant-tables.txt}", 
+    Title = {{Xen hypervisor: Grant Tables}}
 }
 
 @book{Galvin,
@@ -177,7 +178,7 @@
 @inproceedings{Graham:1971:PPP:1478873.1478928,
  author = {Graham, G. Scott and Denning, Peter J.},
  title = {Protection: Principles and Practice},
- booktitle = {Proceedings of the May 16-18, 1972, Spring Joint Computer Conference},
+ booktitle = {Proceedings of the Spring Joint Computer Conference},
  year = {1972},
  pages = {417--429},
  numpages = {13},
@@ -197,7 +198,7 @@
 
 @inproceedings{Riley:2008:GPK:1433006.1433008,
  author = {Riley, Ryan and Jiang, Xuxian and Xu, Dongyan},
- title = {Guest-Transparent Prevention of Kernel Rootkits with VMM-Based Memory Shadowing},
+ title = {Guest-Transparent Prevention of Kernel Rootkits with {VMM}-Based Memory Shadowing},
  booktitle = {Proceedings of the 11th international symposium on Recent Advances in Intrusion Detection},
  series = {RAID'08},
  year = {2008},
@@ -243,7 +244,7 @@
 
 @inproceedings{camargos2008virtualization,
  author = {Camargos, Fernando L. and Girard, Gabriel and Ligneris, Benoit D.},
- booktitle = {2008 Ottawa Linux Symsposium},
+ booktitle = {2008 Ottawa Linux Symposium},
  title = {{Virtualization of Linux servers: a comparative study}},
  journal={{L}inux Symposium},
  pages={63--76},
@@ -254,11 +255,10 @@
 @inproceedings{Sugerman:2001:VID:647055.715774,
  author = {Sugerman, Jeremy and Venkitachalam, Ganesh and Lim, Beng-Hong},
  title = {{Virtualizing {I/O} Devices on {VMware} {Workstation}'s Hosted Virtual Machine Monitor}},
- booktitle = {Proceedings of the General Track: 2002 USENIX Annual Technical Conference},
- journal = {ACM Transactions on Computer Systems},
+ booktitle = ATEC02,
+ series = {ATC'02},
  year = {2001},
  pages = {1--14},
- volume = {15},
  address = {Boston, MA, USA},
 } 
 
@@ -266,7 +266,7 @@
  author = {King, Samuel T. and Dunlap, George W. and Chen, Peter M.},
  title = {Operating system support for virtual machines},
  booktitle = ATEC03,
- series = {ATEC'03},
+ series = {ATC'03},
  year = {2003},
  pages = {71--84},
  address = {San Antonio, TX, USA}
@@ -304,7 +304,7 @@
 
 @inproceedings{Li:2007:QCC:1281700.1281702,
  author = {Li, Chuanpeng and Ding, Chen and Shen, Kai},
- title = {Quantifying the Cost of Context Switch},
+ title = {Quantifying the cost of context switch},
  booktitle = {Proceedings of the 2007 Workshop on Experimental Computer Science},
  year = {2007},
  articleno = {2},
@@ -359,7 +359,7 @@
 } 
 
 @inproceedings{kivity2007kvm,
-  title={{KVM}: the Linux virtual machine monitor},
+  title={{KVM}: the {Linux} virtual machine monitor},
   author={Kivity, Avi and Kamay, Yaniv and Laor, Dor and Lublin, Uri and Liguori, Anthony},
   booktitle = {OLS '07: The 2007 Ottawa Linux Symposium},
   volume={1},

@@ -1,65 +1,13 @@
-This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
-The top-level auxiliary file: thesis.aux
-White space in argument---line 250 of file thesis.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+White space in argument---line 261 of file thesis.aux
  : \citation{are
  :               microkernels ... done right 2papers}
 I'm skipping whatever remains of this command
 The style file: plain.bst
 Database file #1: references.bib
-Warning--entry type for "driverdomain" isn't style-file defined
---line 58 of file references.bib
-Warning--entry type for "coveritykernel" isn't style-file defined
---line 63 of file references.bib
-Warning--entry type for "sysbench" isn't style-file defined
---line 68 of file references.bib
-Warning--entry type for "hypercall" isn't style-file defined
---line 73 of file references.bib
-Warning--entry type for "granttable" isn't style-file defined
---line 78 of file references.bib
 Warning--to sort, need author or key in coveritykernel
 Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
-You've used 43 entries,
-            2118 wiz_defined-function locations,
-            869 strings with 15463 characters,
-and the built_in function-call counts, 16366 in all, are:
-= -- 1654
-> -- 711
-< -- 24
-+ -- 288
-- -- 240
-* -- 1084
-:= -- 2512
-add.period$ -- 125
-call.type$ -- 43
-change.case$ -- 249
-chr.to.int$ -- 0
-cite$ -- 48
-duplicate$ -- 698
-empty$ -- 1336
-format.name$ -- 240
-if$ -- 3609
-int.to.chr$ -- 0
-int.to.str$ -- 43
-missing$ -- 42
-newline$ -- 213
-num.names$ -- 76
-pop$ -- 316
-preamble$ -- 1
-purify$ -- 206
-quote$ -- 0
-skip$ -- 521
-stack$ -- 0
-substring$ -- 986
-swap$ -- 216
-text.length$ -- 24
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 164
-warning$ -- 5
-while$ -- 158
-width$ -- 45
-write$ -- 489
 (There was 1 error message)
