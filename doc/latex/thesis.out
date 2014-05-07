@@ -23,16 +23,20 @@
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}% 23
 \BOOKMARK [1][-]{section.4.1}{Overview}{chapter.4}% 24
 \BOOKMARK [1][-]{section.4.2}{Communication Module}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.3}{Application Domain}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.4}{Driver Domain}{chapter.4}% 27
-\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 28
-\BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}% 29
-\BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}% 30
-\BOOKMARK [1][-]{section.5.3}{Xen Split Device Driver vs interrupt based IDDR System}{chapter.5}% 31
-\BOOKMARK [1][-]{section.5.4}{Interrupt Based IDDR System vs Spinning Based IDDR System}{chapter.5}% 32
-\BOOKMARK [0][-]{chapter.6}{Related Work}{}% 33
-\BOOKMARK [1][-]{section.6.1}{Reliability}{chapter.6}% 34
-\BOOKMARK [2][-]{subsection.6.1.1}{Driver Protection Approaches}{section.6.1}% 35
-\BOOKMARK [2][-]{subsection.6.1.2}{Kernel Designs}{section.6.1}% 36
-\BOOKMARK [1][-]{section.6.2}{Interdomain Communication}{chapter.6}% 37
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 38
+\BOOKMARK [2][-]{subsection.4.2.1}{Interrupt based IDDR system}{section.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.2.2}{Spinning Based IDDR System}{section.4.2}% 27
+\BOOKMARK [1][-]{section.4.3}{Application Domain}{chapter.4}% 28
+\BOOKMARK [2][-]{subsection.4.3.1}{Frontend Driver}{section.4.3}% 29
+\BOOKMARK [1][-]{section.4.4}{Driver Domain}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.4.1}{Backend Driver}{section.4.4}% 31
+\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 32
+\BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.3}{Xen Split Device Driver vs interrupt based IDDR System}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.4}{Interrupt Based IDDR System vs Spinning Based IDDR System}{chapter.5}% 36
+\BOOKMARK [0][-]{chapter.6}{Related Work}{}% 37
+\BOOKMARK [1][-]{section.6.1}{Reliability}{chapter.6}% 38
+\BOOKMARK [2][-]{subsection.6.1.1}{Driver Protection Approaches}{section.6.1}% 39
+\BOOKMARK [2][-]{subsection.6.1.2}{Kernel Designs}{section.6.1}% 40
+\BOOKMARK [1][-]{section.6.2}{Interdomain Communication}{chapter.6}% 41
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 42

@@ -23,8 +23,8 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of spinning based IDDR system\relax }}{36}{figure.caption.34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt Based IDDR system vs Xen split driver\relax }}{54}{figure.caption.47}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{58}{figure.caption.50}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{59}{figure.caption.51}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt Based IDDR system vs Xen split driver\relax }}{51}{figure.caption.42}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{55}{figure.caption.45}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{56}{figure.caption.46}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
