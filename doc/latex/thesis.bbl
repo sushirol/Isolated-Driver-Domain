@@ -96,6 +96,12 @@ Ulrich Drepper.
 \newblock The cost of virtualization.
 \newblock {\em ACM Queue}, 6(1):28--35, 2008.
 
+\bibitem{Elphinstone+:sosp13}
+Kevin Elphinstone and Gernot Heiser.
+\newblock From l3 to sel4 what have we learnt in 20 years of l4 microkernels?
+\newblock In {\em Proceedings of the 24th ACM Symposium on Operating Systems
+  Principles}.
+
 \bibitem{Fraser04safehardware}
 Keir Fraser, Steven Hand, Rolf Neugebauer, Ian Pratt, Andrew Warfield, and Mark
   Williamson.
@@ -141,6 +147,11 @@ Gernot Heiser and Ben Leslie.
   Hypervisors}.
 \newblock In {\em Proceedings of the 1st ACM Asia-Pacific Workshop on Systems},
   APSys'10, pages 19--24, New Delhi, India, 2010.
+
+\bibitem{Heiser+:osr2006}
+Gernot Heiser, Volkmar Uhlig, and Joshua LeVasseur.
+\newblock Are virtual-machine monitors microkernels done right?
+\newblock {\em SIGOPS Operating Systems Review}, 40(1):95--99, 2006.
 
 \bibitem{king2003operating}
 Samuel~T. King, George~W. Dunlap, and Peter~M. Chen.

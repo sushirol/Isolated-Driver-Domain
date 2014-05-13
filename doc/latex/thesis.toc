@@ -46,14 +46,17 @@
 \contentsline {subsection}{\numberline {4.4.1}Backend Driver}{43}{subsection.4.4.1}
 \contentsline {chapter}{\numberline {5}Evaluation}{45}{chapter.5}
 \contentsline {section}{\numberline {5.1}Goals}{45}{section.5.1}
-\contentsline {section}{\numberline {5.2}Methodology}{48}{section.5.2}
-\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs interrupt based IDDR System}{49}{section.5.3}
-\contentsline {section}{\numberline {5.4}Interrupt Based IDDR System vs Spinning Based IDDR System}{52}{section.5.4}
-\contentsline {paragraph}{Comparison :}{53}{section*.43}
-\contentsline {paragraph}{Observation :}{53}{section*.44}
-\contentsline {chapter}{\numberline {6}Related Work}{57}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability}{58}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{58}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{60}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Interdomain Communication}{60}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{62}{chapter.7}
+\contentsline {section}{\numberline {5.2}Methodology}{47}{section.5.2}
+\contentsline {section}{\numberline {5.3}Xen Split Device Driver vs interrupt based IDDR System}{48}{section.5.3}
+\contentsline {section}{\numberline {5.4}Interrupt Based IDDR System vs Spinning Based IDDR System}{50}{section.5.4}
+\contentsline {paragraph}{Comparison :}{51}{section*.43}
+\contentsline {paragraph}{Observation :}{52}{section*.47}
+\contentsline {paragraph}{Observation: }{56}{section*.48}
+\contentsline {chapter}{\numberline {6}Related Work}{59}{chapter.6}
+\contentsline {section}{\numberline {6.1}Reliability}{60}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{60}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{62}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Interdomain Communication}{62}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{64}{chapter.7}
+\contentsline {section}{\numberline {7.1}Future Work}{65}{section.7.1}
+\contentsline {paragraph}{Adaptive spinning : }{65}{section*.52}

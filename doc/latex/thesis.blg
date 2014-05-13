@@ -1,13 +1,15 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-White space in argument---line 260 of file thesis.aux
- : \citation{are
- :               microkernels ... done right 2papers}
-I'm skipping whatever remains of this command
 The style file: plain.bst
 Database file #1: references.bib
+I was expecting a `,' or a `}'---line 349 of file references.bib
+ :  
+ :  series = {SOSP '13},
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--to sort, need author or key in coveritykernel
 Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
+Warning--empty year in Elphinstone+:sosp13
 (There was 1 error message)
