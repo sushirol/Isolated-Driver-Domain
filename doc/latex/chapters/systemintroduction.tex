@@ -35,6 +35,7 @@ is to reduce the performance penalty due to the required communication
 between domains when using this approach.
 
 \subsection*{Sources of Overhead}
+\label{subsec:overhead}
 The IDDR system is a re-implementation of isolated driver domains proposed
 by Fraser et. al. Even though the IDDR system provides better robustness
 for the operating system, it suffers from performance overheads. The
@@ -207,22 +208,3 @@ driver. Both threads spin for the availability of requests and responses
 in the shared queue. The intermediate threads delegate the responsibility
 of the notifications from the frontend driver and backend driver to the
 communication module.
-
-% \section{fault tolerance}
-% Figure~\ref{fig:driver crash} and Figure~\ref{fig:high avail} explains the effects of a malicious activity occurring in the device driver isolated from the Linux kernel. When a device driver running in a driver domain hits a bug, it crashes the kernel of the driver domain and hence the driver domain itself. In addition, applications expecting a response from the driver domain might hang or crash waiting for the response. But due to the address space separation of the application domain and the driver domain, the application domain will remain intact.   
-% \begin{figure}[!ht]
-%     \centering
-%     \begin{subfigure}[b]{0.45\textwidth}
-% 	\includegraphics[scale=.25]{IDDRcrash1}
-% 	\caption{Device driver crash}
-% 	\label{fig:driver crash}
-%     \end{subfigure}
-% 	\hfill
-%     \begin{subfigure}[b]{0.45\textwidth}
-% 	\includegraphics[scale=.25]{IDDRcrash2}
-% 	\caption{Intact system}
-% 	\label{fig:high avail}
-%     \end{subfigure}
-%     \caption{Fault tolerence}\label{fig:fault tolerence}
-% \end{figure}
-    
