@@ -1,7 +1,7 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.4)  14 MAY 2014 13:42
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.4)  14 MAY 2014 14:27
 entering extended mode
  %&-line parsing enabled.
-**thesis.tex
+**thesis
 (./thesis.tex
 LaTeX2e <2009/09/24>
 Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
@@ -424,7 +424,7 @@ Chapter 1.
 
 pdfTeX warning: pdflatex (file ./images/xen-split-tcp.pdf): PDF inclusion: foun
 d PDF version <1.5>, but at most version <1.4> allowed
-<images/xen-split-tcp.pdf, id=342, 963.6pt x 542.025pt>
+<images/xen-split-tcp.pdf, id=332, 963.6pt x 542.025pt>
 File: images/xen-split-tcp.pdf Graphic file (type pdf)
 
 <use images/xen-split-tcp.pdf>
@@ -444,7 +444,7 @@ Overfull \hbox (0.8929pt too wide) in paragraph at lines 1--3
 
 pdfTeX warning: pdflatex (file ./images/thread1.pdf): PDF inclusion: found PDF 
 version <1.5>, but at most version <1.4> allowed
-<images/thread1.pdf, id=399, 963.6pt x 542.025pt>
+<images/thread1.pdf, id=389, 963.6pt x 542.025pt>
 File: images/thread1.pdf Graphic file (type pdf)
  <use images/thread1.pdf>
 Overfull \hbox (29.51111pt too wide) in paragraph at lines 20--21
@@ -455,7 +455,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 20--21
 
 pdfTeX warning: pdflatex (file ./images/thread2.pdf): PDF inclusion: found PDF 
 version <1.5>, but at most version <1.4> allowed
-<images/thread2.pdf, id=401, 963.6pt x 542.025pt>
+<images/thread2.pdf, id=391, 963.6pt x 542.025pt>
 File: images/thread2.pdf Graphic file (type pdf)
  <use images/thread2.pdf>
 Overfull \hbox (29.51111pt too wide) in paragraph at lines 26--27
@@ -468,7 +468,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 26--27
 
 pdfTeX warning: pdflatex (file ./images/kernel.pdf): PDF inclusion: found PDF v
 ersion <1.5>, but at most version <1.4> allowed
-<images/kernel.pdf, id=435, 963.6pt x 542.025pt>
+<images/kernel.pdf, id=425, 963.6pt x 542.025pt>
 File: images/kernel.pdf Graphic file (type pdf)
  <use images/kernel.pdf>
 Overfull \hbox (12.04384pt too wide) in paragraph at lines 87--88
@@ -479,14 +479,14 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 87--88
 
 pdfTeX warning: pdflatex (file ./images/memory_map.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<images/memory_map.pdf, id=533, 963.6pt x 542.025pt>
+<images/memory_map.pdf, id=523, 963.6pt x 542.025pt>
 File: images/memory_map.pdf Graphic file (type pdf)
 
 <use images/memory_map.pdf> [12] [13 <./images/memory_map.pdf>]
 
 pdfTeX warning: pdflatex (file ./images/user-space-1.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<images/user-space-1.pdf, id=555, 963.6pt x 542.025pt>
+<images/user-space-1.pdf, id=545, 963.6pt x 542.025pt>
 File: images/user-space-1.pdf Graphic file (type pdf)
 
 <use images/user-space-1.pdf>
@@ -498,7 +498,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 188--189
 
 pdfTeX warning: pdflatex (file ./images/user-space-2.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<images/user-space-2.pdf, id=557, 963.6pt x 542.025pt>
+<images/user-space-2.pdf, id=547, 963.6pt x 542.025pt>
 File: images/user-space-2.pdf Graphic file (type pdf)
 
 <use images/user-space-2.pdf>
@@ -510,7 +510,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 193--194
 
 pdfTeX warning: pdflatex (file ./images/kernel-space-1.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/kernel-space-1.pdf, id=560, 963.6pt x 542.025pt>
+<images/kernel-space-1.pdf, id=550, 963.6pt x 542.025pt>
 File: images/kernel-space-1.pdf Graphic file (type pdf)
 
 <use images/kernel-space-1.pdf>
@@ -522,7 +522,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 212--213
 
 pdfTeX warning: pdflatex (file ./images/kernel-space-2.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/kernel-space-2.pdf, id=562, 963.6pt x 542.025pt>
+<images/kernel-space-2.pdf, id=552, 963.6pt x 542.025pt>
 File: images/kernel-space-2.pdf Graphic file (type pdf)
 
 <use images/kernel-space-2.pdf>
@@ -534,7 +534,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 217--218
 
 pdfTeX warning: pdflatex (file ./images/OS-arch.pdf): PDF inclusion: found PDF 
 version <1.5>, but at most version <1.4> allowed
-<images/OS-arch.pdf, id=585, 963.6pt x 542.025pt>
+<images/OS-arch.pdf, id=575, 963.6pt x 542.025pt>
 File: images/OS-arch.pdf Graphic file (type pdf)
  <use images/OS-arch.pdf>
 Overfull \hbox (10.7169pt too wide) in paragraph at lines 244--245
@@ -545,7 +545,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 244--245
 
 pdfTeX warning: pdflatex (file ./images/virtualization.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/virtualization.pdf, id=587, 963.6pt x 542.025pt>
+<images/virtualization.pdf, id=577, 963.6pt x 542.025pt>
 File: images/virtualization.pdf Graphic file (type pdf)
 
 <use images/virtualization.pdf>
@@ -567,19 +567,19 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 
 pdfTeX warning: pdflatex (file ./images/type1.pdf): PDF inclusion: found PDF ve
 rsion <1.5>, but at most version <1.4> allowed
-<images/type1.pdf, id=627, 963.6pt x 542.025pt>
+<images/type1.pdf, id=617, 963.6pt x 542.025pt>
 File: images/type1.pdf Graphic file (type pdf)
  <use images/type1.pdf>
 
 pdfTeX warning: pdflatex (file ./images/type2.pdf): PDF inclusion: found PDF ve
 rsion <1.5>, but at most version <1.4> allowed
-<images/type2.pdf, id=631, 963.6pt x 542.025pt>
+<images/type2.pdf, id=621, 963.6pt x 542.025pt>
 File: images/type2.pdf Graphic file (type pdf)
  <use images/type2.pdf> [17 <./images/type1.pdf>] [18 <./images/type2.pdf>]
 
 pdfTeX warning: pdflatex (file ./images/xen-split-fs.pdf): PDF inclusion: found
  PDF version <1.5>, but at most version <1.4> allowed
-<images/xen-split-fs.pdf, id=656, 963.6pt x 542.025pt>
+<images/xen-split-fs.pdf, id=646, 963.6pt x 542.025pt>
 File: images/xen-split-fs.pdf Graphic file (type pdf)
 
 <use images/xen-split-fs.pdf>
@@ -591,7 +591,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 343--344
 
 pdfTeX warning: pdflatex (file ./images/xen.pdf): PDF inclusion: found PDF vers
 ion <1.5>, but at most version <1.4> allowed
-<images/xen.pdf, id=658, 963.6pt x 542.025pt>
+<images/xen.pdf, id=648, 963.6pt x 542.025pt>
 File: images/xen.pdf Graphic file (type pdf)
  <use images/xen.pdf>
 Overfull \hbox (12.04384pt too wide) in paragraph at lines 349--350
@@ -605,7 +605,7 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 pdfTeX warning: pdflatex (file ./images/IObuffer.pdf): PDF inclusion: found PDF
  version <1.5>, but at most version <1.4> allowed
-<images/IObuffer.pdf, id=676, 963.6pt x 542.025pt>
+<images/IObuffer.pdf, id=666, 963.6pt x 542.025pt>
 File: images/IObuffer.pdf Graphic file (type pdf)
  <use images/IObuffer.pdf>
 Overfull \hbox (12.04384pt too wide) in paragraph at lines 382--383
@@ -616,7 +616,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 382--383
 
 pdfTeX warning: pdflatex (file ./images/IObuffer2.pdf): PDF inclusion: found PD
 F version <1.5>, but at most version <1.4> allowed
-<images/IObuffer2.pdf, id=688, 963.6pt x 542.025pt>
+<images/IObuffer2.pdf, id=678, 963.6pt x 542.025pt>
 File: images/IObuffer2.pdf Graphic file (type pdf)
  <use images/IObuffer2.pdf>
 Overfull \hbox (12.04384pt too wide) in paragraph at lines 415--416
@@ -629,7 +629,7 @@ Chapter 3.
 
 pdfTeX warning: pdflatex (file ./images/OSoverview.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<images/OSoverview.pdf, id=716, 963.6pt x 542.025pt>
+<images/OSoverview.pdf, id=706, 963.6pt x 542.025pt>
 File: images/OSoverview.pdf Graphic file (type pdf)
 
 <use images/OSoverview.pdf>
@@ -641,7 +641,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 9--10
 
 pdfTeX warning: pdflatex (file ./images/baseIDDRsystemoverview.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<images/baseIDDRsystemoverview.pdf, id=718, 963.6pt x 542.025pt>
+<images/baseIDDRsystemoverview.pdf, id=708, 963.6pt x 542.025pt>
 File: images/baseIDDRsystemoverview.pdf Graphic file (type pdf)
 
 <use images/baseIDDRsystemoverview.pdf>
@@ -656,7 +656,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 16--17
 
 pdfTeX warning: pdflatex (file ./images/IDDRcomponents.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/IDDRcomponents.pdf, id=748, 963.6pt x 542.025pt>
+<images/IDDRcomponents.pdf, id=738, 963.6pt x 542.025pt>
 File: images/IDDRcomponents.pdf Graphic file (type pdf)
 
 <use images/IDDRcomponents.pdf>
@@ -668,7 +668,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 90--91
 
 pdfTeX warning: pdflatex (file ./images/IDDRdesign.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<images/IDDRdesign.pdf, id=763, 963.6pt x 542.025pt>
+<images/IDDRdesign.pdf, id=753, 963.6pt x 542.025pt>
 File: images/IDDRdesign.pdf Graphic file (type pdf)
 
 <use images/IDDRdesign.pdf>
@@ -680,7 +680,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 129--130
 
 pdfTeX warning: pdflatex (file ./images/component1.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<images/component1.pdf, id=772, 963.6pt x 542.025pt>
+<images/component1.pdf, id=762, 963.6pt x 542.025pt>
 File: images/component1.pdf Graphic file (type pdf)
 
 <use images/component1.pdf>
@@ -692,7 +692,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 150--151
 
 pdfTeX warning: pdflatex (file ./images/component2.pdf): PDF inclusion: found P
 DF version <1.5>, but at most version <1.4> allowed
-<images/component2.pdf, id=774, 963.6pt x 542.025pt>
+<images/component2.pdf, id=764, 963.6pt x 542.025pt>
 File: images/component2.pdf Graphic file (type pdf)
 
 <use images/component2.pdf>
@@ -704,7 +704,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 156--157
 
 pdfTeX warning: pdflatex (file ./images/communicationmodule.pdf): PDF inclusion
 : found PDF version <1.5>, but at most version <1.4> allowed
-<images/communicationmodule.pdf, id=789, 963.6pt x 542.025pt>
+<images/communicationmodule.pdf, id=779, 963.6pt x 542.025pt>
 File: images/communicationmodule.pdf Graphic file (type pdf)
 
 <use images/communicationmodule.pdf>
@@ -718,30 +718,24 @@ Chapter 4.
 
 pdfTeX warning: pdflatex (file ./images/impl_overview_new.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<images/impl_overview_new.pdf, id=808, 963.6pt x 542.025pt>
+<images/impl_overview_new.pdf, id=798, 963.6pt x 542.025pt>
 File: images/impl_overview_new.pdf Graphic file (type pdf)
 
-<use images/impl_overview_new.pdf>
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 37--38
- [][] 
- []
-
-[35
+<use images/impl_overview_new.pdf> [35
 
 ]
 
 LaTeX Warning: Text page 36 contains only floats.
 
-[36 <./images/impl_overview_new.pdf>] [37] [38] [39] [40] [41] [42] [43])
-[44]
+[36 <./images/impl_overview_new.pdf>] [37] [38] [39] [40] [41] [42]) [43]
 Chapter 5.
-(./chapters/Evaluation.tex [45
+(./chapters/Evaluation.tex [44
 
-] [46] [47] [48] [49]
+] [45] [46] [47] [48]
 
 pdfTeX warning: pdflatex (file ./images/iddrvsxen-ramdisk-rdwr.pdf): PDF inclus
 ion: found PDF version <1.5>, but at most version <1.4> allowed
-<images/iddrvsxen-ramdisk-rdwr.pdf, id=912, 361.35pt x 216.81pt>
+<images/iddrvsxen-ramdisk-rdwr.pdf, id=899, 361.35pt x 216.81pt>
 File: images/iddrvsxen-ramdisk-rdwr.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-ramdisk-rdwr.pdf>
@@ -753,7 +747,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 71--72
 
 pdfTeX warning: pdflatex (file ./images/iddrvsxen-loop-rd.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<images/iddrvsxen-loop-rd.pdf, id=914, 361.35pt x 216.81pt>
+<images/iddrvsxen-loop-rd.pdf, id=901, 361.35pt x 216.81pt>
 File: images/iddrvsxen-loop-rd.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-loop-rd.pdf>
@@ -766,12 +760,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 70--82
 
  []
 
-[50] [51 <./images/iddrvsxen-ramdisk-rdwr.pdf> <./images/iddrvsxen-loop-rd.pdf>
+[49] [50 <./images/iddrvsxen-ramdisk-rdwr.pdf> <./images/iddrvsxen-loop-rd.pdf>
 ]
 
 pdfTeX warning: pdflatex (file ./images/rndrd-ramdisk.pdf): PDF inclusion: foun
 d PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrd-ramdisk.pdf, id=954, 361.35pt x 216.81pt>
+<images/rndrd-ramdisk.pdf, id=940, 361.35pt x 216.81pt>
 File: images/rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-ramdisk.pdf>
@@ -783,7 +777,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 107--108
 
 pdfTeX warning: pdflatex (file ./images/rndwr-ramdisk.pdf): PDF inclusion: foun
 d PDF version <1.5>, but at most version <1.4> allowed
-<images/rndwr-ramdisk.pdf, id=956, 361.35pt x 216.81pt>
+<images/rndwr-ramdisk.pdf, id=942, 361.35pt x 216.81pt>
 File: images/rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-ramdisk.pdf>
@@ -795,7 +789,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 113--114
 
 pdfTeX warning: pdflatex (file ./images/rndrw-ramdisk.pdf): PDF inclusion: foun
 d PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrw-ramdisk.pdf, id=958, 361.35pt x 216.81pt>
+<images/rndrw-ramdisk.pdf, id=944, 361.35pt x 216.81pt>
 File: images/rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-ramdisk.pdf>
@@ -807,7 +801,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 119--120
 
 pdfTeX warning: pdflatex (file ./images/rndrd-loopdisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrd-loopdisk.pdf, id=960, 361.35pt x 216.81pt>
+<images/rndrd-loopdisk.pdf, id=946, 361.35pt x 216.81pt>
 File: images/rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-loopdisk.pdf>
@@ -819,7 +813,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 129--130
 
 pdfTeX warning: pdflatex (file ./images/rndwr-loopdisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndwr-loopdisk.pdf, id=962, 361.35pt x 216.81pt>
+<images/rndwr-loopdisk.pdf, id=948, 361.35pt x 216.81pt>
 File: images/rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-loopdisk.pdf>
@@ -831,7 +825,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 135--136
 
 pdfTeX warning: pdflatex (file ./images/rndrw-loopdisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrw-loopdisk.pdf, id=964, 361.35pt x 216.81pt>
+<images/rndrw-loopdisk.pdf, id=950, 361.35pt x 216.81pt>
 File: images/rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-loopdisk.pdf>
@@ -843,7 +837,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 140--141
 
 pdfTeX warning: pdflatex (file ./images/rndrd-harddisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrd-harddisk.pdf, id=966, 361.35pt x 216.81pt>
+<images/rndrd-harddisk.pdf, id=952, 361.35pt x 216.81pt>
 File: images/rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-harddisk.pdf>
@@ -855,7 +849,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 150--151
 
 pdfTeX warning: pdflatex (file ./images/rndwr-harddisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndwr-harddisk.pdf, id=968, 361.35pt x 216.81pt>
+<images/rndwr-harddisk.pdf, id=954, 361.35pt x 216.81pt>
 File: images/rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-harddisk.pdf>
@@ -867,7 +861,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 156--157
 
 pdfTeX warning: pdflatex (file ./images/rndrw-harddisk.pdf): PDF inclusion: fou
 nd PDF version <1.5>, but at most version <1.4> allowed
-<images/rndrw-harddisk.pdf, id=970, 361.35pt x 216.81pt>
+<images/rndrw-harddisk.pdf, id=956, 361.35pt x 216.81pt>
 File: images/rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-harddisk.pdf>
@@ -875,14 +869,14 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 161--162
 [][] 
  []
 
-[52] [53 <./images/rndrd-ramdisk.pdf> <./images/rndwr-ramdisk.pdf> <./images/rn
-drw-ramdisk.pdf>] [54 <./images/rndrd-loopdisk.pdf> <./images/rndwr-loopdisk.pd
-f> <./images/rndrw-loopdisk.pdf>] [55 <./images/rndrd-harddisk.pdf> <./images/r
+[51] [52 <./images/rndrd-ramdisk.pdf> <./images/rndwr-ramdisk.pdf> <./images/rn
+drw-ramdisk.pdf>] [53 <./images/rndrd-loopdisk.pdf> <./images/rndwr-loopdisk.pd
+f> <./images/rndrw-loopdisk.pdf>] [54 <./images/rndrd-harddisk.pdf> <./images/r
 ndwr-harddisk.pdf> <./images/rndrw-harddisk.pdf>]
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrd-ramdisk.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrd-ramdisk.pdf, id=1064, 361.35pt x 216.81pt>
+<images/cpu-rndrd-ramdisk.pdf, id=1051, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-ramdisk.pdf>
@@ -894,7 +888,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 190--191
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrw-ramdisk.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrw-ramdisk.pdf, id=1066, 361.35pt x 216.81pt>
+<images/cpu-rndrw-ramdisk.pdf, id=1053, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-ramdisk.pdf>
@@ -906,7 +900,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 196--197
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndwr-ramdisk.pdf): PDF inclusion: 
 found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndwr-ramdisk.pdf, id=1068, 361.35pt x 216.81pt>
+<images/cpu-rndwr-ramdisk.pdf, id=1055, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-ramdisk.pdf>
@@ -918,7 +912,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 201--202
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrd-loopdisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrd-loopdisk.pdf, id=1070, 361.35pt x 216.81pt>
+<images/cpu-rndrd-loopdisk.pdf, id=1057, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-loopdisk.pdf>
@@ -930,7 +924,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 210--211
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrw-loopdisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrw-loopdisk.pdf, id=1072, 361.35pt x 216.81pt>
+<images/cpu-rndrw-loopdisk.pdf, id=1059, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-loopdisk.pdf>
@@ -942,7 +936,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 216--217
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndwr-loopdisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndwr-loopdisk.pdf, id=1074, 361.35pt x 216.81pt>
+<images/cpu-rndwr-loopdisk.pdf, id=1061, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-loopdisk.pdf>
@@ -954,7 +948,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 221--222
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrd-harddisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrd-harddisk.pdf, id=1076, 361.35pt x 216.81pt>
+<images/cpu-rndrd-harddisk.pdf, id=1063, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-harddisk.pdf>
@@ -966,7 +960,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 231--232
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndwr-harddisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndwr-harddisk.pdf, id=1078, 361.35pt x 216.81pt>
+<images/cpu-rndwr-harddisk.pdf, id=1065, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-harddisk.pdf>
@@ -978,7 +972,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 237--238
 
 pdfTeX warning: pdflatex (file ./images/cpu-rndrw-harddisk.pdf): PDF inclusion:
  found PDF version <1.5>, but at most version <1.4> allowed
-<images/cpu-rndrw-harddisk.pdf, id=1080, 361.35pt x 216.81pt>
+<images/cpu-rndrw-harddisk.pdf, id=1067, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-harddisk.pdf>
@@ -986,44 +980,44 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 242--243
 [][] 
  []
 
-) [56 <./images/cpu-rndrd-ramdisk.pdf> <./images/cpu-rndrw-ramdisk.pdf> <./imag
-es/cpu-rndwr-ramdisk.pdf>] [57 <./images/cpu-rndrd-loopdisk.pdf> <./images/cpu-
-rndrw-loopdisk.pdf> <./images/cpu-rndwr-loopdisk.pdf>] [58 <./images/cpu-rndrd-
+) [55 <./images/cpu-rndrd-ramdisk.pdf> <./images/cpu-rndrw-ramdisk.pdf> <./imag
+es/cpu-rndwr-ramdisk.pdf>] [56 <./images/cpu-rndrd-loopdisk.pdf> <./images/cpu-
+rndrw-loopdisk.pdf> <./images/cpu-rndwr-loopdisk.pdf>] [57 <./images/cpu-rndrd-
 harddisk.pdf> <./images/cpu-rndwr-harddisk.pdf> <./images/cpu-rndrw-harddisk.pd
 f>]
 Chapter 6.
-(./chapters/relatedwork.tex [59
+(./chapters/relatedwork.tex [58
 
-] [60] [61] [62]) [63]
+] [59] [60] [61]) [62]
 Chapter 7.
-(./chapters/conclusion.tex) [64
+(./chapters/conclusion.tex) [63
 
-] (./thesis.bbl [65]
+] (./thesis.bbl [64]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no “ in font cmr12!
- [66
+ [65
 
-] [67] [68] [69]
+] [66] [67] [68]
 Missing character: There is no Â in font cmr12!
 Missing character: There is no ¨ in font cmr12!
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no “ in font cmr12!
 
-[70] [71]) [72] (./thesis.aux)
+[69] [70]) [71] (./thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 9247 strings out of 493848
- 138958 string characters out of 1152824
- 238982 words of memory out of 3000000
- 12079 multiletter control sequences out of 15000+50000
+ 9242 strings out of 493848
+ 138883 string characters out of 1152824
+ 238984 words of memory out of 3000000
+ 12077 multiletter control sequences out of 15000+50000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,10n,38p,893b,537s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,10n,38p,889b,537s stack positions out of 5000i,500n,10000p,200000b,50000s
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
 re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-tex
 live/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/t
@@ -1031,9 +1025,9 @@ ype1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/
 amsfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb
 ></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (82 pages, 2226881 bytes).
+Output written on thesis.pdf (81 pages, 2224980 bytes).
 PDF statistics:
- 1364 PDF objects out of 1440 (max. 8388607)
- 262 named destinations out of 1000 (max. 500000)
- 570 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1351 PDF objects out of 1440 (max. 8388607)
+ 259 named destinations out of 1000 (max. 500000)
+ 554 words of extra memory for PDF output out of 10000 (max. 10000000)
 

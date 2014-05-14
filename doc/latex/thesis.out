@@ -23,12 +23,10 @@
 \BOOKMARK [0][-]{chapter.4}{Implementation}{}
 \BOOKMARK [1][-]{section.4.1}{Overview}{chapter.4}
 \BOOKMARK [1][-]{section.4.2}{Communication Module}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.2.1}{Interrupt based IDDR system}{section.4.2}
-\BOOKMARK [2][-]{subsection.4.2.2}{Spinning Based IDDR System}{section.4.2}
-\BOOKMARK [1][-]{section.4.3}{Application Domain}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.3.1}{Frontend Driver}{section.4.3}
-\BOOKMARK [1][-]{section.4.4}{Driver Domain}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.4.1}{Backend Driver}{section.4.4}
+\BOOKMARK [2][-]{subsection.4.2.1}{Interrupt-based IDDR system}{section.4.2}
+\BOOKMARK [2][-]{subsection.4.2.2}{Spinning-Based IDDR System}{section.4.2}
+\BOOKMARK [1][-]{section.4.3}{Frontend Driver Implementation}{chapter.4}
+\BOOKMARK [1][-]{section.4.4}{Backend Driver Implementation}{chapter.4}
 \BOOKMARK [0][-]{chapter.5}{Evaluation}{}
 \BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}
 \BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}
