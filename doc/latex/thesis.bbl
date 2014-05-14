@@ -100,7 +100,7 @@ Ulrich Drepper.
 Kevin Elphinstone and Gernot Heiser.
 \newblock From l3 to sel4 what have we learnt in 20 years of l4 microkernels?
 \newblock In {\em Proceedings of the 24th ACM Symposium on Operating Systems
-  Principles}.
+  Principles}, SOSP '13, pages 133--150, Farminton, PA, 2013.
 
 \bibitem{Fraser04safehardware}
 Keir Fraser, Steven Hand, Rolf Neugebauer, Ian Pratt, Andrew Warfield, and Mark
