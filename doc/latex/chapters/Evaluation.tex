@@ -1,4 +1,7 @@
-We use \texttt{Linux kernel 3.5.0} for both application domain and driver domains. We use the Arch Linux distribution for the \texttt{x86\_64} platform for our testing and performance evaluation. The specifications of the system used for the evaluation is presented in Table~\ref{tab:config}. 
+We use Linux Kernel version 3.5.0 for both application domain and driver
+domains. We use the Arch Linux distribution for the \texttt{x86\_64}
+platform for our testing and performance evaluation. The specifications of
+the system used for the evaluation are presented in Table~\ref{tab:config}.
 
 \begin{table}
 \caption{Hardware specifications}
@@ -24,46 +27,91 @@ We use \texttt{Linux kernel 3.5.0} for both application domain and driver domain
 \label{sec:goals}
 The goals of our evaluation are:
 \begin{enumerate}
-\item \textbf{Comparison  of Xen's isolated driver domain with the interrupt based IDDR system:}
+\item \textbf{Comparison  of Xen's isolated driver domain mechanism with the interrupt-based IDDR system:}
 
-In order to prove the performance improvement of the spinning based IDDR system over the interrupt based IDDR system and the Xen's isolated driver domain, it is necessary to compare the performance of the Xen's isolated driver domain with the interrupt based IDDR system. Since source code of the isolated driver domains is not available and it follows split device driver architecture, we achieve this evaluation goal by comparing the performance of the interrupt based IDDR system with Xen's split device driver.
+In order to verify that the interrupt-based IDDR system constitutes a suitable baseline against 
+which to compare the spinning-based IDDR system, we compared our interrupt-based implementation
+against Xen's isolated driver domain.  However, since the source code
+of the isolated driver domain implementation is not available, we achieve this evaluation goal 
+by comparing the performance of the interrupt-based IDDR system with Xen's regular
+drivers, which use the same split device driver model.
 
-\item \textbf{Performance impact of spinning-based optimization:}
+\item \textbf{Performance impact of spinning-based optimizations:}
 
-The second goal of the evaluation is to prove that the spinning based communication channel improves the performance of the inter-domain communication and hence the IDDR system.
+The second goal of the evaluation is to prove that the spinning-based implementation of the 
+communication channel improves the performance of the interdomain communication and hence the IDDR system.
 
-We achieve this evaluation goal by comparing the performance of the interrupt based IDDR system with the spinning based IDDR system.
+We achieve this evaluation goal by comparing the performance of the interrupt-based IDDR system 
+with the spinning-based IDDR system.
 \end{enumerate}
 
 \section{Methodology}
 \label{sec:methodology}
-In order to measure the performance of the system, we run performance tests using a variety of block devices. In order to cover a variety of the devices we use block devices such as SATA disk, ramdisk and loop device for the performance testing. A loop device is a device that makes a file accessible as a block device. A ramdisk is a block of a memory, which acts as a disk drive. 
+In order to measure the performance of the system, we run performance
+tests using a variety of block devices. In order to cover a variety of
+devices we use block devices such as SATA disks, ramdisks and loop
+devices for the performance testing. A loop device is a device that provides 
+a block device that is backed by a file.  A ramdisk is a block of a memory
+that acts as a disk drive.
 
-In order to conduct the performance tests, we format the block device with the ext2 file system, and run the fileIO SysBench benchmark~\cite{sysbench} on it. SysBench is a multi-threaded benchmark tool for evaluating a file system. SysBench benchmark has different test modes. FileIO is one of the test mode. FileIO can be used to produce different file I/O workloads. It runs a specified number of threads to execute requests in parallel. We run the SysBench benchmark in fileIO test mode to generate 128 files with \texttt{1Gb} of total data. We execute random reads, random writes, a mix of random reads and writes on all three devices. The block size was set to \texttt{16Kb}. We vary the number of SysBench threads from 1 to 32 to obtain the throughput of the system under different workload. 
+In order to conduct the performance tests, we format the block
+device with the ext2 file system, and run the SysBench
+benchmark~\cite{sysbench} on it. SysBench is a multi-threaded benchmark
+tool for evaluating operating system performance. It includes different test
+modes, one of which is FileIO.  The FileIO mode can be used to produce
+different file I/O workloads. It runs a specified number of threads to
+execute requests in parallel. We run the SysBench benchmark in FileIO
+test mode to generate 128 files with \texttt{1GB} of total data. We
+execute random reads, random writes, and a mix of random reads and writes
+on all three devices. We set the block size to \texttt{16KB}. We vary
+the number of SysBench threads from 1 to 32 to measure the throughput of
+the system under different levels of concurrent access.
 
-\section{Xen Split Device Driver vs interrupt based IDDR System}
-As per our first evaluation goal discussed in Section~\ref{sec:goals}, we compare the interrupt based IDDR with Xen's split device driver. 
+\section{Xen Split Device Driver vs interrupt-based IDDR System}
+As per our first evaluation goal discussed in Section~\ref{sec:goals},
+we compare the interrupt-based IDDR system with Xen's split device driver.
 
 \subsection*{Experimental Setup}
 
 \subsubsection*{Xen Split Device Driver}
-We create a ramdisk in domain 0. The guest domain (domain U) is configured such that the ramdisk uses a split device driver and is available in the guest domain. We do a similar setup for the loop device and the SATA disk. In the case of the loop device, we create a loop device in the domain 0 and then configure the guest domain to use the loop device as a disk. In case of SATA disk, we configure the guest domain such that the SATA disk uses split device driver. We format and mount the disk in the guest domain with the ext2 file system. The SysBench benchmark is run on the mounted partition as explained in section~\ref{sec:methodology}.
+We create a ramdisk in domain 0. The guest domain (domain U) is configured
+to access domain 0's ramdisk via a split device driver. 
+We use the same setup for the loop device and the SATA disk. 
+We format and mount the disk into a partition in the
+guest domain using the ext2 file system in all cases. The SysBench 
+benchmark is run on the mounted partitions as explained in 
+Section~\ref{sec:methodology}.
 
-\subsubsection*{Interrupt Based IDDR System}
-In Xen hypervisor, the domain 0 always runs as a paravirtualized guest and domain U can be a HVM guest or a PV guest. In our setup domain U always runs as a HVM guest. A HVM guest is expected to have less syscall overhead and faster memory bandwidth than a PV guest. We verified this behavior of PV and HVM guests by running syscall micro-benchmark of lmbench. We created a HVM domain U and ran syscall micro-benchmark in PV domain 0 and HVM domain U. We compared the result and came to conclusion that a PV guest has less syscall overhead than a HVM guest.
+\subsubsection*{Interrupt-based IDDR System}
+In the Xen hypervisor, the domain 0 always runs as a paravirtualized guest (PV),
+but domain U can be using both a hardware-assisted virtualization configuration (HVM) 
+or a paravirtualized configuration.  In our setup we run domain U always
+in HVM mode because HVM guests exhibit less system call overhead
+and faster memory bandwidth compared to PV guests, as we observed
+by running the system call micro-benchmark tool lmbench\cite{lmbench}. 
 
-Since in Xen's split device driver runs the backend device driver in domain 0 and the frontend device driver in domain U, it is necessary to run the backend and frontend driver in domain 0 and domain U respectively in our system too.
+When comparing to Xen's split device drivers, the backend device driver executes
+in domain 0 and the frontend device driver in domain U.  
+To eliminate any performance differences that may be solely due the mode
+of virtualization used, we matched the modes of virtualization
+by running IDDR's backend and frontend drivers also in 
+domain 0 and U, respectively.
 
-We insert a ramdisk and the interrupt based IDDR system's backend module in domain 0 and the frontend module in the guest domain (domain U). We format and mount the ramdisk with ext2 file system and run the SysBench benchmark on it.  
+\subsubsection*{Comparison}
+We compare the throughput of Xen's split device driver and the
+interrupt-based IDDR system in Figure~\ref{fig:iddrvsxen-ramdisk-rdwr}
+and Figure~\ref{fig:iddrvsxen-loop-rd}. 
+Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} presents the
+throughput of both systems when data is randomly read from a ramdisk and
+written to it. Figure~\ref{fig:iddrvsxen-loop-rd} presents the throughput
+when data is randomly read from a loop device.
 
-A similar setup is used for a loop device. We create a loop device in domain 0 and insert the backend driver in the same domain. We insert the frontend module in the guest domain.
-
-In order to use SATA disk in domain U we needed SATA controller of the disk to passthrough. However because of technical issues we couldn't passthrough SATA controller to domain U. Hence only for SATA disk experiment we use domain 0 as a driver domain and domain U as an application domain.
-
-\subsubsection*{Comparison }
-We compare the throughput of Xen's split device driver and the interrupt based IDDR system in Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} and Figure~\ref{fig:iddrvsxen-loop-rd}. In this comparison Xen's split device driver is compared with IDDR system as a proxy for Xen's isolated driver domain. The Figure~\ref{fig:iddrvsxen-ramdisk-rdwr} presents the throughput of both systems when data is randomly read from a ramdisk and written to it. Figure~\ref{fig:iddrvsxen-loop-rd} presents the throughput when data is randomly read from a loop device. 
-\\[3mm]
-On a loop device, the performance of the interrupt based IDDR system differs by 3\%-4\% when compared to Xen's split device driver. On a ramdisk, the throughput of the interrupt based IDDR system matches that of the Xen split device driver. This proves that our implementation of the isolated driver domain provides a suitable baseline for our performance optimization.
+On a loop device, the performance of the interrupt based IDDR system
+differs by 3\%-4\% when compared to Xen's split device driver. On a
+ramdisk, the throughput of the interrupt based IDDR system matches that
+of the Xen split device driver. This shows that our interrupt-based
+IDDR implementation provides a suitable baseline for our performance 
+optimizations.
 
 \begin{figure}[!ht]
 %\centering
@@ -82,12 +130,28 @@ On a loop device, the performance of the interrupt based IDDR system differs by 
 \caption{Interrupt Based IDDR system vs Xen split driver}\label{fig:seqloopdisk}
 \end{figure}
 
+%
+% CONTINUE HERE
+%
 \section{Interrupt Based IDDR System vs Spinning Based IDDR System}
-We measure and compare the performance of the interrupt based IDDR system with the spinning based IDDR system. To compare the performance of both systems, we measure performance of the system by varying the number of SysBench threads. The SysBench benchmark executes random read write on a ramdisk and loop device. 
+We measure and compare the performance of the interrupt based IDDR system
+with the spinning based IDDR system. To compare the performance of both
+systems, we measure performance of the system by varying the number of
+SysBench threads. The SysBench benchmark executes random read write on
+a ramdisk and loop device.
+
 \subsection*{Experimental Setup}
-In both systems, the application domain is domain 0, and the driver domain is domain U. We create a ramdisk and insert the backend driver in the driver domain. We insert the frontend driver in the application domain. 
+In both systems, the application domain is domain 0, and the driver domain
+is domain U. We create a ramdisk and insert the backend driver in the
+driver domain. We insert the frontend driver in the application domain.
 
 We measure the performance of both systems on a loop device with same setup.
+
+In order to use SATA disk in domain U we needed SATA controller of the
+disk to passthrough. However because of technical issues we couldn't
+passthrough SATA controller to domain U. Hence only for SATA disk
+experiment we use domain 0 as a driver domain and domain U as an
+application domain.
 
 \subsubsection*{Random reads and writes}
 
@@ -246,6 +310,3 @@ Since in IDDR system, read response thread and read request thread spin continuo
 \caption{Comparison of CPU utilization - SATA disk}\label{fig:cpuharddisk}
 \end{figure}
 
-
-
-\ifbool{toShowBibliography}{\bibliography{references}}{}
