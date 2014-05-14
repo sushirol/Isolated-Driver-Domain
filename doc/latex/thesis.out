@@ -1,41 +1,41 @@
-\BOOKMARK [0][-]{chapter.1}{Introduction}{}
-\BOOKMARK [1][-]{section.1.1}{Problem Statement}{chapter.1}
-\BOOKMARK [1][-]{section.1.2}{Proposed Solution}{chapter.1}
-\BOOKMARK [1][-]{section.1.3}{Core Contributions}{chapter.1}
-\BOOKMARK [1][-]{section.1.4}{Organization}{chapter.1}
-\BOOKMARK [0][-]{chapter.2}{Background}{}
-\BOOKMARK [1][-]{section.2.1}{Processes and Threads}{chapter.2}
-\BOOKMARK [1][-]{section.2.2}{Context Switch}{chapter.2}
-\BOOKMARK [1][-]{section.2.3}{Spinlocks}{chapter.2}
-\BOOKMARK [1][-]{section.2.4}{Device Driver}{chapter.2}
-\BOOKMARK [1][-]{section.2.5}{Memory Protection}{chapter.2}
-\BOOKMARK [1][-]{section.2.6}{Virtualization}{chapter.2}
-\BOOKMARK [2][-]{subsection.2.6.1}{Role of hypervisor}{section.2.6}
-\BOOKMARK [2][-]{subsection.2.6.2}{Xen Hypervisor}{section.2.6}
-\BOOKMARK [0][-]{chapter.3}{System Introduction}{}
-\BOOKMARK [1][-]{section.3.1}{System Overview}{chapter.3}
-\BOOKMARK [1][-]{section.3.2}{Design Goals}{chapter.3}
-\BOOKMARK [1][-]{section.3.3}{Design Properties}{chapter.3}
-\BOOKMARK [1][-]{section.3.4}{System Components}{chapter.3}
-\BOOKMARK [2][-]{subsection.3.4.1}{Frontend Driver}{section.3.4}
-\BOOKMARK [2][-]{subsection.3.4.2}{Backend Driver}{section.3.4}
-\BOOKMARK [2][-]{subsection.3.4.3}{Communication Module}{section.3.4}
-\BOOKMARK [0][-]{chapter.4}{Implementation}{}
-\BOOKMARK [1][-]{section.4.1}{Overview}{chapter.4}
-\BOOKMARK [1][-]{section.4.2}{Communication Module}{chapter.4}
-\BOOKMARK [2][-]{subsection.4.2.1}{Interrupt-based IDDR system}{section.4.2}
-\BOOKMARK [2][-]{subsection.4.2.2}{Spinning-Based IDDR System}{section.4.2}
-\BOOKMARK [1][-]{section.4.3}{Frontend Driver Implementation}{chapter.4}
-\BOOKMARK [1][-]{section.4.4}{Backend Driver Implementation}{chapter.4}
-\BOOKMARK [0][-]{chapter.5}{Evaluation}{}
-\BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}
-\BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}
-\BOOKMARK [1][-]{section.5.3}{Xen Split Device Driver vs interrupt based IDDR System}{chapter.5}
-\BOOKMARK [1][-]{section.5.4}{Interrupt Based IDDR System vs Spinning Based IDDR System}{chapter.5}
-\BOOKMARK [0][-]{chapter.6}{Related Work}{}
-\BOOKMARK [1][-]{section.6.1}{Reliability}{chapter.6}
-\BOOKMARK [2][-]{subsection.6.1.1}{Driver Protection Approaches}{section.6.1}
-\BOOKMARK [2][-]{subsection.6.1.2}{Kernel Designs}{section.6.1}
-\BOOKMARK [1][-]{section.6.2}{Interdomain Communication}{chapter.6}
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}
-\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Problem Statement}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{Proposed Solution}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Core Contributions}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Organization}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Background}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Processes and Threads}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Context Switch}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Spinlocks}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.4}{Device Driver}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.5}{Memory Protection}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.6}{Virtualization}{chapter.2}% 12
+\BOOKMARK [2][-]{subsection.2.6.1}{Role of hypervisor}{section.2.6}% 13
+\BOOKMARK [2][-]{subsection.2.6.2}{Xen Hypervisor}{section.2.6}% 14
+\BOOKMARK [0][-]{chapter.3}{System Introduction}{}% 15
+\BOOKMARK [1][-]{section.3.1}{System Overview}{chapter.3}% 16
+\BOOKMARK [1][-]{section.3.2}{Design Goals}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.3}{Design Properties}{chapter.3}% 18
+\BOOKMARK [1][-]{section.3.4}{System Components}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.4.1}{Frontend Driver}{section.3.4}% 20
+\BOOKMARK [2][-]{subsection.3.4.2}{Backend Driver}{section.3.4}% 21
+\BOOKMARK [2][-]{subsection.3.4.3}{Communication Module}{section.3.4}% 22
+\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Overview}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Communication Module}{chapter.4}% 25
+\BOOKMARK [2][-]{subsection.4.2.1}{Interrupt-based IDDR system}{section.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.2.2}{Spinning-Based IDDR System}{section.4.2}% 27
+\BOOKMARK [1][-]{section.4.3}{Frontend Driver Implementation}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.4}{Backend Driver Implementation}{chapter.4}% 29
+\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.3}{Xen Split Device Driver vs interrupt-based IDDR System}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.4}{Interrupt Based IDDR System vs Spinning Based IDDR System}{chapter.5}% 34
+\BOOKMARK [0][-]{chapter.6}{Related Work}{}% 35
+\BOOKMARK [1][-]{section.6.1}{Reliability}{chapter.6}% 36
+\BOOKMARK [2][-]{subsection.6.1.1}{Driver Protection Approaches}{section.6.1}% 37
+\BOOKMARK [2][-]{subsection.6.1.2}{Kernel Designs}{section.6.1}% 38
+\BOOKMARK [1][-]{section.6.2}{Interdomain Communication}{chapter.6}% 39
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 40
+\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}% 41

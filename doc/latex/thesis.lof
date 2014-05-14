@@ -23,12 +23,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the spinning-based IDDR system\relax }}{36}{figure.caption.34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt Based IDDR system vs Xen split driver\relax }}{50}{figure.caption.42}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt Based IDDR system vs Xen split driver\relax }}{49}{figure.caption.42}
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{52}{figure.caption.44}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{53}{figure.caption.45}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Random reads and writes on a SATA disk\relax }}{54}{figure.caption.46}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ram disk\relax }}{55}{figure.caption.49}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{56}{figure.caption.50}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{57}{figure.caption.51}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ram disk\relax }}{56}{figure.caption.49}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{57}{figure.caption.50}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{58}{figure.caption.51}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
