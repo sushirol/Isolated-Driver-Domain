@@ -67,7 +67,7 @@ on all three devices. We set the block size to \texttt{16KB}. We vary
 the number of SysBench threads from 1 to 32 to measure the throughput of
 the system under different levels of concurrent access.
 
-\section{Xen Split Device Driver vs interrupt-based IDDR System}
+\section{Xen Split Device Driver vs Interrupt-based IDDR System}
 As per our first evaluation goal discussed in Section~\ref{sec:goals},
 we compare the interrupt-based IDDR system with Xen's split device driver.
 
@@ -117,7 +117,7 @@ optimizations.
 %\centering
   \begin{subfigure}[b]{0.2\textwidth}
   \includegraphics[scale=.7]{iddrvsxen-ramdisk-rdwr}
-  \caption{Random reads-writes on a ramdisk}
+  \caption{Random reads and writes on a ramdisk}
   \label{fig:iddrvsxen-ramdisk-rdwr}
   \end{subfigure}
   \hspace{50mm}
@@ -133,44 +133,52 @@ optimizations.
   \caption{Random reads on a SATA disk}
   \label{fig:iddrvsxen-harddisk-rd}
   \end{subfigure}\\
-
-\caption{Interrupt Based IDDR system vs Xen split driver}\label{fig:seqloopdisk}
+\caption{Interrupt-based IDDR system vs Xen split driver}\label{fig:seqloopdisk}
 \end{figure}
 
-%
-% CONTINUE HERE
-%
-\section{Interrupt Based IDDR System vs Spinning Based IDDR System}
-We measure and compare the performance of the interrupt based IDDR system
-with the spinning based IDDR system. To compare the performance of both
+\section{Interrupt-based IDDR System vs Spinning-based IDDR System}
+We measure and compare the performance of the interrupt-based IDDR system
+with the spinning-based IDDR system. To compare the performance of both
 systems, we measure performance of the system by varying the number of
-SysBench threads. The SysBench benchmark executes random read write on
-a ramdisk and loop device.
+SysBench threads. The SysBench benchmark executes random reads and writes 
+on a ramdisk, loop device, and a SATA disk.
 
 \subsection*{Experimental Setup}
 In both systems, the application domain is domain 0, and the driver domain
-is domain U. We create a ramdisk and insert the backend driver in the
-driver domain. We insert the frontend driver in the application domain.
+is domain U.  We create a ramdisk and insert the backend driver in the
+driver domain.  We insert the frontend driver in the application domain.
+We measure the performance of both systems on a loop device with the
+same setup.
 
-We measure the performance of both systems on a loop device with same setup.
-
-In order to use SATA disk in domain U we needed SATA controller of the
-disk to passthrough. However because of technical issues we couldn't
-passthrough SATA controller to domain U. Hence only for SATA disk
-experiment we use domain 0 as a driver domain and domain U as an
-application domain.
+However, we were unable to set up PCI passthrough for the SATA disk,
+preventing us from running the SATA controller driver in domain U.
+For the SATA portion of the experiments, we use domain 0 as the
+driver domain and domain U as the application domain, while still
+retaining all other aspects of the IDDR implementation.
 
 \subsubsection*{Random reads and writes}
 
-\paragraph{Comparison :}
+\paragraph{Comparison:}
 
-Figure~\ref{fig:rndramdisk}, Figure~\ref{fig:rndloopdisk} and Figure~\ref{fig:rndharddisk} compares the throughput of the interrupt based IDDR and the spinning based IDDR system when data is randomly read from a ramdisk, loop device, SATA disk and is written on them.
+Figure~\ref{fig:rndramdisk}, Figure~\ref{fig:rndloopdisk}, and
+Figure~\ref{fig:rndharddisk} compare the throughput of the interrupt-based
+IDDR and the spinning-based IDDR system for read, write, and read/write
+workloads using a ramdisk, loop device, and SATA disk, respectively.
 
-Figure~\ref{subfig:rndrd-ramdisk}, Figure~\ref{subfig:rndrd-loopdisk} Figure~\ref{subfig:rndrd-harddisk} show that the spinning based IDDR system performs better when data is read from a device randomly.  
+Figure~\ref{subfig:rndrd-ramdisk}, Figure~\ref{subfig:rndrd-loopdisk},
+and Figure~\ref{subfig:rndrd-harddisk} show that the spinning-based IDDR
+system performs better when data is read from a device randomly.
 
-Figure~\ref{subfig:rndwr-ramdisk}, Figure~\ref{subfig:rndwr-loopdisk} and Figure~\ref{subfig:rndwr-harddisk} compare the performance of the device when data is written randomly to a device. The graph shows that initially the spinning based IDDR system performs better than the interrupt based IDDR system, but as number of SysBench threads increases, the throughput of the spinning based IDDR system decreases.
-\\[3mm] 
-Figure~\ref{subfig:rndrw-ramdisk}, Figure~\ref{subfig:rndrw-loopdisk} and Figure~\ref{subfig:rndrw-harddisk} compare the performance for mix random read and write workload. 
+Figure~\ref{subfig:rndwr-ramdisk}, Figure~\ref{subfig:rndwr-loopdisk}
+and Figure~\ref{subfig:rndwr-harddisk} compare the performance of
+the device when data is written randomly to a device. The graph shows
+that initially the spinning-based IDDR system performs better than the
+interrupt-based IDDR system, but as the number of SysBench threads increases,
+the throughput of the spinning-based IDDR system decreases.
+
+Figure~\ref{subfig:rndrw-ramdisk}, Figure~\ref{subfig:rndrw-loopdisk}
+and Figure~\ref{subfig:rndrw-harddisk} compare the performance for mixed
+random read and write workloads.
 
 \begin{figure}[!ht]
 % \centering
@@ -236,24 +244,50 @@ Figure~\ref{subfig:rndrw-ramdisk}, Figure~\ref{subfig:rndrw-loopdisk} and Figure
 \caption{Random reads and writes on a SATA disk}\label{fig:rndharddisk}
 \end{figure}
 
+\paragraph{Observation:}
+The performance analysis of the interrupt-based and spinning-based IDDR system
+shows that initially the throughput of both systems increases and then it
+remains constant. We measure the throughput of the system with varying
+number of SysBench threads.
 
-\paragraph{Observation :}
-The performance analysis of the interrupt based and spinning IDDR system shows that initially the throughput of the system increases and then it remains constant. We measure the throughput of the system with varying number of SysBench threads. 
+In both systems, when the number of SysBench threads is low,
+the rate at which data is read and written is low and when the number of
+SysBench threads is high, the rate at which data is read and written is
+high.  Once maximum throughput is achieved, it remains constant.
 
-In both the systems, when the number of SysBench threads is low, the rate at which data is read and written is low and when number of SysBench threads is high, the rate at which data is read and written is high. Low data workload results in low throughput and high data workload results in high data throughput. Once maximum throughput is achieved, it remains constant.
-
-In interrupt based IDDR system, virtual interrupt is send between application domain and driver domain for read and write requests and in spinning based IDDR system, both the domains spin for the request and responses. Our optimization technique reduces the frequency of the virtual interrupt being sent between domains. Hence the improvement in performance depends upon number of virtual interrupts avoided. In the interrupt based IDDR system, when data workload is low, requests are generated with larger gaps of interval. Hence less number of requests are batched together, which results in more virtual interrupts. However, high workload observes more requests being batched together. Since spinning based IDDR system avoids more portion of virtual interrupts when workload is low, we observe a more performance gain when data workload is low. 
+In the interrupt-based IDDR system, virtual interrupts are sent between
+application and driver domains whereas the spinning-based approach
+attempts to avoid these virtual interrupts.  
+Our optimization technique reduces the frequency of the
+virtual interrupt being sent between domains. 
+The higher performance gains at lower levels of concurrency
+may be due to missed opportunities for batching in the interrupt-based case,
+increasing the need for virtual interrupts even further.
 
 \subsubsection*{CPU utilization}
 
-In spinning based IDDR system the frontend and backend driver spin for the request and responses and uses the CPU cycles. Hence we see a trade-off between high CPU utilization and high throughput. 
+The spinning-based IDDR system uses CPU cycles that could also be
+used by applications unless excess CPU capacity is available (as in many
+multicore or manycore systems).
+Hence we exploit a trade-off between higher CPU utilization and 
+higher throughput.
 
-In this section we compare the CPU utilization of interrupt based and spinning based IDDR system.
+In this section we compare the CPU utilization of the interrupt-based and
+the spinning-based IDDR systems.
 
-Figure~\ref{fig:cpuramdisk}, Figure~\ref{fig:cpuloopdisk} and Figure~\ref{fig:cpuharddisk} compares the CPU performance of both the systems with ramdisk, loop device and SATA disk as a physical device. 
+Figure~\ref{fig:cpuramdisk}, Figure~\ref{fig:cpuloopdisk}, and
+Figure~\ref{fig:cpuharddisk} compare the CPU utilization of both 
+systems using the ramdisk, loop device and SATA disk setups.
 
 \paragraph{Observation: }
-Since in IDDR system, read response thread and read request thread spin continuously both threads consume 2 cores of the system all the time. In below graphical presentation, 100\% CPU utilization denotes full utilization of 1 CPU. It can be seen that CPU utilization of spinning based system is near 200\% i.e. 2 cores. 
+In the spinning-based version of IDDR, the read response and request threads
+spin continuously unless the driver is idle for extended periods of time.
+Thus, up to 2 cores of the system may be consumed just for spinning.
+Figures~\ref{fig:cpuramdisk} and~\ref{fig:cpuloopdisk} show the CPU
+utilization for the ramdisk and loop device setups.
+It can be seen that the CPU utilization of the spinning-based 
+implementation ranges between 100\% and 250\%, which is within the
+expected range.
 
 \begin{figure}[!ht]
 %\centering

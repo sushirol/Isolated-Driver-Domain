@@ -1,4 +1,5 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: thesis.aux
 The style file: plain.bst
 Database file #1: references.bib
 Warning--I didn't find a database entry for "lmbench"
@@ -7,4 +8,45 @@ Warning--to sort, need author or key in driverdomain
 Warning--to sort, need author or key in hypercall
 Warning--to sort, need author or key in granttable
 Warning--to sort, need author or key in sysbench
+You've used 45 entries,
+            2118 wiz_defined-function locations,
+            884 strings with 15770 characters,
+and the built_in function-call counts, 17155 in all, are:
+= -- 1736
+> -- 742
+< -- 24
++ -- 300
+- -- 250
+* -- 1137
+:= -- 2631
+add.period$ -- 131
+call.type$ -- 45
+change.case$ -- 260
+chr.to.int$ -- 0
+cite$ -- 50
+duplicate$ -- 732
+empty$ -- 1400
+format.name$ -- 250
+if$ -- 3781
+int.to.chr$ -- 0
+int.to.str$ -- 45
+missing$ -- 44
+newline$ -- 223
+num.names$ -- 80
+pop$ -- 337
+preamble$ -- 1
+purify$ -- 215
+quote$ -- 0
+skip$ -- 540
+stack$ -- 0
+substring$ -- 1047
+swap$ -- 226
+text.length$ -- 24
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 172
+warning$ -- 5
+while$ -- 167
+width$ -- 47
+write$ -- 513
 (There were 6 warnings)
