@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model\relax }}{3}{figure.caption.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Thread\relax }}{8}{figure.caption.8}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Single-threaded vs Multithreaded Processes\relax }}{8}{figure.caption.8}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Split view of a kernel\relax }}{10}{figure.caption.9}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Physical memory\relax }}{13}{figure.caption.13}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces User level memory protection\relax }}{14}{figure.caption.14}
@@ -23,12 +23,12 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the spinning-based IDDR system\relax }}{36}{figure.caption.34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt-based IDDR system vs Xen split driver\relax }}{49}{figure.caption.42}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{52}{figure.caption.44}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{53}{figure.caption.45}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Random reads and writes on a SATA disk\relax }}{54}{figure.caption.46}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ram disk\relax }}{55}{figure.caption.49}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{56}{figure.caption.50}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{57}{figure.caption.51}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt-based IDDR system vs Xen split driver\relax }}{50}{figure.caption.43}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{53}{figure.caption.45}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{54}{figure.caption.46}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Random reads and writes on a SATA disk\relax }}{55}{figure.caption.47}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ram disk\relax }}{56}{figure.caption.50}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{57}{figure.caption.51}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{58}{figure.caption.52}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

@@ -5,12 +5,12 @@
 \BOOKMARK [1][-]{section.1.4}{Organization}{chapter.1}
 \BOOKMARK [0][-]{chapter.2}{Background}{}
 \BOOKMARK [1][-]{section.2.1}{Processes and Threads}{chapter.2}
-\BOOKMARK [1][-]{section.2.2}{Context Switch}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Context Switches}{chapter.2}
 \BOOKMARK [1][-]{section.2.3}{Spinlocks}{chapter.2}
-\BOOKMARK [1][-]{section.2.4}{Device Driver}{chapter.2}
+\BOOKMARK [1][-]{section.2.4}{Device Drivers}{chapter.2}
 \BOOKMARK [1][-]{section.2.5}{Memory Protection}{chapter.2}
 \BOOKMARK [1][-]{section.2.6}{Virtualization}{chapter.2}
-\BOOKMARK [2][-]{subsection.2.6.1}{Role of hypervisor}{section.2.6}
+\BOOKMARK [2][-]{subsection.2.6.1}{Hypervisor Role}{section.2.6}
 \BOOKMARK [2][-]{subsection.2.6.2}{Xen Hypervisor}{section.2.6}
 \BOOKMARK [0][-]{chapter.3}{System Introduction}{}
 \BOOKMARK [1][-]{section.3.1}{System Overview}{chapter.3}
@@ -27,6 +27,7 @@
 \BOOKMARK [2][-]{subsection.4.2.2}{Spinning-Based IDDR System}{section.4.2}
 \BOOKMARK [1][-]{section.4.3}{Frontend Driver Implementation}{chapter.4}
 \BOOKMARK [1][-]{section.4.4}{Backend Driver Implementation}{chapter.4}
+\BOOKMARK [2][-]{subsection.4.4.1}{Future Work}{section.4.4}
 \BOOKMARK [0][-]{chapter.5}{Evaluation}{}
 \BOOKMARK [1][-]{section.5.1}{Goals}{chapter.5}
 \BOOKMARK [1][-]{section.5.2}{Methodology}{chapter.5}
@@ -38,4 +39,3 @@
 \BOOKMARK [2][-]{subsection.6.1.2}{Kernel Designs}{section.6.1}
 \BOOKMARK [1][-]{section.6.2}{Interdomain Communication}{chapter.6}
 \BOOKMARK [0][-]{chapter.7}{Conclusion}{}
-\BOOKMARK [1][-]{section.7.1}{Future Work}{chapter.7}

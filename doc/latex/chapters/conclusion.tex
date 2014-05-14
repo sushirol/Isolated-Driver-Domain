@@ -1,10 +1,21 @@
 
-In this thesis we presented the Isolated Device Driver (IDDR) system. The IDDR system is an operating system which provides isolation between a device driver and the Linux kernel components by running the device driver in the driver domain. The IDDR system is a re-implementation of Xen's isolated driver domain.
+In this thesis we presented the Isolated Device Driver (IDDR) system,
+which we designed and implemented. 
+The IDDR system is an extension to an operating system which provides isolation between
+a device driver and kernel components by running the device
+driver in an isolated driver domain. The IDDR system is an independent re-implementation 
+of ideas originally proposed for Xen's isolated driver domains.
 
-Isolated driver domains use Xen's split device driver mechanism. Originally split device drivers exploit an interrupt based approach to interdomain communication. We replaced the interrupt based approach with a spinning based approach. This spinning based approach has the potential to reduce interdomain communication overhead including the number of context switch. IDDR system trades CPU cycles for better performance.
+Isolated driver domains use Xen's split device driver
+mechanism, which exploits an interrupt-based approach to interdomain communication. 
+In IDDR, we replaced the interrupt-based
+approach with a spinning-based approach. This spinning-based approach
+has the potential to reduce interdomain communication overhead, including
+the number of context switches.   Our evaluation found that we were able
+to achieve better throughput for a variety of device drivers and workloads.
 
-The IDDR system will be advantageous if used with I/O intensive applications. I/O intensive system can afford to utilize the idle CPU cycles for the benefit of the performance. 
+We also evaluated the CPU utilization since spinning trades CPU cycles 
+for better performance.  Spinning may represent a reasonable choice, 
+particularly in environments where I/O performance is paramount and CPU 
+capacity is plentiful.
 
-\section{Future Work}
-\paragraph{Adaptive spinning : }
-In current implementation the read request thread and read response thread spins for a constant amount of time. It will be interesting to see the impact on performance if adaptive spinning is used.

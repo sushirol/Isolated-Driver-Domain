@@ -218,3 +218,11 @@ as an index in the shadow table to map responses to requests. The
 communication module pushes the response into the shared response queue, 
 so that the response is made available to the application domain.
 
+\subsection{Future Work}
+\paragraph{Adaptive spinning: }
+In the current implementation the read request and read response
+spinning thresholds are set to be constant amounts of time. 
+As future work, adaptive spinning could be implemented in which the
+threshold is varied based on assumptions about the cost of blocking
+and resuming the respective threads.
+

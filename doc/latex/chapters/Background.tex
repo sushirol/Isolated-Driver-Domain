@@ -27,10 +27,10 @@ different processes do not share such resources.
 	\caption{Multithreaded process}
 	\label{fig:thread2}
     \end{subfigure}
-    \caption{Thread}\label{fig:threads}
+    \caption{Single-threaded vs Multithreaded Processes}\label{fig:threads}
 \end{figure}
 
-\section{Context Switch}
+\section{Context Switches}
 Multiple threads typically employ time division multiplexing when sharing
 a single processor.  In time division multiplexing, the processor switches
 between executing threads, interleaving their execution. The process of 
@@ -68,7 +68,7 @@ an algorithm based on the rate of successes and failures of recent spinning
 attempts to acquire the lock.  Adaptive spinning helps threads to avoid
 spinning in conditions where it would not be beneficial.
 
-\section{Device Driver}
+\section{Device Drivers}
 \label{sec:device driver}
 
 A device driver is a program that provides a software interface to a
@@ -107,7 +107,7 @@ a block. As a result, in Linux, block and char devices
 differ only in the way data is managed internally by the kernel. 
 Examples of block devices are disks and CDs~\cite{Corbet:2005:LDD:1209083}.
 
-\subsection*{Block Device Driver}
+\subsection*{Block Device Drivers}
 \subsubsection*{Request processing in a block device driver}
 
 \label{subsec:request queue}
@@ -254,7 +254,7 @@ LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
     \caption{Comparison of a non-virtualized system and a virtualized system}\label{fig:Kernel space}
 \end{figure}
 
-\subsection{Role of hypervisor}
+\subsection{Hypervisor Role}
 Operating system virtualization is achieved by inserting a virtual machine 
 monitor (VMM) between the guest operating system and the underlying hardware. 
 On the other hand, a hypervisor is a piece of computer software, firmware, or hardware
