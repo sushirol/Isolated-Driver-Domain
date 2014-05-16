@@ -251,7 +251,7 @@ LeVasseur04UnmodifiedDriverReuse, Riley:2008:GPK:1433006.1433008}.
 	\caption{Virtualization}
 	\label{fig:Virtualization}
 	\end{subfigure}
-    \caption{Comparison of a non-virtualized system and a virtualized system}\label{fig:Kernel space}
+    \caption{Comparison of a non-virtualized system and a virtualized system}\label{fig:virtualized-vs-nonvirtualized}
 \end{figure}
 
 \subsection{Hypervisor Role}
@@ -377,19 +377,19 @@ notify that a virtual disk request has completed.
 Xen provides a data transfer mechanism that allows data to move
 between frontend and backend drivers with minimal overhead.
 
-\begin{figure}[!ht]
-\centering
-\includegraphics[scale=.5]{IObuffer}
-\caption{Ring I/O buffer}
-\label{fig:Ring buffer}
-\end{figure}
-
 Figure~\ref{fig:Ring buffer} shows the structure of an I/O descriptor
 ring. An I/O descriptor ring is a circular queue of descriptors allocated
 by a domain. These descriptors do not contain I/O data itself. The data is kept in I/O buffers
 that are allocated separately by the guest OS; the I/O descriptors contain 
 references to the data buffers.  Access to an I/O ring is based on two pairs
 of producer-consumer pointers.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=.5]{IObuffer}
+\caption{Ring I/O buffer}
+\label{fig:Ring buffer}
+\end{figure}
 
 \begin{enumerate}
 \item Request producer pointer: A producer domain places requests on a
@@ -414,7 +414,7 @@ the other domain. This allows each domain to trade latency for throughput.
 \centering
 \includegraphics[scale=.5]{IObuffer2}
 \caption{Ring I/O buffer}
-\label{fig:Ring buffer}
+\label{fig:Ring buffer2}
 \end{figure}
 
 \subsection*{Shared Pages}
