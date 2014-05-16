@@ -71,7 +71,7 @@ Despite advances in virtualization technology, the overhead of
 communication between guest and driver domains significantly
 affects the performance of applications~\cite{barham2003xen,
 Sugerman:2001:VID:647055.715774, Menon:2006:ONV:1267359.1267361}. Isolated
-driver domains follow an interrupt based approach for sending
+driver domains follow an interrupt-based approach for sending
 notifications~\cite{barham2003xen} between domains. The frontend and backend 
 drivers notify each other of the receipt of a service request and corresponding responses
 by sending an interrupt. The Xen hypervisor needs to schedule the
@@ -92,13 +92,13 @@ driver domains. We propose a solution in which a thread in the backend
 driver spins for some amount of time, checking for incoming service
 requests. Similarly, the frontend driver spins while checking for
 responses.  On multiprocessor environments, this solution performs better
-than the interrupt based approach used in the original implementation.
+than the interrupt-based approach used in the original implementation.
 
 The source code of the isolated driver domain implementation as described 
 by Fraser et al~\cite{driverdomain} is no longer available as part 
 of the Xen hypervisor code distribution.  Therefore, we reimplemented isolated
 driver domains; in this thesis, we refer to our implementation as IDDR
-(Isolated Device Drivers). We implemented our spinning based optimization 
+(Isolated Device Drivers). We implemented our spinning-based optimization 
 within the IDDR framework.
 
 We evaluated the performance of the IDDR system for multiple block device
@@ -122,8 +122,8 @@ which the CPU cycles used cannot easily be used by application code.
 The core contributions of this thesis are listed below: 
 \begin{enumerate}
 \item Reimplementation of isolated driver domains, referred to as IDDR.
-\item Performance optimizations for IDDR by implementing a spinning based 
-        communication channel instead of an interrupt based communication channel. 
+\item Performance optimizations for IDDR by implementing a spinning-based 
+        communication channel instead of an interrupt-based communication channel. 
 \item Performance comparison of the spinning-based vs. interrupt-based approaches.
 \end{enumerate}
 

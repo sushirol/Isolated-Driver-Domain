@@ -106,9 +106,9 @@ throughput of both systems when data is randomly read from a ramdisk and
 written to it. Figure~\ref{fig:iddrvsxen-loop-rd} presents the throughput
 when data is randomly read from a loop device.
 
-On a loop device, the performance of the interrupt based IDDR system
+On a loop device, the performance of the interrupt-based IDDR system
 differs by 3\%-4\% when compared to Xen's split device driver. On a
-ramdisk, the throughput of the interrupt based IDDR system matches that
+ramdisk, the throughput of the interrupt-based IDDR system matches that
 of the Xen split device driver. This shows that our interrupt-based
 IDDR implementation provides a suitable baseline for our performance 
 optimizations.

@@ -14,7 +14,7 @@ presents the architectural overview of the IDDR system.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{baseIDDRsystemoverview}
-\caption{Architectural overview of the interrupt based IDDR system}
+\caption{Architectural overview of the interrupt-based IDDR system}
 \label{fig:base IDDR system overview}
 \end{figure}
 
@@ -88,7 +88,7 @@ This section describes the 3 main components of our design
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRcomponents}
-\caption{System Components}
+\caption{System components}
 \label{fig:Design Evo1}
 \end{figure}
 
@@ -127,7 +127,7 @@ completion notification.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{IDDRdesign}
-\caption{Spinning based IDDR system}
+\caption{Spinning-based IDDR system}
 \label{fig:new IDDR system}
 \end{figure}
 \subsection{Backend Driver}
@@ -178,13 +178,13 @@ Figure~\ref{fig:communication} provides an overview of the communication module.
 \begin{figure}[!ht]
 \centering
 \includegraphics[scale=.5]{communicationmodule}
-\caption{Communication Module}
+\caption{Communication module}
 \label{fig:communication}
 \end{figure}
 
-\paragraph{Interrupt based IDDR System:}
+\paragraph{Interrupt-based IDDR System:}
 \label{par:base IDDR communication}
-In the interrupt based approach, the frontend driver submits requests
+In the interrupt-based approach, the frontend driver submits requests
 to the communication module. The communication module copies the data of
 the write requests to shared memory. The communication module is
 responsible for the allocation and de-allocation of the shared memory
@@ -193,8 +193,8 @@ driver, the communication channel shares the requests with the backend
 driver. It notifies the backend driver that requests are available in
 the shared request queue.
 
-\paragraph{Spinning based IDDR System:}
-\label{par:spin IDDR communication} In the interrupt based approach, by
+\paragraph{Spinning-based IDDR System:}
+\label{par:spin IDDR communication} In the interrupt-based approach, by
 default a software interrupt is sent to the domain as a notification. Each
 such software interrupt causes the hypervisor to schedule the driver
 domain. Similarly, software interrupts which notify the availability of
