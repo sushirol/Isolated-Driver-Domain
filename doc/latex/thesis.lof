@@ -1,7 +1,7 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {1.1}{\ignorespaces Split device driver model\relax }}{3}{figure.caption.5}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Single-threaded vs Multithreaded Processes\relax }}{8}{figure.caption.8}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Single-threaded vs Multithreaded processes\relax }}{8}{figure.caption.8}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Split view of a kernel\relax }}{10}{figure.caption.9}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Physical memory\relax }}{13}{figure.caption.13}
 \contentsline {figure}{\numberline {2.4}{\ignorespaces User level memory protection\relax }}{14}{figure.caption.14}
@@ -15,11 +15,11 @@
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{23}{figure.caption.22}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of a modern OS\relax }}{26}{figure.caption.23}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the interrupt based IDDR system\relax }}{27}{figure.caption.24}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces System Components\relax }}{30}{figure.caption.27}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Spinning based IDDR system\relax }}{31}{figure.caption.28}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the interrupt-based IDDR system\relax }}{27}{figure.caption.24}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces System components\relax }}{30}{figure.caption.27}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Spinning-based IDDR system\relax }}{31}{figure.caption.28}
 \contentsline {figure}{\numberline {3.5}{\ignorespaces Role of the frontend and the backend drivers\relax }}{32}{figure.caption.29}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Communication Module\relax }}{33}{figure.caption.30}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Communication module\relax }}{33}{figure.caption.30}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the spinning-based IDDR system\relax }}{36}{figure.caption.34}
 \addvspace {10\p@ }

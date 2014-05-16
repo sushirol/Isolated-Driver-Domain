@@ -27,8 +27,8 @@
 \contentsline {subsection}{\numberline {3.4.1}Frontend Driver}{29}{subsection.3.4.1}
 \contentsline {subsection}{\numberline {3.4.2}Backend Driver}{31}{subsection.3.4.2}
 \contentsline {subsection}{\numberline {3.4.3}Communication Module}{32}{subsection.3.4.3}
-\contentsline {paragraph}{Interrupt based IDDR System:}{33}{section*.31}
-\contentsline {paragraph}{Spinning based IDDR System:}{34}{section*.32}
+\contentsline {paragraph}{Interrupt-based IDDR System:}{33}{section*.31}
+\contentsline {paragraph}{Spinning-based IDDR System:}{34}{section*.32}
 \contentsline {chapter}{\numberline {4}Implementation}{35}{chapter.4}
 \contentsline {section}{\numberline {4.1}Overview}{35}{section.4.1}
 \contentsline {section}{\numberline {4.2}Communication Module}{37}{section.4.2}
@@ -36,7 +36,7 @@
 \contentsline {paragraph}{Shared Request and Response Queue:}{37}{section*.35}
 \contentsline {paragraph}{Shared Memory for Read/Write Data:}{38}{section*.36}
 \contentsline {paragraph}{Event Notification:}{38}{section*.37}
-\contentsline {subsection}{\numberline {4.2.2}Spinning-Based IDDR System}{39}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.2}Spinning-based IDDR System}{39}{subsection.4.2.2}
 \contentsline {section}{\numberline {4.3}Frontend Driver Implementation}{40}{section.4.3}
 \contentsline {paragraph}{Initialization Code:}{41}{section*.38}
 \contentsline {paragraph}{Request Submission:}{41}{section*.39}
