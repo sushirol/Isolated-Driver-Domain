@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  15 MAY 2014 20:55
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  15 MAY 2014 21:16
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -348,35 +348,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \c@subsubsubsection=\count120
 
-(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux
-
-LaTeX Warning: Label `fig:Kernel space' multiply defined.
-
-
-LaTeX Warning: Label `fig:Ring buffer' multiply defined.
-
-
-LaTeX Warning: Label `sec:goals' multiply defined.
-
-
-LaTeX Warning: Label `subfig:rndrd-harddisk' multiply defined.
-
-
-LaTeX Warning: Label `sub@subfig:rndrd-harddisk' multiply defined.
-
-
-LaTeX Warning: Label `subfig:rndwr-harddisk' multiply defined.
-
-
-LaTeX Warning: Label `sub@subfig:rndwr-harddisk' multiply defined.
-
-
-LaTeX Warning: Label `subfig:rndrw-harddisk' multiply defined.
-
-
-LaTeX Warning: Label `sub@subfig:rndrw-harddisk' multiply defined.
-
-)
+(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 75.
 LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 75.
@@ -392,7 +364,8 @@ LaTeX Font Info:    ... okay on input line 75.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 75.
 LaTeX Font Info:    ... okay on input line 75.
 \AtBeginShipoutBox=\box39
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count121
 \scratchdimen=\dimen133
@@ -430,7 +403,12 @@ LaTeX Info: Redefining \nameref on input line 75.
 
 [1
 
-{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}] [2] [3]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: Citation `Fraser04safehardware' on page ii undefined on input li
+ne 144.
+
+[2] [3]
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Acknowl
 edgments.tex) [4
 
@@ -463,9 +441,36 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Chapter 1.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/introdu
-ction.tex [1
+ction.tex
 
-] <images/xen-split-tcp.pdf, id=332, 963.6pt x 542.025pt>
+LaTeX Warning: Citation `coveritykernel' on page 1 undefined on input line 9.
+
+
+LaTeX Warning: Citation `denning1970virtual' on page 1 undefined on input line 
+16.
+
+
+LaTeX Warning: Citation `Galvin' on page 1 undefined on input line 16.
+
+[1
+
+]
+
+LaTeX Warning: Citation `LeVasseur04UnmodifiedDriverReuse' on page 2 undefined 
+on input line 29.
+
+
+LaTeX Warning: Citation `Fraser04safehardware' on page 2 undefined on input lin
+e 30.
+
+
+LaTeX Warning: Citation `driverdomain' on page 2 undefined on input line 30.
+
+
+LaTeX Warning: Citation `Chisnall:2007:DGX:1407351' on page 2 undefined on inpu
+t line 42.
+
+<images/xen-split-tcp.pdf, id=320, 963.6pt x 542.025pt>
 File: images/xen-split-tcp.pdf Graphic file (type pdf)
 
 <use images/xen-split-tcp.pdf>
@@ -476,8 +481,44 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 50--51
  [][] 
  []
 
+
+LaTeX Warning: Citation `driverdomain' on page 2 undefined on input line 60.
+
 [2] [3 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/xe
-n-split-tcp.pdf>] [4] [5] [6])
+n-split-tcp.pdf>]
+
+LaTeX Warning: Citation `barham2003xen' on page 4 undefined on input line 73.
+
+
+LaTeX Warning: Citation `Sugerman:2001:VID:647055.715774' on page 4 undefined o
+n input line 73.
+
+
+LaTeX Warning: Citation `Menon:2006:ONV:1267359.1267361' on page 4 undefined on
+ input line 73.
+
+
+LaTeX Warning: Citation `barham2003xen' on page 4 undefined on input line 75.
+
+
+LaTeX Warning: Citation `barham2003xen' on page 4 undefined on input line 79.
+
+
+LaTeX Warning: Citation `Li:2007:QCC:1281700.1281702' on page 4 undefined on in
+put line 80.
+
+
+LaTeX Warning: Citation `Mogul:1991:ECS:106973.106982' on page 4 undefined on i
+nput line 80.
+
+
+LaTeX Warning: Citation `Bovet:2005:ULK:1077084' on page 4 undefined on input l
+ine 87.
+
+
+LaTeX Warning: Citation `driverdomain' on page 4 undefined on input line 98.
+
+[4] [5] [6])
 Chapter 2.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Backgro
@@ -487,7 +528,13 @@ Overfull \hbox (0.8929pt too wide) in paragraph at lines 1--3
 -mi-nol-ogy such as pro-cesses, threads,
  []
 
-<images/thread1.pdf, id=389, 963.6pt x 542.025pt>
+
+LaTeX Warning: Citation `Galvin' on page 7 undefined on input line 7.
+
+
+LaTeX Warning: Citation `Galvin' on page 7 undefined on input line 11.
+
+<images/thread1.pdf, id=356, 963.6pt x 542.025pt>
 File: images/thread1.pdf Graphic file (type pdf)
  <use images/thread1.pdf>
 Package pdftex.def Info: images/thread1.pdf used on input line 20.
@@ -497,7 +544,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 20--21
 [][] 
  []
 
-<images/thread2.pdf, id=390, 963.6pt x 542.025pt>
+<images/thread2.pdf, id=357, 963.6pt x 542.025pt>
 File: images/thread2.pdf Graphic file (type pdf)
  <use images/thread2.pdf>
 Package pdftex.def Info: images/thread2.pdf used on input line 26.
@@ -509,17 +556,32 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 26--27
 
 [7
 
-] [8 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/thre
-ad1.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-thread2.pdf
+]
+
+LaTeX Warning: Citation `Galvin' on page 8 undefined on input line 46.
+
+
+LaTeX Warning: Citation `Soares+:osdi10' on page 8 undefined on input line 51.
+
+
+LaTeX Warning: Citation `Li:2007:QCC:1281700.1281702' on page 8 undefined on in
+put line 51.
+
+[8 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/thread
+1.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/th
+read2.pdf
 
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/thread2.pdf): PDF inclusion: multiple pdfs with page group
  included in a single page
->] [9] <images/kernel.pdf, id=424, 963.6pt x 542.025pt>
-File: images/kernel.pdf Graphic file (type pdf)
+>]
 
-<use images/kernel.pdf>
+LaTeX Warning: Citation `Bovet:2005:ULK:1077084' on page 9 undefined on input l
+ine 61.
+
+[9] <images/kernel.pdf, id=386, 963.6pt x 542.025pt>
+File: images/kernel.pdf Graphic file (type pdf)
+ <use images/kernel.pdf>
 Package pdftex.def Info: images/kernel.pdf used on input line 87.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
@@ -528,7 +590,28 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 87--88
  []
 
 [10 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/kerne
-l.pdf>] [11] <images/memory_map.pdf, id=522, 963.6pt x 542.025pt>
+l.pdf>]
+
+LaTeX Warning: Citation `Corbet:2005:LDD:1209083' on page 11 undefined on input
+ line 108.
+
+
+LaTeX Warning: Citation `Corbet:2005:LDD:1209083' on page 11 undefined on input
+ line 125.
+
+[11]
+
+LaTeX Warning: Citation `Corbet:2005:LDD:1209083' on page 12 undefined on input
+ line 132.
+
+
+LaTeX Warning: Citation `Galvin' on page 12 undefined on input line 149.
+
+
+LaTeX Warning: Citation `Graham:1971:PPP:1478873.1478928' on page 12 undefined 
+on input line 149.
+
+<images/memory_map.pdf, id=478, 963.6pt x 542.025pt>
 File: images/memory_map.pdf Graphic file (type pdf)
 
 <use images/memory_map.pdf>
@@ -536,7 +619,7 @@ Package pdftex.def Info: images/memory_map.pdf used on input line 153.
 (pdftex.def)             Requested size: 240.89941pt x 135.5059pt.
  [12] [13 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images
 /memory_map.pdf>]
-<images/user-space-1.pdf, id=544, 963.6pt x 542.025pt>
+<images/user-space-1.pdf, id=499, 963.6pt x 542.025pt>
 File: images/user-space-1.pdf Graphic file (type pdf)
 
 <use images/user-space-1.pdf>
@@ -547,7 +630,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 188--189
 [][] 
  []
 
-<images/user-space-2.pdf, id=545, 963.6pt x 542.025pt>
+<images/user-space-2.pdf, id=500, 963.6pt x 542.025pt>
 File: images/user-space-2.pdf Graphic file (type pdf)
 
 <use images/user-space-2.pdf>
@@ -558,7 +641,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 193--194
 [][] 
  []
 
-<images/kernel-space-1.pdf, id=547, 963.6pt x 542.025pt>
+<images/kernel-space-1.pdf, id=502, 963.6pt x 542.025pt>
 File: images/kernel-space-1.pdf Graphic file (type pdf)
 
 <use images/kernel-space-1.pdf>
@@ -569,7 +652,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 212--213
 [][] 
  []
 
-<images/kernel-space-2.pdf, id=548, 963.6pt x 542.025pt>
+<images/kernel-space-2.pdf, id=503, 963.6pt x 542.025pt>
 File: images/kernel-space-2.pdf Graphic file (type pdf)
 
 <use images/kernel-space-2.pdf>
@@ -580,6 +663,9 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 217--218
 [][] 
  []
 
+
+LaTeX Warning: Citation `Galvin' on page 14 undefined on input line 228.
+
 [14 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/user-
 space-1.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/ima
 ges/user-space-2.pdf
@@ -587,7 +673,24 @@ ges/user-space-2.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/user-space-2.pdf): PDF inclusion: multiple pdfs with page 
 group included in a single page
->] <images/OS-arch.pdf, id=571, 963.6pt x 542.025pt>
+>]
+
+LaTeX Warning: Citation `Drepper:2008:CV:1348583.1348591' on page 15 undefined 
+on input line 236.
+
+
+LaTeX Warning: Citation `Fraser04safehardware' on page 15 undefined on input li
+ne 239.
+
+
+LaTeX Warning: Citation `LeVasseur04UnmodifiedDriverReuse' on page 15 undefined
+ on input line 239.
+
+
+LaTeX Warning: Citation `Riley:2008:GPK:1433006.1433008' on page 15 undefined o
+n input line 239.
+
+<images/OS-arch.pdf, id=521, 963.6pt x 542.025pt>
 File: images/OS-arch.pdf Graphic file (type pdf)
  <use images/OS-arch.pdf>
 Package pdftex.def Info: images/OS-arch.pdf used on input line 244.
@@ -597,7 +700,7 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 244--245
 [][] 
  []
 
-<images/virtualization.pdf, id=572, 963.6pt x 542.025pt>
+<images/virtualization.pdf, id=522, 963.6pt x 542.025pt>
 File: images/virtualization.pdf Graphic file (type pdf)
 
 <use images/virtualization.pdf>
@@ -608,6 +711,10 @@ Overfull \hbox (10.7169pt too wide) in paragraph at lines 250--251
 [][] 
  []
 
+
+LaTeX Warning: Citation `Agesen:2010:EXV:1899928.1899930' on page 15 undefined 
+on input line 267.
+
 [15 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/kerne
 l-space-1.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/i
 mages/kernel-space-2.pdf
@@ -615,9 +722,38 @@ mages/kernel-space-2.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/kernel-space-2.pdf): PDF inclusion: multiple pdfs with pag
 e group included in a single page
->] [16 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OS
--arch.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/image
-s/virtualization.pdf
+>]
+
+LaTeX Warning: Citation `barham2003xen' on page 16 undefined on input line 272.
+
+
+
+LaTeX Warning: Citation `Chisnall:2007:DGX:1407351' on page 16 undefined on inp
+ut line 272.
+
+
+LaTeX Warning: Citation `Habib:2008:VK:1344209.1344217' on page 16 undefined on
+ input line 273.
+
+
+LaTeX Warning: Citation `kivity2007kvm' on page 16 undefined on input line 273.
+
+
+
+LaTeX Warning: Citation `Agesen:2010:EXV:1899928.1899930' on page 16 undefined 
+on input line 274.
+
+
+LaTeX Warning: Citation `camargos2008virtualization' on page 16 undefined on in
+put line 275.
+
+
+LaTeX Warning: Citation `Popek:1974:FRV:361011.361073' on page 16 undefined on 
+input line 277.
+
+[16 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OS-ar
+ch.pdf> <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/v
+irtualization.pdf
 
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/virtualization.pdf): PDF inclusion: multiple pdfs with pag
@@ -631,21 +767,50 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 279.
 
-<images/type1.pdf, id=613, 963.6pt x 542.025pt>
+
+LaTeX Warning: Citation `barham2003xen' on page 17 undefined on input line 284.
+
+
+
+LaTeX Warning: Citation `Agesen:2010:EXV:1899928.1899930' on page 17 undefined 
+on input line 285.
+
+<images/type1.pdf, id=547, 963.6pt x 542.025pt>
 File: images/type1.pdf Graphic file (type pdf)
  <use images/type1.pdf>
 Package pdftex.def Info: images/type1.pdf used on input line 289.
 (pdftex.def)             Requested size: 337.26506pt x 189.71158pt.
 
-<images/type2.pdf, id=616, 963.6pt x 542.025pt>
+
+LaTeX Warning: Citation `Sugerman:2001:VID:647055.715774' on page 17 undefined 
+on input line 297.
+
+
+LaTeX Warning: Citation `camargos2008virtualization' on page 17 undefined on in
+put line 297.
+
+<images/type2.pdf, id=548, 963.6pt x 542.025pt>
 File: images/type2.pdf Graphic file (type pdf)
  <use images/type2.pdf>
 Package pdftex.def Info: images/type2.pdf used on input line 301.
 (pdftex.def)             Requested size: 385.43317pt x 216.80615pt.
- [17 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/type
-1.pdf>]
-[18 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/type2
-.pdf>] <images/xen-split-fs.pdf, id=642, 963.6pt x 542.025pt>
+
+
+LaTeX Warning: Citation `barham2003xen' on page 17 undefined on input line 308.
+
+
+
+LaTeX Warning: Citation `king2003operating' on page 17 undefined on input line 
+310.
+
+[17 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/type1
+.pdf>] [18 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/image
+s/type2.pdf>]
+
+LaTeX Warning: Citation `Chisnall:2007:DGX:1407351' on page 19 undefined on inp
+ut line 339.
+
+<images/xen-split-fs.pdf, id=569, 963.6pt x 542.025pt>
 File: images/xen-split-fs.pdf Graphic file (type pdf)
 
 <use images/xen-split-fs.pdf>
@@ -656,7 +821,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 343--344
  [][] 
  []
 
-<images/xen.pdf, id=643, 963.6pt x 542.025pt>
+<images/xen.pdf, id=570, 963.6pt x 542.025pt>
 File: images/xen.pdf Graphic file (type pdf)
  <use images/xen.pdf>
 Package pdftex.def Info: images/xen.pdf used on input line 349.
@@ -669,21 +834,23 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 349--350
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
+
+LaTeX Warning: Citation `hypercall' on page 19 undefined on input line 358.
+
 [19 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/xen-s
 plit-fs.pdf>] [20 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/late
-x/images/xen.pdf>] <images/IObuffer.pdf, id=662, 963.6pt x 542.025pt>
+x/images/xen.pdf>] <images/IObuffer.pdf, id=588, 963.6pt x 542.025pt>
 File: images/IObuffer.pdf Graphic file (type pdf)
 
 <use images/IObuffer.pdf>
-Package pdftex.def Info: images/IObuffer.pdf used on input line 382.
+Package pdftex.def Info: images/IObuffer.pdf used on input line 389.
 (pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
 
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 382--383
+Overfull \hbox (12.04384pt too wide) in paragraph at lines 389--390
  [][] 
  []
 
-[21 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IObuf
-fer.pdf>] <images/IObuffer2.pdf, id=674, 963.6pt x 542.025pt>
+[21] <images/IObuffer2.pdf, id=597, 963.6pt x 542.025pt>
 File: images/IObuffer2.pdf Graphic file (type pdf)
 
 <use images/IObuffer2.pdf>
@@ -694,12 +861,28 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 415--416
  [][] 
  []
 
-[22] [23 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-IObuffer2.pdf>]) [24]
+
+LaTeX Warning: Citation `granttable' on page 22 undefined on input line 430.
+
+[22 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IObuf
+fer.pdf>]
+
+LaTeX Warning: Citation `Chisnall:2007:DGX:1407351' on page 23 undefined on inp
+ut line 438.
+
+
+LaTeX Warning: Citation `barham2003xen' on page 23 undefined on input line 438.
+
+
+
+LaTeX Warning: Citation `granttable' on page 23 undefined on input line 438.
+
+[23 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IObuf
+fer2.pdf>]) [24]
 Chapter 3.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/systemi
-ntroduction.tex <images/OSoverview.pdf, id=702, 963.6pt x 542.025pt>
+ntroduction.tex <images/OSoverview.pdf, id=622, 963.6pt x 542.025pt>
 File: images/OSoverview.pdf Graphic file (type pdf)
 
 <use images/OSoverview.pdf>
@@ -710,7 +893,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 9--10
  [][] 
  []
 
-<images/baseIDDRsystemoverview.pdf, id=703, 963.6pt x 542.025pt>
+<images/baseIDDRsystemoverview.pdf, id=623, 963.6pt x 542.025pt>
 File: images/baseIDDRsystemoverview.pdf Graphic file (type pdf)
 
 <use images/baseIDDRsystemoverview.pdf>
@@ -727,7 +910,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 16--17
 ] [26 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OSo
 verview.pdf>] [27 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/late
 x/images/baseIDDRsystemoverview.pdf>] [28]
-<images/IDDRcomponents.pdf, id=734, 963.6pt x 542.025pt>
+<images/IDDRcomponents.pdf, id=654, 963.6pt x 542.025pt>
 File: images/IDDRcomponents.pdf Graphic file (type pdf)
 
 <use images/IDDRcomponents.pdf>
@@ -739,7 +922,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 90--91
  []
 
 [29] [30 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/
-IDDRcomponents.pdf>] <images/IDDRdesign.pdf, id=749, 963.6pt x 542.025pt>
+IDDRcomponents.pdf>] <images/IDDRdesign.pdf, id=669, 963.6pt x 542.025pt>
 File: images/IDDRdesign.pdf Graphic file (type pdf)
 
 <use images/IDDRdesign.pdf>
@@ -751,7 +934,7 @@ Overfull \hbox (12.04384pt too wide) in paragraph at lines 129--130
  []
 
 [31 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRd
-esign.pdf>] <images/component1.pdf, id=758, 963.6pt x 542.025pt>
+esign.pdf>] <images/component1.pdf, id=678, 963.6pt x 542.025pt>
 File: images/component1.pdf Graphic file (type pdf)
 
 <use images/component1.pdf>
@@ -762,7 +945,7 @@ Overfull \hbox (29.51111pt too wide) in paragraph at lines 150--151
 [][] 
  []
 
-<images/component2.pdf, id=759, 963.6pt x 542.025pt>
+<images/component2.pdf, id=679, 963.6pt x 542.025pt>
 File: images/component2.pdf Graphic file (type pdf)
 
 <use images/component2.pdf>
@@ -780,7 +963,7 @@ s/component2.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/component2.pdf): PDF inclusion: multiple pdfs with page gr
 oup included in a single page
->] <images/communicationmodule.pdf, id=774, 963.6pt x 542.025pt>
+>] <images/communicationmodule.pdf, id=694, 963.6pt x 542.025pt>
 File: images/communicationmodule.pdf Graphic file (type pdf)
 
 <use images/communicationmodule.pdf>
@@ -797,7 +980,7 @@ nicationmodule.pdf>]) [34]
 Chapter 4.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/impleme
-ntation.tex <images/impl_overview_new.pdf, id=793, 963.6pt x 542.025pt>
+ntation.tex <images/impl_overview_new.pdf, id=713, 963.6pt x 542.025pt>
 File: images/impl_overview_new.pdf Graphic file (type pdf)
 
 <use images/impl_overview_new.pdf>
@@ -810,17 +993,29 @@ Package pdftex.def Info: images/impl_overview_new.pdf used on input line 37.
 LaTeX Warning: Text page 36 contains only floats.
 
 [36 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/impl_
-overview_new.pdf>] [37] [38] [39] [40] [41] [42] [43]) [44]
+overview_new.pdf>] [37] [38]
+
+LaTeX Warning: Citation `Galvin' on page 39 undefined on input line 112.
+
+
+LaTeX Warning: Citation `Bovet:2005:ULK:1077084' on page 39 undefined on input 
+line 112.
+
+[39] [40] [41] [42] [43]) [44]
 Chapter 5.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Evaluat
 ion.tex [45
 
-] [46] [47]
+] [46]
+
+LaTeX Warning: Citation `sysbench' on page 47 undefined on input line 59.
+
+[47]
 
 LaTeX Warning: Citation `lmbench' on page 48 undefined on input line 91.
 
-[48] <images/iddrvsxen-ramdisk-rdwr.pdf, id=895, 361.35pt x 216.81pt>
+[48] <images/iddrvsxen-ramdisk-rdwr.pdf, id=811, 361.35pt x 216.81pt>
 File: images/iddrvsxen-ramdisk-rdwr.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-ramdisk-rdwr.pdf>
@@ -837,7 +1032,7 @@ Underfull \hbox (badness 4608) in paragraph at lines 120--120
 \OT1/cmr/m/n/10.95 and writes on a
  []
 
-<images/iddrvsxen-loop-rd.pdf, id=896, 361.35pt x 216.81pt>
+<images/iddrvsxen-loop-rd.pdf, id=812, 361.35pt x 216.81pt>
 File: images/iddrvsxen-loop-rd.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-loop-rd.pdf>
@@ -848,7 +1043,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 126--127
 [][] 
  []
 
-<images/iddvsxen-harddisk-rd.pdf, id=897, 361.35pt x 216.81pt>
+<images/iddvsxen-harddisk-rd.pdf, id=813, 361.35pt x 216.81pt>
 File: images/iddvsxen-harddisk-rd.pdf Graphic file (type pdf)
 
 <use images/iddvsxen-harddisk-rd.pdf>
@@ -883,7 +1078,7 @@ n-harddisk-rd.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/iddvsxen-harddisk-rd.pdf): PDF inclusion: multiple pdfs wi
 th page group included in a single page
->] [51] <images/rndrd-ramdisk.pdf, id=948, 361.35pt x 216.81pt>
+>] [51] <images/rndrd-ramdisk.pdf, id=864, 361.35pt x 216.81pt>
 File: images/rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-ramdisk.pdf>
@@ -894,7 +1089,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 186--187
 [][] 
  []
 
-<images/rndwr-ramdisk.pdf, id=949, 361.35pt x 216.81pt>
+<images/rndwr-ramdisk.pdf, id=865, 361.35pt x 216.81pt>
 File: images/rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-ramdisk.pdf>
@@ -905,7 +1100,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 192--193
 [][] 
  []
 
-<images/rndrw-ramdisk.pdf, id=950, 361.35pt x 216.81pt>
+<images/rndrw-ramdisk.pdf, id=866, 361.35pt x 216.81pt>
 File: images/rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-ramdisk.pdf>
@@ -916,7 +1111,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 198--199
 [][] 
  []
 
-<images/rndrd-loopdisk.pdf, id=951, 361.35pt x 216.81pt>
+<images/rndrd-loopdisk.pdf, id=867, 361.35pt x 216.81pt>
 File: images/rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-loopdisk.pdf>
@@ -927,7 +1122,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 208--209
 [][] 
  []
 
-<images/rndwr-loopdisk.pdf, id=952, 361.35pt x 216.81pt>
+<images/rndwr-loopdisk.pdf, id=868, 361.35pt x 216.81pt>
 File: images/rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-loopdisk.pdf>
@@ -938,7 +1133,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 214--215
 [][] 
  []
 
-<images/rndrw-loopdisk.pdf, id=953, 361.35pt x 216.81pt>
+<images/rndrw-loopdisk.pdf, id=869, 361.35pt x 216.81pt>
 File: images/rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-loopdisk.pdf>
@@ -949,7 +1144,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 219--220
 [][] 
  []
 
-<images/rndrd-harddisk.pdf, id=954, 361.35pt x 216.81pt>
+<images/rndrd-harddisk.pdf, id=870, 361.35pt x 216.81pt>
 File: images/rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-harddisk.pdf>
@@ -960,7 +1155,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 229--230
 [][] 
  []
 
-<images/rndwr-harddisk.pdf, id=955, 361.35pt x 216.81pt>
+<images/rndwr-harddisk.pdf, id=871, 361.35pt x 216.81pt>
 File: images/rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-harddisk.pdf>
@@ -971,7 +1166,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 235--236
 [][] 
  []
 
-<images/rndrw-harddisk.pdf, id=956, 361.35pt x 216.81pt>
+<images/rndrw-harddisk.pdf, id=872, 361.35pt x 216.81pt>
 File: images/rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-harddisk.pdf>
@@ -1021,7 +1216,7 @@ arddisk.pdf
 pdfTeX warning: pdflatex (file C:/Users/sushrut/Documents/git_co/remote-driver-
 dev/doc/latex/images/rndrw-harddisk.pdf): PDF inclusion: multiple pdfs with pag
 e group included in a single page
->] <images/cpu-rndrd-ramdisk.pdf, id=1056, 361.35pt x 216.81pt>
+>] <images/cpu-rndrd-ramdisk.pdf, id=972, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-ramdisk.pdf>
@@ -1032,7 +1227,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 295--296
 [][] 
  []
 
-<images/cpu-rndrw-ramdisk.pdf, id=1057, 361.35pt x 216.81pt>
+<images/cpu-rndrw-ramdisk.pdf, id=973, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-ramdisk.pdf>
@@ -1043,7 +1238,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 301--302
 [][] 
  []
 
-<images/cpu-rndwr-ramdisk.pdf, id=1058, 361.35pt x 216.81pt>
+<images/cpu-rndwr-ramdisk.pdf, id=974, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-ramdisk.pdf>
@@ -1054,7 +1249,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 306--307
 [][] 
  []
 
-<images/cpu-rndrd-loopdisk.pdf, id=1059, 361.35pt x 216.81pt>
+<images/cpu-rndrd-loopdisk.pdf, id=975, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-loopdisk.pdf>
@@ -1065,7 +1260,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 315--316
 [][] 
  []
 
-<images/cpu-rndrw-loopdisk.pdf, id=1060, 361.35pt x 216.81pt>
+<images/cpu-rndrw-loopdisk.pdf, id=976, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-loopdisk.pdf>
@@ -1076,7 +1271,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 321--322
 [][] 
  []
 
-<images/cpu-rndwr-loopdisk.pdf, id=1061, 361.35pt x 216.81pt>
+<images/cpu-rndwr-loopdisk.pdf, id=977, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-loopdisk.pdf>
@@ -1087,7 +1282,7 @@ Overfull \hbox (112.01535pt too wide) in paragraph at lines 326--327
 [][] 
  []
 
-<images/cpu-rndrd-harddisk.pdf, id=1062, 361.35pt x 216.81pt>
+<images/cpu-rndrd-harddisk.pdf, id=978, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-harddisk.pdf>
@@ -1098,7 +1293,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 336--337
 [][] 
  []
 
-<images/cpu-rndwr-harddisk.pdf, id=1063, 361.35pt x 216.81pt>
+<images/cpu-rndwr-harddisk.pdf, id=979, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-harddisk.pdf>
@@ -1109,7 +1304,7 @@ Overfull \hbox (158.99371pt too wide) in paragraph at lines 342--343
 [][] 
  []
 
-<images/cpu-rndrw-harddisk.pdf, id=1064, 361.35pt x 216.81pt>
+<images/cpu-rndrw-harddisk.pdf, id=980, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-harddisk.pdf>
@@ -1163,51 +1358,117 @@ dev/doc/latex/images/cpu-rndrw-harddisk.pdf): PDF inclusion: multiple pdfs with
 Chapter 6.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/related
-work.tex [59
+work.tex
 
-] [60] [61] [62]) [63]
+LaTeX Warning: Citation `tanenbaum2006can' on page 59 undefined on input line 1
+5.
+
+
+LaTeX Warning: Citation `coveritykernel' on page 59 undefined on input line 15.
+
+
+[59
+
+]
+
+LaTeX Warning: Citation `armand1991give' on page 60 undefined on input line 22.
+
+
+
+LaTeX Warning: Citation `Leslie+:jcst2005' on page 60 undefined on input line 2
+3.
+
+
+LaTeX Warning: Citation `Ganapathy:2008:DIM:1346281.1346303' on page 60 undefin
+ed on input line 25.
+
+
+LaTeX Warning: Citation `swift2005improving' on page 60 undefined on input line
+ 33.
+
+[60]
+
+LaTeX Warning: Citation `Boyd-Wickizer+:atc2010' on page 61 undefined on input 
+line 42.
+
+
+LaTeX Warning: Citation `Belay+:osdi12' on page 61 undefined on input line 47.
+
+
+LaTeX Warning: Citation `Fraser04safehardware' on page 61 undefined on input li
+ne 57.
+
+
+LaTeX Warning: Citation `LeVasseur04UnmodifiedDriverReuse' on page 61 undefined
+ on input line 62.
+
+
+LaTeX Warning: Citation `Nikolaev:2013:VOS:2517349.2522719' on page 61 undefine
+d on input line 69.
+
+[61]
+
+LaTeX Warning: Citation `Accetta+:usenix86' on page 62 undefined on input line 
+79.
+
+
+LaTeX Warning: Citation `Liedtke+:sosp95' on page 62 undefined on input line 79
+.
+
+
+LaTeX Warning: Citation `Elphinstone+:sosp13' on page 62 undefined on input lin
+e 86.
+
+
+LaTeX Warning: Citation `Heiser+:osr2006' on page 62 undefined on input line 89
+.
+
+
+LaTeX Warning: Citation `hand2005virtual' on page 62 undefined on input line 89
+.
+
+
+LaTeX Warning: Citation `Heiser+:acm10' on page 62 undefined on input line 90.
+
+
+LaTeX Warning: Citation `Fraser04safehardware' on page 62 undefined on input li
+ne 98.
+
+
+LaTeX Warning: Citation `Zhang:2007:XHI:1516124.1516138' on page 62 undefined o
+n input line 101.
+
+[62]
+
+LaTeX Warning: Citation `Burtsev:2009:FFI:1855807.1855832' on page 63 undefined
+ on input line 106.
+
+) [63]
 Chapter 7.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/conclus
 ion.tex [64
 
 ])
-(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.bbl
-[65]
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no “ in font cmr12!
- [66
-
-] [67] [68] [69]
-Missing character: There is no Â in font cmr12!
-Missing character: There is no ¨ in font cmr12!
-Missing character: There is no â in font cmr12!
-Missing character: There is no € in font cmr12!
-Missing character: There is no “ in font cmr12!
- [70] [71])
+(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
- [72]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
 
-(C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
+[65]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+ (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 32D96EA74256E224EC1B4C511F6A7074;2689.
 
-
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 11035 strings out of 493921
- 169338 string characters out of 3144869
- 277218 words of memory out of 3000000
- 13902 multiletter control sequences out of 15000+200000
+ 10986 strings out of 493921
+ 168233 string characters out of 3144869
+ 275640 words of memory out of 3000000
+ 13906 multiletter control sequences out of 15000+200000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  37i,10n,39p,813b,556s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1219,9 +1480,9 @@ am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (82 pages, 2242992 bytes).
+Output written on thesis.pdf (75 pages, 2192707 bytes).
 PDF statistics:
- 1348 PDF objects out of 1440 (max. 8388607)
- 260 named destinations out of 1000 (max. 500000)
+ 1175 PDF objects out of 1200 (max. 8388607)
+ 207 named destinations out of 1000 (max. 500000)
  559 words of extra memory for PDF output out of 10000 (max. 10000000)
 

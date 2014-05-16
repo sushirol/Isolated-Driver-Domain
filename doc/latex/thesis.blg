@@ -1,10 +1,5 @@
 This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-The style file: plain.bst
-Database file #1: references.bib
-Warning--I didn't find a database entry for "lmbench"
-Warning--to sort, need author or key in coveritykernel
-Warning--to sort, need author or key in driverdomain
-Warning--to sort, need author or key in hypercall
-Warning--to sort, need author or key in granttable
-Warning--to sort, need author or key in sysbench
-(There were 6 warnings)
+I found no \citation commands---while reading file thesis.aux
+I found no \bibdata command---while reading file thesis.aux
+I found no \bibstyle command---while reading file thesis.aux
+(There were 3 error messages)
