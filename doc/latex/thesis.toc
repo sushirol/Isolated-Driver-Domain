@@ -48,13 +48,13 @@
 \contentsline {section}{\numberline {5.1}Goals}{45}{section.5.1}
 \contentsline {section}{\numberline {5.2}Methodology}{47}{section.5.2}
 \contentsline {section}{\numberline {5.3}Xen Split Device Driver vs Interrupt-based IDDR System}{48}{section.5.3}
-\contentsline {section}{\numberline {5.4}Interrupt-based IDDR System vs Spinning-based IDDR System}{51}{section.5.4}
-\contentsline {paragraph}{Comparison:}{52}{section*.44}
-\contentsline {paragraph}{Observation:}{52}{section*.48}
-\contentsline {paragraph}{Observation: }{55}{section*.49}
-\contentsline {chapter}{\numberline {6}Related Work}{59}{chapter.6}
-\contentsline {section}{\numberline {6.1}Reliability}{60}{section.6.1}
-\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{60}{subsection.6.1.1}
-\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{62}{subsection.6.1.2}
-\contentsline {section}{\numberline {6.2}Interdomain Communication}{62}{section.6.2}
-\contentsline {chapter}{\numberline {7}Conclusion}{64}{chapter.7}
+\contentsline {section}{\numberline {5.4}Interrupt-based IDDR System vs Spinning-based IDDR System}{50}{section.5.4}
+\contentsline {paragraph}{Comparison:}{51}{section*.45}
+\contentsline {paragraph}{Observation:}{51}{section*.52}
+\contentsline {paragraph}{Observation: }{52}{section*.53}
+\contentsline {chapter}{\numberline {6}Related Work}{67}{chapter.6}
+\contentsline {section}{\numberline {6.1}Reliability}{68}{section.6.1}
+\contentsline {subsection}{\numberline {6.1.1}Driver Protection Approaches}{68}{subsection.6.1.1}
+\contentsline {subsection}{\numberline {6.1.2}Kernel Designs}{70}{subsection.6.1.2}
+\contentsline {section}{\numberline {6.2}Interdomain Communication}{70}{section.6.2}
+\contentsline {chapter}{\numberline {7}Conclusion}{72}{chapter.7}

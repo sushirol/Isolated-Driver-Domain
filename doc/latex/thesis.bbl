@@ -1,0 +1,268 @@
+\begin{thebibliography}{10}
+
+\bibitem{coveritykernel}
+{Coverity's Analysis of the Linux kernel}.
+\newblock \url{http://www.coverity.com/library/pdf/coverity_linuxsecurity.pdf}.
+
+\bibitem{sysbench}
+{SysBench 0.4.12 – A System Performance Benchmark}.
+\newblock \url{http://sysbench.sourceforge.net/}.
+
+\bibitem{granttable}
+{Xen hypervisor: Grant Tables}.
+\newblock \url{http://xenbits.xen.org/docs/4.2-testing/misc/grant-tables.txt}.
+
+\bibitem{hypercall}
+{Xen hypervisor: Hypercalls}.
+\newblock \url{http://wiki.xen.org/wiki/Hypercall}.
+
+\bibitem{driverdomain}
+{Xen's Isolated Driver Domains}.
+\newblock \url{http://wiki.xen.org/wiki/Driver_Domain}.
+
+\bibitem{Accetta+:usenix86}
+Mike Accetta, Robert Baron, William Bolosky, David Golub, Richard Rashid,
+  Avadis Tevanian, and Michael Young.
+\newblock Mach: A new kernel foundation for {UNIX} development.
+\newblock In {\em Proceedings of the 1986 Summer USENIX Conference}, pages
+  93--112, 1986.
+
+\bibitem{Agesen:2010:EXV:1899928.1899930}
+Ole Agesen, Alex Garthwaite, Jeffrey Sheldon, and Pratap Subrahmanyam.
+\newblock The evolution of an x86 virtual machine monitor.
+\newblock {\em SIGOPS Oper. Syst. Rev.}, 44(4):3--18, December 2010.
+
+\bibitem{armand1991give}
+Fran{\c{c}}ois Armand.
+\newblock Give a process to your drivers.
+\newblock In {\em Proceedings of the EurOpen Autumn 1991 Conference}, pages
+  16--20. Budapest, 1991.
+
+\bibitem{barham2003xen}
+Paul Barham, Boris Dragovic, Keir Fraser, and et~al.
+\newblock {Xen} and the art of virtualization.
+\newblock In {\em Proceedings of the 19th ACM Symposium on Operating Systems
+  Principles}, SOSP'03, pages 164--177, Bolton Landing, NY, USA, 2003.
+
+\bibitem{Belay+:osdi12}
+Adam Belay, Andrea Bittau, Ali Mashtizadeh, David Terei, David Mazi\`{e}res,
+  and Christos Kozyrakis.
+\newblock {Dune: Safe User-level Access to Privileged CPU Features}.
+\newblock In {\em Proceedings of the 10th USENIX Symposium on Operating Systems
+  Design \& Implementation}, OSDI'12, pages 335--348, Hollywood, CA, USA, 2012.
+
+\bibitem{Bovet:2005:ULK:1077084}
+Daniel Bovet and Marco Cesati.
+\newblock {\em Understanding The Linux Kernel}.
+\newblock Oreilly \& Associates Inc, 3rd edition, 2005.
+
+\bibitem{Boyd-Wickizer+:atc2010}
+Silas Boyd-Wickizer and Nickolai Zeldovich.
+\newblock Tolerating malicious device drivers in {Linux}.
+\newblock In {\em Proceedings of the 2010 USENIX Annual Technical Conference},
+  ATC'10, pages 117--130, Boston, MA, USA, 2010.
+
+\bibitem{Burtsev:2009:FFI:1855807.1855832}
+Anton Burtsev, Kiran Srinivasan, Prashanth Radhakrishnan, Lakshmi~N.
+  Bairavasundaram, Kaladhar Voruganti, and Garth~R. Goodson.
+\newblock Fido: Fast inter-virtual-machine communication for enterprise
+  appliances.
+\newblock In {\em Proceedings of the 2009 USENIX Annual Technical Conference},
+  ATC'09, pages 25--25, San Diego, CA, USA, 2009.
+
+\bibitem{camargos2008virtualization}
+Fernando~L. Camargos, Gabriel Girard, and Benoit~D. Ligneris.
+\newblock {Virtualization of Linux servers: a comparative study}.
+\newblock In {\em 2008 Ottawa Linux Symposium}, pages 63--76, Ottawa, Ontario,
+  Canada, 2008.
+
+\bibitem{Chisnall:2007:DGX:1407351}
+David Chisnall.
+\newblock {\em The Definitive Guide to the Xen Hypervisor}.
+\newblock Prentice Hall Press, 1st edition, 2007.
+
+\bibitem{Corbet:2005:LDD:1209083}
+Jonathan Corbet, Alessandro Rubini, and Greg Kroah-Hartman.
+\newblock {\em Linux Device Drivers}.
+\newblock O'Reilly Media, Inc., 3rd edition, 2005.
+
+\bibitem{denning1970virtual}
+Peter~J Denning.
+\newblock Virtual memory.
+\newblock {\em ACM Computing Surveys (CSUR)}, 2(3):153--189, 1970.
+
+\bibitem{Drepper:2008:CV:1348583.1348591}
+Ulrich Drepper.
+\newblock The cost of virtualization.
+\newblock {\em ACM Queue}, 6(1):28--35, 2008.
+
+\bibitem{Elphinstone+:sosp13}
+Kevin Elphinstone and Gernot Heiser.
+\newblock From l3 to sel4 what have we learnt in 20 years of l4 microkernels?
+\newblock In {\em Proceedings of the 24th ACM Symposium on Operating Systems
+  Principles}, SOSP '13, pages 133--150, Farminton, PA, 2013.
+
+\bibitem{Fraser04safehardware}
+Keir Fraser, Steven Hand, Rolf Neugebauer, Ian Pratt, Andrew Warfield, and Mark
+  Williamson.
+\newblock Safe hardware access with the {X}en virtual machine monitor.
+\newblock In {\em Proceedings of the 1st Workshop on Operating System and
+  Architectural Support for the on-demand IT InfraStructure}, OASIS'04, 2004.
+
+\bibitem{Ganapathy:2008:DIM:1346281.1346303}
+Vinod Ganapathy, Matthew~J. Renzelmann, Arini Balakrishnan, Michael~M. Swift,
+  and Somesh Jha.
+\newblock The design and implementation of microdrivers.
+\newblock In {\em Proceedings of the 18th International Conference on
+  Architectural Support for Programming Languages and Operating Systems},
+  ASPLOS XIII, pages 168--178, Seattle, WA, USA, 2008.
+
+\bibitem{Goldberg:1973:AVM:800122.803950}
+R.~P. Goldberg.
+\newblock Architecture of virtual machines.
+\newblock In {\em Proceedings of the Workshop on Virtual Computer Systems},
+  pages 74--112, Cambridge, Massachusetts, USA, 1973.
+
+\bibitem{Graham:1971:PPP:1478873.1478928}
+G.~Scott Graham and Peter~J. Denning.
+\newblock Protection: Principles and practice.
+\newblock In {\em Proceedings of the Spring Joint Computer Conference}, pages
+  417--429, Atlantic City, NJ, USA, 1972.
+
+\bibitem{Habib:2008:VK:1344209.1344217}
+Irfan Habib.
+\newblock Virtualization with {KVM}.
+\newblock {\em Linux Journal}, 2008(166):8, 2008.
+
+\bibitem{hand2005virtual}
+Steven Hand, Andrew Warfield, Keir Fraser, Evangelos Kotsovinos, and Dan
+  Magenheimer.
+\newblock Are virtual machine monitors microkernels done right?
+\newblock In {\em Proceedings of the 10th Workshop on Hot Topics in Operating
+  Systems}, HOTOS'05, Santa Fe, NM, 2005.
+
+\bibitem{Heiser+:acm10}
+Gernot Heiser and Ben Leslie.
+\newblock {The OKL4 Microvisor: Convergence Point of Microkernels and
+  Hypervisors}.
+\newblock In {\em Proceedings of the 1st ACM Asia-Pacific Workshop on Systems},
+  APSys'10, pages 19--24, New Delhi, India, 2010.
+
+\bibitem{Heiser+:osr2006}
+Gernot Heiser, Volkmar Uhlig, and Joshua LeVasseur.
+\newblock Are virtual-machine monitors microkernels done right?
+\newblock {\em SIGOPS Operating Systems Review}, 40(1):95--99, 2006.
+
+\bibitem{king2003operating}
+Samuel~T. King, George~W. Dunlap, and Peter~M. Chen.
+\newblock Operating system support for virtual machines.
+\newblock In {\em Proceedings of the 2003 USENIX Annual Technical Conference},
+  ATC'03, pages 71--84, San Antonio, TX, USA, 2003.
+
+\bibitem{kivity2007kvm}
+Avi Kivity, Yaniv Kamay, Dor Laor, Uri Lublin, and Anthony Liguori.
+\newblock {KVM}: the {Linux} virtual machine monitor.
+\newblock In {\em OLS '07: The 2007 Ottawa Linux Symposium}, volume~1, pages
+  225--230, 2007.
+
+\bibitem{Leslie+:jcst2005}
+Ben Leslie, Peter Chubb, Nicholas Fitzroy-Dale, Stefan {G¨otz}, Charles Gray,
+  Luke Macpherson, Daniel Potts, Yueting~(Rita) Shen, Kevin Elphinstone, and
+  Gernot Heiser.
+\newblock Userlevel device drivers: Achieved performance.
+\newblock {\em Journal of Computer Science and Technology}, 20(5):654--–664,
+  September 2005.
+
+\bibitem{LeVasseur04UnmodifiedDriverReuse}
+Joshua LeVasseur, Volkmar Uhlig, Jan Stoess, and Stefan G\"{o}tz.
+\newblock Unmodified device driver reuse and improved system dependability via
+  virtual machines.
+\newblock In {\em Proceedings of the 6th USENIX Symposium on Operating Systems
+  Design \& Implementation}, OSDI'04, pages 17--30, San Francisco, CA, USA,
+  2004.
+
+\bibitem{Li:2007:QCC:1281700.1281702}
+Chuanpeng Li, Chen Ding, and Kai Shen.
+\newblock Quantifying the cost of context switch.
+\newblock In {\em Proceedings of the 2007 Workshop on Experimental Computer
+  Science}, San Diego, CA, USA, 2007.
+
+\bibitem{Liedtke+:sosp95}
+J.~Liedtke.
+\newblock On micro-kernel construction.
+\newblock In {\em Proceedings of the 15th ACM Symposium on Operating Systems
+  Principles}, SOSP'95, pages 237--250, Copper Mountain, CO, USA, 1995.
+
+\bibitem{Menascé05virtualization:concepts}
+Daniel~A Menasc{\'e}.
+\newblock Virtualization: Concepts, applications, and performance modeling.
+\newblock In {\em Int. CMG Conference}, pages 407--414, 2005.
+
+\bibitem{Menon:2006:ONV:1267359.1267361}
+Aravind Menon, Alan~L. Cox, and Willy Zwaenepoel.
+\newblock Optimizing network virtualization in {X}en.
+\newblock In {\em Proceedings of the Annual Conference on USENIX '06 Annual
+  Technical Conference}, pages 2--2, Boston, MA, USA, 2006.
+
+\bibitem{Mogul:1991:ECS:106973.106982}
+Jeffrey~C. Mogul and Anita Borg.
+\newblock The effect of context switches on cache performance.
+\newblock {\em SIGPLAN Not.}, 26(4):75--84, 1991.
+
+\bibitem{Nikolaev:2013:VOS:2517349.2522719}
+Ruslan Nikolaev and Godmar Back.
+\newblock {VirtuOS}: An operating system with kernel virtualization.
+\newblock In {\em Proceedings of the 24th ACM Symposium on Operating Systems
+  Principles}, SOSP'13, pages 116--132, Farminton, PA, USA, 2013.
+
+\bibitem{Popek:1974:FRV:361011.361073}
+Gerald~J. Popek and Robert~P. Goldberg.
+\newblock Formal requirements for virtualizable third generation architectures.
+\newblock {\em Commun. ACM}, 17(7):412--421, 1974.
+
+\bibitem{Riley:2008:GPK:1433006.1433008}
+Ryan Riley, Xuxian Jiang, and Dongyan Xu.
+\newblock Guest-transparent prevention of kernel rootkits with {VMM}-based
+  memory shadowing.
+\newblock In {\em Proceedings of the 11th international symposium on Recent
+  Advances in Intrusion Detection}, RAID'08, pages 1--20, Cambridge, MA, USA,
+  2008.
+
+\bibitem{Galvin}
+Abraham Silberschatz, Peter~Baer Galvin, and Greg Gagne.
+\newblock {\em Operating System Concepts}.
+\newblock Wiley Publishing, 8th edition, 2008.
+
+\bibitem{Soares+:osdi10}
+Livio Soares and Michael Stumm.
+\newblock {FlexSC}: flexible system call scheduling with exception-less system
+  calls.
+\newblock In {\em Proceedings of the 9th USENIX Symposium on Operating Systems
+  Design \& Implementation}, OSDI'10, pages 1--8, Vancouver, BC, Canada, 2010.
+
+\bibitem{Sugerman:2001:VID:647055.715774}
+Jeremy Sugerman, Ganesh Venkitachalam, and Beng-Hong Lim.
+\newblock {Virtualizing {I/O} Devices on {VMware} {Workstation}'s Hosted
+  Virtual Machine Monitor}.
+\newblock In {\em Proceedings of the 2002 USENIX Annual Technical Conference},
+  ATC'02, pages 1--14, Boston, MA, USA, 2001.
+
+\bibitem{swift2005improving}
+Michael~M Swift, Brian~N Bershad, and Henry~M Levy.
+\newblock Improving the reliability of commodity operating systems.
+\newblock {\em ACM Transactions on Computer Systems (TOCS)}, 23(1):77--110,
+  2005.
+
+\bibitem{tanenbaum2006can}
+Andrew~S Tanenbaum, Jorrit~N Herder, and Herbert Bos.
+\newblock Can we make operating systems reliable and secure?
+\newblock {\em Computer}, 39(5):44--51, 2006.
+
+\bibitem{Zhang:2007:XHI:1516124.1516138}
+Xiaolan Zhang, Suzanne McIntosh, Pankaj Rohatgi, and John~Linwood Griffin.
+\newblock Xensocket: A high-throughput interdomain transport for virtual
+  machines.
+\newblock In {\em Proceedings of the ACM/IFIP/USENIX 2007 International
+  Conference on Middleware}, pages 184--203, Newport Beach, CA, USA, 2007.
+
+\end{thebibliography}
