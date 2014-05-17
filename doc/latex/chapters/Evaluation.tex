@@ -114,22 +114,23 @@ IDDR implementation provides a suitable baseline for our performance
 optimizations.
 
 \begin{figure}[!ht]
-%\centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{iddrvsxen-ramdisk-rdwr}
+\centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{iddrvsxen-ramdisk-rdwr}
   \caption{Random reads and writes on a ramdisk}
   \label{fig:iddrvsxen-ramdisk-rdwr}
-  \end{subfigure}
-  \hspace{50mm}
-  %\hfill
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{iddrvsxen-loop-rd}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{iddrvsxen-loop-rd}
   \caption{Random reads on a loop device}
   \label{fig:iddrvsxen-loop-rd}
-  \end{subfigure}\\*
-  \hspace{150mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{iddvsxen-harddisk-rd}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{iddvsxen-harddisk-rd}
   \caption{Random reads on a SATA disk}
   \label{fig:iddrvsxen-harddisk-rd}
   \end{subfigure}\\
@@ -181,21 +182,23 @@ and Figure~\ref{subfig:rndrw-harddisk} compare the performance for mixed
 random read and write workloads.
 
 \begin{figure}[!ht]
-% \centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndrd-ramdisk}
+ \centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrd-ramdisk}
   \caption{Random reads}
   \label{subfig:rndrd-ramdisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndwr-ramdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndwr-ramdisk}
   \caption{Random writes}
   \label{subfig:rndwr-ramdisk}
-  \end{subfigure}\\*
-  \hspace{150mm}
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{rndrw-ramdisk}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrw-ramdisk}
   \caption{Random reads writes}
   \label{subfig:rndrw-ramdisk}
   \end{subfigure}
@@ -203,20 +206,23 @@ random read and write workloads.
 \end{figure}
 
 \begin{figure}[!ht]
-%\centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndrd-loopdisk}
+\centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrd-loopdisk}
   \caption{Random reads}
   \label{subfig:rndrd-loopdisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndwr-loopdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndwr-loopdisk}
   \caption{Random writes}
   \label{subfig:rndwr-loopdisk}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{rndrw-loopdisk}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrw-loopdisk}
   \caption{Random reads writes}
   \label{subfig:rndrw-loopdisk}
   \end{subfigure}
@@ -224,20 +230,23 @@ random read and write workloads.
 \end{figure}
 
 \begin{figure}[!ht]
-%\centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndrd-harddisk}
+\centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrd-harddisk}
   \caption{Random reads}
   \label{subfig:rndrd-harddisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{rndwr-harddisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndwr-harddisk}
   \caption{Random writes}
   \label{subfig:rndwr-harddisk}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{rndrw-harddisk}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{rndrw-harddisk}
   \caption{Random reads writes}
   \label{subfig:rndrw-harddisk}
   \end{subfigure}
@@ -268,14 +277,11 @@ increasing the need for virtual interrupts even further.
 
 The spinning-based IDDR system uses CPU cycles that could also be
 used by applications unless excess CPU capacity is available (as in many
-multicore or manycore systems).
-Hence we exploit a trade-off between higher CPU utilization and 
-higher throughput.
+multicore or manycore systems). Hence we exploit a trade-off between higher 
+CPU utilization and higher throughput.
 
 In this section we compare the CPU utilization of the interrupt-based and
-the spinning-based IDDR systems.
-
-Figure~\ref{fig:cpuramdisk}, Figure~\ref{fig:cpuloopdisk}, and
+the spinning-based IDDR systems. Figure~\ref{fig:cpuramdisk}, Figure~\ref{fig:cpuloopdisk}, and
 Figure~\ref{fig:cpuharddisk} compare the CPU utilization of both 
 systems using the ramdisk, loop device and SATA disk setups.
 
@@ -290,20 +296,23 @@ implementation ranges between 100\% and 250\%, which is within the
 expected range.
 
 \begin{figure}[!ht]
-%\centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrd-ramdisk}
+\centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrd-ramdisk}
   \caption{Random reads}
   \label{subfig:cpu-rndrd-ramdisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrw-ramdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrw-ramdisk}
   \caption{Random writes}
   \label{subfig:cpu-rndrw-ramdisk}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{cpu-rndwr-ramdisk}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndwr-ramdisk}
   \caption{Random reads writes}
   \label{subfig:cpu-rndwr-ramdisk}
   \end{subfigure}
@@ -311,19 +320,21 @@ expected range.
 \end{figure}
 
 \begin{figure}[!ht]
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrd-loopdisk}
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrd-loopdisk}
   \caption{Random reads}
   \label{subfig:cpu-rndrd-loopdisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrw-loopdisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrw-loopdisk}
   \caption{Random writes}
   \label{subfig:cpu-rndrw-loopdisk}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{cpu-rndwr-loopdisk}
+\end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndwr-loopdisk}
   \caption{Random reads writes}
   \label{subfig:cpu-rndwr-loopdisk}
   \end{subfigure}
@@ -331,23 +342,25 @@ expected range.
 \end{figure}
 
 \begin{figure}[!ht]
-%\centering
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrd-harddisk}
+\centering
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrd-harddisk}
   \caption{Random reads}
   \label{subfig:cpu-rndrd-harddisk}
-  \end{subfigure}
-  \hspace{50mm}
-  \begin{subfigure}[b]{0.2\textwidth}
-  \includegraphics[scale=.7]{cpu-rndwr-harddisk}
+  \end{subfigure}\\
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndwr-harddisk}
   \caption{Random writes}
   \label{subfig:cpu-rndwr-harddisk}
-  \end{subfigure}\\
-  \begin{subfigure}[b]{0.3\textwidth}
-  \includegraphics[scale=.7]{cpu-rndrw-harddisk}
+  \end{subfigure}
+\end{figure}
+
+\begin{figure}[H]
+  \ContinuedFloat
+  \begin{subfigure}[b]{\textwidth}
+  \includegraphics[width=\textwidth]{cpu-rndrw-harddisk}
   \caption{Random reads writes}
   \label{subfig:cpurndrw-harddisk}
   \end{subfigure}
 \caption{Comparison of CPU utilization - SATA disk}\label{fig:cpuharddisk}
 \end{figure}
-
