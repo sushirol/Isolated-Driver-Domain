@@ -10,7 +10,7 @@
 \contentsline {figure}{\numberline {2.7}{\ignorespaces Type 1 hypervisors\relax }}{17}{figure.caption.17}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces Type 2 hypervisors\relax }}{18}{figure.caption.18}
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Xen split device driver\relax }}{19}{figure.caption.19}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Xen\relax }}{20}{figure.caption.20}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Xen hypervisor\relax }}{20}{figure.caption.20}
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{22}{figure.caption.21}
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{23}{figure.caption.22}
 \addvspace {10\p@ }
@@ -27,8 +27,8 @@
 \contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{56}{figure.caption.47}
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{58}{figure.caption.49}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Random reads and writes on a SATA disk\relax }}{60}{figure.caption.51}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ram disk\relax }}{62}{figure.caption.55}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{64}{figure.caption.57}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - Ramdisk\relax }}{62}{figure.caption.55}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - Loop device\relax }}{64}{figure.caption.57}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{66}{figure.caption.59}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
