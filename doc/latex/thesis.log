@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  17 MAY 2014 01:51
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  17 MAY 2014 01:54
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -789,11 +789,8 @@ Chapter 5.
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/Evaluat
 ion.tex [45
 
-] [46] [47]
-
-LaTeX Warning: Citation `lmbench' on page 48 undefined on input line 91.
-
-[48] <images/iddrvsxen-ramdisk-rdwr.pdf, id=895, 361.35pt x 216.81pt>
+] [46] [47] [48]
+<images/iddrvsxen-ramdisk-rdwr.pdf, id=896, 361.35pt x 216.81pt>
 File: images/iddrvsxen-ramdisk-rdwr.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-ramdisk-rdwr.pdf>
@@ -801,7 +798,7 @@ Package pdftex.def Info: images/iddrvsxen-ramdisk-rdwr.pdf used on input line 1
 19.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/iddrvsxen-loop-rd.pdf, id=896, 361.35pt x 216.81pt>
+<images/iddrvsxen-loop-rd.pdf, id=897, 361.35pt x 216.81pt>
 File: images/iddrvsxen-loop-rd.pdf Graphic file (type pdf)
 
 <use images/iddrvsxen-loop-rd.pdf>
@@ -811,7 +808,7 @@ Package pdftex.def Info: images/iddrvsxen-loop-rd.pdf used on input line 124.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 128.
 
-<images/iddvsxen-harddisk-rd.pdf, id=897, 361.35pt x 216.81pt>
+<images/iddvsxen-harddisk-rd.pdf, id=898, 361.35pt x 216.81pt>
 File: images/iddvsxen-harddisk-rd.pdf Graphic file (type pdf)
 
 <use images/iddvsxen-harddisk-rd.pdf>
@@ -823,14 +820,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--137
 
  []
 
-[49] [50] <images/rndrd-ramdisk.pdf, id=919, 361.35pt x 216.81pt>
+[49] [50] <images/rndrd-ramdisk.pdf, id=921, 361.35pt x 216.81pt>
 File: images/rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-ramdisk.pdf>
 Package pdftex.def Info: images/rndrd-ramdisk.pdf used on input line 187.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/rndwr-ramdisk.pdf, id=920, 361.35pt x 216.81pt>
+<images/rndwr-ramdisk.pdf, id=922, 361.35pt x 216.81pt>
 File: images/rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-ramdisk.pdf>
@@ -840,21 +837,21 @@ Package pdftex.def Info: images/rndwr-ramdisk.pdf used on input line 192.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 196.
 
-<images/rndrw-ramdisk.pdf, id=921, 361.35pt x 216.81pt>
+<images/rndrw-ramdisk.pdf, id=923, 361.35pt x 216.81pt>
 File: images/rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-ramdisk.pdf>
 Package pdftex.def Info: images/rndrw-ramdisk.pdf used on input line 201.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/rndrd-loopdisk.pdf, id=922, 361.35pt x 216.81pt>
+<images/rndrd-loopdisk.pdf, id=924, 361.35pt x 216.81pt>
 File: images/rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-loopdisk.pdf>
 Package pdftex.def Info: images/rndrd-loopdisk.pdf used on input line 211.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/rndwr-loopdisk.pdf, id=923, 361.35pt x 216.81pt>
+<images/rndwr-loopdisk.pdf, id=925, 361.35pt x 216.81pt>
 File: images/rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-loopdisk.pdf>
@@ -864,21 +861,21 @@ Package pdftex.def Info: images/rndwr-loopdisk.pdf used on input line 216.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 220.
 
-<images/rndrw-loopdisk.pdf, id=924, 361.35pt x 216.81pt>
+<images/rndrw-loopdisk.pdf, id=926, 361.35pt x 216.81pt>
 File: images/rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-loopdisk.pdf>
 Package pdftex.def Info: images/rndrw-loopdisk.pdf used on input line 225.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/rndrd-harddisk.pdf, id=925, 361.35pt x 216.81pt>
+<images/rndrd-harddisk.pdf, id=927, 361.35pt x 216.81pt>
 File: images/rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrd-harddisk.pdf>
 Package pdftex.def Info: images/rndrd-harddisk.pdf used on input line 235.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/rndwr-harddisk.pdf, id=926, 361.35pt x 216.81pt>
+<images/rndwr-harddisk.pdf, id=928, 361.35pt x 216.81pt>
 File: images/rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndwr-harddisk.pdf>
@@ -888,21 +885,21 @@ Package pdftex.def Info: images/rndwr-harddisk.pdf used on input line 240.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 244.
 
-<images/rndrw-harddisk.pdf, id=927, 361.35pt x 216.81pt>
+<images/rndrw-harddisk.pdf, id=929, 361.35pt x 216.81pt>
 File: images/rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/rndrw-harddisk.pdf>
 Package pdftex.def Info: images/rndrw-harddisk.pdf used on input line 249.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
  [51]
-<images/cpu-rndrd-ramdisk.pdf, id=943, 361.35pt x 216.81pt>
+<images/cpu-rndrd-ramdisk.pdf, id=945, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-ramdisk.pdf>
 Package pdftex.def Info: images/cpu-rndrd-ramdisk.pdf used on input line 301.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/cpu-rndrw-ramdisk.pdf, id=944, 361.35pt x 216.81pt>
+<images/cpu-rndrw-ramdisk.pdf, id=946, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-ramdisk.pdf>
@@ -912,21 +909,21 @@ Package pdftex.def Info: images/cpu-rndrw-ramdisk.pdf used on input line 306.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 310.
 
-<images/cpu-rndwr-ramdisk.pdf, id=945, 361.35pt x 216.81pt>
+<images/cpu-rndwr-ramdisk.pdf, id=947, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-ramdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-ramdisk.pdf>
 Package pdftex.def Info: images/cpu-rndwr-ramdisk.pdf used on input line 315.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/cpu-rndrd-loopdisk.pdf, id=946, 361.35pt x 216.81pt>
+<images/cpu-rndrd-loopdisk.pdf, id=948, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-loopdisk.pdf>
 Package pdftex.def Info: images/cpu-rndrd-loopdisk.pdf used on input line 324.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/cpu-rndrw-loopdisk.pdf, id=947, 361.35pt x 216.81pt>
+<images/cpu-rndrw-loopdisk.pdf, id=949, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-loopdisk.pdf>
@@ -936,21 +933,21 @@ Package pdftex.def Info: images/cpu-rndrw-loopdisk.pdf used on input line 329.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 333.
 
-<images/cpu-rndwr-loopdisk.pdf, id=948, 361.35pt x 216.81pt>
+<images/cpu-rndwr-loopdisk.pdf, id=950, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-loopdisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-loopdisk.pdf>
 Package pdftex.def Info: images/cpu-rndwr-loopdisk.pdf used on input line 337.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/cpu-rndrd-harddisk.pdf, id=949, 361.35pt x 216.81pt>
+<images/cpu-rndrd-harddisk.pdf, id=951, 361.35pt x 216.81pt>
 File: images/cpu-rndrd-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrd-harddisk.pdf>
 Package pdftex.def Info: images/cpu-rndrd-harddisk.pdf used on input line 347.
 (pdftex.def)             Requested size: 469.75499pt x 281.85626pt.
 
-<images/cpu-rndwr-harddisk.pdf, id=950, 361.35pt x 216.81pt>
+<images/cpu-rndwr-harddisk.pdf, id=952, 361.35pt x 216.81pt>
 File: images/cpu-rndwr-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndwr-harddisk.pdf>
@@ -960,7 +957,7 @@ Package pdftex.def Info: images/cpu-rndwr-harddisk.pdf used on input line 352.
 
 LaTeX Warning: Float too large for page by 16.81752pt on input line 356.
 
-<images/cpu-rndrw-harddisk.pdf, id=951, 361.35pt x 216.81pt>
+<images/cpu-rndrw-harddisk.pdf, id=953, 361.35pt x 216.81pt>
 File: images/cpu-rndrw-harddisk.pdf Graphic file (type pdf)
 
 <use images/cpu-rndrw-harddisk.pdf>
@@ -1058,15 +1055,11 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 32D96EA74256E224EC1B4C511F6A7074;2689.
-
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 11061 strings out of 493921
- 169808 string characters out of 3144869
- 282630 words of memory out of 3000000
+ 11062 strings out of 493921
+ 169820 string characters out of 3144869
+ 282660 words of memory out of 3000000
  13913 multiletter control sequences out of 15000+200000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1079,9 +1072,9 @@ am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (90 pages, 2249543 bytes).
+Output written on thesis.pdf (90 pages, 2249955 bytes).
 PDF statistics:
- 1397 PDF objects out of 1440 (max. 8388607)
- 275 named destinations out of 1000 (max. 500000)
+ 1400 PDF objects out of 1440 (max. 8388607)
+ 276 named destinations out of 1000 (max. 500000)
  559 words of extra memory for PDF output out of 10000 (max. 10000000)
 

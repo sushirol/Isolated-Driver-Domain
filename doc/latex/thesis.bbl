@@ -193,6 +193,11 @@ J.~Liedtke.
 \newblock In {\em Proceedings of the 15th ACM Symposium on Operating Systems
   Principles}, SOSP'95, pages 237--250, Copper Mountain, CO, USA, 1995.
 
+\bibitem{lmbench}
+Larry McVoy and Carl Staelin.
+\newblock {LMbench -- Tools for Performance Analysis}, 2013.
+\newblock \url{http://lmbench.sourceforge.net/}.
+
 \bibitem{Menascé05virtualization:concepts}
 Daniel~A Menasc{\'e}.
 \newblock Virtualization: Concepts, applications, and performance modeling.
