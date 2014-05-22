@@ -12,7 +12,7 @@
 \contentsline {figure}{\numberline {2.9}{\ignorespaces Xen split device driver\relax }}{19}{figure.caption.19}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Xen hypervisor\relax }}{20}{figure.caption.20}
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Ring I/O buffer\relax }}{22}{figure.caption.21}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Ring I/O buffer\relax }}{23}{figure.caption.22}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces The composition of a split device driver using ring buffer\relax }}{23}{figure.caption.22}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Architectural overview of a modern OS\relax }}{26}{figure.caption.23}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Architectural overview of the interrupt-based IDDR system\relax }}{27}{figure.caption.24}
@@ -24,11 +24,11 @@
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementation overview of the spinning-based IDDR system\relax }}{36}{figure.caption.34}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {5.1}{\ignorespaces Interrupt-based IDDR system vs Xen split driver\relax }}{54}{figure.caption.44}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a Ramdisk\relax }}{56}{figure.caption.47}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a Loop device\relax }}{58}{figure.caption.49}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Random reads and writes on a ramdisk\relax }}{56}{figure.caption.47}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Random reads and writes on a loop device\relax }}{58}{figure.caption.49}
 \contentsline {figure}{\numberline {5.4}{\ignorespaces Random reads and writes on a SATA disk\relax }}{60}{figure.caption.51}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - Ramdisk\relax }}{62}{figure.caption.55}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - Loop device\relax }}{64}{figure.caption.57}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Comparison of CPU utilization - ramdisk\relax }}{62}{figure.caption.55}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Comparison of CPU utilization - loop device\relax }}{64}{figure.caption.57}
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Comparison of CPU utilization - SATA disk\relax }}{66}{figure.caption.59}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

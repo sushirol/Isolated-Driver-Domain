@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  17 MAY 2014 02:04
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.11.26)  23 MAY 2014 00:20
 entering extended mode
 **thesis
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\thesis.tex
@@ -649,22 +649,13 @@ File: images/IObuffer.pdf Graphic file (type pdf)
 
 <use images/IObuffer.pdf>
 Package pdftex.def Info: images/IObuffer.pdf used on input line 389.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 389--390
- [][] 
- []
-
-[21] <images/IObuffer2.pdf, id=672, 963.6pt x 542.025pt>
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
+ [21]
+<images/IObuffer2.pdf, id=672, 963.6pt x 542.025pt>
 File: images/IObuffer2.pdf Graphic file (type pdf)
-
-<use images/IObuffer2.pdf>
+ <use images/IObuffer2.pdf>
 Package pdftex.def Info: images/IObuffer2.pdf used on input line 415.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 415--416
- [][] 
- []
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
 
 [22 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IObuf
 fer.pdf>] [23 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/im
@@ -677,11 +668,7 @@ File: images/OSoverview.pdf Graphic file (type pdf)
 
 <use images/OSoverview.pdf>
 Package pdftex.def Info: images/OSoverview.pdf used on input line 9.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 9--10
- [][] 
- []
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
 
 <images/baseIDDRsystemoverview.pdf, id=703, 963.6pt x 542.025pt>
 File: images/baseIDDRsystemoverview.pdf Graphic file (type pdf)
@@ -689,18 +676,13 @@ File: images/baseIDDRsystemoverview.pdf Graphic file (type pdf)
 <use images/baseIDDRsystemoverview.pdf>
 Package pdftex.def Info: images/baseIDDRsystemoverview.pdf used on input line 1
 6.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 16--17
- [][] 
- []
-
-[25
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
+ [25
 
 ] [26 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/OSo
 verview.pdf>] [27 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/late
-x/images/baseIDDRsystemoverview.pdf>] [28]
-<images/IDDRcomponents.pdf, id=734, 963.6pt x 542.025pt>
+x/images/baseIDDRsystemoverview.pdf>] [28] <images/IDDRcomponents.pdf, id=734, 
+963.6pt x 542.025pt>
 File: images/IDDRcomponents.pdf Graphic file (type pdf)
 
 <use images/IDDRcomponents.pdf>
@@ -717,14 +699,10 @@ File: images/IDDRdesign.pdf Graphic file (type pdf)
 
 <use images/IDDRdesign.pdf>
 Package pdftex.def Info: images/IDDRdesign.pdf used on input line 129.
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 129--130
- [][] 
- []
-
-[31 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDRd
-esign.pdf>] <images/component1.pdf, id=758, 963.6pt x 542.025pt>
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
+ [31 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/IDDR
+design.pdf>]
+<images/component1.pdf, id=758, 963.6pt x 542.025pt>
 File: images/component1.pdf Graphic file (type pdf)
 
 <use images/component1.pdf>
@@ -759,14 +737,9 @@ File: images/communicationmodule.pdf Graphic file (type pdf)
 <use images/communicationmodule.pdf>
 Package pdftex.def Info: images/communicationmodule.pdf used on input line 180.
 
-(pdftex.def)             Requested size: 481.79883pt x 271.01183pt.
-
-Overfull \hbox (12.04384pt too wide) in paragraph at lines 180--181
- [][] 
- []
-
-[33 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/commu
-nicationmodule.pdf>]) [34]
+(pdftex.def)             Requested size: 469.75499pt x 264.23819pt.
+ [33 <C:/Users/sushrut/Documents/git_co/remote-driver-dev/doc/latex/images/comm
+unicationmodule.pdf>]) [34]
 Chapter 4.
 
 (C:\Users\sushrut\Documents\git_co\remote-driver-dev\doc\latex\chapters/impleme
@@ -1059,7 +1032,7 @@ Package rerunfilecheck Info: File `thesis.out' has not changed.
 Here is how much of TeX's memory you used:
  11062 strings out of 493921
  169820 string characters out of 3144869
- 282670 words of memory out of 3000000
+ 282713 words of memory out of 3000000
  13913 multiletter control sequences out of 15000+200000
  9668 words of font info for 34 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1072,7 +1045,7 @@ am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Fil
 es (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (90 pages, 2249979 bytes).
+Output written on thesis.pdf (90 pages, 2249793 bytes).
 PDF statistics:
  1400 PDF objects out of 1440 (max. 8388607)
  276 named destinations out of 1000 (max. 500000)
